@@ -24,7 +24,7 @@ An overview of how Python operates and the most important practices for achievin
 Hopefully with the information from this course you will be in a better position to investigate and optimise the performance of your own code.
 
 This course's website can be used as a reference manual when profiling your own code.
-
+<!--
 ::::::::::::::::::::::::::::::::::::: callout
 
 ## Your Feedback is Required!
@@ -34,6 +34,7 @@ Please complete [this Google form](https://forms.gle/C82uWBEou3FMrQs99) to let u
 Your feedback enables us to improve the course for future attendees!
 
 :::::::::::::::::::::::::::::::::::::::::::::
+-->
 
 ::::::::::::::::::::::::::::::::::::: keypoints
 
