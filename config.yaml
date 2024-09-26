@@ -75,7 +75,7 @@ episodes:
 # Information for Learners
 learners: 
 - setup.md
-- registration.md
+# - registration.md # University of Sheffield specific registration procedure
 - acknowledgements.md
 - ppp.md
 - reference.md
@@ -91,5 +91,6 @@ profiles:
 # This space below is where custom yaml items (e.g. pinning
 # sandpaper and varnish versions) should live
 
-varnish: RSE-Sheffield/uos-varnish@main
-url: 'https://rse.shef.ac.uk/pando-python'
+# These config items are used to deploy the University of Sheffield varnish theme
+#varnish: RSE-Sheffield/uos-varnish@main
+#url: 'https://rse.shef.ac.uk/pando-python'
