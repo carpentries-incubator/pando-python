@@ -56,7 +56,7 @@ This is achieved by internally storing items in a static array.
 This array however can be longer than the list, so the current length of the list is stored alongside the array.
 When an item is appended, the list checks whether it has enough spare space to add the item to the end.
 If it doesn't, it will re-allocate a larger array, copy across the elements, and deallocate the old array.
-The item to be appended is then copied to the end and the counter which tracks the list's length is increemnted.
+The item to be appended is then copied to the end and the counter which tracks the list's length is incremented.
 
 The amount the internal array grows by is dependent on the particular list implementation's growth factor.
 CPython for example uses [`newsize + (newsize >> 3) + 6`](https://github.com/python/cpython/blob/a571a2fd3fdaeafdfd71f3d80ed5a3b22b63d0f7/Objects/listobject.c#L74), which works out to an over allocation of roughly ~12.5%.
