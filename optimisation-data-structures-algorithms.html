@@ -384,7 +384,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Data Structures &amp; Algorithms</h1>
-        <p>Last updated on 2024-03-28 |
+        <p>Last updated on 2025-01-14 |
 
         <a href="https://github.com/RSE-Sheffield/pando-python/edit/main/episodes/optimisation-data-structures-algorithms.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -457,7 +457,7 @@ checks whether it has enough spare space to add the item to the end. If
 it doesn’t, it will re-allocate a larger array, copy across the
 elements, and deallocate the old array. The item to be appended is then
 copied to the end and the counter which tracks the list’s length is
-increemnted.</p>
+incremented.</p>
 <p>The amount the internal array grows by is dependent on the particular
 list implementation’s growth factor. CPython for example uses <a href="https://github.com/python/cpython/blob/a571a2fd3fdaeafdfd71f3d80ed5a3b22b63d0f7/Objects/listobject.c#L74" class="external-link"><code>newsize + (newsize &gt;&gt; 3) + 6</code></a>,
 which works out to an over allocation of roughly ~12.5%.</p>
@@ -700,7 +700,7 @@ duplicates <code>int(N/2)</code> affect performance?</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
   <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
 </button>
-<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
+<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
 <div class="accordion-body">
 <ul><li>
 <code>uniqueSet()</code> passes the input list to the constructor
@@ -726,7 +726,7 @@ comprehension.</em></p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>Constructing a set by passing in a single list is the clear
 winner.</p>
@@ -926,7 +926,7 @@ any links that you are not going to use.
   "url": "https://RSE-Sheffield.github.io/pando-python/optimisation-data-structures-algorithms.html",
   "identifier": "https://RSE-Sheffield.github.io/pando-python/optimisation-data-structures-algorithms.html",
   "dateCreated": "2024-02-01",
-  "dateModified": "2024-03-28",
+  "dateModified": "2025-01-14",
   "datePublished": "2025-01-14"
 }
 
