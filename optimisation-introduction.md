@@ -19,13 +19,15 @@ exercises: 0
 ## Introduction
 
 <!-- Enable you to look at hotspots identified by compiler, identify whether it's efficient -->
-Now that you're able to find the most expensive components of your code with profiling, it becomes time to learn how to identify whether that expense is reasonable.
+Now that you're able to find the most expensive components of your code with profiling, we can think about ways to improve it.
+However, the best way to do this will depend a lot on your specific code! For example, if your code is spending 60 seconds waiting to download data files and then 1 second to analyse that data, then optimizing your data analysis code won’t make much of a difference.
+We'll talk briefly about some of these external bottlenecks at the end. For now, we’ll assume that you’re not waiting for anything else and we'll look at the performance of your code.
 
 <!-- Necessary to understand how code executes (to a degree) -->
 In order to optimise code for performance, it is necessary to have an understanding of what a computer is doing to execute it.
 
 <!-- Goal is to give you a high level understanding of how your code executes. You don't need to be an expert, even a vague general understanding will leave you in a stronger position. -->
-Even a high-level understanding of how you code executes, such as how Python and the most common data-structures and algorithms are implemented, can help you to identify suboptimal approaches when programming. If you have learned to write code informally out of necessity, to get something to work, it's not uncommon to have collected some bad habits along the way.
+Even a high-level understanding of how you code executes, such as how Python and the most common data-structures and algorithms are implemented, can help you to identify suboptimal approaches when programming. If you have learned to write code informally out of necessity, to get something to work, it's not uncommon to have collected some "unpythonic" habits along the way that may harm your code's performance.
 
 <!-- This is largely high-level/abstract knowledge applicable to the vast majority of programming languages, applies even more strongly if using compiled Python features like numba -->
 The remaining content is often abstract knowledge, that is transferable to the vast majority of programming languages. This is because the hardware architecture, data-structures and algorithms used are common to many languages and they hold some of the greatest influence over performance bottlenecks.
@@ -43,6 +45,67 @@ Advanced optimisations, mostly outside the scope of this course, can increase th
 Therefore, the balance between the impact to both performance and maintainability should be considered when optimising code.
 
 This is not to say, don't consider performance when first writing code. The selection of appropriate algorithms and data-structures covered in this course form good practice, simply don't fret over a need to micro-optimise every small component of the code that you write.
+
+### Performance of Python
+
+If you've read about different programming languages, you may have heard that there’s a difference between “interpreted” languages (like Python) and "compiled" languages (like C). You may have heard that Python is slow *because* it is an interpreted language.
+To understand where this comes from (and how to get around it), let's talk a little bit about how Python works.
+
+![Illustration of integers in C and Python.](episodes/fig/int-c-vs-py.png){alt="A diagram illustrating the difference between integers in C and Python. In C, the integer is a raw number in memory. In Python, it additionally contains a header with metadata."}
+<!-- Figure inspired by https://jakevdp.github.io/blog/2014/05/09/why-python-is-slow/#1.-Python-is-Dynamically-Typed-rather-than-Statically-Typed. -->
+
+In C, integers (or other basic types) are raw data in memory. It is up to the programmer to keep track of the data type.
+The compiler can then turn the source code directly into machine code. This allows the compiler to perform low-level optimisations that better exploit hardware nuance to achieve fast performance. This however comes at the cost of compiled software not being cross-platform.
+
+```C
+/* C code */
+int a = 1;
+int b = 2;
+int c = a + b;
+```
+
+In Python, everything is a complex object. The interpreter uses extra fields in the header to keep track of data types at runtime or take care of memory management.
+This adds a lot more flexibility and makes life easier for programmers. However, it comes at the cost of some overhead in both time and memory usage.
+
+```python
+# Python code
+a = 1
+b = 2
+c = a + b
+```
+
+::::::::::::::::::::::::::::::::::::: callout
+
+Objects store both their raw data (like an integer or string) and some internal information used by the interpreter.
+We can see that additional storage space with `sys.getsizeof()`, which shows how many bytes an object takes up:
+
+```Python
+import sys
+
+sys.getsizeof("")  # 41
+sys.getsizeof("a")  # 42
+sys.getsizeof("ab")  # 43
+
+sys.getsizeof([])  # 56
+sys.getsizeof(["a"])  # 64
+
+sys.getsizeof(1)  # 28
+```
+
+(Note: For container objects (like lists and dictionaries) or custom classes, values returned by `getsizeof()` are implementation-dependent and may not reflect the actual memory usage.)
+
+:::::::::::::::::::::::::::::::::::::::::::::
+
+We effectively gain programmer performance by sacrificing some code performance. Most of the time, computers are "fast enough" so this is the right trade-off, as Donald Knuth said.
+
+However, there are the few other cases where code performance really matters. To handle these cases, Python has the capability to integrate with code written in lower-level programming language (like C, Fortran or Rust) under the hood.
+Some performance-sensitive libraries therefore perform a lot of the work in such low-level code, before returning a nice Python object back to you.
+(We’ll discuss NumPy in a later section; but many parts of the Python standard library also use this pattern.)
+
+Therefore, **it is often best to tell the interpreter/library at a high level *what you want*, and let it figure out *how to do it*.**
+
+That way, the interpreter/library is free to do all its work in the low-level code, and adds overhead only once, when it creates and returns a Python object in the end.
+This usually makes your code more readable, too: When someone else reads your code, they can see exactly *what you want to do*, without getting overwhelmed by overly detailed step-by-step instructions.
 
 
 ## Ensuring Reproducible Results

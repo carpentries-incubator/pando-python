@@ -33,6 +33,15 @@ pip install pytest snakeviz line_profiler[all] numpy pandas matplotlib
 
 To complete some of the exercises you will need to use a text-editor or Python IDE, so make sure you have your favourite available.
 
+:::::::::::::: instructor
+
+As the instructor, you should additionally install the `shapely` package, which you may need for a brief demo during the episode on scientific Python packages.
+
+```sh
+pip install shapely
+```
+
+:::::::::::::::::::::::::
 
 
 :::::::::::::::: spoiler

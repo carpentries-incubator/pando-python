@@ -8,7 +8,7 @@ exercises: 0
 
 - How does a CPU look for a variable it requires?
 - What impact do cache lines have on memory accesses?
-- Why is it faster to read/write a single 100mb file, than 100 1mb files?
+- Why is it faster to read/write a single 100 MB file, than 100 files of 1 MB each?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -32,7 +32,7 @@ But the CPU has much smaller caches on-board, to make accessing the most recent 
 ![An annotated photo of a computer's hardware.](episodes/fig/annotated-motherboard.jpg){alt="An annotated photo of inside a desktop computer's case. The CPU, RAM, power supply, graphics cards (GPUs) and harddrive are labelled."}
 
 <!-- Read/operate on variable ram->cpu cache->registers->cpu -->
-When reading a variable, to perform an operation with it, the CPU will first look in it's registers. These exist per core, they are the location that computation is actually performed. Accessing them is incredibly fast, but there only exists enough storage for around 32 variables (typical number, e.g. 4 bytes).
+When reading a variable, to perform an operation with it, the CPU will first look in its registers. These exist per core, they are the location that computation is actually performed. Accessing them is incredibly fast, but there only exists enough storage for around 32 variables (typical number, e.g. 4 bytes).
 As the register file is so small, most variables won't be found and the CPU's caches will be searched.
 It will first check the current processing core's L1 (Level 1) cache, this small cache (typically 64 KB per physical core) is the smallest and fastest to access cache on a CPU.
 If the variable is not found in the L1 cache, the L2 cache that is shared between multiple cores will be checked. This shared cache, is slower to access but larger than L1 (typically 1-3MB per core).
@@ -42,7 +42,7 @@ If the variable has not been found in any of the CPU's cache, the CPU will look 
 Correspondingly, the earlier the CPU finds the variable the faster it will be to access.
 However, to fully understand the cache's it's necessary to explain what happens once a variable has been found.
 
-If a variable is not found in the caches, so must be fetched from RAM.
+If a variable is not found in the caches, it must be fetched from RAM.
 The full 64 byte cache line containing the variable, will be copied first into the CPU's L3, then L2 and then L1.
 Most variables are only 4 or 8 bytes, so many neighbouring variables are also pulled into the caches.
 Similarly, adding new data to a cache evicts old data.
@@ -80,9 +80,9 @@ The latency to access files on disk is another order of magnitude higher than ac
 As such, disk accesses similarly benefit from sequential accesses and reading larger blocks together rather than single variables.
 Python's `io` package is already buffered, so automatically handles this for you in the background.
 
-However before a file can be read, the file system on the disk must be polled to transform the file path to it's address on disk to initiate the transfer (or throw an exception).
+However before a file can be read, the file system on the disk must be polled to transform the file path to its address on disk to initiate the transfer (or throw an exception).
 
-Following the common theme of this episode, the cost of accessing randomly scattered files can be significantly slower than accessing a single larger file of the same size.
+Following the common theme of this episode, accessing randomly scattered files can be significantly slower than accessing a single larger file of the same size.
 This is because for each file accessed, the file system must be polled to transform the file path to an address on disk. 
 Traditional hard disk drives particularly suffer, as the read head must physically move to locate data.
 
@@ -91,7 +91,7 @@ Hence, it can be wise to avoid storing outputs in many individual files and to i
 This is even visible outside of your own code. If you try to upload/download 1 GB to HPC.
 The transfer will be significantly faster, assuming good internet bandwidth, if that's a single file rather than thousands.
 
-The below example code runs a small benchmark, whereby 10MB is written to disk and read back whilst being timed. In one case this is as a single file, and the other, 1000 file segments.
+The below example code runs a small benchmark, whereby 10MB is written to disk and read back whilst being timed. In one case this is as a single file, and in the other, 1000 file segments.
 
 ```python
 import os, time
@@ -156,13 +156,78 @@ Repeated runs show some noise to the timing, however the slowdown is consistentl
 You might not even be reading 1000 different files. You could be reading the same file multiple times, rather than reading it once and retaining it in memory during execution.
 An even greater overhead would apply.
 
+## Accessing the Network
+
+When transfering files over a network, similar effects apply. There is a fixed overhead for every file transfer (no matter how big the file), so downloading many small files will be slower than downloading a single large file of the same total size.
+
+Because of this overhead, downloading many small files often does not use all the available bandwidth. It may be possible to speed things up by parallelising downloads.
+
+```Python
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from timeit import timeit
+import requests  # install with `pip install requests`
+
+
+def download_file(url, filename):
+    response = requests.get(url)
+    with open(filename, 'wb') as f:
+        f.write(response.content)
+    return filename
+
+downloaded_files = []
+
+def sequentialDownload():
+    for mass in range(10, 20):
+        url = f"https://github.com/SNEWS2/snewpy-models-ccsn/raw/refs/heads/main/models/Warren_2020/stir_a1.23/stir_multimessenger_a1.23_m{mass}.0.h5"
+        f = download_file(url, f"seq_{mass}.h5")
+        downloaded_files.append(f)
+
+def parallelDownload():
+    # Initialise a pool of 6 threads to share the workload
+    pool = ThreadPoolExecutor(max_workers=6)
+    jobs = []
+    # Submit each download to be executed by the thread pool
+    for mass in range(10, 20):
+        url = f"https://github.com/SNEWS2/snewpy-models-ccsn/raw/refs/heads/main/models/Warren_2020/stir_a1.23/stir_multimessenger_a1.23_m{mass}.0.h5"
+        local_filename = f"par_{mass}.h5"
+        jobs.append(pool.submit(download_file, url, local_filename))
+
+    # Collect the results (and errors) as the jobs are completed
+    for result in as_completed(jobs):        
+        if result.exception() is None:
+            # handle return values of the parallelised function
+            f = result.result()
+            downloaded_files.append(f)
+        else:
+            # handle errors
+            print(result.exception())
+
+    pool.shutdown(wait=False)
+
+
+print(f"sequentialDownload: {timeit(sequentialDownload, globals=globals(), number=1):.3f} s")
+print(downloaded_files)
+downloaded_files = []
+print(f"parallelDownload: {timeit(parallelDownload, globals=globals(), number=1):.3f} s")
+print(downloaded_files)
+```
+
+Depending on your internet connection, results may vary significantly, but the parallel download will usually be quite a bit faster. Note also that the order in which the parallel downloads finish will vary.
+
+```output
+sequentialDownload: 3.225 s
+['seq_10.h5', 'seq_11.h5', 'seq_12.h5', 'seq_13.h5', 'seq_14.h5', 'seq_15.h5', 'seq_16.h5', 'seq_17.h5', 'seq_18.h5', 'seq_19.h5']
+parallelDownload: 0.285 s
+['par_11.h5', 'par_12.h5', 'par_15.h5', 'par_13.h5', 'par_10.h5', 'par_14.h5', 'par_16.h5', 'par_19.h5', 'par_17.h5', 'par_18.h5']
+```
+
 ## Latency Overview
 
 Latency can have a big impact on the speed that a program executes, the below graph demonstrates this. Note the log scale!
 
-![A graph demonstrating the wide variety of latencies a programmer may experience when accessing data.](episodes/fig/latency.png){alt="A horizontal bar chart displaying the relative latencies for L1/L2/L3 cache, RAM, SSD, HDD and a packet being sent from London to California and back. These latencies range from 1 nanosecond  to 140 milliseconds and are displayed with a log scale."}
+![A graph demonstrating the wide variety of latencies a programmer may experience when accessing data.](episodes/fig/latency.png){alt="A horizontal bar chart displaying the relative latencies for L1/L2/L3 cache, RAM, SSD, HDD and a packet being sent from London to California and back. These latencies range from 1 nanosecond to 140 milliseconds and are displayed with a log scale."}
 
-The lower the latency typically the higher the effective bandwidth. L1 and L2 cache have 1TB/s, RAM 100GB/s, SSDs upto 32 GB/s, HDDs upto 150MB/s. Making large memory transactions even slower.
+The lower the latency typically the higher the effective bandwidth (L1 and L2 cache have 1 TB/s, RAM 100 GB/s, SSDs up to 32 GB/s, HDDs up to 150 MB/s), making large memory transactions even slower.
 
 ## Memory Allocation is not Free
 

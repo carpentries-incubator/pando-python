@@ -38,6 +38,9 @@ Your feedback enables us to improve the course for future attendees!
 
 ::::::::::::::::::::::::::::::::::::: keypoints
 
+- Using Python Language Features and the Standard Library
+    - Python is an interpreted language. This adds an additional overhead at runtime to the execution of Python code. Many core Python functions are implemented in faster C/C++, free from this overhead.
+    - Where possible, use built-in functions (like `sum()`, `min()` or `max()`), language features (like list comprehensions) and standard library functionality (like `str.split()`) instead of re-inventing the wheel. This makes your code more readable and is often more performant.
 - Data Structures & Algorithms
     - List comprehension should be preferred when constructing lists.
     - Where appropriate, Tuples and Generator functions should be preferred over Python lists.
@@ -45,8 +48,8 @@ Your feedback enables us to improve the course for future attendees!
     - When used appropriately, dictionaries and sets are significantly faster than lists.
     - If searching a list or array is required, it should be sorted and searched using `bisect_left()` (binary search).
 - Minimise Python Written
-    - Python is an interpreted language, this adds an additional overhead at runtime to the execution of Python code. Many core Python and NumPy functions are implemented in faster C/C++, free from this overhead.
-    - NumPy can take advantage of vectorisation to process arrays, which can greatly improve performance.
+    - Like many core Python functions, NumPy functions are implemented in faster C/C++.
+    - Additionally, NumPy can take advantage of vectorisation to process arrays, which can greatly improve performance.
     - Pandas' data tables store columns as arrays, therefore operations applied to columns can take advantage of NumPys vectorisation.
 - Newer is Often Faster
     - Where feasible, the latest version of Python and packages should be used as they can include significant free improvements to the performance of your code.
