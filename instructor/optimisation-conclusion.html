@@ -260,7 +260,7 @@
 <div class="accordion accordion-flush" id="accordionFlush8">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading8">
-        <a href="optimisation-data-structures-algorithms.html">7. Data Structures &amp; Algorithms</a>
+        <a href="optimisation-using-python.html">7. Using Python Language Features and the Standard Library</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -269,7 +269,7 @@
 <div class="accordion accordion-flush" id="accordionFlush9">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading9">
-        <a href="long-break1.html">8. Break</a>
+        <a href="optimisation-data-structures-algorithms.html">8. Data Structures &amp; Algorithms</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -278,7 +278,7 @@
 <div class="accordion accordion-flush" id="accordionFlush10">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading10">
-        <a href="optimisation-minimise-python.html">9. Understanding Python (NumPy/Pandas)</a>
+        <a href="long-break1.html">9. Break</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -287,7 +287,7 @@
 <div class="accordion accordion-flush" id="accordionFlush11">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading11">
-        <a href="optimisation-use-latest.html">10. Keep Python &amp; Packages up to Date</a>
+        <a href="optimisation-numpy.html">10. Using Scientific Python Packages (NumPy, Pandas and more)</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -296,7 +296,16 @@
 <div class="accordion accordion-flush" id="accordionFlush12">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading12">
-        <a href="optimisation-memory.html">11. Understanding Memory</a>
+        <a href="optimisation-use-latest.html">11. Keep Python &amp; Packages up to Date</a>
+    </div><!--/div.accordion-header-->
+
+  </div><!--/div.accordion-item-->
+</div><!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush13">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading13">
+        <a href="optimisation-memory.html">12. Understanding Memory</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -307,7 +316,7 @@
     <div class="accordion-header" id="flush-headingcurrent">
         <span class="visually-hidden">Current Chapter</span>
         <span class="current-chapter">
-        12. Optimisation Conclusion
+        13. Optimisation Conclusion
         </span>
       
     </div><!--/div.accordion-header-->
@@ -373,7 +382,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Optimisation Conclusion</h1>
-        <p>Last updated on 2024-09-26 |
+        <p>Last updated on 2025-03-15 |
 
         <a href="https://github.com/RSE-Sheffield/pando-python/edit/main/episodes/optimisation-conclusion.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -433,7 +442,17 @@ Your feedback enables us to improve the course for future attendees!
 <div class="callout-inner">
 <h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
-<ul><li>Data Structures &amp; Algorithms
+<ul><li>Using Python Language Features and the Standard Library
+<ul><li>Python is an interpreted language. This adds an additional overhead
+at runtime to the execution of Python code. Many core Python functions
+are implemented in faster C/C++, free from this overhead.</li>
+<li>Where possible, use built-in functions (like <code>sum()</code>,
+<code>min()</code> or <code>max()</code>), language features (like list
+comprehensions) and standard library functionality (like
+<code>str.split()</code>) instead of re-inventing the wheel. This makes
+your code more readable and is often more performant.</li>
+</ul></li>
+<li>Data Structures &amp; Algorithms
 <ul><li>List comprehension should be preferred when constructing lists.</li>
 <li>Where appropriate, Tuples and Generator functions should be
 preferred over Python lists.</li>
@@ -445,11 +464,10 @@ faster than lists.</li>
 searched using <code>bisect_left()</code> (binary search).</li>
 </ul></li>
 <li>Minimise Python Written
-<ul><li>Python is an interpreted language, this adds an additional overhead
-at runtime to the execution of Python code. Many core Python and NumPy
-functions are implemented in faster C/C++, free from this overhead.</li>
-<li>NumPy can take advantage of vectorisation to process arrays, which
-can greatly improve performance.</li>
+<ul><li>Like many core Python functions, NumPy functions are implemented in
+faster C/C++.</li>
+<li>Additionally, NumPy can take advantage of vectorisation to process
+arrays, which can greatly improve performance.</li>
 <li>Pandas’ data tables store columns as arrays, therefore operations
 applied to columns can take advantage of NumPys vectorisation.</li>
 </ul></li>
@@ -512,7 +530,7 @@ any links that you are not going to use.
 	
         | <a href="https://github.com/RSE-Sheffield/pando-python/blob/main/CONTRIBUTING.md" class="external-link">Contributing</a>
         | <a href="https://github.com/RSE-Sheffield/pando-python/" class="external-link">Source</a></p>
-				<p><a href="https://github.com/RSE-Sheffield/pando-python/blob/main/CITATION" class="external-link">Cite</a> | <a href="mailto:robert.chisholm@sheffield.ac.uk">Contact</a> | <a href="https://carpentries.org/about/" class="external-link">About</a></p>
+				<p><a href="https://github.com/RSE-Sheffield/pando-python/blob/main/CITATION.cff" class="external-link">Cite</a> | <a href="mailto:robert.chisholm@sheffield.ac.uk">Contact</a> | <a href="https://carpentries.org/about/" class="external-link">About</a></p>
 			</div>
 			<div class="col-md-6">
 
@@ -541,8 +559,8 @@ any links that you are not going to use.
   "url": "https://RSE-Sheffield.github.io/pando-python/instructor/optimisation-conclusion.html",
   "identifier": "https://RSE-Sheffield.github.io/pando-python/instructor/optimisation-conclusion.html",
   "dateCreated": "2024-02-01",
-  "dateModified": "2024-09-26",
-  "datePublished": "2025-03-11"
+  "dateModified": "2025-03-15",
+  "datePublished": "2025-03-15"
 }
 
   </script><script>

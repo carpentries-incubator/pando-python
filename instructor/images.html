@@ -318,7 +318,7 @@
 <div class="accordion accordion-flush" id="accordionFlush8">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading8">
-        <a href="optimisation-data-structures-algorithms.html">7. Data Structures &amp; Algorithms</a>
+        <a href="optimisation-using-python.html">7. Using Python Language Features and the Standard Library</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -330,7 +330,7 @@
 <div class="accordion accordion-flush" id="accordionFlush9">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading9">
-        <a href="long-break1.html">8. Break</a>
+        <a href="optimisation-data-structures-algorithms.html">8. Data Structures &amp; Algorithms</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -342,7 +342,7 @@
 <div class="accordion accordion-flush" id="accordionFlush10">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading10">
-        <a href="optimisation-minimise-python.html">9. Understanding Python (NumPy/Pandas)</a>
+        <a href="long-break1.html">9. Break</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -354,7 +354,7 @@
 <div class="accordion accordion-flush" id="accordionFlush11">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading11">
-        <a href="optimisation-use-latest.html">10. Keep Python &amp; Packages up to Date</a>
+        <a href="optimisation-numpy.html">10. Using Scientific Python Packages (NumPy, Pandas and more)</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -366,7 +366,7 @@
 <div class="accordion accordion-flush" id="accordionFlush12">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading12">
-        <a href="optimisation-memory.html">11. Understanding Memory</a>
+        <a href="optimisation-use-latest.html">11. Keep Python &amp; Packages up to Date</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -378,7 +378,19 @@
 <div class="accordion accordion-flush" id="accordionFlush13">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading13">
-        <a href="optimisation-conclusion.html">12. Optimisation Conclusion</a>
+        <a href="optimisation-memory.html">12. Understanding Memory</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush14">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading14">
+        <a href="optimisation-conclusion.html">13. Optimisation Conclusion</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -498,6 +510,10 @@ default configuration of <code>predprey.py</code>.</div>
 inside a Juypter notebook for the above FizzBuzz profile code.</div>
 </figure><hr></section><section id="profiling-conclusion"><h2 class="section-heading"><a href="profiling-conclusion.html">Profiling Conclusion</a></h2>
 <hr class="half-width"></section><section id="optimisation-introduction"><h2 class="section-heading"><a href="optimisation-introduction.html">Introduction to Optimisation</a></h2>
+<hr class="half-width">
+<h3 id="optimisation-introduction-figure-1">Figure 1</h3>
+<p aria-hidden="true">Image 1 of 1: ‘A diagram illustrating the difference between integers in C and Python. In C, the integer is a raw number in memory. In Python, it additionally contains a header with metadata.’</p>
+<figure><img src="../fig/int-c-vs-py.png" alt="A diagram illustrating the difference between integers in C and Python. In C, the integer is a raw number in memory. In Python, it additionally contains a header with metadata." class="figure mx-auto d-block"><!-- Figure inspired by https://jakevdp.github.io/blog/2014/05/09/why-python-is-slow/#1.-Python-is-Dynamically-Typed-rather-than-Statically-Typed. --></figure><hr></section><section id="optimisation-using-python"><h2 class="section-heading"><a href="optimisation-using-python.html">Using Python Language Features and the Standard Library</a></h2>
 <hr class="half-width"></section><section id="optimisation-data-structures-algorithms"><h2 class="section-heading"><a href="optimisation-data-structures-algorithms.html">Data Structures &amp; Algorithms</a></h2>
 <hr class="half-width">
 <h3 id="optimisation-data-structures-algorithms-figure-1">Figure 1</h3>
@@ -506,12 +522,25 @@ inside a Juypter notebook for the above FizzBuzz profile code.</div>
 to an empty list, and the number of internal resizes in CPython.</div>
 </figure><hr>
 <h3 id="optimisation-data-structures-algorithms-figure-2">Figure 2</h3>
+<p aria-hidden="true">Image 1 of 1: ‘An image of a single long bookshelf, with a large number of books.’</p>
+<figure><img src="../fig/bookshelf_list.jpg" alt="An image of a single long bookshelf, with a large number of books." class="figure mx-auto d-block"><div class="figcaption">A bookshelf corresponding to a Python
+list.</div>
+</figure><hr>
+<h3 id="optimisation-data-structures-algorithms-figure-3">Figure 3</h3>
+<p aria-hidden="true">Image 1 of 1: ‘An image of two bookcases, labelled “Sci-Fi” and “Romance”. Each bookcase contains shelves labelled in alphabetical order, with zero or few books on each shelf.’</p>
+<figure><img src="../fig/bookshelf_dict.jpg" alt="An image of two bookcases, labelled “Sci-Fi” and “Romance”. Each bookcase contains shelves labelled in alphabetical order, with zero or few books on each shelf." class="figure mx-auto d-block"><div class="figcaption">A bookshelf corresponding to a Python
+dictionary.</div>
+</figure><hr>
+<h3 id="optimisation-data-structures-algorithms-figure-4">Figure 4</h3>
 <p aria-hidden="true">Image 1 of 1: ‘A diagram demonstrating how the keys (hashes) 37, 64, 14, 94, 67 are inserted into a hash table with 11 indices. This is followed by the insertion of 59, 80 and 39 which require linear probing to be inserted due to collisions.’</p>
 <figure><img src="../fig/hash_linear_probing.png" alt="A diagram demonstrating how the keys (hashes) 37, 64, 14, 94, 67 are inserted into a hash table with 11 indices. This is followed by the insertion of 59, 80 and 39 which require linear probing to be inserted due to collisions." class="figure mx-auto d-block"><div class="figcaption">An visual explanation of linear probing, CPython
 uses an advanced form of this.</div>
 </figure><hr></section><section id="long-break1"><h2 class="section-heading"><a href="long-break1.html">Break</a></h2>
-<hr class="half-width"></section><section id="optimisation-minimise-python"><h2 class="section-heading"><a href="optimisation-minimise-python.html">Understanding Python (NumPy/Pandas)</a></h2>
-<hr class="half-width"></section><section id="optimisation-use-latest"><h2 class="section-heading"><a href="optimisation-use-latest.html">Keep Python &amp; Packages up to Date</a></h2>
+<hr class="half-width"></section><section id="optimisation-numpy"><h2 class="section-heading"><a href="optimisation-numpy.html">Using Scientific Python Packages (NumPy, Pandas and more)</a></h2>
+<hr class="half-width">
+<h3 id="optimisation-numpy-figure-1">Figure 1</h3>
+<p aria-hidden="true">Image 1 of 1: ‘A diagram illustrating the difference between a NumPy array and a Python list. The NumPy array is a raw block of memory containing numerical values. A Python list contains a header with metadata and multiple items, each of which is a reference to another Python object with its own header and value.’</p>
+<figure><img src="../fig/numpy-array-vs-list.png" alt="A diagram illustrating the difference between a NumPy array and a Python list. The NumPy array is a raw block of memory containing numerical values. A Python list contains a header with metadata and multiple items, each of which is a reference to another Python object with its own header and value." class="figure mx-auto d-block"><!-- Figure inspired by https://jakevdp.github.io/blog/2014/05/09/why-python-is-slow/#3.-Python's-object-model-can-lead-to-inefficient-memory-access --></figure><hr></section><section id="optimisation-use-latest"><h2 class="section-heading"><a href="optimisation-use-latest.html">Keep Python &amp; Packages up to Date</a></h2>
 <hr class="half-width"></section><section id="optimisation-memory"><h2 class="section-heading"><a href="optimisation-memory.html">Understanding Memory</a></h2>
 <hr class="half-width">
 <h3 id="optimisation-memory-figure-1">Figure 1</h3>
@@ -547,7 +576,7 @@ latencies a programmer may experience when accessing data.</div>
 	
         | <a href="https://github.com/RSE-Sheffield/pando-python/blob/main/CONTRIBUTING.md" class="external-link">Contributing</a>
         | <a href="https://github.com/RSE-Sheffield/pando-python/" class="external-link">Source</a></p>
-				<p><a href="https://github.com/RSE-Sheffield/pando-python/blob/main/CITATION" class="external-link">Cite</a> | <a href="mailto:robert.chisholm@sheffield.ac.uk">Contact</a> | <a href="https://carpentries.org/about/" class="external-link">About</a></p>
+				<p><a href="https://github.com/RSE-Sheffield/pando-python/blob/main/CITATION.cff" class="external-link">Cite</a> | <a href="mailto:robert.chisholm@sheffield.ac.uk">Contact</a> | <a href="https://carpentries.org/about/" class="external-link">About</a></p>
 			</div>
 			<div class="col-md-6">
 
@@ -577,8 +606,8 @@ latencies a programmer may experience when accessing data.</div>
   "url": "https://RSE-Sheffield.github.io/pando-python/instructor/images.html",
   "identifier": "https://RSE-Sheffield.github.io/pando-python/instructor/images.html",
   "dateCreated": "2024-02-01",
-  "dateModified": "2025-03-11",
-  "datePublished": "2025-03-11"
+  "dateModified": "2025-03-15",
+  "datePublished": "2025-03-15"
 }
 
   </script><script>

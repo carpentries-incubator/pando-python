@@ -318,7 +318,7 @@
 <div class="accordion accordion-flush" id="accordionFlush8">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading8">
-        <a href="optimisation-data-structures-algorithms.html">7. Data Structures &amp; Algorithms</a>
+        <a href="optimisation-using-python.html">7. Using Python Language Features and the Standard Library</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -330,7 +330,7 @@
 <div class="accordion accordion-flush" id="accordionFlush9">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading9">
-        <a href="long-break1.html">8. Break</a>
+        <a href="optimisation-data-structures-algorithms.html">8. Data Structures &amp; Algorithms</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -342,7 +342,7 @@
 <div class="accordion accordion-flush" id="accordionFlush10">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading10">
-        <a href="optimisation-minimise-python.html">9. Understanding Python (NumPy/Pandas)</a>
+        <a href="long-break1.html">9. Break</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -354,7 +354,7 @@
 <div class="accordion accordion-flush" id="accordionFlush11">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading11">
-        <a href="optimisation-use-latest.html">10. Keep Python &amp; Packages up to Date</a>
+        <a href="optimisation-numpy.html">10. Using Scientific Python Packages (NumPy, Pandas and more)</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -366,7 +366,7 @@
 <div class="accordion accordion-flush" id="accordionFlush12">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading12">
-        <a href="optimisation-memory.html">11. Understanding Memory</a>
+        <a href="optimisation-use-latest.html">11. Keep Python &amp; Packages up to Date</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -378,7 +378,19 @@
 <div class="accordion accordion-flush" id="accordionFlush13">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading13">
-        <a href="optimisation-conclusion.html">12. Optimisation Conclusion</a>
+        <a href="optimisation-memory.html">12. Understanding Memory</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush14">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading14">
+        <a href="optimisation-conclusion.html">13. Optimisation Conclusion</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -572,6 +584,18 @@ added to tests, to decide whether they should be executed or
 skipped.</li>
 </ul>
 <hr>
+<br></section><section id="optimisation-using-python"><h2 class="section-heading"><a href="optimisation-using-python.html">Using Python Language Features and the Standard Library</a></h2>
+<hr class="half-width">
+<h3 id="optimisation-using-python-headingInstructor1">
+<a href="optimisation-using-python.html#headingInstructor1">Instructor Note</a><a class="anchor" aria-label="anchor" href="#optimisation-using-python-headingInstructor1"></a>
+</h3>
+<p>This episode discusses relatively fundamental features of Python.</p>
+<p>For students experienced with writing Python, many of these points
+may be unnecessary. However, self-taught students—especially if they
+have previously studied lower-level languages with a less powerful
+standard library—may have adopted “unpythonic” habits and will
+particularly benefit from this section.</p>
+<hr>
 <br></section><section id="optimisation-data-structures-algorithms"><h2 class="section-heading"><a href="optimisation-data-structures-algorithms.html">Data Structures &amp; Algorithms</a></h2>
 <hr class="half-width">
 <h3 id="optimisation-data-structures-algorithms-headingInstructor1">
@@ -585,9 +609,67 @@ the performant patterns in understanding to aid memorisation.</p>
 data-structure/algorithm internals challenging, if they are still able
 to recognise the demonstrated patterns.</p>
 <hr>
+<br><h3 id="optimisation-data-structures-algorithms-headingInstructor2">
+<a href="optimisation-data-structures-algorithms.html#headingInstructor2">Instructor Note</a><a class="anchor" aria-label="anchor" href="#optimisation-data-structures-algorithms-headingInstructor2"></a>
+</h3>
+<p>The large bookcases in the second illustration, with many shelves
+almost empty, take up a lot more space than the single shelf in the
+first illustration. This may also be interpreted as the dictionary using
+more memory than a list.</p>
+<p>In principle, this is correct. However:</p>
+<ul>
+<li>The actual difference is much less pronounced than in the
+illustration. (A list requires about 8 bytes to keep track of each item,
+while a dictionary requires about 30 bytes.)</li>
+<li>In most cases this net size of the list/dictionary itself is
+negligibly small compared to the size of the objects stored in the list
+or dictionary (e.g. 41 bytes for an empty string or 112 bytes for an
+empty NumPy array).</li>
+</ul>
+<p>In practice, therefore, this trade-off between memory usage and speed
+is usually worth it.</p>
+<hr>
 <br></section><section id="long-break1"><h2 class="section-heading"><a href="long-break1.html">Break</a></h2>
-<hr class="half-width"></section><section id="optimisation-minimise-python"><h2 class="section-heading"><a href="optimisation-minimise-python.html">Understanding Python (NumPy/Pandas)</a></h2>
-<hr class="half-width"></section><section id="optimisation-use-latest"><h2 class="section-heading"><a href="optimisation-use-latest.html">Keep Python &amp; Packages up to Date</a></h2>
+<hr class="half-width"></section><section id="optimisation-numpy"><h2 class="section-heading"><a href="optimisation-numpy.html">Using Scientific Python Packages (NumPy, Pandas and more)</a></h2>
+<hr class="half-width">
+<h3 id="optimisation-numpy-headingInstructor1">
+<a href="optimisation-numpy.html#headingInstructor1">Instructor Note</a><a class="anchor" aria-label="anchor" href="#optimisation-numpy-headingInstructor1"></a>
+</h3>
+<p>A simple analogy:</p>
+<p>If you’re baking cookies, the oven (CPU register) is big enough to
+operate on multiple cookies (numbers) simultaneously. So whether you
+bake 1 cookie or 10, it’ll take exactly the same amount of time.
+However, this requires that the cookies are neatly arranged on a baking
+tray (in a contiguous chunk of memory).</p>
+<p>Basic ints/floats in NumPy arrays are arranged like that, so this
+works great. In contrast, numbers in a Python list <a href="https://jakevdp.github.io/blog/2014/05/09/why-python-is-slow/#3.-Python's-object-model-can-lead-to-inefficient-memory-access" class="external-link">are
+spread across memory in a fairly complex arrangement</a>, so cannot
+benefit from this unless you convert them to a NumPy array first.</p>
+<hr>
+<br><h3 id="optimisation-numpy-headingInstructor2">
+<a href="optimisation-numpy.html#headingInstructor2">Instructor Note</a><a class="anchor" aria-label="anchor" href="#optimisation-numpy-headingInstructor2"></a>
+</h3>
+<p>The following code snippet demonstrates how this works for a
+simplified example.</p>
+<div class="codewrapper sourceCode" id="cb13">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="im">from</span> shapely <span class="im">import</span> Point, Polygon</span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> polygon <span class="op">=</span> Polygon([(<span class="dv">0</span>,<span class="dv">0</span>), (<span class="dv">1</span>,<span class="dv">0</span>), (<span class="dv">1</span>,<span class="dv">1</span>), (<span class="dv">0</span>,<span class="dv">1</span>), (<span class="dv">0</span>,<span class="dv">0</span>)])</span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> points_array <span class="op">=</span> np.array((Point(<span class="fl">0.1</span>, <span class="fl">0.1</span>), Point(<span class="fl">0.5</span>, <span class="fl">0.5</span>), Point(<span class="dv">2</span>, <span class="dv">2</span>)))</span>
+<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> point_names_array <span class="op">=</span> np.array((<span class="st">"P1: Periphery"</span>, <span class="st">"P2: Centre"</span>, <span class="st">"P3: Outside"</span>))</span>
+<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> points_in_polygon_idx <span class="op">=</span> polygon.contains(points_array)</span>
+<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> points_in_polygon_idx</span>
+<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a>array([ <span class="va">True</span>,  <span class="va">True</span>, <span class="va">False</span>])</span>
+<span id="cb13-9"><a href="#cb13-9" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> points_in_polygon <span class="op">=</span> point_names_array[points_in_polygon_idx]</span>
+<span id="cb13-10"><a href="#cb13-10" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> points_in_polygon</span>
+<span id="cb13-11"><a href="#cb13-11" tabindex="-1"></a>array([<span class="st">'P1: Periphery'</span>, <span class="st">'P2: Centre'</span>], dtype<span class="op">=</span><span class="st">'&lt;U13'</span>)</span>
+<span id="cb13-12"><a href="#cb13-12" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> points_in_polygon.tolist()</span>
+<span id="cb13-13"><a href="#cb13-13" tabindex="-1"></a>[<span class="st">'P1: Periphery'</span>, <span class="st">'P2: Centre'</span>]</span></code></pre>
+</div>
+<hr>
+<br></section><section id="optimisation-use-latest"><h2 class="section-heading"><a href="optimisation-use-latest.html">Keep Python &amp; Packages up to Date</a></h2>
 <hr class="half-width"></section><section id="optimisation-memory"><h2 class="section-heading"><a href="optimisation-memory.html">Understanding Memory</a></h2>
 <hr class="half-width"></section><section id="optimisation-conclusion"><h2 class="section-heading"><a href="optimisation-conclusion.html">Optimisation Conclusion</a></h2>
 <hr class="half-width"></section></section>
@@ -608,7 +690,7 @@ to recognise the demonstrated patterns.</p>
 	
         | <a href="https://github.com/RSE-Sheffield/pando-python/blob/main/CONTRIBUTING.md" class="external-link">Contributing</a>
         | <a href="https://github.com/RSE-Sheffield/pando-python/" class="external-link">Source</a></p>
-				<p><a href="https://github.com/RSE-Sheffield/pando-python/blob/main/CITATION" class="external-link">Cite</a> | <a href="mailto:robert.chisholm@sheffield.ac.uk">Contact</a> | <a href="https://carpentries.org/about/" class="external-link">About</a></p>
+				<p><a href="https://github.com/RSE-Sheffield/pando-python/blob/main/CITATION.cff" class="external-link">Cite</a> | <a href="mailto:robert.chisholm@sheffield.ac.uk">Contact</a> | <a href="https://carpentries.org/about/" class="external-link">About</a></p>
 			</div>
 			<div class="col-md-6">
 
@@ -638,8 +720,8 @@ to recognise the demonstrated patterns.</p>
   "url": "https://RSE-Sheffield.github.io/pando-python/instructor/instructor-notes.html",
   "identifier": "https://RSE-Sheffield.github.io/pando-python/instructor/instructor-notes.html",
   "dateCreated": "2024-02-01",
-  "dateModified": "2025-03-11",
-  "datePublished": "2025-03-11"
+  "dateModified": "2025-03-15",
+  "datePublished": "2025-03-15"
 }
 
   </script><script>
