@@ -35,7 +35,7 @@ It adds restriction via its own [basic numeric types](https://numpy.org/doc/stab
 
 ### NumPy Arrays and Python Lists Live in Two Separate Worlds
 
-NumPy's arrays (not to be confused with the core Python `array` package) are static arrays. Unlike core Python's lists, they do not dynamically resize. Therefore if you wish to append to a NumPy array, you must call `resize()` first. If you treat this like `append()` for a Python list, resizing for each individual append, you will be performing significantly more copies and memory allocations than a Python list.
+NumPy's arrays (not to be confused with the core Python `array` package) are static arrays. Unlike core Python's lists, they do not dynamically resize. Therefore, if you wish to append to a NumPy array, you must call `resize()` first. If you treat this like `append()` for a Python list, resizing for each individual append, you will be performing significantly more copies and memory allocations than a Python list.
 
 The below example sees lists and arrays constructed from `range(100000)`.
 
@@ -225,17 +225,18 @@ print(f"numpy_sum_array: {timeit(np_sum_ar, setup=gen_array, number=repeats):.2f
 print(f"numpy_dot_array: {timeit(np_dot_ar, setup=gen_array, number=repeats):.2f}ms")
 ```
 
-* `python_sum_list` uses list comprehension to perform the multiplication, followed by the Python core `sum()`. This comes out at 46.93ms
-* `python_sum_array` instead directly multiplies the two arrays (taking advantage of NumPy's vectorisation) but uses the core Python `sum()`, this comes in slightly faster at 33.26ms.
-* `numpy_sum_array` again takes advantage of NumPy's vectorisation for the multiplication, and additionally uses NumPy's `sum()` implementation. These two rounds of vectorisation provide a much faster 1.44ms completion.
-* `numpy_dot_array` instead uses NumPy's `dot()` to calculate the dot product in a single operation. This comes out the fastest at 0.29ms, 162x faster than `python_sum_list`. 
-
 ```output
 python_sum_list: 46.93ms
 python_sum_array: 33.26ms
 numpy_sum_array: 1.44ms
 numpy_dot_array: 0.29ms
 ```
+
+* `python_sum_list` uses list comprehension to perform the multiplication, followed by the Python core `sum()`. This comes out at 46.93ms
+* `python_sum_array` instead directly multiplies the two arrays (taking advantage of NumPy's vectorisation) but uses the core Python `sum()`, this comes in slightly faster at 33.26ms.
+* `numpy_sum_array` again takes advantage of NumPy's vectorisation for the multiplication, and additionally uses NumPy's `sum()` implementation. These two rounds of vectorisation provide a much faster 1.44ms completion.
+* `numpy_dot_array` instead uses NumPy's `dot()` to calculate the dot product in a single operation. This comes out the fastest at 0.29ms, 162x faster than `python_sum_list`. 
+
 
 ::::::::::::::::::::::::::::::::::::: callout
 
@@ -248,7 +249,7 @@ A small number of functions are backed by BLAS and LAPACK, enabling even greater
 
 The [supported functions](https://numpy.org/doc/stable/reference/routines.linalg.html) mostly correspond to linear algebra operations like `numpy.dot()`.
 
-The auto-parallelisation of these functions is hardware dependant, so you won't always automatically get the additional benefit of parallelisation.
+The auto-parallelisation of these functions is hardware-dependent, so you won't always automatically get the additional benefit of parallelisation.
 However, HPC systems should be primed to take advantage, so try increasing the number of cores you request when submitting your jobs and see if it improves the performance.
 
 *This might be why `numpy_dot_array` is that much faster than `numpy_sum_array` in the previous example!*
@@ -453,7 +454,7 @@ vectorize: 1.48ms
 
 It won't always be possible to take full advantage of vectorisation, for example you may have conditional logic.
 
-An alternate approach is converting your dataframe to a Python dictionary using `to_dict(orient='index')`. This creates a nested dictionary, where each row of the outer dictionary is an internal dictionary. This can then be processed via list-comprehension:
+An alternate approach is converting your DataFrame to a Python dictionary using `to_dict(orient='index')`. This creates a nested dictionary, where each row of the outer dictionary is an internal dictionary. This can then be processed via list-comprehension:
 
 ```python
 def to_dict():
@@ -470,7 +471,7 @@ Whilst still nearly 100x slower than pure vectorisation, it's twice as fast as `
 to_dict: 131.15ms
 ```
 
-This is because indexing into Pandas' `Series` (rows) is significantly slower than a Python dictionary. There is a slight overhead to creating the dictionary (40ms in this example), however the stark difference in access speed is more than enough to overcome that cost for any large dataframe.
+This is because indexing into Pandas' `Series` (rows) is significantly slower than a Python dictionary. There is a slight overhead to creating the dictionary (40ms in this example), however the stark difference in access speed is more than enough to overcome that cost for any large DataFrame.
 
 ```python
 from timeit import timeit

@@ -46,7 +46,7 @@ As a stack it is a last-in first-out (LIFO) data structure.
 
 ![A diagram of a call stack](fig/stack.png){alt="A greyscale diagram showing a (call)stack, containing 5 stack frame. Two additional stack frames are shown outside the stack, one is marked as entering the call stack with an arrow labelled push and the other is marked as exiting the call stack labelled pop."}
 
-When a function is called, a frame to track it's variables and metadata is pushed to the call stack.
+When a function is called, a frame to track its variables and metadata is pushed to the call stack.
 When that same function finishes and returns, it is popped from the stack and variables local to the function are dropped.
 
 If you've ever seen a stack overflow error, this refers to the call stack becoming too large.
@@ -88,7 +88,7 @@ Hence, this prints the following call stack:
     traceback.print_stack()
 ```
 
-The first line states the file and line number where `a()` was called from (the last line of code in the file shown). The second line states that it was the function `a()` that was called, this could include it's arguments. The third line then repeats this pattern, stating the line number where `b2()` was called inside `a()`. This continues until the call to `traceback.print_stack()` is reached.
+The first line states the file and line number where `a()` was called from (the last line of code in the file shown). The second line states that it was the function `a()` that was called, this could include its arguments. The third line then repeats this pattern, stating the line number where `b2()` was called inside `a()`. This continues until the call to `traceback.print_stack()` is reached.
 
 You may see stack traces like this when an unhandled exception is thrown by your code.
 
@@ -102,7 +102,7 @@ You may see stack traces like this when an unhandled exception is thrown by your
 [`cProfile`](https://docs.python.org/3/library/profile.html#instant-user-s-manual) is a function-level profiler provided as part of the Python standard library.
 
 <!-- How is it used? -->
-It can be called directly within your Python code as an imported package, however it's easier to use it's script interface:
+It can be called directly within your Python code as an imported package, however it's easier to use its script interface:
 
 ```sh
 python -m cProfile -o <output file> <script name> <arguments>
@@ -199,9 +199,9 @@ In the icicle visualization style functions are represented by rectangles. A roo
 -->
 
 The icicle diagram displayed by `snakeviz` represents an aggregate of the call stack during the execution of the profiled code.
-The box which fills the top row represents the the root call, filling the row shows that it occupied 100% of the runtime.
+The box which fills the top row represents the root call, filling the row shows that it occupied 100% of the runtime.
 The second row holds the child methods called from the root, with their widths relative to the proportion of runtime they occupied.
-This continues with each subsequent row, however where a method only occupies 50% of the runtime, it's children can only occupy a maximum of that runtime hence the appearance of "icicles" as each row gets narrower when the overhead of methods with no further children is accounted for.
+This continues with each subsequent row, however where a method only occupies 50% of the runtime, its children can only occupy a maximum of that runtime hence the appearance of "icicles" as each row gets narrower when the overhead of methods with no further children is accounted for.
 
 By clicking a box within the diagram, it will "zoom" making the selected box the root allowing more detail to be explored. The diagram is limited to 10 rows by default ("Depth") and methods with a relatively small proportion of the runtime are hidden ("Cutoff").
 
@@ -211,9 +211,9 @@ As you hover each box, information to the left of the diagram updates specifying
 
 ## snakeviz Inside Notebooks
 
-If you're more familiar with writing Python inside Jupyter notebooks you can still use  `snakeviz` directly from inside notebooks using the notebooks "magic" prefix (`%`) and it will automatically call `cProfile` for you.
+If you're more familiar with writing Python inside Jupyter notebooks you can still use `snakeviz` directly from inside notebooks using the notebooks "magic" prefix (`%`) and it will automatically call `cProfile` for you.
 
-First `snakeviz` must be installed and it's extension loaded.
+First `snakeviz` must be installed and its extension loaded.
 
 ```py
 !pip install snakeviz
@@ -239,7 +239,7 @@ my_function()
 
 In both cases, the full `snakeviz` profile visualisation will appear as an output within the notebook!
 
-*You may wish to right click the top of the output, and select "Disable Scrolling for Outputs" to expand it's box if it begins too small.*
+*You may wish to right click the top of the output, and select "Disable Scrolling for Outputs" to expand its box if it begins too small.*
 
 :::::::::::::::::::::::::::::::::::::::::::::
 
@@ -323,7 +323,7 @@ As `time.sleep()` is a core Python method it is displayed as "built-in method" a
 
 If you hover any boxes representing the methods from the above code, you will see file and line properties completed. The directory property remains empty as the profiled code was in the root of the working directory. A profile of a large project with many files across multiple directories will see this filled.
 
-Find the box representing `c_2()` on the icicle diagram, it's children are unlabelled because they are not wide enough (but they can still be hovered). Clicking `c_2()` zooms in the diagram, showing the children to be `time.sleep()` and `d_1()`.
+Find the box representing `c_2()` on the icicle diagram, its children are unlabelled because they are not wide enough (but they can still be hovered). Clicking `c_2()` zooms in the diagram, showing the children to be `time.sleep()` and `d_1()`.
 
 To zoom back out you can either click the top row, which will zoom out one layer, or click "Reset Zoom" on the left-hand side.
 
@@ -437,11 +437,10 @@ Download and profile <a href="files/pred-prey/predprey.py" download>the Python p
 >
 > The three agents; predators, prey and grass exist in a two dimensional grid. Predators eat prey, prey eat grass. The size of each population changes over time. Depending on the parameters of the model, the populations may oscillate, grow or collapse due to the availability of their food source.
 
-The program can be executed via `python predprey.py`.
+The program can be executed via `python predprey.py <steps>`.
+The value of `steps` for a full run is 250, however a full run may not be necessary to find the bottlenecks.
 
-It takes no arguments, but contains various environment properties which can be modified to change the model's behaviour.
 When the model finishes it outputs a graph of the three populations `predprey_out.png`.
-
 
 :::::::::::::::::::::::: solution 
 

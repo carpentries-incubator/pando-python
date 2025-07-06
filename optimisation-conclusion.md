@@ -55,10 +55,9 @@ Your feedback enables us to improve the course for future attendees!
     - Where feasible, the latest version of Python and packages should be used as they can include significant free improvements to the performance of your code.
     - There is a risk that updating Python or packages will not be possible to due to version incompatibilities or will require breaking changes to your code.
     - Changes to packages may impact results output by your code, ensure you have a method of validation ready prior to attempting upgrades.
-- How the Computer Hardware Affects Performance
-    - Sequential accesses to memory (RAM or disk) will be faster than random or scattered accesses.
-      - This is not always natively possible in Python without the use of packages such as NumPy and Pandas
+- How Latency Affects Performance
     - One large file is preferable to many small files.
+    - Network requests can be parallelised to reduce the impact of fixed overheads.
     - Memory allocation is not free, avoiding destroying and recreating objects can improve performance.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::

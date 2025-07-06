@@ -1,83 +1,33 @@
 ---
-title: "Understanding Memory"
+title: "Understanding Latency"
 teaching: 30
 exercises: 0
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions
 
-- How does a CPU look for a variable it requires?
-- What impact do cache lines have on memory accesses?
 - Why is it faster to read/write a single 100 MB file, than 100 files of 1 MB each?
+- How many orders of magnitude slower are disk accesses than RAM?
+- What's the cost of creating a list?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
 
-- Able to explain, at a high-level, how memory accesses occur during computation and how this impacts optimisation considerations.
 - Able to identify the relationship between different latencies relevant to software.
+- Demonstrate how to implement parallel network requests.
+- Justify the re-use of existing variables over creating new ones.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-## Accessing Variables
-
-The storage and movement of data plays a large role in the performance of executing software.
-
-<!-- Brief summary of hardware -->
-Modern computer's typically have a single processor (CPU), within this processor there are multiple processing cores each capable of executing different code in parallel.
-
-Data held in memory by running software is exists in RAM, this memory is faster to access than hard drives (and solid-state drives).
-But the CPU has much smaller caches on-board, to make accessing the most recent variables even faster.
-
-![An annotated photo of a computer's hardware.](episodes/fig/annotated-motherboard.jpg){alt="An annotated photo of inside a desktop computer's case. The CPU, RAM, power supply, graphics cards (GPUs) and harddrive are labelled."}
-
-<!-- Read/operate on variable ram->cpu cache->registers->cpu -->
-When reading a variable, to perform an operation with it, the CPU will first look in its registers. These exist per core, they are the location that computation is actually performed. Accessing them is incredibly fast, but there only exists enough storage for around 32 variables (typical number, e.g. 4 bytes).
-As the register file is so small, most variables won't be found and the CPU's caches will be searched.
-It will first check the current processing core's L1 (Level 1) cache, this small cache (typically 64 KB per physical core) is the smallest and fastest to access cache on a CPU.
-If the variable is not found in the L1 cache, the L2 cache that is shared between multiple cores will be checked. This shared cache, is slower to access but larger than L1 (typically 1-3MB per core).
-This process then repeats for the L3 cache which may be shared among all cores of the CPU. This cache again has higher latency to access, but increased size (typically slightly larger than the total L2 cache size).
-If the variable has not been found in any of the CPU's cache, the CPU will look to the computer's RAM. This is an order of magnitude slower to access, with several orders of magnitude greater capacity (tens to hundreds of GB are now standard).
-
-Correspondingly, the earlier the CPU finds the variable the faster it will be to access.
-However, to fully understand the cache's it's necessary to explain what happens once a variable has been found.
-
-If a variable is not found in the caches, it must be fetched from RAM.
-The full 64 byte cache line containing the variable, will be copied first into the CPU's L3, then L2 and then L1.
-Most variables are only 4 or 8 bytes, so many neighbouring variables are also pulled into the caches.
-Similarly, adding new data to a cache evicts old data.
-This means that reading 16 integers contiguously stored in memory, should be faster than 16 scattered integers
-
-Therefore, to **optimally** access variables they should be stored contiguously in memory with related data and worked on whilst they remain in caches.
-If you add to a variable, perform large amount of unrelated processing, then add to the variable again it will likely have been evicted from caches and need to be reloaded from slower RAM again.
-
-<!-- Latency/Throughput typically inversely proportional to capacity -->
-It's not necessary to remember this full detail of how memory access work within a computer, but the context perhaps helps understand why memory locality is important.
-
-![An abstract diagram showing the path data takes from disk or RAM to be used for computation.](episodes/fig/hardware.png){alt='An abstract representation of a CPU, RAM and Disk, showing their internal caches and the pathways data can pass.'}
-
-::::::::::::::::::::::::::::::::::::: callout
-
-Python as a programming language, does not give you enough control to carefully pack your variables in this manner (every variable is an object, so it's stored as a pointer that redirects to the actual data stored elsewhere).
-
-However all is not lost, packages such as `numpy` and `pandas` implemented in C/C++ enable Python users to take advantage of efficient memory accesses (when they are used correctly).
-
-:::::::::::::::::::::::::::::::::::::::::::::
-
-<!-- TODO python code example 
-```python
-
-```-->
 
 ## Accessing Disk
 
 <!-- Read data from a file it goes disk->disk cache->ram->cpu cache/s->cpu -->
-When accessing data on disk (or network), a very similar process is performed to that between CPU and RAM when accessing variables.
+When reading data from a file, it is first transferred from the disk to the disk cache and then to the RAM (the computer's main memory, where variables are stored).
+The latency to access files on disk is another order of magnitude higher than accessing normal variables.
 
-When reading data from a file, it transferred from the disk, to the disk cache, to the RAM.
-The latency to access files on disk is another order of magnitude higher than accessing RAM.
-
-As such, disk accesses similarly benefit from sequential accesses and reading larger blocks together rather than single variables.
+As such, disk accesses benefit from sequential accesses and reading larger blocks together rather than single variables.
 Python's `io` package is already buffered, so automatically handles this for you in the background.
 
 However before a file can be read, the file system on the disk must be polled to transform the file path to its address on disk to initiate the transfer (or throw an exception).
@@ -158,7 +108,7 @@ An even greater overhead would apply.
 
 ## Accessing the Network
 
-When transfering files over a network, similar effects apply. There is a fixed overhead for every file transfer (no matter how big the file), so downloading many small files will be slower than downloading a single large file of the same total size.
+When transferring files over a network, similar effects apply. There is a fixed overhead for every file transfer (no matter how big the file), so downloading many small files will be slower than downloading a single large file of the same total size.
 
 Because of this overhead, downloading many small files often does not use all the available bandwidth. It may be possible to speed things up by parallelising downloads.
 
@@ -227,7 +177,9 @@ Latency can have a big impact on the speed that a program executes, the below gr
 
 ![A graph demonstrating the wide variety of latencies a programmer may experience when accessing data.](episodes/fig/latency.png){alt="A horizontal bar chart displaying the relative latencies for L1/L2/L3 cache, RAM, SSD, HDD and a packet being sent from London to California and back. These latencies range from 1 nanosecond to 140 milliseconds and are displayed with a log scale."}
 
-The lower the latency typically the higher the effective bandwidth (L1 and L2 cache have 1 TB/s, RAM 100 GB/s, SSDs up to 32 GB/s, HDDs up to 150 MB/s), making large memory transactions even slower.
+L1/L2/L3 caches are where your most recently accessed variables are stored inside the CPU, whereas RAM is where most of your variables will be found.
+
+The lower the latency typically the higher the effective bandwidth (L1 and L2 cache have 1&nbsp;TB/s, RAM 100&nbsp;GB/s, SSDs up to 32 GB/s, HDDs up to 150&nbsp;MB/s), making large memory transactions even slower.
 
 ## Memory Allocation is not Free
 
@@ -242,7 +194,6 @@ Within Python memory is not explicitly allocated and deallocated, instead it is 
 The below implementation of the [heat-equation](https://en.wikipedia.org/wiki/Heat_equation), reallocates `out_grid`, a large 2 dimensional (500x500) list each time `update()` is called which progresses the model.
 
 ```python
-import time
 grid_shape = (512, 512)
 
 def update(grid, a_dt):
@@ -291,7 +242,6 @@ Line #      Hits         Time  Per Hit   % Time  Line Contents
 If instead `out_grid` is double buffered, such that two buffers are allocated outside the function, which are swapped after each call to update().
 
 ```python
-import time
 grid_shape = (512, 512)
 
 def update(grid, a_dt, out_grid):
@@ -337,9 +287,8 @@ Line #      Hits         Time  Per Hit   % Time  Line Contents
 
 ::::::::::::::::::::::::::::::::::::: keypoints
 
-- Sequential accesses to memory (RAM or disk) will be faster than random or scattered accesses.
-  - This is not always natively possible in Python without the use of packages such as NumPy and Pandas
 - One large file is preferable to many small files.
+- Network requests can be parallelised to reduce the impact of fixed overheads.
 - Memory allocation is not free, avoiding destroying and recreating objects can improve performance.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::

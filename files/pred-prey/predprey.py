@@ -1,3 +1,4 @@
+import sys
 import math
 import numpy as np
 import matplotlib.pyplot as plt
@@ -415,8 +416,14 @@ class Model:
         # plot graph of results
         self._plot()
         
+# Argument parsing
+if len(sys.argv) != 2:
+    print("Script expects 1 positive integer argument (number of steps), %u found."%(len(sys.argv) - 1))
+    sys.exit(1)
+steps = int(sys.argv[1])
+if steps < 1:
+    print("Script expects 1 positive integer argument (number of steps), %s converts < 1."%(sys.argv[1]))
+    sys.exit(1)
         
-        
-        
-model = Model()
+model = Model(steps=steps)
 model.run()

@@ -27,28 +27,29 @@ We'll talk briefly about some of these external bottlenecks at the end. For now,
 In order to optimise code for performance, it is necessary to have an understanding of what a computer is doing to execute it.
 
 <!-- Goal is to give you a high level understanding of how your code executes. You don't need to be an expert, even a vague general understanding will leave you in a stronger position. -->
-Even a high-level understanding of how you code executes, such as how Python and the most common data-structures and algorithms are implemented, can help you to identify suboptimal approaches when programming. If you have learned to write code informally out of necessity, to get something to work, it's not uncommon to have collected some "unpythonic" habits along the way that may harm your code's performance.
+A high-level understanding of how your code executes, such as how Python and the most common data-structures and algorithms are implemented, can help you identify suboptimal approaches when programming. If you have learned to write code informally out of necessity, to get something to work, it's not uncommon to have collected some "unpythonic" habits along the way that may harm your code's performance.
+
+<!-- This should be considered good practice that you can implement when first writing your code. -->
+These are the first steps in code optimisation, and knowledge you can put into practice by making more informed choices as you write your code and after profiling it.
 
 <!-- This is largely high-level/abstract knowledge applicable to the vast majority of programming languages, applies even more strongly if using compiled Python features like numba -->
 The remaining content is often abstract knowledge, that is transferable to the vast majority of programming languages. This is because the hardware architecture, data-structures and algorithms used are common to many languages and they hold some of the greatest influence over performance bottlenecks.
 
-## Premature Optimisation
+## Performance vs Maintainability
 
 > Programmers waste enormous amounts of time thinking about, or worrying about, the speed of noncritical parts of their programs, and these attempts at efficiency actually have a strong negative impact when debugging and maintenance are considered. We should forget about small efficiencies, say about 97% of the time: **premature optimization is the root of all evil**. Yet we should not pass up our opportunities in that critical 3%. - Donald Knuth
 
-This classic quote among computer scientists states; when considering optimisation it is important to focus on the potential impact, both to the performance and maintainability of the code.
+This classic quote among computer scientists emphasises the importance of considering both performance and maintainability when optimising code and prioritising your optimisations.
 
-Profiling is a valuable tool in this cause. Should effort be expended to optimise a component which occupies 1% of the runtime? Or would that time be better spent focusing on the most expensive components?
+While advanced optimisations may boost performance, they often come at the cost of making the code harder to understand and maintain. Even if you're working alone on private code, your future self should be able to easily understand the implementation. Hence, when optimising, always weigh the potential impact on both performance and maintainability. While this course does not cover most advanced optimisations, you may already be familiar with and using some.
 
-Advanced optimisations, mostly outside the scope of this course, can increase the cost of maintenance by obfuscating what code is doing. Even if you are a solo-developer working on private code, your future self should be able to easily comprehend your implementation.
+Profiling is a valuable tool for prioritising optimisations. Should effort be expended to optimise a component which occupies 1% of the runtime? Or would that time be better spent optimising the most expensive components?
 
-Therefore, the balance between the impact to both performance and maintainability should be considered when optimising code.
+This doesn't mean you should ignore performance when initially writing code. Choosing the right algorithms and data structures, as we will discuss in this course, is good practice. However, there's no need to obsess over micro-optimising every tiny component of your code—focus on the bigger picture.
 
-This is not to say, don't consider performance when first writing code. The selection of appropriate algorithms and data-structures covered in this course form good practice, simply don't fret over a need to micro-optimise every small component of the code that you write.
+## Performance of Python
 
-### Performance of Python
-
-If you've read about different programming languages, you may have heard that there’s a difference between “interpreted” languages (like Python) and "compiled" languages (like C). You may have heard that Python is slow *because* it is an interpreted language.
+If you've read about different programming languages, you may have heard that there’s a difference between "interpreted" languages (like Python) and "compiled" languages (like C). You may have heard that Python is slow *because* it is an interpreted language.
 To understand where this comes from (and how to get around it), let's talk a little bit about how Python works.
 
 ![Illustration of integers in C and Python.](episodes/fig/int-c-vs-py.png){alt="A diagram illustrating the difference between integers in C and Python. In C, the integer is a raw number in memory. In Python, it additionally contains a header with metadata."}
@@ -111,22 +112,17 @@ This usually makes your code more readable, too: When someone else reads your co
 ## Ensuring Reproducible Results
 
 <!-- This is also good practice when optimising your code, to ensure mistakes aren't made -->
-When optimising your code, you are making speculative changes. It's easy to make mistakes, many of which can be subtle. Therefore, it's important to have a strategy in place to check that the outputs remain correct.
+When optimising existing code, you're often making speculative changes, which can lead to subtle mistakes. To ensure that your optimisations aren't also introducing errors, it's crucial to have a strategy for checking that the results remain correct.
 
-Testing is hopefully already a seamless part of your research software development process.
-Test can be used to clarify how your software should perform, ensuring that new features work as intended and protecting against unintended changes to old functionality.
-
-There are a plethora of methods for testing code.
+Testing should already be an integral part of your development process. It helps clarify expected behaviour, ensures new features are working as intended, and protects against unintended regressions in previously working functionality. Always verify your changes through testing to ensure that the optimisations don’t compromise the correctness of your code.
 
 ## pytest Overview
 
-Most Python developers use the testing package [pytest](https://docs.pytest.org/en/latest/), it's a great place to get started if you're new to testing code.
+There are a plethora of methods for testing code. Most Python developers use the testing package [pytest](https://docs.pytest.org/en/latest/), it's a great place to get started if you're new to testing code.
 
 Here's a quick example of how a test can be used to check your function's output against an expected value.
 
-Tests should be created within a project's testing directory, by creating files named with the form `test_*.py` or `*_test.py`.
-
-pytest looks for these files, when running the test suite.
+Tests should be created within a project's testing directory, by creating files named with the form `test_*.py` or `*_test.py`. pytest looks for file names with these patterns when running the test suite.
 
 Within the created test file, any functions named in the form `test*` are considered tests that will be executed by pytest.
 

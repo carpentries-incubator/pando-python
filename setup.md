@@ -22,8 +22,12 @@ This course uses Python and was developed using Python 3.11, therefore it is rec
 
 You may want to create a new Python virtual environment for the course, this can be done with your preferred Python environment manager (e.g. `conda`, `pipenv`), the required packages can all be installed via `pip`.
 
-<!-- conda create -n pando python
-     conda activate pando -->
+If you have `conda` available, you can create and activate a new environment named `py311_env` with Python 3.11 using the following command:
+
+```sh
+conda create --name py311_env python=3.11
+conda activate py311_env
+```
 
 The non-core Python packages required by the course are `pytest`, `snakeviz`, `line_profiler`, `numpy`, `pandas` and `matplotlib` which can be installed via `pip`.
  
@@ -51,13 +55,7 @@ pip install shapely
 If you are unable to install `line_profiler` via `pip` on MacOS. Instead it can be installed via `conda`.
 
 ```sh
-conda install line_profiler
-```
-
-It may first be necessary to enable conda-forge.
-
-```sh
-conda config --add channels conda-forge
+conda install -c conda-forge line_profiler
 ```
 ::::::::::::::::::::::::
 

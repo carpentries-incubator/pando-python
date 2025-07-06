@@ -58,6 +58,11 @@ When an item is appended, the list checks whether it has enough spare space to a
 If it doesn't, it will re-allocate a larger array, copy across the elements, and deallocate the old array.
 The item to be appended is then copied to the end and the counter which tracks the list's length is incremented.
 
+<!-- Based on ICR-RSE's visual note: https://icr-rse-group.github.io/carpentry-pando-python/optimisation-data-structures-algorithms.html#lists -->
+![A visual diagram of list storage.](episodes/fig/list-append.png){alt="A list uses a contiguous block of memory, similar to an array, for storing the pointers to its elements. It is depicted as a series of five adjacent boxes, labelled 'P1' to 'P5', representing pointers to the list's elements.
+It can have additional storage beyond its length to make appends faster. An illustration shows the previous list with two extra empty boxes marked with question marks, indicating spare elements. Below, Python code `len(my_list) == 5` and `my_list.append(6)` is shown. After appending, the first of the previously empty boxes contains 'P6', and the last one remains empty. The length is now `len(my_list) == 6`.&#13;&#10;&#13;&#10;Appending to a full list causes it to grow. This makes some appends slower. An illustration depicts a full list with 'P1' through 'P7' in adjacent boxes and a label &quot;No spare elements!&quot;. Below, Python code `len(my_list) == 7` and `my_list.append(8)` is shown. The result is a new, larger continuous block of memory with 'P1' through 'P8' followed by a question mark in an additional box, indicating one spare element. The label &quot;2 new elements&quot; with curved arrows suggests that when the list grows, it typically allocates more memory than just the space for the new element.
+A concluding note states that a list will typically grow by 12.5%, hence shorter lists will grow more frequently when appending." }
+
 The amount the internal array grows by is dependent on the particular list implementation's growth factor.
 CPython for example uses [`newsize + (newsize >> 3) + 6`](https://github.com/python/cpython/blob/a571a2fd3fdaeafdfd71f3d80ed5a3b22b63d0f7/Objects/listobject.c#L74), which works out to an over allocation of roughly ~12.5%.
 
@@ -151,21 +156,20 @@ Since Python 3.6, the items within a dictionary will iterate in the order that t
 
 ### Hashing Data Structures
 
-Python's dictionaries are implemented as hashing data structures.
-Explaining how these work will get a bit technical, so let’s start with an analogy:
+Python's dictionaries are implemented as hashing data structures, we can understand these at a high-level with an analogy:
 
 A Python list is like having a single long bookshelf. When you buy a new book (append a new element to the list), you place it at the far end of the shelf, right after all the previous books.
 
 ![A bookshelf corresponding to a Python list.](episodes/fig/bookshelf_list.jpg){alt="An image of a single long bookshelf, with a large number of books."}
 
-A hashing data structure is more like a bookcase with several shelves, labeled by genre (sci-fi, romance, children’s books, non-fiction, …) and author surname. When you buy a new book by Jules Verne, you might place it on the shelf labeled “Sci-Fi, V–Z”.
-And if you keep adding more books, at some point you’ll move to a larger bookcase with more shelves (and thus more fine-grained sorting), to make sure you don’t have too many books on a single shelf.
+A Python dictionary is more like a bookcase with several shelves, labelled by genre (sci-fi, romance, children's books, non-fiction,&nbsp;…) and author surname. When you buy a new book by Jules Verne, you might place it on the shelf labelled &quot;Sci-Fi, V–Z&quot;.
+And if you keep adding more books, at some point you'll move to a larger bookcase with more shelves (and thus more fine-grained sorting), to make sure you don't have too many books on a single shelf.
 
-![A bookshelf corresponding to a Python dictionary.](episodes/fig/bookshelf_dict.jpg){alt="An image of two bookcases, labelled “Sci-Fi” and “Romance”. Each bookcase contains shelves labelled in alphabetical order, with zero or few books on each shelf."}
+![A bookshelf corresponding to a Python dictionary.](episodes/fig/bookshelf_dict.jpg){alt="An image of two bookcases, labelled &quot;Sci-Fi&quot; and &quot;Romance&quot;. Each bookcase contains shelves labelled in alphabetical order, with zero or few books on each shelf."}
 
-Now, let's say a friend wanted to borrow the book "'—All You Zombies—'" by Robert Heinlein.
+Now, let's say a friend wanted to borrow the book &quot;'—All You Zombies—'&quot; by Robert Heinlein.
 If I had my books arranged on a single bookshelf (in a list), I would have to look through every book I own in order to find it.
-However, if I had a bookcase with several shelves (a hashing data structure), I know immediately that I need to check the shelf “Sci-Fi, G—J”, so I’d be able to find it much more quickly!
+However, if I had a bookcase with several shelves (a hashing data structure), I know immediately that I need to check the shelf &quot;Sci-Fi, G—J&quot;, so I'd be able to find it much more quickly!
 
 ::::::::::::::::::::::::::::::::::::: instructor
 
@@ -181,25 +185,14 @@ In practice, therefore, this trade-off between memory usage and speed is usually
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
+When a value is inserted into a dictionary, its key is hashed to decide on which "shelf" it should be stored. Most items will have a unique shelf, allowing them to be accessed directly. This is typically much faster for locating a specific item than searching a list.
+
 
 ::::::::::::::::::::::::::::::::::::: callout
 
-### Technical explanation
-
-Within a hashing data structure each inserted key is hashed to produce a (hopefully unique) integer key.
-The dictionary is pre-allocated to a default size, and the key is assigned the index within the dictionary equivalent to the hash modulo the length of the dictionary.
-If that index doesn't already contain another key, the key (and any associated values) can be inserted.
-When the index isn't free, a collision strategy is applied. CPython's [dictionary](https://github.com/python/cpython/blob/main/Objects/dictobject.c) and [set](https://github.com/python/cpython/blob/main/Objects/setobject.c) both use a form of open addressing whereby a hash is mutated and corresponding indices probed until a free one is located.
-When the hashing data structure exceeds a given load factor (e.g. 2/3 of indices have been assigned keys), the internal storage must grow. This process requires every item to be re-inserted which can be expensive, but reduces the average probes for a key to be found.
-
-![An visual explanation of linear probing, CPython uses an advanced form of this.](episodes/fig/hash_linear_probing.png){alt="A diagram demonstrating how the keys (hashes) 37, 64, 14, 94, 67 are inserted into a hash table with 11 indices. This is followed by the insertion of 59, 80 and 39 which require linear probing to be inserted due to collisions."}
-
-To retrieve or check for the existence of a key within a hashing data structure, the key is hashed again and a process equivalent to insertion is repeated. However, now the key at each index is checked for equality with the one provided. If any empty index is found before an equivalent key, then the key must not be present in the data structure.
-
-
 ### Keys
 
-Keys will typically be a core Python type such as a number or string. However multiple of these can be combined as a Tuple to form a compound key, or a custom class can be used if the methods `__hash__()` and `__eq__()` have been implemented.
+A dictionary's keys will typically be a core Python type such as a number or string. However, multiple of these can be combined as a tuple to form a compound key, or a custom class can be used if the methods `__hash__()` and `__eq__()` have been implemented.
 
 You can implement `__hash__()` by utilising the ability for Python to hash tuples, avoiding the need to implement a bespoke hash function.
 
@@ -301,7 +294,7 @@ Constructing a set with a loop and `add()` (equivalent to a list's `append()`) c
 
 The naive list approach is 2200x times slower than the fastest approach, because of how many times the list is searched. This gap will only grow as the number of items increases.
 
-Sorting the input list reduces the cost of searching the output list significantly, however it is still 8x slower than the fastest approach. In part because around half of it's runtime is now spent sorting the list.
+Sorting the input list reduces the cost of searching the output list significantly, however it is still 8x slower than the fastest approach. In part because around half of its runtime is now spent sorting the list.
 
 ```output
 uniqueSet: 0.30ms
@@ -316,9 +309,9 @@ uniqueListSort: 2.67ms
 
 Independent of the performance to construct a unique set (as covered in the previous section), it's worth identifying the performance to search the data-structure to retrieve an item or check whether it exists.
 
-The performance of a hashing data structure is subject to the load factor and number of collisions. An item that hashes with no collision can be checked almost directly, whereas one with collisions will probe until it finds the correct item or an empty slot. In the worst possible case, whereby all insert items have collided this would mean checking every single item. In practice, hashing data-structures are designed to minimise the chances of this happening and most items should be found or identified as missing with a single access.
+The performance of a hashing data structure is subject to the load factor and number of collisions. An item that hashes with no collision can be accessed almost directly, whereas one with collisions will probe until it finds the correct item or an empty slot. In the worst possible case, whereby all insert items have collided this would mean checking every single item. In practice, hashing data-structures are designed to minimise the chances of this happening and most items should be found or identified as missing on the first attempt (without probing beyond the original hash).
 
-In contrast if searching a list or array, the default approach is to start at the first item and check all subsequent items until the correct item has been found. If the correct item is not present, this will require the entire list to be checked. Therefore the worst-case is similar to that of the hashing data-structure, however it is guaranteed in cases where the item is missing. Similarly, on-average we would expect an item to be found half way through the list, meaning that an average search will require checking half of the items.
+In contrast, if searching a list or array, the default approach is to start at the first item and check all subsequent items until the correct item has been found. If the correct item is not present, this will require the entire list to be checked. Therefore the worst-case is similar to that of the hashing data-structure, however it is guaranteed in cases where the item is missing. Similarly, on-average we would expect an item to be found halfway through the list, meaning that an average search will require checking half of the items.
 
 If however the list or array is sorted, a binary search can be used. A binary search divides the list in half and checks which half the target item would be found in, this continues recursively until the search is exhausted whereby the item should be found or dismissed. This is significantly faster than performing a linear search of the list, checking a total of `log N` items every time.
 

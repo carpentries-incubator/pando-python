@@ -25,7 +25,7 @@ This is an all-day course, however it normally finishes by early afternoon.
 <!-- Aim for 3-4 objectives for every 6 hours of training -->
 <!-- SMART Objectives
     - Specific
-    - Measureable
+    - Measurable
     - Attainable (within the span of the course)
     - Relevant
     - Time-bound (implicitly the length of the course)
@@ -34,7 +34,7 @@ This is an all-day course, however it normally finishes by early afternoon.
 After attending this training, participants will be able to:
 
 - identify the most expensive functions and lines of code using `cprofile` and `line_profiler`.
-- evaluate code to determine the limiting factors of it's performance.
+- evaluate code to determine the limiting factors of its performance.
 - recognise and implement optimisations for common limiting factors of performance.
 
 ::::::::::::::::::::::::::::::::::::::::::  prereq

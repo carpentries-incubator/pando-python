@@ -41,7 +41,7 @@ Increasingly, particularly with relation to HPC, attention is being paid to the 
 
 Profiling is most relevant to working code, when you have reached a stage that the code works and are considering deploying it.
 
-Any code that will run for more than a few minutes over it's lifetime, that isn't a quick one-shot script can benefit from profiling.
+Any code that will run for more than a few minutes over its lifetime and isn't a quick one-off script can benefit from profiling.
 
 Profiling should be a relatively quick and inexpensive process. If there are no significant bottlenecks in your code you can quickly be confident that your code is reasonably optimised. If you do identify a concerning bottleneck, further work to optimise your code and reduce the bottleneck could see significant improvements to the performance of your code and hence productivity.
 
@@ -124,7 +124,7 @@ Therefore, it is better described as a tool for **benchmarking**.
 Software is typically comprised of a hierarchy of function calls, both functions written by the developer and those used from the language's standard library and third party packages.
 
 <!-- What -->
-Function-level profiling analyses where time is being spent with respect to functions. Typically function-level profiling will calculate the number of times each function is called and the total time spent executing each function, inclusive and exclusive of child function calls.
+Function-level profiling analyses where time is being spent with respect to functions. Typically, function-level profiling will calculate the number of times each function is called and the total time spent executing each function, inclusive and exclusive of child function calls.
 
 <!-- Why -->
 This allows functions that occupy a disproportionate amount of the total runtime to be quickly identified and investigated.
@@ -156,7 +156,7 @@ Line-level profiling can be particularly expensive, a program can execute hundre
 
 `line_profiler` is deterministic, meaning that it tracks every line of code executed. To avoid it being too costly, the profiling is restricted to methods targeted with the decorator `@profile`.
 
-In contrast [`scalene`](https://github.com/plasma-umass/scalene) is a more advanced Python profiler capable of line-level profiling. It uses a sampling based approach, whereby the profiler halts and samples the line of code currently executing thousands of times per second. This reduces the cost of profiling, whilst still maintaining representative metrics for the most expensive components.
+In contrast, [`scalene`](https://github.com/plasma-umass/scalene) is a more advanced Python profiler capable of line-level profiling. It uses a sampling based approach, whereby the profiler halts and samples the line of code currently executing thousands of times per second. This reduces the cost of profiling, whilst still maintaining representative metrics for the most expensive components.
 
 :::::::::::::::::::::::::::::::::::::::::::::
 
@@ -165,7 +165,7 @@ In contrast [`scalene`](https://github.com/plasma-umass/scalene) is a more advan
 Timeline profiling takes a different approach to visualising where time is being spent during execution.
 
 <!-- What -->
-Typically a subset of function-level profiling, the execution of the profiled software is instead presented as a timeline highlighting the order of function execution in addition to the time spent in each individual function call.
+Typically, a subset of function-level profiling, the execution of the profiled software is instead presented as a timeline highlighting the order of function execution in addition to the time spent in each individual function call.
 
 <!-- Why -->
 By highlighting individual functions calls, patterns relating to how performance scales over time can be identified. These would be hidden with the aforementioned aggregate approaches.
@@ -202,7 +202,7 @@ Ideally, it should take no more than a few minutes to run the profiled test-case
 
 <!-- For example -->
 <!-- I don't really like this paragraph -->
-For example, you may have a model which normally simulates a year in hourly timesteps.
+For example, you may have a model which normally simulates a year in hourly time-steps.
 It would be appropriate to begin by profiling the simulation of a single day.
 If the model scales over time, such as due to population growth, it may be pertinent to profile a single day later into a simulation if the model can be resumed or configured.
 A larger population is likely to amplify any bottlenecks that scale with the population, making them easier to identify.
@@ -215,7 +215,7 @@ A larger population is likely to amplify any bottlenecks that scale with the pop
 Think about a project where you've been working with Python.
 Do you know where the time during execution is being spent?
 
-Write a short plan of the approach you would take to investigate and confirm where the majority of time is being spent during it's execution.
+Write a short plan of the approach you would take to investigate and confirm where the majority of time is being spent during its execution.
 
 <!-- TODO should they share this anywhere, should it be discussed within the group? -->
 
@@ -233,7 +233,7 @@ Write a short plan of the approach you would take to investigate and confirm whe
 ::::::::::::::::::::::::::::::::::::: keypoints
 
 - Profiling is a relatively quick process to analyse where time is being spent and bottlenecks during a program's execution.
-- Code should be profiled when ready for deployment if it will be running for more than a few minutes during it's lifetime.
+- Code should be profiled when ready for deployment if it will be running for more than a few minutes during its lifetime.
 - There are several types of profiler each with slightly different purposes.
     - function-level: `cProfile` (visualised with `snakeviz`)
     - line-level: `line_profiler`
