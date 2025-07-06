@@ -61,6 +61,9 @@
     <loc>https://RSE-Sheffield.github.io/pando-python/instructor/optimisation-introduction.html</loc>
   </url>
   <url>
+    <loc>https://RSE-Sheffield.github.io/pando-python/instructor/optimisation-latency.html</loc>
+  </url>
+  <url>
     <loc>https://RSE-Sheffield.github.io/pando-python/instructor/optimisation-memory.html</loc>
   </url>
   <url>
@@ -103,6 +106,9 @@
     <loc>https://RSE-Sheffield.github.io/pando-python/instructor/short-break1.html</loc>
   </url>
   <url>
+    <loc>https://RSE-Sheffield.github.io/pando-python/instructor/technical-appendix.html</loc>
+  </url>
+  <url>
     <loc>https://RSE-Sheffield.github.io/pando-python/instructor-notes.html</loc>
   </url>
   <url>
@@ -119,6 +125,9 @@
   </url>
   <url>
     <loc>https://RSE-Sheffield.github.io/pando-python/optimisation-introduction.html</loc>
+  </url>
+  <url>
+    <loc>https://RSE-Sheffield.github.io/pando-python/optimisation-latency.html</loc>
   </url>
   <url>
     <loc>https://RSE-Sheffield.github.io/pando-python/optimisation-memory.html</loc>
@@ -161,5 +170,8 @@
   </url>
   <url>
     <loc>https://RSE-Sheffield.github.io/pando-python/short-break1.html</loc>
+  </url>
+  <url>
+    <loc>https://RSE-Sheffield.github.io/pando-python/technical-appendix.html</loc>
   </url>
 </urlset>

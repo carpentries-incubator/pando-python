@@ -99,7 +99,7 @@
           <button class="nav-link dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
             More <i data-feather="chevron-down"></i>
           </button>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown"><hr><li><a class="dropdown-item" href="acknowledgements.html">Acknowledgements</a></li><li><a class="dropdown-item" href="ppp.html">Performant Python Patterns (Talk)</a></li><li><a class="dropdown-item" href="reference.html">Reference</a></li>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown"><hr><li><a class="dropdown-item" href="technical-appendix.html">Technical Appendix</a></li><li><a class="dropdown-item" href="acknowledgements.html">Acknowledgements</a></li><li><a class="dropdown-item" href="ppp.html">Performant Python Patterns (Talk)</a></li><li><a class="dropdown-item" href="reference.html">Reference</a></li>
           </ul></li>
       </ul></div>
     <!--
@@ -319,7 +319,7 @@
 <div class="accordion accordion-flush" id="accordionFlush13">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading13">
-        <a href="optimisation-memory.html">12. Understanding Memory</a>
+        <a href="optimisation-latency.html">12. Understanding Latency</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -356,7 +356,7 @@
                       <li>
                         <a href="../instructor/images.html">Extract All Images</a>
                       </li>
-                      <hr><li><a class="dropdown-item" href="acknowledgements.html">Acknowledgements</a></li><li><a class="dropdown-item" href="ppp.html">Performant Python Patterns (Talk)</a></li><li><a class="dropdown-item" href="reference.html">Reference</a></li>
+                      <hr><li><a class="dropdown-item" href="technical-appendix.html">Technical Appendix</a></li><li><a class="dropdown-item" href="acknowledgements.html">Acknowledgements</a></li><li><a class="dropdown-item" href="ppp.html">Performant Python Patterns (Talk)</a></li><li><a class="dropdown-item" href="reference.html">Reference</a></li>
                     </ul></div>
                 </div>
               </div>
@@ -392,7 +392,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Introduction to Profiling</h1>
-        <p>Last updated on 2024-03-28 |
+        <p>Last updated on 2025-07-06 |
 
         <a href="https://github.com/RSE-Sheffield/pando-python/edit/main/episodes/profiling-introduction.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -461,9 +461,8 @@ resources.</p>
 </section><section><h2 class="section-heading" id="when-to-profile">When to Profile<a class="anchor" aria-label="anchor" href="#when-to-profile"></a></h2>
 <hr class="half-width"><p>Profiling is most relevant to working code, when you have reached a
 stage that the code works and are considering deploying it.</p>
-<p>Any code that will run for more than a few minutes over it’s
-lifetime, that isn’t a quick one-shot script can benefit from
-profiling.</p>
+<p>Any code that will run for more than a few minutes over its lifetime
+and isn’t a quick one-off script can benefit from profiling.</p>
 <p>Profiling should be a relatively quick and inexpensive process. If
 there are no significant bottlenecks in your code you can quickly be
 confident that your code is reasonably optimised. If you do identify a
@@ -575,7 +574,7 @@ both functions written by the developer and those used from the
 language’s standard library and third party packages.</p>
 <!-- What -->
 <p>Function-level profiling analyses where time is being spent with
-respect to functions. Typically function-level profiling will calculate
+respect to functions. Typically, function-level profiling will calculate
 the number of times each function is called and the total time spent
 executing each function, inclusive and exclusive of child function
 calls.</p>
@@ -618,7 +617,7 @@ collecting information about each line of code can be costly.</p>
 every line of code executed. To avoid it being too costly, the profiling
 is restricted to methods targeted with the decorator
 <code>@profile</code>.</p>
-<p>In contrast <a href="https://github.com/plasma-umass/scalene" class="external-link"><code>scalene</code></a>
+<p>In contrast, <a href="https://github.com/plasma-umass/scalene" class="external-link"><code>scalene</code></a>
 is a more advanced Python profiler capable of line-level profiling. It
 uses a sampling based approach, whereby the profiler halts and samples
 the line of code currently executing thousands of times per second. This
@@ -634,7 +633,7 @@ metrics for the most expensive components.</p>
 <p>Timeline profiling takes a different approach to visualising where
 time is being spent during execution.</p>
 <!-- What -->
-<p>Typically a subset of function-level profiling, the execution of the
+<p>Typically, a subset of function-level profiling, the execution of the
 profiled software is instead presented as a timeline highlighting the
 order of function execution in addition to the time spent in each
 individual function call.</p>
@@ -682,7 +681,7 @@ circumstances where something that short is not possible.</p>
 <!-- For example -->
 <!-- I don't really like this paragraph -->
 <p>For example, you may have a model which normally simulates a year in
-hourly timesteps. It would be appropriate to begin by profiling the
+hourly time-steps. It would be appropriate to begin by profiling the
 simulation of a single day. If the model scales over time, such as due
 to population growth, it may be pertinent to profile a single day later
 into a simulation if the model can be resumed or configured. A larger
@@ -698,7 +697,7 @@ population, making them easier to identify.</p>
 <p>Think about a project where you’ve been working with Python. Do you
 know where the time during execution is being spent?</p>
 <p>Write a short plan of the approach you would take to investigate and
-confirm where the majority of time is being spent during it’s
+confirm where the majority of time is being spent during its
 execution.</p>
 <!-- TODO should they share this anywhere, should it be discussed within the group? -->
 </div>
@@ -728,7 +727,7 @@ execution.</p>
 <ul><li>Profiling is a relatively quick process to analyse where time is
 being spent and bottlenecks during a program’s execution.</li>
 <li>Code should be profiled when ready for deployment if it will be
-running for more than a few minutes during it’s lifetime.</li>
+running for more than a few minutes during its lifetime.</li>
 <li>There are several types of profiler each with slightly different
 purposes.
 <ul><li>function-level: <code>cProfile</code> (visualised with
@@ -806,8 +805,8 @@ any links that you are not going to use.
   "url": "https://RSE-Sheffield.github.io/pando-python/instructor/profiling-introduction.html",
   "identifier": "https://RSE-Sheffield.github.io/pando-python/instructor/profiling-introduction.html",
   "dateCreated": "2024-02-01",
-  "dateModified": "2024-03-28",
-  "datePublished": "2025-07-01"
+  "dateModified": "2025-07-06",
+  "datePublished": "2025-07-06"
 }
 
   </script><script>

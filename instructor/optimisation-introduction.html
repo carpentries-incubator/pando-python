@@ -99,7 +99,7 @@
           <button class="nav-link dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
             More <i data-feather="chevron-down"></i>
           </button>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown"><hr><li><a class="dropdown-item" href="acknowledgements.html">Acknowledgements</a></li><li><a class="dropdown-item" href="ppp.html">Performant Python Patterns (Talk)</a></li><li><a class="dropdown-item" href="reference.html">Reference</a></li>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown"><hr><li><a class="dropdown-item" href="technical-appendix.html">Technical Appendix</a></li><li><a class="dropdown-item" href="acknowledgements.html">Acknowledgements</a></li><li><a class="dropdown-item" href="ppp.html">Performant Python Patterns (Talk)</a></li><li><a class="dropdown-item" href="reference.html">Reference</a></li>
           </ul></li>
       </ul></div>
     <!--
@@ -262,7 +262,8 @@
     <div id="flush-collapsecurrent" class="accordion-collapse collapse show" aria-labelledby="flush-headingcurrent" data-bs-parent="#accordionFlushcurrent">
       <div class="accordion-body">
         <ul><li><a href="#introduction">Introduction</a></li>
-<li><a href="#premature-optimisation">Premature Optimisation</a></li>
+<li><a href="#performance-vs-maintainability">Performance vs Maintainability</a></li>
+<li><a href="#performance-of-python">Performance of Python</a></li>
 <li><a href="#ensuring-reproducible-results">Ensuring Reproducible Results</a></li>
 <li><a href="#pytest-overview">pytest Overview</a></li>
         </ul></div><!--/div.accordion-body-->
@@ -319,7 +320,7 @@
 <div class="accordion accordion-flush" id="accordionFlush13">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading13">
-        <a href="optimisation-memory.html">12. Understanding Memory</a>
+        <a href="optimisation-latency.html">12. Understanding Latency</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -356,7 +357,7 @@
                       <li>
                         <a href="../instructor/images.html">Extract All Images</a>
                       </li>
-                      <hr><li><a class="dropdown-item" href="acknowledgements.html">Acknowledgements</a></li><li><a class="dropdown-item" href="ppp.html">Performant Python Patterns (Talk)</a></li><li><a class="dropdown-item" href="reference.html">Reference</a></li>
+                      <hr><li><a class="dropdown-item" href="technical-appendix.html">Technical Appendix</a></li><li><a class="dropdown-item" href="acknowledgements.html">Acknowledgements</a></li><li><a class="dropdown-item" href="ppp.html">Performant Python Patterns (Talk)</a></li><li><a class="dropdown-item" href="reference.html">Reference</a></li>
                     </ul></div>
                 </div>
               </div>
@@ -392,7 +393,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Introduction to Optimisation</h1>
-        <p>Last updated on 2025-03-15 |
+        <p>Last updated on 2025-07-06 |
 
         <a href="https://github.com/RSE-Sheffield/pando-python/edit/main/episodes/optimisation-introduction.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -442,20 +443,24 @@ performance of your code.</p>
 <p>In order to optimise code for performance, it is necessary to have an
 understanding of what a computer is doing to execute it.</p>
 <!-- Goal is to give you a high level understanding of how your code executes. You don't need to be an expert, even a vague general understanding will leave you in a stronger position. -->
-<p>Even a high-level understanding of how you code executes, such as how
+<p>A high-level understanding of how your code executes, such as how
 Python and the most common data-structures and algorithms are
-implemented, can help you to identify suboptimal approaches when
+implemented, can help you identify suboptimal approaches when
 programming. If you have learned to write code informally out of
 necessity, to get something to work, it’s not uncommon to have collected
 some “unpythonic” habits along the way that may harm your code’s
 performance.</p>
+<!-- This should be considered good practice that you can implement when first writing your code. -->
+<p>These are the first steps in code optimisation, and knowledge you can
+put into practice by making more informed choices as you write your code
+and after profiling it.</p>
 <!-- This is largely high-level/abstract knowledge applicable to the vast majority of programming languages, applies even more strongly if using compiled Python features like numba -->
 <p>The remaining content is often abstract knowledge, that is
 transferable to the vast majority of programming languages. This is
 because the hardware architecture, data-structures and algorithms used
 are common to many languages and they hold some of the greatest
 influence over performance bottlenecks.</p>
-</section><section><h2 class="section-heading" id="premature-optimisation">Premature Optimisation<a class="anchor" aria-label="anchor" href="#premature-optimisation"></a></h2>
+</section><section><h2 class="section-heading" id="performance-vs-maintainability">Performance vs Maintainability<a class="anchor" aria-label="anchor" href="#performance-vs-maintainability"></a></h2>
 <hr class="half-width"><blockquote>
 <p>Programmers waste enormous amounts of time thinking about, or
 worrying about, the speed of noncritical parts of their programs, and
@@ -465,25 +470,27 @@ efficiencies, say about 97% of the time: <strong>premature optimization
 is the root of all evil</strong>. Yet we should not pass up our
 opportunities in that critical 3%. - Donald Knuth</p>
 </blockquote>
-<p>This classic quote among computer scientists states; when considering
-optimisation it is important to focus on the potential impact, both to
-the performance and maintainability of the code.</p>
-<p>Profiling is a valuable tool in this cause. Should effort be expended
-to optimise a component which occupies 1% of the runtime? Or would that
-time be better spent focusing on the most expensive components?</p>
-<p>Advanced optimisations, mostly outside the scope of this course, can
-increase the cost of maintenance by obfuscating what code is doing. Even
-if you are a solo-developer working on private code, your future self
-should be able to easily comprehend your implementation.</p>
-<p>Therefore, the balance between the impact to both performance and
-maintainability should be considered when optimising code.</p>
-<p>This is not to say, don’t consider performance when first writing
-code. The selection of appropriate algorithms and data-structures
-covered in this course form good practice, simply don’t fret over a need
-to micro-optimise every small component of the code that you write.</p>
-<div class="section level3">
-<h3 id="performance-of-python">Performance of Python<a class="anchor" aria-label="anchor" href="#performance-of-python"></a></h3>
-<p>If you’ve read about different programming languages, you may have
+<p>This classic quote among computer scientists emphasises the
+importance of considering both performance and maintainability when
+optimising code and prioritising your optimisations.</p>
+<p>While advanced optimisations may boost performance, they often come
+at the cost of making the code harder to understand and maintain. Even
+if you’re working alone on private code, your future self should be able
+to easily understand the implementation. Hence, when optimising, always
+weigh the potential impact on both performance and maintainability.
+While this course does not cover most advanced optimisations, you may
+already be familiar with and using some.</p>
+<p>Profiling is a valuable tool for prioritising optimisations. Should
+effort be expended to optimise a component which occupies 1% of the
+runtime? Or would that time be better spent optimising the most
+expensive components?</p>
+<p>This doesn’t mean you should ignore performance when initially
+writing code. Choosing the right algorithms and data structures, as we
+will discuss in this course, is good practice. However, there’s no need
+to obsess over micro-optimising every tiny component of your code—focus
+on the bigger picture.</p>
+</section><section><h2 class="section-heading" id="performance-of-python">Performance of Python<a class="anchor" aria-label="anchor" href="#performance-of-python"></a></h2>
+<hr class="half-width"><p>If you’ve read about different programming languages, you may have
 heard that there’s a difference between “interpreted” languages (like
 Python) and “compiled” languages (like C). You may have heard that
 Python is slow <em>because</em> it is an interpreted language. To
@@ -568,26 +575,27 @@ a Python object in the end. This usually makes your code more readable,
 too: When someone else reads your code, they can see exactly <em>what
 you want to do</em>, without getting overwhelmed by overly detailed
 step-by-step instructions.</p>
-</div>
 </section><section><h2 class="section-heading" id="ensuring-reproducible-results">Ensuring Reproducible Results<a class="anchor" aria-label="anchor" href="#ensuring-reproducible-results"></a></h2>
-<hr class="half-width"><!-- This is also good practice when optimising your code, to ensure mistakes aren't made --><p>When optimising your code, you are making speculative changes. It’s
-easy to make mistakes, many of which can be subtle. Therefore, it’s
-important to have a strategy in place to check that the outputs remain
-correct.</p>
-<p>Testing is hopefully already a seamless part of your research
-software development process. Test can be used to clarify how your
-software should perform, ensuring that new features work as intended and
-protecting against unintended changes to old functionality.</p>
-<p>There are a plethora of methods for testing code.</p>
+<hr class="half-width"><!-- This is also good practice when optimising your code, to ensure mistakes aren't made --><p>When optimising existing code, you’re often making speculative
+changes, which can lead to subtle mistakes. To ensure that your
+optimisations aren’t also introducing errors, it’s crucial to have a
+strategy for checking that the results remain correct.</p>
+<p>Testing should already be an integral part of your development
+process. It helps clarify expected behaviour, ensures new features are
+working as intended, and protects against unintended regressions in
+previously working functionality. Always verify your changes through
+testing to ensure that the optimisations don’t compromise the
+correctness of your code.</p>
 </section><section><h2 class="section-heading" id="pytest-overview">pytest Overview<a class="anchor" aria-label="anchor" href="#pytest-overview"></a></h2>
-<hr class="half-width"><p>Most Python developers use the testing package <a href="https://docs.pytest.org/en/latest/" class="external-link">pytest</a>, it’s a great place
+<hr class="half-width"><p>There are a plethora of methods for testing code. Most Python
+developers use the testing package <a href="https://docs.pytest.org/en/latest/" class="external-link">pytest</a>, it’s a great place
 to get started if you’re new to testing code.</p>
 <p>Here’s a quick example of how a test can be used to check your
 function’s output against an expected value.</p>
 <p>Tests should be created within a project’s testing directory, by
 creating files named with the form <code>test_*.py</code> or
-<code>*_test.py</code>.</p>
-<p>pytest looks for these files, when running the test suite.</p>
+<code>*_test.py</code>. pytest looks for file names with these patterns
+when running the test suite.</p>
 <p>Within the created test file, any functions named in the form
 <code>test*</code> are considered tests that will be executed by
 pytest.</p>
@@ -767,8 +775,8 @@ any links that you are not going to use.
   "url": "https://RSE-Sheffield.github.io/pando-python/instructor/optimisation-introduction.html",
   "identifier": "https://RSE-Sheffield.github.io/pando-python/instructor/optimisation-introduction.html",
   "dateCreated": "2024-02-01",
-  "dateModified": "2025-03-15",
-  "datePublished": "2025-07-01"
+  "dateModified": "2025-07-06",
+  "datePublished": "2025-07-06"
 }
 
   </script><script>

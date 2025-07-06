@@ -123,6 +123,7 @@
           </button>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 <hr>
+<li><a class="dropdown-item" href="technical-appendix.html">Technical Appendix</a></li>
 <li><a class="dropdown-item" href="acknowledgements.html">Acknowledgements</a></li>
 <li><a class="dropdown-item" href="ppp.html">Performant Python Patterns (Talk)</a></li>
 <li><a class="dropdown-item" href="reference.html">Reference</a></li>
@@ -378,7 +379,7 @@
 <div class="accordion accordion-flush" id="accordionFlush13">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading13">
-        <a href="optimisation-memory.html">12. Understanding Memory</a>
+        <a href="optimisation-latency.html">12. Understanding Latency</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -424,6 +425,7 @@
                         <a href="../instructor/images.html">Extract All Images</a>
                       </li>
                       <hr>
+<li><a class="dropdown-item" href="technical-appendix.html">Technical Appendix</a></li>
 <li><a class="dropdown-item" href="acknowledgements.html">Acknowledgements</a></li>
 <li><a class="dropdown-item" href="ppp.html">Performant Python Patterns (Talk)</a></li>
 <li><a class="dropdown-item" href="reference.html">Reference</a></li>
@@ -458,7 +460,7 @@
         
 <section id="aio-profiling-introduction"><p>Content from <a href="profiling-introduction.html">Introduction to Profiling</a></p>
 <hr>
-<p>Last updated on 2024-03-28 |
+<p>Last updated on 2025-07-06 |
 
         <a href="https://github.com/RSE-Sheffield/pando-python/edit/main/episodes/profiling-introduction.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 25 minutes</p>
@@ -528,9 +530,8 @@ resources.</p>
 <hr class="half-width">
 <p>Profiling is most relevant to working code, when you have reached a
 stage that the code works and are considering deploying it.</p>
-<p>Any code that will run for more than a few minutes over it’s
-lifetime, that isn’t a quick one-shot script can benefit from
-profiling.</p>
+<p>Any code that will run for more than a few minutes over its lifetime
+and isn’t a quick one-off script can benefit from profiling.</p>
 <p>Profiling should be a relatively quick and inexpensive process. If
 there are no significant bottlenecks in your code you can quickly be
 confident that your code is reasonably optimised. If you do identify a
@@ -650,7 +651,7 @@ both functions written by the developer and those used from the
 language’s standard library and third party packages.</p>
 <!-- What -->
 <p>Function-level profiling analyses where time is being spent with
-respect to functions. Typically function-level profiling will calculate
+respect to functions. Typically, function-level profiling will calculate
 the number of times each function is called and the total time spent
 executing each function, inclusive and exclusive of child function
 calls.</p>
@@ -694,7 +695,7 @@ collecting information about each line of code can be costly.</p>
 every line of code executed. To avoid it being too costly, the profiling
 is restricted to methods targeted with the decorator
 <code>@profile</code>.</p>
-<p>In contrast <a href="https://github.com/plasma-umass/scalene" class="external-link"><code>scalene</code></a>
+<p>In contrast, <a href="https://github.com/plasma-umass/scalene" class="external-link"><code>scalene</code></a>
 is a more advanced Python profiler capable of line-level profiling. It
 uses a sampling based approach, whereby the profiler halts and samples
 the line of code currently executing thousands of times per second. This
@@ -711,7 +712,7 @@ metrics for the most expensive components.</p>
 <p>Timeline profiling takes a different approach to visualising where
 time is being spent during execution.</p>
 <!-- What -->
-<p>Typically a subset of function-level profiling, the execution of the
+<p>Typically, a subset of function-level profiling, the execution of the
 profiled software is instead presented as a timeline highlighting the
 order of function execution in addition to the time spent in each
 individual function call.</p>
@@ -763,7 +764,7 @@ circumstances where something that short is not possible.</p>
 <!-- For example -->
 <!-- I don't really like this paragraph -->
 <p>For example, you may have a model which normally simulates a year in
-hourly timesteps. It would be appropriate to begin by profiling the
+hourly time-steps. It would be appropriate to begin by profiling the
 simulation of a single day. If the model scales over time, such as due
 to population growth, it may be pertinent to profile a single day later
 into a simulation if the model can be resumed or configured. A larger
@@ -779,7 +780,7 @@ population, making them easier to identify.</p>
 <p>Think about a project where you’ve been working with Python. Do you
 know where the time during execution is being spent?</p>
 <p>Write a short plan of the approach you would take to investigate and
-confirm where the majority of time is being spent during it’s
+confirm where the majority of time is being spent during its
 execution.</p>
 <!-- TODO should they share this anywhere, should it be discussed within the group? -->
 </div>
@@ -812,7 +813,7 @@ execution.</p>
 <li>Profiling is a relatively quick process to analyse where time is
 being spent and bottlenecks during a program’s execution.</li>
 <li>Code should be profiled when ready for deployment if it will be
-running for more than a few minutes during it’s lifetime.</li>
+running for more than a few minutes during its lifetime.</li>
 <li>There are several types of profiler each with slightly different
 purposes.
 <ul>
@@ -837,7 +838,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-profiling-functions"><p>Content from <a href="profiling-functions.html">Function Level Profiling</a></p>
 <hr>
-<p>Last updated on 2024-03-28 |
+<p>Last updated on 2025-07-06 |
 
         <a href="https://github.com/RSE-Sheffield/pando-python/edit/main/episodes/profiling-functions.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 40 minutes</p>
@@ -910,7 +911,7 @@ profiler <code>cProfile</code>, how it’s output can be visualised with
 and their associated variables.</p>
 <p>As a stack it is a last-in first-out (LIFO) data structure.</p>
 <figure><img src="../fig/stack.png" alt="A greyscale diagram showing a (call)stack, containing 5 stack frame. Two additional stack frames are shown outside the stack, one is marked as entering the call stack with an arrow labelled push and the other is marked as exiting the call stack labelled pop." class="figure mx-auto d-block"><div class="figcaption">A diagram of a call stack</div>
-</figure><p>When a function is called, a frame to track it’s variables and
+</figure><p>When a function is called, a frame to track its variables and
 metadata is pushed to the call stack. When that same function finishes
 and returns, it is popped from the stack and variables local to the
 function are dropped.</p>
@@ -958,7 +959,7 @@ by <code>a()</code>, which is called from global scope.</p>
 <p>The first line states the file and line number where <code>a()</code>
 was called from (the last line of code in the file shown). The second
 line states that it was the function <code>a()</code> that was called,
-this could include it’s arguments. The third line then repeats this
+this could include its arguments. The third line then repeats this
 pattern, stating the line number where <code>b2()</code> was called
 inside <code>a()</code>. This continues until the call to
 <code>traceback.print_stack()</code> is reached.</p>
@@ -978,7 +979,7 @@ is a function-level profiler provided as part of the Python standard
 library.</p>
 <!-- How is it used? -->
 <p>It can be called directly within your Python code as an imported
-package, however it’s easier to use it’s script interface:</p>
+package, however it’s easier to use its script interface:</p>
 <div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">SH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -1076,7 +1077,7 @@ visualisation of the data when exported to file.</p>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
   <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
 <div class="accordion-body">
 <p>It can help to run these examples by running <code>snakeviz</code>
 live. For the worked example you may wish to also show the code (e.g. in
@@ -1122,14 +1123,14 @@ provided by <code>snakeviz</code>.</div>
 In the icicle visualization style functions are represented by rectangles. A root function is the top-most rectangle, with functions it calls below it, then the functions those call below them, and so on. The amount of time spent inside a function is represented by the width of the rectangle. A rectangle that stretches across most of the visualization represents a function that is taking up most of the time of its calling function, while a skinny rectangle represents a function that is using hardly any time at all.
 --><p>The icicle diagram displayed by <code>snakeviz</code> represents an
 aggregate of the call stack during the execution of the profiled code.
-The box which fills the top row represents the the root call, filling
-the row shows that it occupied 100% of the runtime. The second row holds
-the child methods called from the root, with their widths relative to
-the proportion of runtime they occupied. This continues with each
-subsequent row, however where a method only occupies 50% of the runtime,
-it’s children can only occupy a maximum of that runtime hence the
-appearance of “icicles” as each row gets narrower when the overhead of
-methods with no further children is accounted for.</p>
+The box which fills the top row represents the root call, filling the
+row shows that it occupied 100% of the runtime. The second row holds the
+child methods called from the root, with their widths relative to the
+proportion of runtime they occupied. This continues with each subsequent
+row, however where a method only occupies 50% of the runtime, its
+children can only occupy a maximum of that runtime hence the appearance
+of “icicles” as each row gets narrower when the overhead of methods with
+no further children is accounted for.</p>
 <p>By clicking a box within the diagram, it will “zoom” making the
 selected box the root allowing more detail to be explored. The diagram
 is limited to 10 rows by default (“Depth”) and methods with a relatively
@@ -1147,7 +1148,7 @@ specifying the location of the method and for how long it ran.</p>
 you can still use <code>snakeviz</code> directly from inside notebooks
 using the notebooks “magic” prefix (<code>%</code>) and it will
 automatically call <code>cProfile</code> for you.</p>
-<p>First <code>snakeviz</code> must be installed and it’s extension
+<p>First <code>snakeviz</code> must be installed and its extension
 loaded.</p>
 <div class="codewrapper sourceCode" id="cb9">
 <h3 class="code-label">PY<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1177,7 +1178,7 @@ python executed within it.</p>
 <p>In both cases, the full <code>snakeviz</code> profile visualisation
 will appear as an output within the notebook!</p>
 <p><em>You may wish to right click the top of the output, and select
-“Disable Scrolling for Outputs” to expand it’s box if it begins too
+“Disable Scrolling for Outputs” to expand its box if it begins too
 small.</em></p>
 </div>
 </div>
@@ -1190,7 +1191,7 @@ small.</em></p>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor2" aria-expanded="false" aria-controls="collapseInstructor2">
   <h3 class="accordion-header" id="headingInstructor2">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
 </button>
-<div id="collapseInstructor2" class="accordion-collapse collapse" aria-labelledby="headingInstructor2" data-bs-parent="#accordionInstructor2">
+<div id="collapseInstructor2" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor2" aria-labelledby="headingInstructor2">
 <div class="accordion-body">
 <p>Demonstrate this!</p>
 </div>
@@ -1317,7 +1318,7 @@ remains empty as the profiled code was in the root of the working
 directory. A profile of a large project with many files across multiple
 directories will see this filled.</p>
 <p>Find the box representing <code>c_2()</code> on the icicle diagram,
-it’s children are unlabelled because they are not wide enough (but they
+its children are unlabelled because they are not wide enough (but they
 can still be hovered). Clicking <code>c_2()</code> zooms in the diagram,
 showing the children to be <code>time.sleep()</code> and
 <code>d_1()</code>.</p>
@@ -1373,7 +1374,7 @@ what has been covered in this episode.</p>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor3" aria-expanded="false" aria-controls="collapseInstructor3">
   <h3 class="accordion-header" id="headingInstructor3">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
 </button>
-<div id="collapseInstructor3" class="accordion-collapse collapse" aria-labelledby="headingInstructor3" data-bs-parent="#accordionInstructor3">
+<div id="collapseInstructor3" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor3" aria-labelledby="headingInstructor3">
 <div class="accordion-body">
 <p>Arguments 1-9 passed to <code>travellingsales.py</code> should
 execute relatively fast (less than a minute)</p>
@@ -1424,7 +1425,7 @@ poor scaling so larger numbers take significantly longer to run.</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
   <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
 </button>
-<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
+<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
 <div class="accordion-body">
 <ul>
 <li>If a hotspot isn’t visible with the argument <code>1</code>, try
@@ -1442,7 +1443,7 @@ within the profile.</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>The hotspot only becomes visible when an argument of <code>5</code>
 or greater is passed.</p>
@@ -1467,7 +1468,7 @@ component.</em></p>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor4" aria-expanded="false" aria-controls="collapseInstructor4">
   <h3 class="accordion-header" id="headingInstructor4">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
 </button>
-<div id="collapseInstructor4" class="accordion-collapse collapse" aria-labelledby="headingInstructor4" data-bs-parent="#accordionInstructor4">
+<div id="collapseInstructor4" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor4" aria-labelledby="headingInstructor4">
 <div class="accordion-body">
 <p>The default configuration of the Predator Prey model takes around 10
 seconds to run, it may be slower on other hardware.</p>
@@ -1509,10 +1510,11 @@ population changes over time. Depending on the parameters of the model,
 the populations may oscillate, grow or collapse due to the availability
 of their food source.</p>
 </blockquote>
-<p>The program can be executed via <code>python predprey.py</code>.</p>
-<p>It takes no arguments, but contains various environment properties
-which can be modified to change the model’s behaviour. When the model
-finishes it outputs a graph of the three populations
+<p>The program can be executed via
+<code>python predprey.py &lt;steps&gt;</code>. The value of
+<code>steps</code> for a full run is 250, however a full run may not be
+necessary to find the bottlenecks.</p>
+<p>When the model finishes it outputs a graph of the three populations
 <code>predprey_out.png</code>.</p>
 </div>
 </div>
@@ -1522,7 +1524,7 @@ finishes it outputs a graph of the three populations
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>It should be clear from the profile that the method
 <code>Grass::eaten()</code> (from <code>predprey.py:278</code>) occupies
@@ -1590,7 +1592,7 @@ Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  --></p></section><section id="aio-profiling-lines"><p>Content from <a href="profiling-lines.html">Line Level Profiling</a></p>
 <hr>
-<p>Last updated on 2024-06-20 |
+<p>Last updated on 2025-07-06 |
 
         <a href="https://github.com/RSE-Sheffield/pando-python/edit/main/episodes/profiling-lines.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 50 minutes</p>
@@ -1642,7 +1644,7 @@ of the cost due to their complexity.</p>
 <!-- What -->
 <p>Line level profiling allows you to target specific methods to collect
 more granular metrics, which can help narrow the source of expensive
-computation further. Typically line-level profiling will calculate the
+computation further. Typically, line-level profiling will calculate the
 number of times each line is called and the total time spent executing
 each line. However, with the increased granularity come increased
 collection costs, which is why it’s targeted to specific methods.</p>
@@ -1672,7 +1674,7 @@ installed via pip.</p>
 <button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler1" aria-expanded="false" aria-controls="collapseSpoiler1">
   <h3 class="accordion-header" id="headingSpoiler1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Mac OS </h3>
 </button>
-<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
+<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
 <div class="accordion-body">
 <p>If you are unable to install <code>line_profiler</code> via
 <code>pip</code> on MacOS. Instead it can be installed via
@@ -1957,7 +1959,7 @@ package <code>rich</code>, it will have been installed if
 <div class="callout-content">
 <p>If you’re more familiar with writing Python inside Jupyter notebooks
 you can, as with <code>snakeviz</code>, use <code>line_profiler</code>
-directly from inside notebooks. However it is still necessary for the
+directly from inside notebooks. However, it is still necessary for the
 code you wish to profile to be placed within a function.</p>
 <p>First <code>line_profiler</code> must be installed and it’s extension
 loaded.</p>
@@ -1980,7 +1982,7 @@ individual function that you would otherwise apply the
 <code>@profile</code> decorator to.</p>
 <p>This is followed by calling the function which runs the full code to
 be profiled.</p>
-<p>For the above fizzbuzz example it would be:</p>
+<p>For the above FizzBuzz example it would be:</p>
 <div class="codewrapper sourceCode" id="cb16">
 <h3 class="code-label">PY<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -2035,7 +2037,7 @@ number of elements to be sorted.</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
   <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
 </button>
-<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
+<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
 <div class="accordion-body">
 <ul>
 <li>Remember that the code needs to be moved into a method decorated
@@ -2055,7 +2057,7 @@ with <code>@profile</code>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>If you chose to profile the whole code, it may look like this:</p>
 <div class="codewrapper sourceCode" id="cb17">
@@ -2157,7 +2159,7 @@ we are unlikely to be able to improve it further.</p>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
   <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
 <div class="accordion-body">
 <p>Download the pre-generated <code>line_profiler</code> output, this
 can be opened be to save waiting for the profiler.</p>
@@ -2195,7 +2197,7 @@ how it might be optimised.</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint2" aria-expanded="false" aria-controls="collapseHint2">
   <h4 class="accordion-header" id="headingHint2"> Give me a hint </h4>
 </button>
-<div id="collapseHint2" class="accordion-collapse collapse" data-bs-parent="#accordionHint2" aria-labelledby="headingHint2">
+<div id="collapseHint2" class="accordion-collapse collapse" aria-labelledby="headingHint2" data-bs-parent="#accordionHint2">
 <div class="accordion-body">
 <ul>
 <li>Remember that the function needs to be decorated with
@@ -2217,7 +2219,7 @@ number of steps <code>predprey.py:305</code>.</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>First the function must be decorated</p>
 <div class="codewrapper sourceCode" id="cb21">
@@ -2234,19 +2236,14 @@ number of steps <code>predprey.py:305</code>.</li>
 <span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a>    <span class="kw">def</span> eaten(<span class="va">self</span>, prey_list):</span></code></pre>
 </div>
 <p><code>line_profiler</code> can then be executed via
-<code>python -m kernprof -lvr predprey.py</code>.</p>
-<p>This will take much longer to run due to <code>line_profiler</code>,
-you may wish to reduce the number of steps. In this instance it may
-change the profiling output slightly, as the number of <code>Prey</code>
-and their member variables evaluated by this method both change as the
-model progresses, but the overall pattern is likely to remain
-similar.</p>
-<div class="codewrapper sourceCode" id="cb23">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="co"># line ~420</span></span>
-<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a>model <span class="op">=</span> Model(<span class="dv">50</span>) <span class="co"># 50 steps (originally defaulted to 250)</span></span></code></pre>
-</div>
+<code>python -m kernprof -lvr predprey.py &lt;steps&gt;</code>.</p>
+<p>Since this will take much longer to run due to
+<code>line_profiler</code>, you may wish to profile fewer
+<code>steps</code> than you did in the function-level profiling exercise
+(250 was suggested for a full run). In this instance it may change the
+profiling output slightly, as the number of <code>Prey</code> and their
+member variables evaluated by this method both change as the model
+progresses, but the overall pattern is likely to remain similar.</p>
 <p>Alternatively, you can kill the profiling process
 (e.g. <code>ctrl + c</code>) after a minute and the currently collected
 partial profiling information will be output.</p>
@@ -2292,12 +2289,12 @@ Line #      Hits         Time  Per Hit   % Time  Line Contents
 </div>
 <p>From the profiling output it can be seen that lines 285-287 occupy
 over 90% of the method’s runtime!</p>
-<div class="codewrapper sourceCode" id="cb25">
+<div class="codewrapper sourceCode" id="cb24">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a>            <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(prey_list)):</span>
-<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a>                prey <span class="op">=</span> prey_list[i]</span>
-<span id="cb25-3"><a href="#cb25-3" tabindex="-1"></a>                <span class="cf">if</span> prey.life <span class="op">&lt;</span> PREY_HUNGER_THRESH:</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a>            <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(prey_list)):</span>
+<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a>                prey <span class="op">=</span> prey_list[i]</span>
+<span id="cb24-3"><a href="#cb24-3" tabindex="-1"></a>                <span class="cf">if</span> prey.life <span class="op">&lt;</span> PREY_HUNGER_THRESH:</span></code></pre>
 </div>
 <p>Given that the following line 289 only has a relative 0.6% time, it
 can be understood that the vast majority of times the condition
@@ -2305,9 +2302,10 @@ can be understood that the vast majority of times the condition
 proceed.</p>
 <p>Remembering that this method is executed once per each of the 5000
 <code>Grass</code> agents each step of the model, it could make sense to
-pre-filter <code>prey_list</code> once each timestep before it is passed
-to <code>Grass::eaten()</code>. This would greatly reduce the number of
-<code>Prey</code> iterated, reducing the cost of the method.</p>
+pre-filter <code>prey_list</code> once each time-step before it is
+passed to <code>Grass::eaten()</code>. This would greatly reduce the
+number of <code>Prey</code> iterated, reducing the cost of the
+method.</p>
 </div>
 </div>
 </div>
@@ -2326,7 +2324,7 @@ to <code>Grass::eaten()</code>. This would greatly reduce the number of
 <li>
 <code>kernprof</code> executes <code>line_profiler</code> via
 <code>python -m kernprof -lvr &lt;script name&gt; &lt;arguments&gt;</code>.</li>
-<li>Code in global scope must wrapped in a method if it is to be
+<li>Code in global scope must be wrapped in a method if it is to be
 profiled with <code>line_profiler</code>.</li>
 <li>The output from <code>line_profiler</code> lists the absolute and
 relative time spent per line for each targeted function.</li>
@@ -2430,7 +2428,7 @@ representative of a realistic run.</li>
 </div>
 </div></section><section id="aio-optimisation-introduction"><p>Content from <a href="optimisation-introduction.html">Introduction to Optimisation</a></p>
 <hr>
-<p>Last updated on 2025-03-15 |
+<p>Last updated on 2025-07-06 |
 
         <a href="https://github.com/RSE-Sheffield/pando-python/edit/main/episodes/optimisation-introduction.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 10 minutes</p>
@@ -2479,20 +2477,24 @@ performance of your code.</p>
 <p>In order to optimise code for performance, it is necessary to have an
 understanding of what a computer is doing to execute it.</p>
 <!-- Goal is to give you a high level understanding of how your code executes. You don't need to be an expert, even a vague general understanding will leave you in a stronger position. -->
-<p>Even a high-level understanding of how you code executes, such as how
+<p>A high-level understanding of how your code executes, such as how
 Python and the most common data-structures and algorithms are
-implemented, can help you to identify suboptimal approaches when
+implemented, can help you identify suboptimal approaches when
 programming. If you have learned to write code informally out of
 necessity, to get something to work, it’s not uncommon to have collected
 some “unpythonic” habits along the way that may harm your code’s
 performance.</p>
+<!-- This should be considered good practice that you can implement when first writing your code. -->
+<p>These are the first steps in code optimisation, and knowledge you can
+put into practice by making more informed choices as you write your code
+and after profiling it.</p>
 <!-- This is largely high-level/abstract knowledge applicable to the vast majority of programming languages, applies even more strongly if using compiled Python features like numba -->
 <p>The remaining content is often abstract knowledge, that is
 transferable to the vast majority of programming languages. This is
 because the hardware architecture, data-structures and algorithms used
 are common to many languages and they hold some of the greatest
 influence over performance bottlenecks.</p>
-</section><section><h2 class="section-heading" id="premature-optimisation">Premature Optimisation<a class="anchor" aria-label="anchor" href="#premature-optimisation"></a>
+</section><section><h2 class="section-heading" id="performance-vs-maintainability">Performance vs Maintainability<a class="anchor" aria-label="anchor" href="#performance-vs-maintainability"></a>
 </h2>
 <hr class="half-width">
 <blockquote>
@@ -2504,25 +2506,28 @@ efficiencies, say about 97% of the time: <strong>premature optimization
 is the root of all evil</strong>. Yet we should not pass up our
 opportunities in that critical 3%. - Donald Knuth</p>
 </blockquote>
-<p>This classic quote among computer scientists states; when considering
-optimisation it is important to focus on the potential impact, both to
-the performance and maintainability of the code.</p>
-<p>Profiling is a valuable tool in this cause. Should effort be expended
-to optimise a component which occupies 1% of the runtime? Or would that
-time be better spent focusing on the most expensive components?</p>
-<p>Advanced optimisations, mostly outside the scope of this course, can
-increase the cost of maintenance by obfuscating what code is doing. Even
-if you are a solo-developer working on private code, your future self
-should be able to easily comprehend your implementation.</p>
-<p>Therefore, the balance between the impact to both performance and
-maintainability should be considered when optimising code.</p>
-<p>This is not to say, don’t consider performance when first writing
-code. The selection of appropriate algorithms and data-structures
-covered in this course form good practice, simply don’t fret over a need
-to micro-optimise every small component of the code that you write.</p>
-<div class="section level3">
-<h3 id="performance-of-python">Performance of Python<a class="anchor" aria-label="anchor" href="#performance-of-python"></a>
-</h3>
+<p>This classic quote among computer scientists emphasises the
+importance of considering both performance and maintainability when
+optimising code and prioritising your optimisations.</p>
+<p>While advanced optimisations may boost performance, they often come
+at the cost of making the code harder to understand and maintain. Even
+if you’re working alone on private code, your future self should be able
+to easily understand the implementation. Hence, when optimising, always
+weigh the potential impact on both performance and maintainability.
+While this course does not cover most advanced optimisations, you may
+already be familiar with and using some.</p>
+<p>Profiling is a valuable tool for prioritising optimisations. Should
+effort be expended to optimise a component which occupies 1% of the
+runtime? Or would that time be better spent optimising the most
+expensive components?</p>
+<p>This doesn’t mean you should ignore performance when initially
+writing code. Choosing the right algorithms and data structures, as we
+will discuss in this course, is good practice. However, there’s no need
+to obsess over micro-optimising every tiny component of your code—focus
+on the bigger picture.</p>
+</section><section><h2 class="section-heading" id="performance-of-python">Performance of Python<a class="anchor" aria-label="anchor" href="#performance-of-python"></a>
+</h2>
+<hr class="half-width">
 <p>If you’ve read about different programming languages, you may have
 heard that there’s a difference between “interpreted” languages (like
 Python) and “compiled” languages (like C). You may have heard that
@@ -2608,30 +2613,31 @@ a Python object in the end. This usually makes your code more readable,
 too: When someone else reads your code, they can see exactly <em>what
 you want to do</em>, without getting overwhelmed by overly detailed
 step-by-step instructions.</p>
-</div>
 </section><section><h2 class="section-heading" id="ensuring-reproducible-results">Ensuring Reproducible Results<a class="anchor" aria-label="anchor" href="#ensuring-reproducible-results"></a>
 </h2>
 <hr class="half-width">
-<!-- This is also good practice when optimising your code, to ensure mistakes aren't made --><p>When optimising your code, you are making speculative changes. It’s
-easy to make mistakes, many of which can be subtle. Therefore, it’s
-important to have a strategy in place to check that the outputs remain
-correct.</p>
-<p>Testing is hopefully already a seamless part of your research
-software development process. Test can be used to clarify how your
-software should perform, ensuring that new features work as intended and
-protecting against unintended changes to old functionality.</p>
-<p>There are a plethora of methods for testing code.</p>
+<!-- This is also good practice when optimising your code, to ensure mistakes aren't made --><p>When optimising existing code, you’re often making speculative
+changes, which can lead to subtle mistakes. To ensure that your
+optimisations aren’t also introducing errors, it’s crucial to have a
+strategy for checking that the results remain correct.</p>
+<p>Testing should already be an integral part of your development
+process. It helps clarify expected behaviour, ensures new features are
+working as intended, and protects against unintended regressions in
+previously working functionality. Always verify your changes through
+testing to ensure that the optimisations don’t compromise the
+correctness of your code.</p>
 </section><section><h2 class="section-heading" id="pytest-overview">pytest Overview<a class="anchor" aria-label="anchor" href="#pytest-overview"></a>
 </h2>
 <hr class="half-width">
-<p>Most Python developers use the testing package <a href="https://docs.pytest.org/en/latest/" class="external-link">pytest</a>, it’s a great place
+<p>There are a plethora of methods for testing code. Most Python
+developers use the testing package <a href="https://docs.pytest.org/en/latest/" class="external-link">pytest</a>, it’s a great place
 to get started if you’re new to testing code.</p>
 <p>Here’s a quick example of how a test can be used to check your
 function’s output against an expected value.</p>
 <p>Tests should be created within a project’s testing directory, by
 creating files named with the form <code>test_*.py</code> or
-<code>*_test.py</code>.</p>
-<p>pytest looks for these files, when running the test suite.</p>
+<code>*_test.py</code>. pytest looks for file names with these patterns
+when running the test suite.</p>
 <p>Within the created test file, any functions named in the form
 <code>test*</code> are considered tests that will be executed by
 pytest.</p>
@@ -2759,7 +2765,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-optimisation-using-python"><p>Content from <a href="optimisation-using-python.html">Using Python Language Features and the Standard Library</a></p>
 <hr>
-<p>Last updated on 2025-03-15 |
+<p>Last updated on 2025-07-06 |
 
         <a href="https://github.com/RSE-Sheffield/pando-python/edit/main/episodes/optimisation-using-python.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 15 minutes</p>
@@ -2801,7 +2807,7 @@ execution in the back-end.</li>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
   <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
 <div class="accordion-body">
 <p>This episode discusses relatively fundamental features of Python.</p>
 <p>For students experienced with writing Python, many of these points
@@ -2906,7 +2912,7 @@ Return the sum of all items</li>
 <div class="callout-content">
 <p>The built-in functions <a href="https://docs.python.org/3/library/functions.html#filter" class="external-link"><code>filter()</code></a>
 and <a href="https://docs.python.org/3/library/functions.html#map" class="external-link"><code>map()</code></a>
-can be used for processing iterables. However list-comprehension is
+can be used for processing iterables. However, list-comprehension is
 likely to be more performant.</p>
 <!-- Would this benefit from an example? -->
 </div>
@@ -2918,16 +2924,16 @@ you want</em>, and let it figure out <em>how to do it</em>.</p>
 </section><section><h2 class="section-heading" id="example-searching-an-element-in-a-list">Example: Searching an element in a list<a class="anchor" aria-label="anchor" href="#example-searching-an-element-in-a-list"></a>
 </h2>
 <hr class="half-width">
-<p>A simple example of this would be to perform a linear search of a
-list. (Though as we’ll see in the next section, there’s a much more
-effective way to do this!) The below example creates a list of 2500
-integers in the inclusive-exclusive range <code>[0, 5000)</code>. It
-then searches for all of the even numbers in that range.
-<code>manualSearch()</code> is implemented manually, iterating
-<code>ls</code> checking each individual item in Python code.
-<code>operatorSearch()</code> in contrast uses the <code>in</code>
-keyword to perform each search, which allows CPython to implement the
-inner loop in its C back-end.</p>
+<p>A simple example of this is performing a linear search on a list.
+(Though as we’ll see in the next section, this isn’t the most efficient
+approach!) In the following example, we create a list of 2500 integers
+in the (inclusive-exclusive) range <code>[0, 5000)</code>. The goal is
+to search for all even numbers within that range.</p>
+<p>The function <code>manualSearch()</code> manually iterates through
+the list (<code>ls</code>) and checks each individual item using Python
+code. On the other hand, <code>operatorSearch()</code> uses the
+<code>in</code> operator to perform each search, which allows CPython to
+implement the inner loop in its C back-end.</p>
 <div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -2973,144 +2979,6 @@ operatorSearch: 28.43ms</code></pre>
 operation, the one that contains less Python is probably faster. This
 won’t apply if you’re using 3rd party packages written purely in Python
 though.</p>
-<div id="python-bytecode" class="callout">
-<div class="callout-square">
-<i class="callout-icon" data-feather="bell"></i>
-</div>
-<div id="python-bytecode" class="callout-inner">
-<h3 class="callout-title">Python bytecode</h3>
-<div class="callout-content">
-<p>You can use <code>dis</code> to view the bytecode generated by
-Python, the amount of byte-code more strongly correlates with how much
-code is being executed by the Python interpreter. However, this still
-does not account for whether functions called are implemented using
-Python or C.</p>
-<p>The pure Python search compiles to 82 lines of byte-code.</p>
-<div class="codewrapper sourceCode" id="cb5">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="im">import</span> dis</span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="kw">def</span> manualSearch():</span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>    ls <span class="op">=</span> generateInputs()</span>
-<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>    ct <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, <span class="bu">int</span>(N<span class="op">*</span>M), M):</span>
-<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, <span class="bu">len</span>(ls)):</span>
-<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>            <span class="cf">if</span> ls[j] <span class="op">==</span> i:</span>
-<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>                ct <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>                <span class="cf">break</span></span>
-<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a></span>
-<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a>dis.dis(manualSearch)</span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code> 11           0 LOAD_GLOBAL              0 (generateInputs)
-              2 CALL_FUNCTION            0
-              4 STORE_FAST               0 (ls)
-
- 12           6 LOAD_CONST               1 (0)
-              8 STORE_FAST               1 (ct)
-
- 13          10 LOAD_GLOBAL              1 (range)
-             12 LOAD_CONST               1 (0)
-             14 LOAD_GLOBAL              2 (int)
-             16 LOAD_GLOBAL              3 (N)
-             18 LOAD_GLOBAL              4 (M)
-             20 BINARY_MULTIPLY
-             22 CALL_FUNCTION            1
-             24 LOAD_GLOBAL              4 (M)
-             26 CALL_FUNCTION            3
-             28 GET_ITER
-        &gt;&gt;   30 FOR_ITER                24 (to 80)
-             32 STORE_FAST               2 (i)
-
- 14          34 LOAD_GLOBAL              1 (range)
-             36 LOAD_CONST               1 (0)
-             38 LOAD_GLOBAL              5 (len)
-             40 LOAD_FAST                0 (ls)
-             42 CALL_FUNCTION            1
-             44 CALL_FUNCTION            2
-             46 GET_ITER
-        &gt;&gt;   48 FOR_ITER                14 (to 78)
-             50 STORE_FAST               3 (j)
-
- 15          52 LOAD_FAST                0 (ls)
-             54 LOAD_FAST                3 (j)
-             56 BINARY_SUBSCR
-             58 LOAD_FAST                2 (i)
-             60 COMPARE_OP               2 (==)
-             62 POP_JUMP_IF_FALSE       38 (to 76)
-
- 16          64 LOAD_FAST                1 (ct)
-             66 LOAD_CONST               2 (1)
-             68 INPLACE_ADD
-             70 STORE_FAST               1 (ct)
-
- 17          72 POP_TOP
-             74 JUMP_FORWARD             1 (to 78)
-
- 15     &gt;&gt;   76 JUMP_ABSOLUTE           24 (to 48)
-        &gt;&gt;   78 JUMP_ABSOLUTE           15 (to 30)
-
- 13     &gt;&gt;   80 LOAD_CONST               0 (None)
-             82 RETURN_VALUE</code></pre>
-</div>
-<p>Whereas the <code>in</code> variant only compiles to 54.</p>
-<div class="codewrapper sourceCode" id="cb7">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="im">import</span> dis</span>
-<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="kw">def</span> operatorSearch():</span>
-<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>    ls <span class="op">=</span> generateInputs()</span>
-<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>    ct <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, <span class="bu">int</span>(N<span class="op">*</span>M), M):</span>
-<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a>        <span class="cf">if</span> i <span class="kw">in</span> ls:</span>
-<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a>            ct <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a></span>
-<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a>dis.dis(operatorSearch)</span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>  4           0 LOAD_GLOBAL              0 (generateInputs)
-              2 CALL_FUNCTION            0
-              4 STORE_FAST               0 (ls)
-
-  5           6 LOAD_CONST               1 (0)
-              8 STORE_FAST               1 (ct)
-
-  6          10 LOAD_GLOBAL              1 (range)
-             12 LOAD_CONST               1 (0)
-             14 LOAD_GLOBAL              2 (int)
-             16 LOAD_GLOBAL              3 (N)
-             18 LOAD_GLOBAL              4 (M)
-             20 BINARY_MULTIPLY
-             22 CALL_FUNCTION            1
-             24 LOAD_GLOBAL              4 (M)
-             26 CALL_FUNCTION            3
-             28 GET_ITER
-        &gt;&gt;   30 FOR_ITER                10 (to 52)
-             32 STORE_FAST               2 (i)
-
-  7          34 LOAD_FAST                2 (i)
-             36 LOAD_FAST                0 (ls)
-             38 CONTAINS_OP              0
-             40 POP_JUMP_IF_FALSE       25 (to 50)
-
-  8          42 LOAD_FAST                1 (ct)
-             44 LOAD_CONST               2 (1)
-             46 INPLACE_ADD
-             48 STORE_FAST               1 (ct)
-        &gt;&gt;   50 JUMP_ABSOLUTE           15 (to 30)
-
-  6     &gt;&gt;   52 LOAD_CONST               0 (None)
-             54 RETURN_VALUE</code></pre>
-</div>
-</div>
-</div>
-</div>
 </section><section><h2 class="section-heading" id="example-parsing-data-from-a-text-file">Example: Parsing data from a text file<a class="anchor" aria-label="anchor" href="#example-parsing-data-from-a-text-file"></a>
 </h2>
 <hr class="half-width">
@@ -3127,40 +2995,40 @@ split the string up.</p>
 <div class="callout-content">
 <p>Let’s say we have read in some data from a text file, each line
 containing a time bin and a mean energy:</p>
-<div class="codewrapper sourceCode" id="cb9">
+<div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>f <span class="op">=</span> [</span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>    <span class="st">' 0000   0.9819 '</span>,</span>
-<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>    <span class="st">' 0001   0.3435 '</span>,</span>
-<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>    <span class="co"># ...</span></span>
-<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>    <span class="st">' 0099   0.2275 '</span>,</span>
-<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a>    <span class="st">' 0100   0.7067 '</span>,</span>
-<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a>    <span class="co"># ...</span></span>
-<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a>]</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>f <span class="op">=</span> [</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>    <span class="st">' 0000   0.9819 '</span>,</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>    <span class="st">' 0001   0.3435 '</span>,</span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>    <span class="co"># ...</span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>    <span class="st">' 0099   0.2275 '</span>,</span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>    <span class="st">' 0100   0.7067 '</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>    <span class="co"># ...</span></span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>]</span></code></pre>
 </div>
 <p>If you’ve a C programming background, you may write the following
 code to parse the data into a dictionary:</p>
-<div class="codewrapper sourceCode" id="cb10">
+<div class="codewrapper sourceCode" id="cb6">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="kw">def</span> manualSplit():</span>
-<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>    data <span class="op">=</span> {}</span>
-<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>    <span class="cf">for</span> line <span class="kw">in</span> f:</span>
-<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>        first_char <span class="op">=</span> line.find(<span class="st">"0"</span>)</span>
-<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a>        end_time <span class="op">=</span> line.find(<span class="st">" "</span>, first_char, <span class="op">-</span><span class="dv">1</span>)</span>
-<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a></span>
-<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a>        energy_found <span class="op">=</span> line.find(<span class="st">"."</span>, end_time, <span class="op">-</span><span class="dv">1</span>)</span>
-<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a>        begin_energy <span class="op">=</span> line.rfind(<span class="st">" "</span>, end_time, energy_found)</span>
-<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a>        end_energy <span class="op">=</span> line.find(<span class="st">" "</span>, energy_found)</span>
-<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a>        <span class="cf">if</span> end_energy <span class="op">==</span> <span class="op">-</span><span class="dv">1</span>:</span>
-<span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a>            end_energy <span class="op">=</span> <span class="bu">len</span>(line)</span>
-<span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a>        </span>
-<span id="cb10-13"><a href="#cb10-13" tabindex="-1"></a>        time <span class="op">=</span> line[first_char:end_time]</span>
-<span id="cb10-14"><a href="#cb10-14" tabindex="-1"></a>        energy <span class="op">=</span> line[begin_energy <span class="op">+</span> <span class="dv">1</span>:end_energy]</span>
-<span id="cb10-15"><a href="#cb10-15" tabindex="-1"></a></span>
-<span id="cb10-16"><a href="#cb10-16" tabindex="-1"></a>        data[time] <span class="op">=</span> energy</span>
-<span id="cb10-17"><a href="#cb10-17" tabindex="-1"></a>    <span class="cf">return</span> data</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="kw">def</span> manualSplit():</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>    data <span class="op">=</span> {}</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>    <span class="cf">for</span> line <span class="kw">in</span> f:</span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>        first_char <span class="op">=</span> line.find(<span class="st">"0"</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>        end_time <span class="op">=</span> line.find(<span class="st">" "</span>, first_char, <span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a>        energy_found <span class="op">=</span> line.find(<span class="st">"."</span>, end_time, <span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>        begin_energy <span class="op">=</span> line.rfind(<span class="st">" "</span>, end_time, energy_found)</span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a>        end_energy <span class="op">=</span> line.find(<span class="st">" "</span>, energy_found)</span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a>        <span class="cf">if</span> end_energy <span class="op">==</span> <span class="op">-</span><span class="dv">1</span>:</span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a>            end_energy <span class="op">=</span> <span class="bu">len</span>(line)</span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a>        </span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a>        time <span class="op">=</span> line[first_char:end_time]</span>
+<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a>        energy <span class="op">=</span> line[begin_energy <span class="op">+</span> <span class="dv">1</span>:end_energy]</span>
+<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a></span>
+<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a>        data[time] <span class="op">=</span> energy</span>
+<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a>    <span class="cf">return</span> data</span></code></pre>
 </div>
 <p>Can you find a shorter, more easily understandable way to write this
 in Python?</p>
@@ -3172,7 +3040,7 @@ in Python?</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
   <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
 </button>
-<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
+<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
 <div class="accordion-body">
 <p>Python strings have a lot of methods to perform common operations,
 like removing suffixes, replacing substrings, joining or splitting,
@@ -3187,18 +3055,18 @@ methods documentation</a> for a full list.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
-<div class="codewrapper sourceCode" id="cb11">
+<div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a></span>
-<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="kw">def</span> builtinSplit():</span>
-<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a>    data <span class="op">=</span> {}</span>
-<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a>    <span class="cf">for</span> line <span class="kw">in</span> f:</span>
-<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a>        time, energy <span class="op">=</span> line.split()</span>
-<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a>        data[time] <span class="op">=</span> energy</span>
-<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a>    <span class="cf">return</span> data</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="kw">def</span> builtinSplit():</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>    data <span class="op">=</span> {}</span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>    <span class="cf">for</span> line <span class="kw">in</span> f:</span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>        time, energy <span class="op">=</span> line.split()</span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>        data[time] <span class="op">=</span> energy</span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a>    <span class="cf">return</span> data</span></code></pre>
 </div>
 <p>This code is not just much more readable; it is also more flexible,
 since it does not rely on the precise formatting of the input strings.
@@ -3209,19 +3077,19 @@ bins.)</p>
 <p>The code that’s executed by CPython may use a similar approach as in
 <code>manualSplit()</code>; however, since this is all happening “under
 the hood” in C code, it is once again faster.</p>
-<div class="codewrapper sourceCode" id="cb12">
+<div class="codewrapper sourceCode" id="cb8">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a></span>
-<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">10_000</span>  <span class="co"># Number of elements in the list</span></span>
-<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a></span>
-<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a><span class="co"># Ensure every list is the same</span></span>
-<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a>random.seed(<span class="dv">12</span>)</span>
-<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a>f <span class="op">=</span> [<span class="ss">f" </span><span class="sc">{</span>i<span class="sc">:0&gt;6d}</span><span class="ss"> </span><span class="sc">{</span>random<span class="sc">.</span>random()<span class="sc">:8.4f}</span><span class="ss"> "</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(N)]</span>
-<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a></span>
-<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a>repeats <span class="op">=</span> <span class="dv">1000</span></span>
-<span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"manualSplit: </span><span class="sc">{</span>timeit(manualSplit, <span class="bu">globals</span><span class="op">=</span><span class="bu">globals</span>(), number<span class="op">=</span>repeats)<span class="sc">:.3f}</span><span class="ss">ms"</span>)</span>
-<span id="cb12-10"><a href="#cb12-10" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"builtinSplit: </span><span class="sc">{</span>timeit(builtinSplit, <span class="bu">globals</span><span class="op">=</span><span class="bu">globals</span>(), number<span class="op">=</span>repeats)<span class="sc">:.3f}</span><span class="ss">ms"</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">10_000</span>  <span class="co"># Number of elements in the list</span></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="co"># Ensure every list is the same</span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>random.seed(<span class="dv">12</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>f <span class="op">=</span> [<span class="ss">f" </span><span class="sc">{</span>i<span class="sc">:0&gt;6d}</span><span class="ss"> </span><span class="sc">{</span>random<span class="sc">.</span>random()<span class="sc">:8.4f}</span><span class="ss"> "</span> <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(N)]</span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a>repeats <span class="op">=</span> <span class="dv">1000</span></span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"manualSplit: </span><span class="sc">{</span>timeit(manualSplit, <span class="bu">globals</span><span class="op">=</span><span class="bu">globals</span>(), number<span class="op">=</span>repeats)<span class="sc">:.3f}</span><span class="ss">ms"</span>)</span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"builtinSplit: </span><span class="sc">{</span>timeit(builtinSplit, <span class="bu">globals</span><span class="op">=</span><span class="bu">globals</span>(), number<span class="op">=</span>repeats)<span class="sc">:.3f}</span><span class="ss">ms"</span>)</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -3251,7 +3119,7 @@ lot of low-level step-by-step instructions?</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint2" aria-expanded="false" aria-controls="collapseHint2">
   <h4 class="accordion-header" id="headingHint2"> Give me a hint </h4>
 </button>
-<div id="collapseHint2" class="accordion-collapse collapse" data-bs-parent="#accordionHint2" aria-labelledby="headingHint2">
+<div id="collapseHint2" class="accordion-collapse collapse" aria-labelledby="headingHint2" data-bs-parent="#accordionHint2">
 <div class="accordion-body">
 <!-- Typical cases might include reading data from a file, …, … TODO: more examples? -->
 <p>(Before you try to rewrite those parts of your code, use a profiler
@@ -3267,7 +3135,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-optimisation-data-structures-algorithms"><p>Content from <a href="optimisation-data-structures-algorithms.html">Data Structures &amp; Algorithms</a></p>
 <hr>
-<p>Last updated on 2025-03-15 |
+<p>Last updated on 2025-07-06 |
 
         <a href="https://github.com/RSE-Sheffield/pando-python/edit/main/episodes/optimisation-data-structures-algorithms.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 35 minutes</p>
@@ -3311,7 +3179,7 @@ a list or array</li>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
   <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
 <div class="accordion-body">
 <p>The important information for students to learn within this episode
 are the patterns demonstrated via the benchmarks.</p>
@@ -3359,7 +3227,9 @@ it doesn’t, it will re-allocate a larger array, copy across the
 elements, and deallocate the old array. The item to be appended is then
 copied to the end and the counter which tracks the list’s length is
 incremented.</p>
-<p>The amount the internal array grows by is dependent on the particular
+<!-- Based on ICR-RSE's visual note: https://icr-rse-group.github.io/carpentry-pando-python/optimisation-data-structures-algorithms.html#lists -->
+<figure><img src="../fig/list-append.png" alt="A list uses a contiguous block of memory, similar to an array, for storing the pointers to its elements. It is depicted as a series of five adjacent boxes, labelled 'P1' to 'P5', representing pointers to the list's elements. It can have additional storage beyond its length to make appends faster. An illustration shows the previous list with two extra empty boxes marked with question marks, indicating spare elements. Below, Python code `len(my_list) == 5` and `my_list.append(6)` is shown. After appending, the first of the previously empty boxes contains 'P6', and the last one remains empty. The length is now `len(my_list) == 6`. Appending to a full list causes it to grow. This makes some appends slower. An illustration depicts a full list with 'P1' through 'P7' in adjacent boxes and a label &quot;No spare elements!&quot;. Below, Python code `len(my_list) == 7` and `my_list.append(8)` is shown. The result is a new, larger continuous block of memory with 'P1' through 'P8' followed by a question mark in an additional box, indicating one spare element. The label &quot;2 new elements&quot; with curved arrows suggests that when the list grows, it typically allocates more memory than just the space for the new element. A concluding note states that a list will typically grow by 12.5%, hence shorter lists will grow more frequently when appending." class="figure mx-auto d-block"><div class="figcaption">A visual diagram of list storage.</div>
+</figure><p>The amount the internal array grows by is dependent on the particular
 list implementation’s growth factor. CPython for example uses <a href="https://github.com/python/cpython/blob/a571a2fd3fdaeafdfd71f3d80ed5a3b22b63d0f7/Objects/listobject.c#L74" class="external-link"><code>newsize + (newsize &gt;&gt; 3) + 6</code></a>,
 which works out to an over allocation of roughly ~12.5%.</p>
 <figure><img src="../fig/cpython_list_allocations.png" alt="A line graph displaying the relationship between the number of calls to append() and the number of internal resizes of a CPython list. It has a logarithmic relationship, at 1 million appends there have been 84 internal resizes." class="figure mx-auto d-block"><div class="figcaption">The relationship between the number of appends
@@ -3476,35 +3346,34 @@ equality.</p>
 <div class="section level3">
 <h3 id="hashing-data-structures">Hashing Data Structures<a class="anchor" aria-label="anchor" href="#hashing-data-structures"></a>
 </h3>
-<p>Python’s dictionaries are implemented as hashing data structures.
-Explaining how these work will get a bit technical, so let’s start with
-an analogy:</p>
+<p>Python’s dictionaries are implemented as hashing data structures, we
+can understand these at a high-level with an analogy:</p>
 <p>A Python list is like having a single long bookshelf. When you buy a
 new book (append a new element to the list), you place it at the far end
 of the shelf, right after all the previous books.</p>
 <figure><img src="../fig/bookshelf_list.jpg" alt="An image of a single long bookshelf, with a large number of books." class="figure mx-auto d-block"><div class="figcaption">A bookshelf corresponding to a Python
 list.</div>
-</figure><p>A hashing data structure is more like a bookcase with several
-shelves, labeled by genre (sci-fi, romance, children’s books,
-non-fiction, …) and author surname. When you buy a new book by Jules
-Verne, you might place it on the shelf labeled “Sci-Fi, V–Z”. And if you
-keep adding more books, at some point you’ll move to a larger bookcase
-with more shelves (and thus more fine-grained sorting), to make sure you
-don’t have too many books on a single shelf.</p>
-<figure><img src="../fig/bookshelf_dict.jpg" alt="An image of two bookcases, labelled “Sci-Fi” and “Romance”. Each bookcase contains shelves labelled in alphabetical order, with zero or few books on each shelf." class="figure mx-auto d-block"><div class="figcaption">A bookshelf corresponding to a Python
+</figure><p>A Python dictionary is more like a bookcase with several shelves,
+labelled by genre (sci-fi, romance, children’s books, non-fiction, …)
+and author surname. When you buy a new book by Jules Verne, you might
+place it on the shelf labelled "Sci-Fi, V–Z". And if you keep adding
+more books, at some point you’ll move to a larger bookcase with more
+shelves (and thus more fine-grained sorting), to make sure you don’t
+have too many books on a single shelf.</p>
+<figure><img src="../fig/bookshelf_dict.jpg" alt='An image of two bookcases, labelled "Sci-Fi" and "Romance". Each bookcase contains shelves labelled in alphabetical order, with zero or few books on each shelf.' class="figure mx-auto d-block"><div class="figcaption">A bookshelf corresponding to a Python
 dictionary.</div>
-</figure><p>Now, let’s say a friend wanted to borrow the book “‘—All You
-Zombies—’” by Robert Heinlein. If I had my books arranged on a single
+</figure><p>Now, let’s say a friend wanted to borrow the book "‘—All You
+Zombies—’" by Robert Heinlein. If I had my books arranged on a single
 bookshelf (in a list), I would have to look through every book I own in
 order to find it. However, if I had a bookcase with several shelves (a
 hashing data structure), I know immediately that I need to check the
-shelf “Sci-Fi, G—J”, so I’d be able to find it much more quickly!</p>
+shelf "Sci-Fi, G—J", so I’d be able to find it much more quickly!</p>
 <div id="accordionInstructor2" class="accordion instructor-note accordion-flush">
 <div class="accordion-item">
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor2" aria-expanded="false" aria-controls="collapseInstructor2">
   <h3 class="accordion-header" id="headingInstructor2">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
 </button>
-<div id="collapseInstructor2" class="accordion-collapse collapse" aria-labelledby="headingInstructor2" data-bs-parent="#accordionInstructor2">
+<div id="collapseInstructor2" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor2" aria-labelledby="headingInstructor2">
 <div class="accordion-body">
 <p>The large bookcases in the second illustration, with many shelves
 almost empty, take up a lot more space than the single shelf in the
@@ -3526,40 +3395,20 @@ is usually worth it.</p>
 </div>
 </div>
 </div>
-<div id="technical-explanation" class="callout">
+<p>When a value is inserted into a dictionary, its key is hashed to
+decide on which “shelf” it should be stored. Most items will have a
+unique shelf, allowing them to be accessed directly. This is typically
+much faster for locating a specific item than searching a list.</p>
+<div id="keys" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div id="technical-explanation" class="callout-inner">
-<h3 class="callout-title">Technical explanation</h3>
+<div id="keys" class="callout-inner">
+<h3 class="callout-title">Keys</h3>
 <div class="callout-content">
-<p>Within a hashing data structure each inserted key is hashed to
-produce a (hopefully unique) integer key. The dictionary is
-pre-allocated to a default size, and the key is assigned the index
-within the dictionary equivalent to the hash modulo the length of the
-dictionary. If that index doesn’t already contain another key, the key
-(and any associated values) can be inserted. When the index isn’t free,
-a collision strategy is applied. CPython’s <a href="https://github.com/python/cpython/blob/main/Objects/dictobject.c" class="external-link">dictionary</a>
-and <a href="https://github.com/python/cpython/blob/main/Objects/setobject.c" class="external-link">set</a>
-both use a form of open addressing whereby a hash is mutated and
-corresponding indices probed until a free one is located. When the
-hashing data structure exceeds a given load factor (e.g. 2/3 of indices
-have been assigned keys), the internal storage must grow. This process
-requires every item to be re-inserted which can be expensive, but
-reduces the average probes for a key to be found.</p>
-<figure><img src="../fig/hash_linear_probing.png" alt="A diagram demonstrating how the keys (hashes) 37, 64, 14, 94, 67 are inserted into a hash table with 11 indices. This is followed by the insertion of 59, 80 and 39 which require linear probing to be inserted due to collisions." class="figure mx-auto d-block"><div class="figcaption">An visual explanation of linear probing, CPython
-uses an advanced form of this.</div>
-</figure><p>To retrieve or check for the existence of a key within a hashing data
-structure, the key is hashed again and a process equivalent to insertion
-is repeated. However, now the key at each index is checked for equality
-with the one provided. If any empty index is found before an equivalent
-key, then the key must not be present in the data structure.</p>
-<div class="section level3">
-<h3 id="keys">Keys<a class="anchor" aria-label="anchor" href="#keys"></a>
-</h3>
-<p>Keys will typically be a core Python type such as a number or string.
-However multiple of these can be combined as a Tuple to form a compound
-key, or a custom class can be used if the methods
+<p>A dictionary’s keys will typically be a core Python type such as a
+number or string. However, multiple of these can be combined as a tuple
+to form a compound key, or a custom class can be used if the methods
 <code>__hash__()</code> and <code>__eq__()</code> have been
 implemented.</p>
 <p>You can implement <code>__hash__()</code> by utilising the ability
@@ -3590,7 +3439,6 @@ have the same hash, hence all member variables which contribute to
 <code>__eq__()</code> should also contribute to <code>__hash__()</code>
 and vice versa (it’s fine to have irrelevant or redundant internal
 members contribute to neither).</p>
-</div>
 </div>
 </div>
 </div>
@@ -3671,7 +3519,7 @@ duplicates <code>int(N/2)</code> affect performance?</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
   <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
 </button>
-<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
+<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
 <div class="accordion-body">
 <ul>
 <li>
@@ -3699,7 +3547,7 @@ comprehension.</em></p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>Constructing a set by passing in a single list is the clear
 winner.</p>
@@ -3712,7 +3560,7 @@ approach, because of how many times the list is searched. This gap will
 only grow as the number of items increases.</p>
 <p>Sorting the input list reduces the cost of searching the output list
 significantly, however it is still 8x slower than the fastest approach.
-In part because around half of it’s runtime is now spent sorting the
+In part because around half of its runtime is now spent sorting the
 list.</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -3735,19 +3583,20 @@ search the data-structure to retrieve an item or check whether it
 exists.</p>
 <p>The performance of a hashing data structure is subject to the load
 factor and number of collisions. An item that hashes with no collision
-can be checked almost directly, whereas one with collisions will probe
+can be accessed almost directly, whereas one with collisions will probe
 until it finds the correct item or an empty slot. In the worst possible
 case, whereby all insert items have collided this would mean checking
 every single item. In practice, hashing data-structures are designed to
 minimise the chances of this happening and most items should be found or
-identified as missing with a single access.</p>
-<p>In contrast if searching a list or array, the default approach is to
+identified as missing on the first attempt (without probing beyond the
+original hash).</p>
+<p>In contrast, if searching a list or array, the default approach is to
 start at the first item and check all subsequent items until the correct
 item has been found. If the correct item is not present, this will
 require the entire list to be checked. Therefore the worst-case is
 similar to that of the hashing data-structure, however it is guaranteed
 in cases where the item is missing. Similarly, on-average we would
-expect an item to be found half way through the list, meaning that an
+expect an item to be found halfway through the list, meaning that an
 average search will require checking half of the items.</p>
 <p>If however the list or array is sorted, a binary search can be used.
 A binary search divides the list in half and checks which half the
@@ -3860,7 +3709,7 @@ Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  --></p></section><section id="aio-optimisation-numpy"><p>Content from <a href="optimisation-numpy.html">Using Scientific Python Packages (NumPy, Pandas and more)</a></p>
 <hr>
-<p>Last updated on 2025-03-15 |
+<p>Last updated on 2025-07-06 |
 
         <a href="https://github.com/RSE-Sheffield/pando-python/edit/main/episodes/optimisation-numpy.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 30 minutes</p>
@@ -3916,7 +3765,7 @@ performance can become significantly worse.</p>
 </h3>
 <p>NumPy’s arrays (not to be confused with the core Python
 <code>array</code> package) are static arrays. Unlike core Python’s
-lists, they do not dynamically resize. Therefore if you wish to append
+lists, they do not dynamically resize. Therefore, if you wish to append
 to a NumPy array, you must call <code>resize()</code> first. If you
 treat this like <code>append()</code> for a Python list, resizing for
 each individual append, you will be performing significantly more copies
@@ -4176,6 +4025,14 @@ Added Python sum array, skipped a couple of others-->
 <span id="cb9-16"><a href="#cb9-16" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"numpy_sum_array: </span><span class="sc">{</span>timeit(np_sum_ar, setup<span class="op">=</span>gen_array, number<span class="op">=</span>repeats)<span class="sc">:.2f}</span><span class="ss">ms"</span>)</span>
 <span id="cb9-17"><a href="#cb9-17" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"numpy_dot_array: </span><span class="sc">{</span>timeit(np_dot_ar, setup<span class="op">=</span>gen_array, number<span class="op">=</span>repeats)<span class="sc">:.2f}</span><span class="ss">ms"</span>)</span></code></pre>
 </div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>python_sum_list: 46.93ms
+python_sum_array: 33.26ms
+numpy_sum_array: 1.44ms
+numpy_dot_array: 0.29ms</code></pre>
+</div>
 <ul>
 <li>
 <code>python_sum_list</code> uses list comprehension to perform the
@@ -4196,14 +4053,6 @@ provide a much faster 1.44ms completion.</li>
 to calculate the dot product in a single operation. This comes out the
 fastest at 0.29ms, 162x faster than <code>python_sum_list</code>.</li>
 </ul>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>python_sum_list: 46.93ms
-python_sum_array: 33.26ms
-numpy_sum_array: 1.44ms
-numpy_dot_array: 0.29ms</code></pre>
-</div>
 <div id="parallel-numpy" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
@@ -4219,7 +4068,7 @@ even greater speedup.</p>
 <p>The <a href="https://numpy.org/doc/stable/reference/routines.linalg.html" class="external-link">supported
 functions</a> mostly correspond to linear algebra operations like
 <code>numpy.dot()</code>.</p>
-<p>The auto-parallelisation of these functions is hardware dependant, so
+<p>The auto-parallelisation of these functions is hardware-dependent, so
 you won’t always automatically get the additional benefit of
 parallelisation. However, HPC systems should be primed to take
 advantage, so try increasing the number of cores you request when
@@ -4482,7 +4331,7 @@ rows entirely by passing only the required columns to NumPy.</p>
 <pre><code>vectorize: 1.48ms</code></pre>
 <p>It won’t always be possible to take full advantage of vectorisation,
 for example you may have conditional logic.</p>
-<p>An alternate approach is converting your dataframe to a Python
+<p>An alternate approach is converting your DataFrame to a Python
 dictionary using <code>to_dict(orient='index')</code>. This creates a
 nested dictionary, where each row of the outer dictionary is an internal
 dictionary. This can then be processed via list-comprehension:</p>
@@ -4507,7 +4356,7 @@ as fast as <code>apply()</code>.</p>
 significantly slower than a Python dictionary. There is a slight
 overhead to creating the dictionary (40ms in this example), however the
 stark difference in access speed is more than enough to overcome that
-cost for any large dataframe.</p>
+cost for any large DataFrame.</p>
 <div class="codewrapper sourceCode" id="cb20">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -4707,11 +4556,11 @@ you have a method of validation ready prior to attempting upgrades.</li>
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
-</section></section><section id="aio-optimisation-memory"><p>Content from <a href="optimisation-memory.html">Understanding Memory</a></p>
+</section></section><section id="aio-optimisation-latency"><p>Content from <a href="optimisation-latency.html">Understanding Latency</a></p>
 <hr>
-<p>Last updated on 2025-03-15 |
+<p>Last updated on 2025-07-06 |
 
-        <a href="https://github.com/RSE-Sheffield/pando-python/edit/main/episodes/optimisation-memory.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
+        <a href="https://github.com/RSE-Sheffield/pando-python/edit/main/episodes/optimisation-latency.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 30 minutes</p>
 <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
@@ -4724,10 +4573,10 @@ any links that you are not going to use.
 <div class="inner">
 <h3 class="card-title">Questions</h3>
 <ul>
-<li>How does a CPU look for a variable it requires?</li>
-<li>What impact do cache lines have on memory accesses?</li>
 <li>Why is it faster to read/write a single 100 MB file, than 100 files
 of 1 MB each?</li>
+<li>How many orders of magnitude slower are disk accesses than RAM?</li>
+<li>What’s the cost of creating a list?</li>
 </ul>
 </div>
 </div>
@@ -4737,104 +4586,26 @@ of 1 MB each?</li>
 <div class="inner bordered">
 <h3 class="card-title">Objectives</h3>
 <ul>
-<li>Able to explain, at a high-level, how memory accesses occur during
-computation and how this impacts optimisation considerations.</li>
 <li>Able to identify the relationship between different latencies
 relevant to software.</li>
+<li>Demonstrate how to implement parallel network requests.</li>
+<li>Justify the re-use of existing variables over creating new
+ones.</li>
 </ul>
 </div>
 </div>
 </div>
 </div>
 </div>
-<section><h2 class="section-heading" id="accessing-variables">Accessing Variables<a class="anchor" aria-label="anchor" href="#accessing-variables"></a>
+<section><h2 class="section-heading" id="accessing-disk">Accessing Disk<a class="anchor" aria-label="anchor" href="#accessing-disk"></a>
 </h2>
 <hr class="half-width">
-<p>The storage and movement of data plays a large role in the
-performance of executing software.</p>
-<!-- Brief summary of hardware -->
-<p>Modern computer’s typically have a single processor (CPU), within
-this processor there are multiple processing cores each capable of
-executing different code in parallel.</p>
-<p>Data held in memory by running software is exists in RAM, this memory
-is faster to access than hard drives (and solid-state drives). But the
-CPU has much smaller caches on-board, to make accessing the most recent
-variables even faster.</p>
-<figure><img src="../fig/annotated-motherboard.jpg" alt="An annotated photo of inside a desktop computer's case. The CPU, RAM, power supply, graphics cards (GPUs) and harddrive are labelled." class="figure mx-auto d-block"><div class="figcaption">An annotated photo of a computer’s
-hardware.</div>
-</figure><!-- Read/operate on variable ram->cpu cache->registers->cpu --><p>When reading a variable, to perform an operation with it, the CPU
-will first look in its registers. These exist per core, they are the
-location that computation is actually performed. Accessing them is
-incredibly fast, but there only exists enough storage for around 32
-variables (typical number, e.g. 4 bytes). As the register file is so
-small, most variables won’t be found and the CPU’s caches will be
-searched. It will first check the current processing core’s L1 (Level 1)
-cache, this small cache (typically 64 KB per physical core) is the
-smallest and fastest to access cache on a CPU. If the variable is not
-found in the L1 cache, the L2 cache that is shared between multiple
-cores will be checked. This shared cache, is slower to access but larger
-than L1 (typically 1-3MB per core). This process then repeats for the L3
-cache which may be shared among all cores of the CPU. This cache again
-has higher latency to access, but increased size (typically slightly
-larger than the total L2 cache size). If the variable has not been found
-in any of the CPU’s cache, the CPU will look to the computer’s RAM. This
-is an order of magnitude slower to access, with several orders of
-magnitude greater capacity (tens to hundreds of GB are now
-standard).</p>
-<p>Correspondingly, the earlier the CPU finds the variable the faster it
-will be to access. However, to fully understand the cache’s it’s
-necessary to explain what happens once a variable has been found.</p>
-<p>If a variable is not found in the caches, it must be fetched from
-RAM. The full 64 byte cache line containing the variable, will be copied
-first into the CPU’s L3, then L2 and then L1. Most variables are only 4
-or 8 bytes, so many neighbouring variables are also pulled into the
-caches. Similarly, adding new data to a cache evicts old data. This
-means that reading 16 integers contiguously stored in memory, should be
-faster than 16 scattered integers</p>
-<p>Therefore, to <strong>optimally</strong> access variables they should
-be stored contiguously in memory with related data and worked on whilst
-they remain in caches. If you add to a variable, perform large amount of
-unrelated processing, then add to the variable again it will likely have
-been evicted from caches and need to be reloaded from slower RAM
-again.</p>
-<!-- Latency/Throughput typically inversely proportional to capacity -->
-<p>It’s not necessary to remember this full detail of how memory access
-work within a computer, but the context perhaps helps understand why
-memory locality is important.</p>
-<figure><img src="../fig/hardware.png" alt="An abstract representation of a CPU, RAM and Disk, showing their internal caches and the pathways data can pass." class="figure mx-auto d-block"><div class="figcaption">An abstract diagram showing the path data takes
-from disk or RAM to be used for computation.</div>
-</figure><div id="callout1" class="callout">
-<div class="callout-square">
-<i class="callout-icon" data-feather="bell"></i>
-</div>
-<div class="callout-inner">
-<h3 class="callout-title">Callout</h3>
-<div class="callout-content">
-<p>Python as a programming language, does not give you enough control to
-carefully pack your variables in this manner (every variable is an
-object, so it’s stored as a pointer that redirects to the actual data
-stored elsewhere).</p>
-<p>However all is not lost, packages such as <code>numpy</code> and
-<code>pandas</code> implemented in C/C++ enable Python users to take
-advantage of efficient memory accesses (when they are used
-correctly).</p>
-</div>
-</div>
-</div>
-<!-- TODO python code example
-```python
-
-```-->
-</section><section><h2 class="section-heading" id="accessing-disk">Accessing Disk<a class="anchor" aria-label="anchor" href="#accessing-disk"></a>
-</h2>
-<hr class="half-width">
-<!-- Read data from a file it goes disk->disk cache->ram->cpu cache/s->cpu --><p>When accessing data on disk (or network), a very similar process is
-performed to that between CPU and RAM when accessing variables.</p>
-<p>When reading data from a file, it transferred from the disk, to the
-disk cache, to the RAM. The latency to access files on disk is another
-order of magnitude higher than accessing RAM.</p>
-<p>As such, disk accesses similarly benefit from sequential accesses and
-reading larger blocks together rather than single variables. Python’s
+<!-- Read data from a file it goes disk->disk cache->ram->cpu cache/s->cpu --><p>When reading data from a file, it is first transferred from the disk
+to the disk cache and then to the RAM (the computer’s main memory, where
+variables are stored). The latency to access files on disk is another
+order of magnitude higher than accessing normal variables.</p>
+<p>As such, disk accesses benefit from sequential accesses and reading
+larger blocks together rather than single variables. Python’s
 <code>io</code> package is already buffered, so automatically handles
 this for you in the background.</p>
 <p>However before a file can be read, the file system on the disk must
@@ -4925,7 +4696,7 @@ apply.</p>
 </section><section><h2 class="section-heading" id="accessing-the-network">Accessing the Network<a class="anchor" aria-label="anchor" href="#accessing-the-network"></a>
 </h2>
 <hr class="half-width">
-<p>When transfering files over a network, similar effects apply. There
+<p>When transferring files over a network, similar effects apply. There
 is a fixed overhead for every file transfer (no matter how big the
 file), so downloading many small files will be slower than downloading a
 single large file of the same total size.</p>
@@ -5002,7 +4773,10 @@ parallelDownload: 0.285 s
 the below graph demonstrates this. Note the log scale!</p>
 <figure><img src="../fig/latency.png" alt="A horizontal bar chart displaying the relative latencies for L1/L2/L3 cache, RAM, SSD, HDD and a packet being sent from London to California and back. These latencies range from 1 nanosecond to 140 milliseconds and are displayed with a log scale." class="figure mx-auto d-block"><div class="figcaption">A graph demonstrating the wide variety of
 latencies a programmer may experience when accessing data.</div>
-</figure><p>The lower the latency typically the higher the effective bandwidth
+</figure><p>L1/L2/L3 caches are where your most recently accessed variables are
+stored inside the CPU, whereas RAM is where most of your variables will
+be found.</p>
+<p>The lower the latency typically the higher the effective bandwidth
 (L1 and L2 cache have 1 TB/s, RAM 100 GB/s, SSDs up to 32 GB/s, HDDs up
 to 150 MB/s), making large memory transactions even slower.</p>
 </section><section><h2 class="section-heading" id="memory-allocation-is-not-free">Memory Allocation is not Free<a class="anchor" aria-label="anchor" href="#memory-allocation-is-not-free"></a>
@@ -5024,29 +4798,28 @@ model.</p>
 <div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="im">import</span> time</span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>grid_shape <span class="op">=</span> (<span class="dv">512</span>, <span class="dv">512</span>)</span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="kw">def</span> update(grid, a_dt):</span>
-<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>    x_max, y_max <span class="op">=</span> grid_shape</span>
-<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>    out_grid <span class="op">=</span> [[<span class="fl">0.0</span> <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(y_max)] <span class="op">*</span> y_max <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(x_max)]</span>
-<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(x_max):</span>
-<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(y_max):</span>
-<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>            out_xx <span class="op">=</span> grid[(i<span class="op">-</span><span class="dv">1</span>)<span class="op">%</span>x_max][j] <span class="op">-</span> <span class="dv">2</span> <span class="op">*</span> grid[i][j] <span class="op">+</span> grid[(i<span class="op">+</span><span class="dv">1</span>)<span class="op">%</span>x_max][j]</span>
-<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>            out_yy <span class="op">=</span> grid[i][(j<span class="op">-</span><span class="dv">1</span>)<span class="op">%</span>y_max] <span class="op">-</span> <span class="dv">2</span> <span class="op">*</span> grid[i][j] <span class="op">+</span> grid[i][(j<span class="op">+</span><span class="dv">1</span>)<span class="op">%</span>y_max]</span>
-<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a>            out_grid[i][j] <span class="op">=</span> grid[i][j] <span class="op">+</span> (out_xx <span class="op">+</span> out_yy) <span class="op">*</span> a_dt </span>
-<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a>    <span class="cf">return</span> out_grid</span>
-<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a>    </span>
-<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a><span class="kw">def</span> heat_equation(steps):</span>
-<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a>    x_max, y_max <span class="op">=</span> grid_shape</span>
-<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a>    grid <span class="op">=</span> [[<span class="fl">0.0</span>] <span class="op">*</span> y_max <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(x_max)]</span>
-<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a>    <span class="co"># Init central point to diffuse</span></span>
-<span id="cb5-18"><a href="#cb5-18" tabindex="-1"></a>    grid[<span class="bu">int</span>(x_max<span class="op">/</span><span class="dv">2</span>)][<span class="bu">int</span>(y_max<span class="op">/</span><span class="dv">2</span>)] <span class="op">=</span> <span class="fl">1.0</span></span>
-<span id="cb5-19"><a href="#cb5-19" tabindex="-1"></a>    <span class="co"># Run steps</span></span>
-<span id="cb5-20"><a href="#cb5-20" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(steps):</span>
-<span id="cb5-21"><a href="#cb5-21" tabindex="-1"></a>        grid <span class="op">=</span> update(grid, <span class="fl">0.1</span>)</span>
-<span id="cb5-22"><a href="#cb5-22" tabindex="-1"></a></span>
-<span id="cb5-23"><a href="#cb5-23" tabindex="-1"></a>heat_equation(<span class="dv">100</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>grid_shape <span class="op">=</span> (<span class="dv">512</span>, <span class="dv">512</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="kw">def</span> update(grid, a_dt):</span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>    x_max, y_max <span class="op">=</span> grid_shape</span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>    out_grid <span class="op">=</span> [[<span class="fl">0.0</span> <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(y_max)] <span class="op">*</span> y_max <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(x_max)]</span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(x_max):</span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(y_max):</span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>            out_xx <span class="op">=</span> grid[(i<span class="op">-</span><span class="dv">1</span>)<span class="op">%</span>x_max][j] <span class="op">-</span> <span class="dv">2</span> <span class="op">*</span> grid[i][j] <span class="op">+</span> grid[(i<span class="op">+</span><span class="dv">1</span>)<span class="op">%</span>x_max][j]</span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>            out_yy <span class="op">=</span> grid[i][(j<span class="op">-</span><span class="dv">1</span>)<span class="op">%</span>y_max] <span class="op">-</span> <span class="dv">2</span> <span class="op">*</span> grid[i][j] <span class="op">+</span> grid[i][(j<span class="op">+</span><span class="dv">1</span>)<span class="op">%</span>y_max]</span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>            out_grid[i][j] <span class="op">=</span> grid[i][j] <span class="op">+</span> (out_xx <span class="op">+</span> out_yy) <span class="op">*</span> a_dt </span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a>    <span class="cf">return</span> out_grid</span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a>    </span>
+<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a><span class="kw">def</span> heat_equation(steps):</span>
+<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a>    x_max, y_max <span class="op">=</span> grid_shape</span>
+<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a>    grid <span class="op">=</span> [[<span class="fl">0.0</span>] <span class="op">*</span> y_max <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(x_max)]</span>
+<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a>    <span class="co"># Init central point to diffuse</span></span>
+<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a>    grid[<span class="bu">int</span>(x_max<span class="op">/</span><span class="dv">2</span>)][<span class="bu">int</span>(y_max<span class="op">/</span><span class="dv">2</span>)] <span class="op">=</span> <span class="fl">1.0</span></span>
+<span id="cb5-18"><a href="#cb5-18" tabindex="-1"></a>    <span class="co"># Run steps</span></span>
+<span id="cb5-19"><a href="#cb5-19" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(steps):</span>
+<span id="cb5-20"><a href="#cb5-20" tabindex="-1"></a>        grid <span class="op">=</span> update(grid, <span class="fl">0.1</span>)</span>
+<span id="cb5-21"><a href="#cb5-21" tabindex="-1"></a></span>
+<span id="cb5-22"><a href="#cb5-22" tabindex="-1"></a>heat_equation(<span class="dv">100</span>)</span></code></pre>
 </div>
 <p>Line profiling demonstrates that function takes up over 55 seconds of
 the total runtime, with the cost of allocating the temporary
@@ -5078,29 +4851,28 @@ call to update().</p>
 <div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="im">import</span> time</span>
-<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>grid_shape <span class="op">=</span> (<span class="dv">512</span>, <span class="dv">512</span>)</span>
-<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="kw">def</span> update(grid, a_dt, out_grid):</span>
-<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>    x_max, y_max <span class="op">=</span> grid_shape</span>
-<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(x_max):</span>
-<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(y_max):</span>
-<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a>            out_xx <span class="op">=</span> grid[(i<span class="op">-</span><span class="dv">1</span>)<span class="op">%</span>x_max][j] <span class="op">-</span> <span class="dv">2</span> <span class="op">*</span> grid[i][j] <span class="op">+</span> grid[(i<span class="op">+</span><span class="dv">1</span>)<span class="op">%</span>x_max][j]</span>
-<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a>            out_yy <span class="op">=</span> grid[i][(j<span class="op">-</span><span class="dv">1</span>)<span class="op">%</span>y_max] <span class="op">-</span> <span class="dv">2</span> <span class="op">*</span> grid[i][j] <span class="op">+</span> grid[i][(j<span class="op">+</span><span class="dv">1</span>)<span class="op">%</span>y_max]</span>
-<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a>            out_grid[i][j] <span class="op">=</span> grid[i][j] <span class="op">+</span> (out_xx <span class="op">+</span> out_yy) <span class="op">*</span> a_dt </span>
-<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a>    </span>
-<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a><span class="kw">def</span> heat_equation(steps):</span>
-<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a>    x_max, y_max <span class="op">=</span> grid_shape</span>
-<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a>    grid <span class="op">=</span> [[<span class="fl">0.0</span> <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(y_max)] <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(x_max)]</span>
-<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a>    out_grid <span class="op">=</span> [[<span class="fl">0.0</span> <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(y_max)] <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(x_max)]  <span class="co"># Allocate a second buffer once</span></span>
-<span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a>    <span class="co"># Init central point to diffuse</span></span>
-<span id="cb7-17"><a href="#cb7-17" tabindex="-1"></a>    grid[<span class="bu">int</span>(x_max<span class="op">/</span><span class="dv">2</span>)][<span class="bu">int</span>(y_max<span class="op">/</span><span class="dv">2</span>)] <span class="op">=</span> <span class="fl">1.0</span></span>
-<span id="cb7-18"><a href="#cb7-18" tabindex="-1"></a>    <span class="co"># Run steps</span></span>
-<span id="cb7-19"><a href="#cb7-19" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(steps):</span>
-<span id="cb7-20"><a href="#cb7-20" tabindex="-1"></a>        update(grid, <span class="fl">0.1</span>, out_grid)  <span class="co"># Pass the output buffer</span></span>
-<span id="cb7-21"><a href="#cb7-21" tabindex="-1"></a>        grid, out_grid <span class="op">=</span> out_grid, grid  <span class="co"># Swap buffers</span></span>
-<span id="cb7-22"><a href="#cb7-22" tabindex="-1"></a></span>
-<span id="cb7-23"><a href="#cb7-23" tabindex="-1"></a>heat_equation(<span class="dv">100</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>grid_shape <span class="op">=</span> (<span class="dv">512</span>, <span class="dv">512</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="kw">def</span> update(grid, a_dt, out_grid):</span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>    x_max, y_max <span class="op">=</span> grid_shape</span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(x_max):</span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(y_max):</span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a>            out_xx <span class="op">=</span> grid[(i<span class="op">-</span><span class="dv">1</span>)<span class="op">%</span>x_max][j] <span class="op">-</span> <span class="dv">2</span> <span class="op">*</span> grid[i][j] <span class="op">+</span> grid[(i<span class="op">+</span><span class="dv">1</span>)<span class="op">%</span>x_max][j]</span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a>            out_yy <span class="op">=</span> grid[i][(j<span class="op">-</span><span class="dv">1</span>)<span class="op">%</span>y_max] <span class="op">-</span> <span class="dv">2</span> <span class="op">*</span> grid[i][j] <span class="op">+</span> grid[i][(j<span class="op">+</span><span class="dv">1</span>)<span class="op">%</span>y_max]</span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a>            out_grid[i][j] <span class="op">=</span> grid[i][j] <span class="op">+</span> (out_xx <span class="op">+</span> out_yy) <span class="op">*</span> a_dt </span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a>    </span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a><span class="kw">def</span> heat_equation(steps):</span>
+<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a>    x_max, y_max <span class="op">=</span> grid_shape</span>
+<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a>    grid <span class="op">=</span> [[<span class="fl">0.0</span> <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(y_max)] <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(x_max)]</span>
+<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a>    out_grid <span class="op">=</span> [[<span class="fl">0.0</span> <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(y_max)] <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(x_max)]  <span class="co"># Allocate a second buffer once</span></span>
+<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a>    <span class="co"># Init central point to diffuse</span></span>
+<span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a>    grid[<span class="bu">int</span>(x_max<span class="op">/</span><span class="dv">2</span>)][<span class="bu">int</span>(y_max<span class="op">/</span><span class="dv">2</span>)] <span class="op">=</span> <span class="fl">1.0</span></span>
+<span id="cb7-17"><a href="#cb7-17" tabindex="-1"></a>    <span class="co"># Run steps</span></span>
+<span id="cb7-18"><a href="#cb7-18" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(steps):</span>
+<span id="cb7-19"><a href="#cb7-19" tabindex="-1"></a>        update(grid, <span class="fl">0.1</span>, out_grid)  <span class="co"># Pass the output buffer</span></span>
+<span id="cb7-20"><a href="#cb7-20" tabindex="-1"></a>        grid, out_grid <span class="op">=</span> out_grid, grid  <span class="co"># Swap buffers</span></span>
+<span id="cb7-21"><a href="#cb7-21" tabindex="-1"></a></span>
+<span id="cb7-22"><a href="#cb7-22" tabindex="-1"></a>heat_equation(<span class="dv">100</span>)</span></code></pre>
 </div>
 <p>The total time reduces to 34 seconds, reducing the runtime by 39%
 inline with the removed allocation.</p>
@@ -5130,14 +4902,9 @@ Line #      Hits         Time  Per Hit   % Time  Line Contents
 <h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul>
-<li>Sequential accesses to memory (RAM or disk) will be faster than
-random or scattered accesses.
-<ul>
-<li>This is not always natively possible in Python without the use of
-packages such as NumPy and Pandas</li>
-</ul>
-</li>
 <li>One large file is preferable to many small files.</li>
+<li>Network requests can be parallelised to reduce the impact of fixed
+overheads.</li>
 <li>Memory allocation is not free, avoiding destroying and recreating
 objects can improve performance.</li>
 </ul>
@@ -5150,7 +4917,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-optimisation-conclusion"><p>Content from <a href="optimisation-conclusion.html">Optimisation Conclusion</a></p>
 <hr>
-<p>Last updated on 2025-03-15 |
+<p>Last updated on 2025-07-06 |
 
         <a href="https://github.com/RSE-Sheffield/pando-python/edit/main/episodes/optimisation-conclusion.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 5 minutes</p>
@@ -5255,16 +5022,11 @@ changes to your code.</li>
 you have a method of validation ready prior to attempting upgrades.</li>
 </ul>
 </li>
-<li>How the Computer Hardware Affects Performance
+<li>How Latency Affects Performance
 <ul>
-<li>Sequential accesses to memory (RAM or disk) will be faster than
-random or scattered accesses.
-<ul>
-<li>This is not always natively possible in Python without the use of
-packages such as NumPy and Pandas</li>
-</ul>
-</li>
 <li>One large file is preferable to many small files.</li>
+<li>Network requests can be parallelised to reduce the impact of fixed
+overheads.</li>
 <li>Memory allocation is not free, avoiding destroying and recreating
 objects can improve performance.</li>
 </ul>
@@ -5320,8 +5082,8 @@ objects can improve performance.</li>
   "url": "https://RSE-Sheffield.github.io/pando-python/instructor/aio.html",
   "identifier": "https://RSE-Sheffield.github.io/pando-python/instructor/aio.html",
   "dateCreated": "2024-02-01",
-  "dateModified": "2025-07-01",
-  "datePublished": "2025-07-01"
+  "dateModified": "2025-07-06",
+  "datePublished": "2025-07-06"
 }
 
   </script><script>

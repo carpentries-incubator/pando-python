@@ -70,13 +70,14 @@ episodes:
 - long-break1.md
 - optimisation-numpy.md
 - optimisation-use-latest.md
-- optimisation-memory.md
+- optimisation-latency.md
 - optimisation-conclusion.md
 
 # Information for Learners
 learners: 
 - setup.md
 # - registration.md # University of Sheffield specific registration procedure
+- technical-appendix.md
 - acknowledgements.md
 - ppp.md
 - reference.md

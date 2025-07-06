@@ -123,6 +123,7 @@
           </button>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 <hr>
+<li><a class="dropdown-item" href="technical-appendix.html">Technical Appendix</a></li>
 <li><a class="dropdown-item" href="acknowledgements.html">Acknowledgements</a></li>
 <li><a class="dropdown-item" href="ppp.html">Performant Python Patterns (Talk)</a></li>
 <li><a class="dropdown-item" href="reference.html">Reference</a></li>
@@ -378,7 +379,7 @@
 <div class="accordion accordion-flush" id="accordionFlush13">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading13">
-        <a href="optimisation-memory.html">12. Understanding Memory</a>
+        <a href="optimisation-latency.html">12. Understanding Latency</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -424,6 +425,7 @@
                         <a href="../instructor/images.html">Extract All Images</a>
                       </li>
                       <hr>
+<li><a class="dropdown-item" href="technical-appendix.html">Technical Appendix</a></li>
 <li><a class="dropdown-item" href="acknowledgements.html">Acknowledgements</a></li>
 <li><a class="dropdown-item" href="ppp.html">Performant Python Patterns (Talk)</a></li>
 <li><a class="dropdown-item" href="reference.html">Reference</a></li>
@@ -517,43 +519,32 @@ inside a Juypter notebook for the above FizzBuzz profile code.</div>
 <hr class="half-width"></section><section id="optimisation-data-structures-algorithms"><h2 class="section-heading"><a href="optimisation-data-structures-algorithms.html">Data Structures &amp; Algorithms</a></h2>
 <hr class="half-width">
 <h3 id="optimisation-data-structures-algorithms-figure-1">Figure 1</h3>
+<p aria-hidden="true">Image 1 of 1: ‘A list uses a contiguous block of memory, similar to an array, for storing the pointers to its elements. It is depicted as a series of five adjacent boxes, labelled 'P1' to 'P5', representing pointers to the list's elements. It can have additional storage beyond its length to make appends faster. An illustration shows the previous list with two extra empty boxes marked with question marks, indicating spare elements. Below, Python code `len(my_list) == 5` and `my_list.append(6)` is shown. After appending, the first of the previously empty boxes contains 'P6', and the last one remains empty. The length is now `len(my_list) == 6`. Appending to a full list causes it to grow. This makes some appends slower. An illustration depicts a full list with 'P1' through 'P7' in adjacent boxes and a label "No spare elements!". Below, Python code `len(my_list) == 7` and `my_list.append(8)` is shown. The result is a new, larger continuous block of memory with 'P1' through 'P8' followed by a question mark in an additional box, indicating one spare element. The label "2 new elements" with curved arrows suggests that when the list grows, it typically allocates more memory than just the space for the new element. A concluding note states that a list will typically grow by 12.5%, hence shorter lists will grow more frequently when appending.’</p>
+<figure><img src="../fig/list-append.png" alt="A list uses a contiguous block of memory, similar to an array, for storing the pointers to its elements. It is depicted as a series of five adjacent boxes, labelled 'P1' to 'P5', representing pointers to the list's elements. It can have additional storage beyond its length to make appends faster. An illustration shows the previous list with two extra empty boxes marked with question marks, indicating spare elements. Below, Python code `len(my_list) == 5` and `my_list.append(6)` is shown. After appending, the first of the previously empty boxes contains 'P6', and the last one remains empty. The length is now `len(my_list) == 6`. Appending to a full list causes it to grow. This makes some appends slower. An illustration depicts a full list with 'P1' through 'P7' in adjacent boxes and a label &quot;No spare elements!&quot;. Below, Python code `len(my_list) == 7` and `my_list.append(8)` is shown. The result is a new, larger continuous block of memory with 'P1' through 'P8' followed by a question mark in an additional box, indicating one spare element. The label &quot;2 new elements&quot; with curved arrows suggests that when the list grows, it typically allocates more memory than just the space for the new element. A concluding note states that a list will typically grow by 12.5%, hence shorter lists will grow more frequently when appending." class="figure mx-auto d-block"><div class="figcaption">A visual diagram of list storage.</div>
+</figure><hr>
+<h3 id="optimisation-data-structures-algorithms-figure-2">Figure 2</h3>
 <p aria-hidden="true">Image 1 of 1: ‘A line graph displaying the relationship between the number of calls to append() and the number of internal resizes of a CPython list. It has a logarithmic relationship, at 1 million appends there have been 84 internal resizes.’</p>
 <figure><img src="../fig/cpython_list_allocations.png" alt="A line graph displaying the relationship between the number of calls to append() and the number of internal resizes of a CPython list. It has a logarithmic relationship, at 1 million appends there have been 84 internal resizes." class="figure mx-auto d-block"><div class="figcaption">The relationship between the number of appends
 to an empty list, and the number of internal resizes in CPython.</div>
 </figure><hr>
-<h3 id="optimisation-data-structures-algorithms-figure-2">Figure 2</h3>
+<h3 id="optimisation-data-structures-algorithms-figure-3">Figure 3</h3>
 <p aria-hidden="true">Image 1 of 1: ‘An image of a single long bookshelf, with a large number of books.’</p>
 <figure><img src="../fig/bookshelf_list.jpg" alt="An image of a single long bookshelf, with a large number of books." class="figure mx-auto d-block"><div class="figcaption">A bookshelf corresponding to a Python
 list.</div>
 </figure><hr>
-<h3 id="optimisation-data-structures-algorithms-figure-3">Figure 3</h3>
-<p aria-hidden="true">Image 1 of 1: ‘An image of two bookcases, labelled “Sci-Fi” and “Romance”. Each bookcase contains shelves labelled in alphabetical order, with zero or few books on each shelf.’</p>
-<figure><img src="../fig/bookshelf_dict.jpg" alt="An image of two bookcases, labelled “Sci-Fi” and “Romance”. Each bookcase contains shelves labelled in alphabetical order, with zero or few books on each shelf." class="figure mx-auto d-block"><div class="figcaption">A bookshelf corresponding to a Python
-dictionary.</div>
-</figure><hr>
 <h3 id="optimisation-data-structures-algorithms-figure-4">Figure 4</h3>
-<p aria-hidden="true">Image 1 of 1: ‘A diagram demonstrating how the keys (hashes) 37, 64, 14, 94, 67 are inserted into a hash table with 11 indices. This is followed by the insertion of 59, 80 and 39 which require linear probing to be inserted due to collisions.’</p>
-<figure><img src="../fig/hash_linear_probing.png" alt="A diagram demonstrating how the keys (hashes) 37, 64, 14, 94, 67 are inserted into a hash table with 11 indices. This is followed by the insertion of 59, 80 and 39 which require linear probing to be inserted due to collisions." class="figure mx-auto d-block"><div class="figcaption">An visual explanation of linear probing, CPython
-uses an advanced form of this.</div>
+<p aria-hidden="true">Image 1 of 1: ‘An image of two bookcases, labelled "Sci-Fi" and "Romance". Each bookcase contains shelves labelled in alphabetical order, with zero or few books on each shelf.’</p>
+<figure><img src="../fig/bookshelf_dict.jpg" alt='An image of two bookcases, labelled "Sci-Fi" and "Romance". Each bookcase contains shelves labelled in alphabetical order, with zero or few books on each shelf.' class="figure mx-auto d-block"><div class="figcaption">A bookshelf corresponding to a Python
+dictionary.</div>
 </figure><hr></section><section id="long-break1"><h2 class="section-heading"><a href="long-break1.html">Break</a></h2>
 <hr class="half-width"></section><section id="optimisation-numpy"><h2 class="section-heading"><a href="optimisation-numpy.html">Using Scientific Python Packages (NumPy, Pandas and more)</a></h2>
 <hr class="half-width">
 <h3 id="optimisation-numpy-figure-1">Figure 1</h3>
 <p aria-hidden="true">Image 1 of 1: ‘A diagram illustrating the difference between a NumPy array and a Python list. The NumPy array is a raw block of memory containing numerical values. A Python list contains a header with metadata and multiple items, each of which is a reference to another Python object with its own header and value.’</p>
 <figure><img src="../fig/numpy-array-vs-list.png" alt="A diagram illustrating the difference between a NumPy array and a Python list. The NumPy array is a raw block of memory containing numerical values. A Python list contains a header with metadata and multiple items, each of which is a reference to another Python object with its own header and value." class="figure mx-auto d-block"><!-- Figure inspired by https://jakevdp.github.io/blog/2014/05/09/why-python-is-slow/#3.-Python's-object-model-can-lead-to-inefficient-memory-access --></figure><hr></section><section id="optimisation-use-latest"><h2 class="section-heading"><a href="optimisation-use-latest.html">Keep Python &amp; Packages up to Date</a></h2>
-<hr class="half-width"></section><section id="optimisation-memory"><h2 class="section-heading"><a href="optimisation-memory.html">Understanding Memory</a></h2>
+<hr class="half-width"></section><section id="optimisation-latency"><h2 class="section-heading"><a href="optimisation-latency.html">Understanding Latency</a></h2>
 <hr class="half-width">
-<h3 id="optimisation-memory-figure-1">Figure 1</h3>
-<p aria-hidden="true">Image 1 of 1: ‘An annotated photo of inside a desktop computer's case. The CPU, RAM, power supply, graphics cards (GPUs) and harddrive are labelled.’</p>
-<figure><img src="../fig/annotated-motherboard.jpg" alt="An annotated photo of inside a desktop computer's case. The CPU, RAM, power supply, graphics cards (GPUs) and harddrive are labelled." class="figure mx-auto d-block"><div class="figcaption">An annotated photo of a computer’s
-hardware.</div>
-</figure><hr>
-<h3 id="optimisation-memory-figure-2">Figure 2</h3>
-<p aria-hidden="true">Image 1 of 1: ‘An abstract representation of a CPU, RAM and Disk, showing their internal caches and the pathways data can pass.’</p>
-<figure><img src="../fig/hardware.png" alt="An abstract representation of a CPU, RAM and Disk, showing their internal caches and the pathways data can pass." class="figure mx-auto d-block"><div class="figcaption">An abstract diagram showing the path data takes
-from disk or RAM to be used for computation.</div>
-</figure><hr>
-<h3 id="optimisation-memory-figure-3">Figure 3</h3>
+<h3 id="optimisation-latency-figure-1">Figure 1</h3>
 <p aria-hidden="true">Image 1 of 1: ‘A horizontal bar chart displaying the relative latencies for L1/L2/L3 cache, RAM, SSD, HDD and a packet being sent from London to California and back. These latencies range from 1 nanosecond to 140 milliseconds and are displayed with a log scale.’</p>
 <figure><img src="../fig/latency.png" alt="A horizontal bar chart displaying the relative latencies for L1/L2/L3 cache, RAM, SSD, HDD and a packet being sent from London to California and back. These latencies range from 1 nanosecond to 140 milliseconds and are displayed with a log scale." class="figure mx-auto d-block"><div class="figcaption">A graph demonstrating the wide variety of
 latencies a programmer may experience when accessing data.</div>
@@ -606,8 +597,8 @@ latencies a programmer may experience when accessing data.</div>
   "url": "https://RSE-Sheffield.github.io/pando-python/instructor/images.html",
   "identifier": "https://RSE-Sheffield.github.io/pando-python/instructor/images.html",
   "dateCreated": "2024-02-01",
-  "dateModified": "2025-07-01",
-  "datePublished": "2025-07-01"
+  "dateModified": "2025-07-06",
+  "datePublished": "2025-07-06"
 }
 
   </script><script>

@@ -99,7 +99,7 @@
           <button class="nav-link dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
             More <i data-feather="chevron-down"></i>
           </button>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown"><hr><li><a class="dropdown-item" href="acknowledgements.html">Acknowledgements</a></li><li><a class="dropdown-item" href="ppp.html">Performant Python Patterns (Talk)</a></li><li><a class="dropdown-item" href="reference.html">Reference</a></li>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown"><hr><li><a class="dropdown-item" href="technical-appendix.html">Technical Appendix</a></li><li><a class="dropdown-item" href="acknowledgements.html">Acknowledgements</a></li><li><a class="dropdown-item" href="ppp.html">Performant Python Patterns (Talk)</a></li><li><a class="dropdown-item" href="reference.html">Reference</a></li>
           </ul></li>
       </ul></div>
     <!--
@@ -305,7 +305,7 @@
 <div class="accordion accordion-flush" id="accordionFlush13">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading13">
-        <a href="optimisation-memory.html">12. Understanding Memory</a>
+        <a href="optimisation-latency.html">12. Understanding Latency</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -342,7 +342,7 @@
                       <li>
                         <a href="../instructor/images.html">Extract All Images</a>
                       </li>
-                      <hr><li><a class="dropdown-item" href="acknowledgements.html">Acknowledgements</a></li><li><a class="dropdown-item" href="ppp.html">Performant Python Patterns (Talk)</a></li><li><a class="dropdown-item" href="reference.html">Reference</a></li>
+                      <hr><li><a class="dropdown-item" href="technical-appendix.html">Technical Appendix</a></li><li><a class="dropdown-item" href="acknowledgements.html">Acknowledgements</a></li><li><a class="dropdown-item" href="ppp.html">Performant Python Patterns (Talk)</a></li><li><a class="dropdown-item" href="reference.html">Reference</a></li>
                     </ul></div>
                 </div>
               </div>
@@ -378,7 +378,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Acknowledgements</h1>
-        <p>Last updated on 2025-03-15 |
+        <p>Last updated on 2025-07-06 |
 
         <a href="https://github.com/RSE-Sheffield/pando-python/edit/main/learners/acknowledgements.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -398,21 +398,29 @@ support researchers working with their <a href="https://docs.hpc.shef.ac.uk/en/l
 HPC system.</p>
 <p><strong>Authorship</strong></p>
 <p>The initial materials were authored by <a href="https://www.sheffield.ac.uk/dcs/people/research-staff/robert-chisholm" class="external-link">Robert
-Chisholm</a>, with support from various colleagues within the university
+Chisholm</a>, with support from various colleagues within the University
 of Sheffield’s <a href="https://rse.shef.ac.uk" class="external-link">Research Software
 Engineering</a> and <a href="https://www.sheffield.ac.uk/it-services/research" class="external-link">Research IT</a>
-teams.</p>
-<p>Additional consulting was provided by James Kilbane a close friend
-(and general rubber duck).</p>
+teams. Additional consulting was provided by James Kilbane, a close
+friend (and general rubber duck).</p>
+<p><a href="https://www.kcl.ac.uk/people/jost-migenda" class="external-link">Jost Migenda</a>
+from the <a href="https://www.kcl.ac.uk/research/facilities/e-research" class="external-link">KCL
+e-Research department</a> contributed significant improvements and
+additions to the optimization episodes. They have also become a
+co-maintainer of the course.</p>
+<p>Anastasiia Shcherbakova and Mira Sarkis of <a href="https://github.com/ICR-RSE-Group" class="external-link">ICR-RSE</a> contributed
+inspiration for the list append figure and a large number of typographic
+corrections and simplifications during the alpha phase of the course’s
+development lifecycle.</p>
 <p><strong>Resources</strong></p>
 <p>Most of the content was drawn from the education and experience of
-the author, however the below resources provided inspiration:</p>
+the authors, however the below resources provided inspiration:</p>
 <ul><li>
 <a href="https://www.oreilly.com/library/view/high-performance-python/9781492055013/" class="external-link">High
 Performance Python, 2nd Edition</a>: This excellent book goes far deeper
 than this short course in explaining how to maximise performance in
-Python, however it inspired the examples; <a href="optimisation-memory.html#memory-allocation-is-not-free">memory
-allocation is not free</a> and <a href="optimisation-memory.html#memory-allocation-is-not-free">vectorisation</a>.</li>
+Python, however it inspired the examples; <a href="optimisation-latency.html#memory-allocation-is-not-free">memory
+allocation is not free</a> and <a href="optimisation-latency.html#memory-allocation-is-not-free">vectorisation</a>.</li>
 <li>
 <a href="https://viralinstruction.com/posts/hardware/" class="external-link">What
 scientists must know about hardware to write fast code</a>: This
@@ -420,7 +428,8 @@ notebook provides an array of hardware lessons relevant to programming
 for performance, which could be similarly found in most undergraduate
 Computer Science courses. Although the notebook is grounded in Julia, a
 lower level language than Python, it is referring to hardware so many of
-same lessons are covered in the <a href="optimisation-memory.html">memory episode</a>.</li>
+same lessons are covered in the <a href="optimisation-latency">latency
+episode</a>.</li>
 <li>
 <a href="https://jakevdp.github.io/blog/2014/05/09/why-python-is-slow/" class="external-link">Why
 Python is Slow: Looking Under the Hood</a>: This blog post looks under
@@ -489,8 +498,8 @@ any links that you are not going to use.
   "url": "https://RSE-Sheffield.github.io/pando-python/instructor/acknowledgements.html",
   "identifier": "https://RSE-Sheffield.github.io/pando-python/instructor/acknowledgements.html",
   "dateCreated": "2024-02-01",
-  "dateModified": "2025-03-15",
-  "datePublished": "2025-07-01"
+  "dateModified": "2025-07-06",
+  "datePublished": "2025-07-06"
 }
 
   </script><script>

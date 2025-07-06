@@ -123,6 +123,7 @@
           </button>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 <hr>
+<li><a class="dropdown-item" href="technical-appendix.html">Technical Appendix</a></li>
 <li><a class="dropdown-item" href="acknowledgements.html">Acknowledgements</a></li>
 <li><a class="dropdown-item" href="ppp.html">Performant Python Patterns (Talk)</a></li>
 <li><a class="dropdown-item" href="reference.html">Reference</a></li>
@@ -378,7 +379,7 @@
 <div class="accordion accordion-flush" id="accordionFlush13">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading13">
-        <a href="optimisation-memory.html">12. Understanding Memory</a>
+        <a href="optimisation-latency.html">12. Understanding Latency</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -424,6 +425,7 @@
                         <a href="../instructor/images.html">Extract All Images</a>
                       </li>
                       <hr>
+<li><a class="dropdown-item" href="technical-appendix.html">Technical Appendix</a></li>
 <li><a class="dropdown-item" href="acknowledgements.html">Acknowledgements</a></li>
 <li><a class="dropdown-item" href="ppp.html">Performant Python Patterns (Talk)</a></li>
 <li><a class="dropdown-item" href="reference.html">Reference</a></li>
@@ -462,7 +464,7 @@
 <li>Profiling is a relatively quick process to analyse where time is
 being spent and bottlenecks during a program’s execution.</li>
 <li>Code should be profiled when ready for deployment if it will be
-running for more than a few minutes during it’s lifetime.</li>
+running for more than a few minutes during its lifetime.</li>
 <li>There are several types of profiler each with slightly different
 purposes.
 <ul>
@@ -498,7 +500,7 @@ listing both the cumulative and total minus sub functions time.</li>
 <li>
 <code>kernprof</code> executes <code>line_profiler</code> via
 <code>python -m kernprof -lvr &lt;script name&gt; &lt;arguments&gt;</code>.</li>
-<li>Code in global scope must wrapped in a method if it is to be
+<li>Code in global scope must be wrapped in a method if it is to be
 profiled with <code>line_profiler</code>.</li>
 <li>The output from <code>line_profiler</code> lists the absolute and
 relative time spent per line for each targeted function.</li>
@@ -590,17 +592,12 @@ possible to due to version incompatibilities or will require breaking
 changes to your code.</li>
 <li>Changes to packages may impact results output by your code, ensure
 you have a method of validation ready prior to attempting upgrades.</li>
-</ul></section><section id="optimisation-memory"><h2 class="section-heading"><a href="optimisation-memory.html">Understanding Memory</a></h2>
+</ul></section><section id="optimisation-latency"><h2 class="section-heading"><a href="optimisation-latency.html">Understanding Latency</a></h2>
 <hr class="half-width">
 <ul>
-<li>Sequential accesses to memory (RAM or disk) will be faster than
-random or scattered accesses.
-<ul>
-<li>This is not always natively possible in Python without the use of
-packages such as NumPy and Pandas</li>
-</ul>
-</li>
 <li>One large file is preferable to many small files.</li>
+<li>Network requests can be parallelised to reduce the impact of fixed
+overheads.</li>
 <li>Memory allocation is not free, avoiding destroying and recreating
 objects can improve performance.</li>
 </ul></section><section id="optimisation-conclusion"><h2 class="section-heading"><a href="optimisation-conclusion.html">Optimisation Conclusion</a></h2>
@@ -653,16 +650,11 @@ changes to your code.</li>
 you have a method of validation ready prior to attempting upgrades.</li>
 </ul>
 </li>
-<li>How the Computer Hardware Affects Performance
+<li>How Latency Affects Performance
 <ul>
-<li>Sequential accesses to memory (RAM or disk) will be faster than
-random or scattered accesses.
-<ul>
-<li>This is not always natively possible in Python without the use of
-packages such as NumPy and Pandas</li>
-</ul>
-</li>
 <li>One large file is preferable to many small files.</li>
+<li>Network requests can be parallelised to reduce the impact of fixed
+overheads.</li>
 <li>Memory allocation is not free, avoiding destroying and recreating
 objects can improve performance.</li>
 </ul>
@@ -715,8 +707,8 @@ objects can improve performance.</li>
   "url": "https://RSE-Sheffield.github.io/pando-python/instructor/key-points.html",
   "identifier": "https://RSE-Sheffield.github.io/pando-python/instructor/key-points.html",
   "dateCreated": "2024-02-01",
-  "dateModified": "2025-07-01",
-  "datePublished": "2025-07-01"
+  "dateModified": "2025-07-06",
+  "datePublished": "2025-07-06"
 }
 
   </script><script>

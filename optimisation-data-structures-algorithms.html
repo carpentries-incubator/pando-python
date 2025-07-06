@@ -99,7 +99,7 @@
           <button class="nav-link dropdown-toggle" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
             More <i data-feather="chevron-down"></i>
           </button>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown"><li><a class="dropdown-item" href="acknowledgements.html">Acknowledgements</a></li><li><a class="dropdown-item" href="ppp.html">Performant Python Patterns (Talk)</a></li><li><a class="dropdown-item" href="reference.html">Reference</a></li>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown"><li><a class="dropdown-item" href="technical-appendix.html">Technical Appendix</a></li><li><a class="dropdown-item" href="acknowledgements.html">Acknowledgements</a></li><li><a class="dropdown-item" href="ppp.html">Performant Python Patterns (Talk)</a></li><li><a class="dropdown-item" href="reference.html">Reference</a></li>
           </ul></li>
       </ul></div>
     <!--
@@ -320,7 +320,7 @@
 <div class="accordion accordion-flush" id="accordionFlush13">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading13">
-        <a href="optimisation-memory.html">12. Understanding Memory</a>
+        <a href="optimisation-latency.html">12. Understanding Latency</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -357,7 +357,7 @@
                       <li>
                         <a href="profiles.html">Learner Profiles</a>
                       </li>
-                      <li><a href="acknowledgements.html">Acknowledgements</a></li><li><a href="ppp.html">Performant Python Patterns (Talk)</a></li><li><a href="reference.html">Reference</a></li>
+                      <li><a href="technical-appendix.html">Technical Appendix</a></li><li><a href="acknowledgements.html">Acknowledgements</a></li><li><a href="ppp.html">Performant Python Patterns (Talk)</a></li><li><a href="reference.html">Reference</a></li>
                     </ul></div>
                 </div>
               </div>
@@ -393,7 +393,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Data Structures &amp; Algorithms</h1>
-        <p>Last updated on 2025-03-15 |
+        <p>Last updated on 2025-07-06 |
 
         <a href="https://github.com/RSE-Sheffield/pando-python/edit/main/episodes/optimisation-data-structures-algorithms.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -467,7 +467,9 @@ it doesn’t, it will re-allocate a larger array, copy across the
 elements, and deallocate the old array. The item to be appended is then
 copied to the end and the counter which tracks the list’s length is
 incremented.</p>
-<p>The amount the internal array grows by is dependent on the particular
+<!-- Based on ICR-RSE's visual note: https://icr-rse-group.github.io/carpentry-pando-python/optimisation-data-structures-algorithms.html#lists -->
+<figure><img src="fig/list-append.png" alt="A list uses a contiguous block of memory, similar to an array, for storing the pointers to its elements. It is depicted as a series of five adjacent boxes, labelled 'P1' to 'P5', representing pointers to the list's elements. It can have additional storage beyond its length to make appends faster. An illustration shows the previous list with two extra empty boxes marked with question marks, indicating spare elements. Below, Python code `len(my_list) == 5` and `my_list.append(6)` is shown. After appending, the first of the previously empty boxes contains 'P6', and the last one remains empty. The length is now `len(my_list) == 6`. Appending to a full list causes it to grow. This makes some appends slower. An illustration depicts a full list with 'P1' through 'P7' in adjacent boxes and a label &quot;No spare elements!&quot;. Below, Python code `len(my_list) == 7` and `my_list.append(8)` is shown. The result is a new, larger continuous block of memory with 'P1' through 'P8' followed by a question mark in an additional box, indicating one spare element. The label &quot;2 new elements&quot; with curved arrows suggests that when the list grows, it typically allocates more memory than just the space for the new element. A concluding note states that a list will typically grow by 12.5%, hence shorter lists will grow more frequently when appending." class="figure mx-auto d-block"><div class="figcaption">A visual diagram of list storage.</div>
+</figure><p>The amount the internal array grows by is dependent on the particular
 list implementation’s growth factor. CPython for example uses <a href="https://github.com/python/cpython/blob/a571a2fd3fdaeafdfd71f3d80ed5a3b22b63d0f7/Objects/listobject.c#L74" class="external-link"><code>newsize + (newsize &gt;&gt; 3) + 6</code></a>,
 which works out to an over allocation of roughly ~12.5%.</p>
 <figure><img src="fig/cpython_list_allocations.png" alt="A line graph displaying the relationship between the number of calls to append() and the number of internal resizes of a CPython list. It has a logarithmic relationship, at 1 million appends there have been 84 internal resizes." class="figure mx-auto d-block"><div class="figcaption">The relationship between the number of appends
@@ -576,63 +578,43 @@ equality.</p>
 </div>
 <div class="section level3">
 <h3 id="hashing-data-structures">Hashing Data Structures<a class="anchor" aria-label="anchor" href="#hashing-data-structures"></a></h3>
-<p>Python’s dictionaries are implemented as hashing data structures.
-Explaining how these work will get a bit technical, so let’s start with
-an analogy:</p>
+<p>Python’s dictionaries are implemented as hashing data structures, we
+can understand these at a high-level with an analogy:</p>
 <p>A Python list is like having a single long bookshelf. When you buy a
 new book (append a new element to the list), you place it at the far end
 of the shelf, right after all the previous books.</p>
 <figure><img src="fig/bookshelf_list.jpg" alt="An image of a single long bookshelf, with a large number of books." class="figure mx-auto d-block"><div class="figcaption">A bookshelf corresponding to a Python
 list.</div>
-</figure><p>A hashing data structure is more like a bookcase with several
-shelves, labeled by genre (sci-fi, romance, children’s books,
-non-fiction, …) and author surname. When you buy a new book by Jules
-Verne, you might place it on the shelf labeled “Sci-Fi, V–Z”. And if you
-keep adding more books, at some point you’ll move to a larger bookcase
-with more shelves (and thus more fine-grained sorting), to make sure you
-don’t have too many books on a single shelf.</p>
-<figure><img src="fig/bookshelf_dict.jpg" alt="An image of two bookcases, labelled “Sci-Fi” and “Romance”. Each bookcase contains shelves labelled in alphabetical order, with zero or few books on each shelf." class="figure mx-auto d-block"><div class="figcaption">A bookshelf corresponding to a Python
+</figure><p>A Python dictionary is more like a bookcase with several shelves,
+labelled by genre (sci-fi, romance, children’s books, non-fiction, …)
+and author surname. When you buy a new book by Jules Verne, you might
+place it on the shelf labelled "Sci-Fi, V–Z". And if you keep adding
+more books, at some point you’ll move to a larger bookcase with more
+shelves (and thus more fine-grained sorting), to make sure you don’t
+have too many books on a single shelf.</p>
+<figure><img src="fig/bookshelf_dict.jpg" alt='An image of two bookcases, labelled "Sci-Fi" and "Romance". Each bookcase contains shelves labelled in alphabetical order, with zero or few books on each shelf.' class="figure mx-auto d-block"><div class="figcaption">A bookshelf corresponding to a Python
 dictionary.</div>
-</figure><p>Now, let’s say a friend wanted to borrow the book “‘—All You
-Zombies—’” by Robert Heinlein. If I had my books arranged on a single
+</figure><p>Now, let’s say a friend wanted to borrow the book "‘—All You
+Zombies—’" by Robert Heinlein. If I had my books arranged on a single
 bookshelf (in a list), I would have to look through every book I own in
 order to find it. However, if I had a bookcase with several shelves (a
 hashing data structure), I know immediately that I need to check the
-shelf “Sci-Fi, G—J”, so I’d be able to find it much more quickly!</p>
+shelf "Sci-Fi, G—J", so I’d be able to find it much more quickly!</p>
 
-<div id="technical-explanation" class="callout">
+<p>When a value is inserted into a dictionary, its key is hashed to
+decide on which “shelf” it should be stored. Most items will have a
+unique shelf, allowing them to be accessed directly. This is typically
+much faster for locating a specific item than searching a list.</p>
+<div id="keys" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div id="technical-explanation" class="callout-inner">
-<h3 class="callout-title">Technical explanation</h3>
+<div id="keys" class="callout-inner">
+<h3 class="callout-title">Keys</h3>
 <div class="callout-content">
-<p>Within a hashing data structure each inserted key is hashed to
-produce a (hopefully unique) integer key. The dictionary is
-pre-allocated to a default size, and the key is assigned the index
-within the dictionary equivalent to the hash modulo the length of the
-dictionary. If that index doesn’t already contain another key, the key
-(and any associated values) can be inserted. When the index isn’t free,
-a collision strategy is applied. CPython’s <a href="https://github.com/python/cpython/blob/main/Objects/dictobject.c" class="external-link">dictionary</a>
-and <a href="https://github.com/python/cpython/blob/main/Objects/setobject.c" class="external-link">set</a>
-both use a form of open addressing whereby a hash is mutated and
-corresponding indices probed until a free one is located. When the
-hashing data structure exceeds a given load factor (e.g. 2/3 of indices
-have been assigned keys), the internal storage must grow. This process
-requires every item to be re-inserted which can be expensive, but
-reduces the average probes for a key to be found.</p>
-<figure><img src="fig/hash_linear_probing.png" alt="A diagram demonstrating how the keys (hashes) 37, 64, 14, 94, 67 are inserted into a hash table with 11 indices. This is followed by the insertion of 59, 80 and 39 which require linear probing to be inserted due to collisions." class="figure mx-auto d-block"><div class="figcaption">An visual explanation of linear probing, CPython
-uses an advanced form of this.</div>
-</figure><p>To retrieve or check for the existence of a key within a hashing data
-structure, the key is hashed again and a process equivalent to insertion
-is repeated. However, now the key at each index is checked for equality
-with the one provided. If any empty index is found before an equivalent
-key, then the key must not be present in the data structure.</p>
-<div class="section level3">
-<h3 id="keys">Keys<a class="anchor" aria-label="anchor" href="#keys"></a></h3>
-<p>Keys will typically be a core Python type such as a number or string.
-However multiple of these can be combined as a Tuple to form a compound
-key, or a custom class can be used if the methods
+<p>A dictionary’s keys will typically be a core Python type such as a
+number or string. However, multiple of these can be combined as a tuple
+to form a compound key, or a custom class can be used if the methods
 <code>__hash__()</code> and <code>__eq__()</code> have been
 implemented.</p>
 <p>You can implement <code>__hash__()</code> by utilising the ability
@@ -663,7 +645,6 @@ have the same hash, hence all member variables which contribute to
 <code>__eq__()</code> should also contribute to <code>__hash__()</code>
 and vice versa (it’s fine to have irrelevant or redundant internal
 members contribute to neither).</p>
-</div>
 </div>
 </div>
 </div>
@@ -742,7 +723,7 @@ duplicates <code>int(N/2)</code> affect performance?</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
   <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
 </button>
-<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
+<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
 <div class="accordion-body">
 <ul><li>
 <code>uniqueSet()</code> passes the input list to the constructor
@@ -768,7 +749,7 @@ comprehension.</em></p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>Constructing a set by passing in a single list is the clear
 winner.</p>
@@ -781,7 +762,7 @@ approach, because of how many times the list is searched. This gap will
 only grow as the number of items increases.</p>
 <p>Sorting the input list reduces the cost of searching the output list
 significantly, however it is still 8x slower than the fastest approach.
-In part because around half of it’s runtime is now spent sorting the
+In part because around half of its runtime is now spent sorting the
 list.</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -802,19 +783,20 @@ search the data-structure to retrieve an item or check whether it
 exists.</p>
 <p>The performance of a hashing data structure is subject to the load
 factor and number of collisions. An item that hashes with no collision
-can be checked almost directly, whereas one with collisions will probe
+can be accessed almost directly, whereas one with collisions will probe
 until it finds the correct item or an empty slot. In the worst possible
 case, whereby all insert items have collided this would mean checking
 every single item. In practice, hashing data-structures are designed to
 minimise the chances of this happening and most items should be found or
-identified as missing with a single access.</p>
-<p>In contrast if searching a list or array, the default approach is to
+identified as missing on the first attempt (without probing beyond the
+original hash).</p>
+<p>In contrast, if searching a list or array, the default approach is to
 start at the first item and check all subsequent items until the correct
 item has been found. If the correct item is not present, this will
 require the entire list to be checked. Therefore the worst-case is
 similar to that of the hashing data-structure, however it is guaranteed
 in cases where the item is missing. Similarly, on-average we would
-expect an item to be found half way through the list, meaning that an
+expect an item to be found halfway through the list, meaning that an
 average search will require checking half of the items.</p>
 <p>If however the list or array is sorted, a binary search can be used.
 A binary search divides the list in half and checks which half the
@@ -968,8 +950,8 @@ any links that you are not going to use.
   "url": "https://RSE-Sheffield.github.io/pando-python/optimisation-data-structures-algorithms.html",
   "identifier": "https://RSE-Sheffield.github.io/pando-python/optimisation-data-structures-algorithms.html",
   "dateCreated": "2024-02-01",
-  "dateModified": "2025-03-15",
-  "datePublished": "2025-07-01"
+  "dateModified": "2025-07-06",
+  "datePublished": "2025-07-06"
 }
 
   </script><script>
