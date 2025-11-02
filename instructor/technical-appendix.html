@@ -378,7 +378,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Technical Appendix</h1>
-        <p>Last updated on 2025-07-06 |
+        <p>Last updated on 2025-11-02 |
 
         <a href="https://github.com/carpentries-incubator/pando-python/edit/main/learners/technical-appendix.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -414,133 +414,138 @@ code is being executed by the Python interpreter and hence how long it
 may take to execute. However, this is a crude proxy as it does not
 account for functions that are called and whether those functions are
 implemented using Python or C.</p>
-<p>The pure Python search compiles to 82 lines of bytecode.</p>
+<p>The pure Python search compiles to 51 lines of bytecode. (Note that
+different versions of Python may produce slightly different bytecode
+than shown here.)</p>
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="im">import</span> dis</span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="kw">def</span> manualSearch():</span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>    ls <span class="op">=</span> generateInputs()</span>
-<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>    ct <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, <span class="bu">int</span>(N<span class="op">*</span>M), M):</span>
-<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, <span class="bu">len</span>(ls)):</span>
-<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>            <span class="cf">if</span> ls[j] <span class="op">==</span> i:</span>
-<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>                ct <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>                <span class="cf">break</span></span>
-<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>dis.dis(manualSearch)</span></code></pre>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="im">import</span> random</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="co"># Generate sample data</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">2500</span></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>M <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>ls <span class="op">=</span> [random.randint(<span class="dv">0</span>, <span class="bu">int</span>(N<span class="op">*</span>M)) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(N)]</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="kw">def</span> manualSearch():</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>    ct <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, <span class="bu">int</span>(N<span class="op">*</span>M), M):</span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, <span class="bu">len</span>(ls)):</span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>            <span class="cf">if</span> ls[j] <span class="op">==</span> i:</span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>                ct <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>                <span class="cf">break</span></span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a>dis.dis(manualSearch)</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code> 11           0 LOAD_GLOBAL              0 (generateInputs)
-              2 CALL_FUNCTION            0
-              4 STORE_FAST               0 (ls)
+<pre class="output" tabindex="0"><code>  9           RESUME                   0
 
- 12           6 LOAD_CONST               1 (0)
-              8 STORE_FAST               1 (ct)
+ 10           LOAD_CONST               1 (0)
+              STORE_FAST               0 (ct)
 
- 13          10 LOAD_GLOBAL              1 (range)
-             12 LOAD_CONST               1 (0)
-             14 LOAD_GLOBAL              2 (int)
-             16 LOAD_GLOBAL              3 (N)
-             18 LOAD_GLOBAL              4 (M)
-             20 BINARY_MULTIPLY
-             22 CALL_FUNCTION            1
-             24 LOAD_GLOBAL              4 (M)
-             26 CALL_FUNCTION            3
-             28 GET_ITER
-        &gt;&gt;   30 FOR_ITER                24 (to 80)
-             32 STORE_FAST               2 (i)
+ 11           LOAD_GLOBAL              1 (range + NULL)
+              LOAD_CONST               1 (0)
+              LOAD_GLOBAL              3 (int + NULL)
+              LOAD_GLOBAL              4 (N)
+              LOAD_GLOBAL              6 (M)
+              BINARY_OP                5 (*)
+              CALL                     1
+              LOAD_GLOBAL              6 (M)
+              CALL                     3
+              GET_ITER
+      L1:     FOR_ITER                56 (to L5)
+              STORE_FAST               1 (i)
 
- 14          34 LOAD_GLOBAL              1 (range)
-             36 LOAD_CONST               1 (0)
-             38 LOAD_GLOBAL              5 (len)
-             40 LOAD_FAST                0 (ls)
-             42 CALL_FUNCTION            1
-             44 CALL_FUNCTION            2
-             46 GET_ITER
-        &gt;&gt;   48 FOR_ITER                14 (to 78)
-             50 STORE_FAST               3 (j)
+ 12           LOAD_GLOBAL              1 (range + NULL)
+              LOAD_CONST               1 (0)
+              LOAD_GLOBAL              9 (len + NULL)
+              LOAD_GLOBAL             10 (ls)
+              CALL                     1
+              CALL                     2
+              GET_ITER
+      L2:     FOR_ITER                24 (to L4)
+              STORE_FAST               2 (j)
 
- 15          52 LOAD_FAST                0 (ls)
-             54 LOAD_FAST                3 (j)
-             56 BINARY_SUBSCR
-             58 LOAD_FAST                2 (i)
-             60 COMPARE_OP               2 (==)
-             62 POP_JUMP_IF_FALSE       38 (to 76)
+ 13           LOAD_GLOBAL             10 (ls)
+              LOAD_FAST                2 (j)
+              BINARY_SUBSCR
+              LOAD_FAST                1 (i)
+              COMPARE_OP              88 (bool(==))
+              POP_JUMP_IF_TRUE         2 (to L3)
+              JUMP_BACKWARD           18 (to L2)
 
- 16          64 LOAD_FAST                1 (ct)
-             66 LOAD_CONST               2 (1)
-             68 INPLACE_ADD
-             70 STORE_FAST               1 (ct)
+ 14   L3:     LOAD_FAST                0 (ct)
+              LOAD_CONST               2 (1)
+              BINARY_OP               13 (+=)
+              STORE_FAST               0 (ct)
 
- 17          72 POP_TOP
-             74 JUMP_FORWARD             1 (to 78)
+ 15           POP_TOP
+              JUMP_BACKWARD           54 (to L1)
 
- 15     &gt;&gt;   76 JUMP_ABSOLUTE           24 (to 48)
-        &gt;&gt;   78 JUMP_ABSOLUTE           15 (to 30)
+ 12   L4:     END_FOR
+              POP_TOP
+              JUMP_BACKWARD           58 (to L1)
 
- 13     &gt;&gt;   80 LOAD_CONST               0 (None)
-             82 RETURN_VALUE</code></pre>
+ 11   L5:     END_FOR
+              POP_TOP
+              RETURN_CONST             0 (None)</code></pre>
 </div>
-<p>Whereas the <code>in</code> variant only compiles to 54.</p>
+<p>Whereas the <code>in</code> variant only compiles to 33.</p>
 <div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="im">import</span> dis</span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="kw">def</span> operatorSearch():</span>
-<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>    ls <span class="op">=</span> generateInputs()</span>
-<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>    ct <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, <span class="bu">int</span>(N<span class="op">*</span>M), M):</span>
-<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>        <span class="cf">if</span> i <span class="kw">in</span> ls:</span>
-<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>            ct <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a></span>
-<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a>dis.dis(operatorSearch)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="kw">def</span> operatorSearch():</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>    ct <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, <span class="bu">int</span>(N<span class="op">*</span>M), M):</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>        <span class="cf">if</span> i <span class="kw">in</span> ls:</span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>            ct <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>dis.dis(operatorSearch)</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>  4           0 LOAD_GLOBAL              0 (generateInputs)
-              2 CALL_FUNCTION            0
-              4 STORE_FAST               0 (ls)
+<pre class="output" tabindex="0"><code>  1           RESUME                   0
 
-  5           6 LOAD_CONST               1 (0)
-              8 STORE_FAST               1 (ct)
+  2           LOAD_CONST               1 (0)
+              STORE_FAST               0 (ct)
 
-  6          10 LOAD_GLOBAL              1 (range)
-             12 LOAD_CONST               1 (0)
-             14 LOAD_GLOBAL              2 (int)
-             16 LOAD_GLOBAL              3 (N)
-             18 LOAD_GLOBAL              4 (M)
-             20 BINARY_MULTIPLY
-             22 CALL_FUNCTION            1
-             24 LOAD_GLOBAL              4 (M)
-             26 CALL_FUNCTION            3
-             28 GET_ITER
-        &gt;&gt;   30 FOR_ITER                10 (to 52)
-             32 STORE_FAST               2 (i)
+  3           LOAD_GLOBAL              1 (range + NULL)
+              LOAD_CONST               1 (0)
+              LOAD_GLOBAL              3 (int + NULL)
+              LOAD_GLOBAL              4 (N)
+              LOAD_GLOBAL              6 (M)
+              BINARY_OP                5 (*)
+              CALL                     1
+              LOAD_GLOBAL              6 (M)
+              CALL                     3
+              GET_ITER
+      L1:     FOR_ITER                20 (to L3)
+              STORE_FAST               1 (i)
 
-  7          34 LOAD_FAST                2 (i)
-             36 LOAD_FAST                0 (ls)
-             38 CONTAINS_OP              0
-             40 POP_JUMP_IF_FALSE       25 (to 50)
+  4           LOAD_FAST                1 (i)
+              LOAD_GLOBAL              8 (ls)
+              CONTAINS_OP              0
+              POP_JUMP_IF_TRUE         2 (to L2)
+              JUMP_BACKWARD           15 (to L1)
 
-  8          42 LOAD_FAST                1 (ct)
-             44 LOAD_CONST               2 (1)
-             46 INPLACE_ADD
-             48 STORE_FAST               1 (ct)
-        &gt;&gt;   50 JUMP_ABSOLUTE           15 (to 30)
+  5   L2:     LOAD_FAST                0 (ct)
+              LOAD_CONST               2 (1)
+              BINARY_OP               13 (+=)
+              STORE_FAST               0 (ct)
+              JUMP_BACKWARD           22 (to L1)
 
-  6     &gt;&gt;   52 LOAD_CONST               0 (None)
-             54 RETURN_VALUE</code></pre>
+  3   L3:     END_FOR
+              POP_TOP
+              RETURN_CONST             0 (None)</code></pre>
 </div>
 <p>A naive assessment of how expensive two functions are can be carried
 out with this comparison. However this method of displaying bytecode
 only shows bytecode for the requested function, so it is not clear how
-expensive called function’s will be or higher level changes to an
+expensive called functions will be or higher level changes to an
 algorithm which could reduce the number of iterations or similar.</p>
 </section><section><h2 class="section-heading" id="hardware-level-memory-accesses">Hardware Level Memory Accesses<a class="anchor" aria-label="anchor" href="#hardware-level-memory-accesses"></a></h2>
 <hr class="half-width"><p>The storage and movement of data plays a large role in the
@@ -715,8 +720,8 @@ any links that you are not going to use.
   "url": "https://carpentries-incubator.github.io/pando-python/instructor/technical-appendix.html",
   "identifier": "https://carpentries-incubator.github.io/pando-python/instructor/technical-appendix.html",
   "dateCreated": "2024-02-01",
-  "dateModified": "2025-07-06",
-  "datePublished": "2025-10-28"
+  "dateModified": "2025-11-02",
+  "datePublished": "2025-11-02"
 }
 
   </script><script>
