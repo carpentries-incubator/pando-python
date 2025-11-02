@@ -238,41 +238,35 @@ If you reduce the value of `repeats` it will run faster, how does changing the n
 import random
 from timeit import timeit
 
-def generateInputs(N = 25000):
-    random.seed(12)  # Ensure every list is the same 
-    return [random.randint(0,int(N/2)) for i in range(N)]
-    
+N = 25000  # Number of elements in the list
+data = [random.randint(0, int(N/2)) for i in range(N)]
+
 def uniqueSet():
-    ls_in = generateInputs()
-    set_out = set(ls_in)
+    set_out = set(data)
     
 def uniqueSetAdd():
-    ls_in = generateInputs()
     set_out = set()
-    for i in ls_in:
+    for i in data:
         set_out.add(i)
     
 def uniqueList():
-    ls_in = generateInputs()
     ls_out = []
-    for i in ls_in:
+    for i in data:
         if not i in ls_out:
             ls_out.append(i)
 
 def uniqueListSort():
-    ls_in = generateInputs()
-    ls_in.sort()
+    ls_in = sorted(data)
     ls_out = [ls_in[0]]
     for i in ls_in:
         if ls_out[-1] != i:
             ls_out.append(i)
-            
+
 repeats = 1000
-gen_time = timeit(generateInputs, number=repeats)
-print(f"uniqueSet: {timeit(uniqueSet, number=repeats)-gen_time:.2f}ms")
-print(f"uniqueSetAdd: {timeit(uniqueSetAdd, number=repeats)-gen_time:.2f}ms")
-print(f"uniqueList: {timeit(uniqueList, number=repeats)-gen_time:.2f}ms")
-print(f"uniqueListSort: {timeit(uniqueListSort, number=repeats)-gen_time:.2f}ms")
+print(f"uniqueSet: {timeit(uniqueSet, number=repeats):.2f}ms")
+print(f"uniqueSetAdd: {timeit(uniqueSetAdd, number=repeats):.2f}ms")
+print(f"uniqueList: {timeit(uniqueList, number=repeats):.2f}ms")
+print(f"uniqueListSort: {timeit(uniqueListSort, number=repeats):.2f}ms")
 ```
 
 :::::::::::::::::::::::: hint
@@ -325,51 +319,43 @@ from bisect import bisect_left
 N = 25000  # Number of elements in list
 M = 2  # N*M == Range over which the elements span
 
-def generateInputs():
-    random.seed(12)  # Ensure every list is the same
-    st = set([random.randint(0, int(N*M)) for i in range(N)])
-    ls = list(st)
-    ls.sort()  # Sort required for binary
-    return st, ls  # Return both set and list
+st = set([random.randint(0, int(N*M)) for i in range(N)])
+ls = list(st)
+ls.sort()  # Sort required for binary search
     
 def search_set():
-    st, _ = generateInputs()
     j = 0
     for i in range(0, int(N*M), M):
         if i in st:
             j += 1
     
 def linear_search_list():
-    _, ls = generateInputs()
     j = 0
     for i in range(0, int(N*M), M):
         if i in ls:
             j += 1
     
 def binary_search_list():
-    _, ls = generateInputs()
     j = 0
     for i in range(0, int(N*M), M):
         k = bisect_left(ls, i)
         if k != len(ls) and ls[k] == i:
             j += 1
 
-            
 repeats = 1000
-gen_time = timeit(generateInputs, number=repeats)
-print(f"search_set: {timeit(search_set, number=repeats)-gen_time:.2f}ms")
-print(f"linear_search_list: {timeit(linear_search_list, number=repeats)-gen_time:.2f}ms")
-print(f"binary_search_list: {timeit(binary_search_list, number=repeats)-gen_time:.2f}ms")
+print(f"search_set: {timeit(search_set, number=repeats):.2f}ms")
+print(f"linear_search_list: {timeit(linear_search_list, number=repeats):.2f}ms")
+print(f"binary_search_list: {timeit(binary_search_list, number=repeats):.2f}ms")
 ```
 
-Searching the set is fastest performing 25,000 searches in 0.04ms.
-This is followed by the binary search of the (sorted) list which is 145x slower, although the list has been filtered for duplicates. A list still containing duplicates would be longer, leading to a more expensive search.
-The linear search of the list is more than 56,600x slower than the fastest, it really shouldn't be used!
+Searching the set is fastest performing 25,000 searches in 0.57ms.
+This is followed by the binary search of the (sorted) list which is 6x slower, although the list has been filtered for duplicates. A list still containing duplicates would be longer, leading to a more expensive search.
+The linear search of the list is about 2700x slower than the fastest, it really shouldn't be used!
 
 ```output
-search_set: 0.04ms
-linear_search_list: 2264.91ms
-binary_search_list: 5.79ms
+search_set: 0.57ms
+linear_search_list: 1531.61ms
+binary_search_list: 3.43ms
 ```
 
 These results are subject to change based on the number of items and the proportion of searched items that exist within the list. However, the pattern is likely to remain the same. Linear searches should be avoided!

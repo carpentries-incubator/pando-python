@@ -111,16 +111,13 @@ The function `manualSearch()` manually iterates through the list (`ls`) and chec
 
 ```python
 import random
+from timeit import timeit
 
 N = 2500  # Number of elements in list
 M = 2  # N*M == Range over which the elements span
-
-def generateInputs():
-    random.seed(12)  # Ensure every list is the same
-    return [random.randint(0, int(N*M)) for i in range(N)]
+ls = [random.randint(0, int(N*M)) for i in range(N)]
     
 def manualSearch():
-    ls = generateInputs()
     ct = 0
     for i in range(0, int(N*M), M):
         for j in range(0, len(ls)):
@@ -129,16 +126,14 @@ def manualSearch():
                 break
 
 def operatorSearch():
-    ls = generateInputs()
     ct = 0
     for i in range(0, int(N*M), M):
         if i in ls:
             ct += 1
 
 repeats = 1000
-gen_time = timeit(generateInputs, number=repeats)
-print(f"manualSearch: {timeit(manualSearch, number=repeats)-gen_time:.2f}ms")
-print(f"operatorSearch: {timeit(operatorSearch, number=repeats)-gen_time:.2f}ms")
+print(f"manualSearch: {timeit(manualSearch, number=repeats):.2f}ms")
+print(f"operatorSearch: {timeit(operatorSearch, number=repeats):.2f}ms")
 ```
 
 This results in the manual Python implementation being 5x slower, doing the exact same operation!
