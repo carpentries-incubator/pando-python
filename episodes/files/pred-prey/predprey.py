@@ -53,11 +53,7 @@ class Prey:
 
         # Add a steering factor away from each predator. Strength increases with closeness.
         for predator in predator_list:
-            # Fetch location of predator
-            predator_x = self.x;
-            predator_y = self.y;
-
-            # Check if the two predators are within interaction radius
+            # Check if predator and prey are within interaction radius
             dx = self.x - predator.x
             dy = self.y - predator.y
             distance = math.sqrt(dx * dx + dy * dy)
@@ -161,6 +157,7 @@ class Prey:
             child.vx = np.random.uniform() * 2 - 1
             child.vy = np.random.uniform() * 2 - 1
             child.life = self.life
+            return child
         
     
 class Predator:
@@ -306,7 +303,7 @@ class Grass:
         
 class Model:
 
-    def __init__(self, steps = 250):
+    def __init__(self, steps = 50):
         self.steps = steps
         self.num_prey = 200
         self.num_predators = 50
@@ -375,7 +372,7 @@ class Model:
             c = p.reproduce()
             if c:
                 children.append(c)
-        self.predators.extend(children)
+        self.prey.extend(children)
         children = []
         for p in self.predators:
             c = p.reproduce()
