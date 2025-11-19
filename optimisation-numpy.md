@@ -420,11 +420,11 @@ def pandas_apply():
     df = genDataFrame()
     return df.apply(pythagoras, axis=1)
 
-repeats = 100
+repeats = 1000
 gentime = timeit(genDataFrame, number=repeats)
-print(f"for_range: {timeit(for_range, number=repeats)*10-gentime:.2f}ms")
-print(f"for_iterrows: {timeit(for_iterrows, number=repeats)*10-gentime:.2f}ms")
-print(f"pandas_apply: {timeit(pandas_apply, number=repeats)*10-gentime:.2f}ms")
+print(f"for_range: {timeit(for_range, number=int(repeats/20))*20-gentime:.2f}ms")  # scale with factor 20, otherwise it takes too long
+print(f"for_iterrows: {timeit(for_iterrows, number=int(repeats/20))*20-gentime:.2f}ms")
+print(f"pandas_apply: {timeit(pandas_apply, number=int(repeats/20))*20-gentime:.2f}ms")
 ```
 
 `apply()` is 4x faster than the two `for` approaches, as it avoids the Python `for` loop.
@@ -438,11 +438,56 @@ pandas_apply: 390.49ms
 
 However, rows don't exist in memory as arrays (columns do!), so `apply()` does not take advantage of NumPy's vectorisation. You may be able to go a step further and avoid explicitly operating on rows entirely by passing only the required columns to NumPy.
 
+::::::::::::::::::::::::::::::::::::: challenge
+
+We can extract the individual columns of the data frame. These are of the type `pandas.Series`, which supports array broadcasting, just like a NumPy array.
+Instead of using the `pythagoras(row)` function, can you write a vectorised version of this calculation?
+
 ```python
 def vectorize():
     df = genDataFrame()
-    return pandas.Series(numpy.sqrt(numpy.square(df["f_vertical"]) + numpy.square(df["f_horizontal"])))
-    
+    vertical = df["f_vertical"]
+    horizontal = df["f_horizontal"]
+
+    # Your code goes here
+
+    return pandas.Series(results)
+```
+
+Once you’ve done that, measure your performance by running
+```python
+repeats = 1000
+gentime = timeit(genDataFrame, number=repeats)
+print(f"vectorize: {timeit(vectorize, number=repeats)-gentime:.2f}ms")
+```
+What result do you find? Does this match your expectations?
+
+:::::::::::::::::::::::: hint
+
+Remember that most common mathematical operations work element-wise when applied to NumPy arrays.
+For example:
+
+```python
+ar = np.array([1,2,3])
+
+print(ar**2)  # array([1, 4, 9])
+print(ar + ar)  # array([2, 4, 6])
+```
+
+:::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::: solution
+
+```python
+def vectorize():
+    df = genDataFrame()
+    vertical = df["f_vertical"]
+    horizontal = df["f_horizontal"]
+
+    result = numpy.sqrt(vertical**2 + horizontal**2)
+
+    return pandas.Series(result)
+
 print(f"vectorize: {timeit(vectorize, number=repeats)-gentime:.2f}ms")
 ```
 
@@ -451,6 +496,11 @@ print(f"vectorize: {timeit(vectorize, number=repeats)-gentime:.2f}ms")
 ```
 vectorize: 1.48ms
 ```
+
+:::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::::::::::
+
 
 It won't always be possible to take full advantage of vectorisation, for example you may have conditional logic.
 
