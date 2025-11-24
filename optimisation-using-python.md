@@ -104,8 +104,8 @@ It is often best to tell the interpreter/library at a high level *what you want*
 ## Example: Searching an element in a list
 
 A simple example of this is performing a linear search on a list. (Though as we’ll see in the next section, this isn't the most efficient approach!)
-In the following example, we create a list of 2500 integers in the (inclusive-exclusive) range `[0, 5000)`.
-The goal is to search for all even numbers within that range.
+In the following example, we create a list of 2500 random integers in the (inclusive-exclusive) range `[0, 5000)`.
+The goal is to count how many unique even numbers are in the list.
 
 The function `manualSearch()` manually iterates through the list (`ls`) and checks each individual item using Python code. On the other hand, `operatorSearch()` uses the `in` operator to perform each search, which allows CPython to implement the inner loop in its C back-end.
 
@@ -118,18 +118,18 @@ M = 2  # N*M == Range over which the elements span
 ls = [random.randint(0, int(N*M)) for i in range(N)]
     
 def manualSearch():
-    ct = 0
-    for i in range(0, int(N*M), M):
-        for j in range(0, len(ls)):
-            if ls[j] == i:
-                ct += 1
+    count = 0
+    for even_number in range(0, int(N*M), M):
+        for i in range(0, len(ls)):
+            if ls[i] == even_number:
+                count += 1
                 break
 
 def operatorSearch():
-    ct = 0
-    for i in range(0, int(N*M), M):
-        if i in ls:
-            ct += 1
+    count = 0
+    for even_number in range(0, int(N*M), M):
+        if even_number in ls:
+            count += 1
 
 repeats = 1000
 print(f"manualSearch: {timeit(manualSearch, number=repeats):.2f}ms")
