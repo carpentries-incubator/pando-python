@@ -608,21 +608,20 @@ Download the [data zip file](https://example.com/FIXME) and unzip it to your Des
 <div id="details" class="callout-inner">
 <h3 class="callout-title">Details</h3>
 <div class="callout-content">
-<p>This course uses Python and was developed using Python 3.11,
-therefore it is recommended that you have a Python 3.11 or newer
+<p>This course was originally developed using Python 3.11 and last
+tested with Python 3.13. We recommend that you have a Python 3.13
 environment.</p>
 <p>You may want to create a new Python virtual environment for the
 course, this can be done with your preferred Python environment manager
 (e.g. <code>conda</code>, <code>pipenv</code>), the required packages
 can all be installed via <code>pip</code>.</p>
 <p>If you have <code>conda</code> available, you can create and activate
-a new environment named <code>py311_env</code> with Python 3.11 using
-the following command:</p>
+a new environment using the following command:</p>
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">SH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode sh" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">--name</span> py311_env python=3.11</span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="ex">conda</span> activate py311_env</span></code></pre>
+<pre class="sourceCode sh" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">--name</span> prof_opt python=3.13</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="ex">conda</span> activate prof_opt</span></code></pre>
 </div>
 <p>The non-core Python packages required by the course are
 <code>pytest</code>, <code>snakeviz</code>, <code>line_profiler</code>,
@@ -631,7 +630,7 @@ which can be installed via <code>pip</code>.</p>
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">SH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode sh" tabindex="0"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="ex">pip</span> install pytest snakeviz line_profiler<span class="pp">[</span><span class="ss">all</span><span class="pp">]</span> numpy pandas matplotlib</span></code></pre>
+<pre class="sourceCode sh" tabindex="0"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="ex">pip</span> install pytest snakeviz <span class="st">"line_profiler[all]"</span> numpy pandas matplotlib</span></code></pre>
 </div>
 <p>To complete some of the exercises you will need to use a text-editor
 or Python IDE, so make sure you have your favourite available.</p>
@@ -640,7 +639,7 @@ or Python IDE, so make sure you have your favourite available.</p>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
   <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
 <div class="accordion-body">
 <p>As the instructor, you should additionally install the
 <code>shapely</code> package, which you may need for a brief demo during
@@ -649,25 +648,6 @@ the episode on scientific Python packages.</p>
 <h3 class="code-label">SH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode sh" tabindex="0"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="ex">pip</span> install shapely</span></code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div id="accordionSpoiler1" class="accordion spoiler-accordion accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler1" aria-expanded="false" aria-controls="collapseSpoiler1">
-  <h3 class="accordion-header" id="headingSpoiler1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Mac OS (line_profiler) </h3>
-</button>
-<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
-<div class="accordion-body">
-<p>If you are unable to install <code>line_profiler</code> via
-<code>pip</code> on MacOS. Instead it can be installed via
-<code>conda</code>.</p>
-<div class="codewrapper sourceCode" id="cb4">
-<h3 class="code-label">SH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode sh" tabindex="0"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="ex">conda</span> install <span class="at">-c</span> conda-forge line_profiler</span></code></pre>
 </div>
 </div>
 </div>
@@ -729,8 +709,8 @@ any links that you are not going to use.
   "url": "https://carpentries-incubator.github.io/pando-python/instructor/index.html",
   "identifier": "https://carpentries-incubator.github.io/pando-python/instructor/index.html",
   "dateCreated": "2024-02-01",
-  "dateModified": "2025-11-19",
-  "datePublished": "2025-11-19"
+  "dateModified": "2025-11-24",
+  "datePublished": "2025-11-24"
 }
 
   </script><script>
