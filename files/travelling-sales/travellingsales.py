@@ -7,6 +7,7 @@ import itertools
 import math
 import random
 import sys
+import time
 
 def distance(point1, point2):
     return math.sqrt((point2[0] - point1[0])**2 + (point2[1] - point1[1])**2)
@@ -42,7 +43,11 @@ for i in range(cities_len):
     cities.append((random.uniform(-1, 1), random.uniform(-1, 1)))
 
 # Find the shortest path
+start_time = time.monotonic()
 shortest_path, min_distance = traveling_salesman_brute_force(cities)
+end_time = time.monotonic()
+
 print("Cities:", cities_len)
 print("Shortest Path:", shortest_path)
 print("Shortest Distance:", min_distance)
+print(f"Execution time: {end_time - start_time:.3f} s")
