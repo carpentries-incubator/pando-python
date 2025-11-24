@@ -1,7 +1,9 @@
-import sys
 import math
-import numpy as np
+import sys
+import time
+
 import matplotlib.pyplot as plt
+import numpy as np
 
 # Reproduction
 REPRODUCE_PREY_PROB = 0.05
@@ -424,6 +426,9 @@ steps = int(sys.argv[1])
 if steps < 1:
     print("Script expects 1 positive integer argument (number of steps), %s converts < 1."%(sys.argv[1]))
     sys.exit(1)
-        
+
+start_time = time.monotonic()
 model = Model(steps=steps)
 model.run()
+end_time = time.monotonic()
+print(f"Execution time: {end_time - start_time:.3f} s")
