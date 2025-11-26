@@ -44,25 +44,8 @@ In this episode we will cover the usage of the line-level profiler `line_profile
 It is not part of the Python standard library, and therefore must be installed via pip.
 
 ```sh
-pip install line_profiler[all]
+pip install "line_profiler[all]"
 ```
-
-:::::::::::::::: spoiler
-
-### Mac OS
-
-If you are unable to install `line_profiler` via `pip` on MacOS. Instead it can be installed via `conda`.
-
-```sh
-conda install line_profiler
-```
-
-It may first be necessary to enable conda-forge.
-
-```sh
-conda config --add channels conda-forge
-```
-::::::::::::::::::::::::
 
 To use `line_profiler` decorate methods to be profiled with `@profile` which is imported from `line_profiler`.
 
