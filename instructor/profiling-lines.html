@@ -536,23 +536,23 @@ Line #      Hits         Time  Per Hit   % Time  Line Contents
     10         1          0.3      0.3      1.8      return True</code></pre>
 </div>
 <p>The columns have the following definitions:</p>
-<table class="table"><colgroup><col width="15%"><col width="85%"></colgroup><thead><tr class="header"><th>Column</th>
+<table class="table"><colgroup><col width="15%"><col width="85%"></colgroup><thead><tr><th>Column</th>
 <th>Definition</th>
-</tr></thead><tbody><tr class="odd"><td><code>Line #</code></td>
+</tr></thead><tbody><tr><td><code>Line #</code></td>
 <td>The line number of the relevant line within the file (specified
 above the table).</td>
-</tr><tr class="even"><td><code>Hits</code></td>
+</tr><tr><td><code>Hits</code></td>
 <td>The total number of times the line was executed.</td>
-</tr><tr class="odd"><td><code>Time</code></td>
+</tr><tr><td><code>Time</code></td>
 <td>The total time spent executing that line, including child function
 calls.</td>
-</tr><tr class="even"><td><code>Per Hit</code></td>
+</tr><tr><td><code>Per Hit</code></td>
 <td>The average time per call, including child function calls
 (<code>Time</code>/<code>Hits</code>).</td>
-</tr><tr class="odd"><td><code>% Time</code></td>
+</tr><tr><td><code>% Time</code></td>
 <td>The time spent executing the line, including child function calls,
 relative to the other lines of the function.</td>
-</tr><tr class="even"><td><code>Line Contents</code></td>
+</tr><tr><td><code>Line Contents</code></td>
 <td>A copy of the line from the file.</td>
 </tr></tbody></table><p>As <code>line_profiler</code> must be attached to specific methods
 and cannot attach to a full Python file or project, if your Python file
@@ -788,7 +788,7 @@ number of elements to be sorted.</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
   <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
 </button>
-<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
+<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
 <div class="accordion-body">
 <ul><li>Remember that the code needs to be moved into a method decorated
 with <code>@profile</code>
@@ -806,7 +806,7 @@ with <code>@profile</code>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>If you chose to profile the whole code, it may look like this:</p>
 <div class="codewrapper sourceCode" id="cb15">
@@ -908,7 +908,7 @@ we are unlikely to be able to improve it further.</p>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
   <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
 <div class="accordion-body">
 <p>Download the pre-generated <code>line_profiler</code> output, this
 can be opened be to save waiting for the profiler.</p>
@@ -945,7 +945,7 @@ how it might be optimised.</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint2" aria-expanded="false" aria-controls="collapseHint2">
   <h4 class="accordion-header" id="headingHint2"> Give me a hint </h4>
 </button>
-<div id="collapseHint2" class="accordion-collapse collapse" aria-labelledby="headingHint2" data-bs-parent="#accordionHint2">
+<div id="collapseHint2" class="accordion-collapse collapse" data-bs-parent="#accordionHint2" aria-labelledby="headingHint2">
 <div class="accordion-body">
 <ul><li>Remember that the function needs to be decorated with
 <code>@profile</code>
@@ -965,7 +965,7 @@ number of steps <code>predprey.py:305</code>.</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>First the function must be decorated</p>
 <div class="codewrapper sourceCode" id="cb19">
@@ -1118,7 +1118,7 @@ any links that you are not going to use.
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
 
         <p>Template licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">CC-BY 4.0</a> by <a href="https://carpentries.org/" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/0.18.3" class="external-link">sandpaper (0.18.3)</a>, <a href="https://github.com/carpentries/pegboard/tree/0.7.9" class="external-link">pegboard (0.7.9)</a>, and <a href="https://github.com/carpentries/varnish/tree/1.0.9" class="external-link">varnish (1.0.9)</a></p>
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/" class="external-link">sandpaper (0.18.1)</a>, <a href="https://github.com/carpentries/pegboard/tree/" class="external-link">pegboard (0.7.9)</a>, and <a href="https://github.com/carpentries/varnish/tree/" class="external-link">varnish (1.0.9)</a></p>
 		</div>
 		</footer></div> <!-- / div.container -->
 	<div id="to-top">
