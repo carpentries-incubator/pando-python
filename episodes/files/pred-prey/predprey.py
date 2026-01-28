@@ -5,33 +5,65 @@ import time
 import matplotlib.pyplot as plt
 import numpy as np
 
+# # Reproduction
+# REPRODUCE_PREY_PROB = 0.04
+# REPRODUCE_PRED_PROB = 0.025
+
+# # Cohesion/Avoidance
+# SAME_SPECIES_AVOIDANCE_RADIUS = 0.035
+# PREY_GROUP_COHESION_RADIUS = 0.2
+
+# # Predator/Prey/Grass interaction
+# PRED_PREY_INTERACTION_RADIUS = 0.2
+# PRED_SPEED_ADVANTAGE = 3.0
+# PRED_KILL_DISTANCE = 0.1
+# GRASS_EAT_DISTANCE = 0.05
+# GAIN_FROM_FOOD_PREY = 20
+# GAIN_FROM_FOOD_PREDATOR = 100
+# GRASS_REGROW_CYCLES = 20
+# PRED_HUNGER_THRESH = 100
+# PREY_HUNGER_THRESH = 100
+
+# # Simulation properties
+# DELTA_TIME = 0.001
+# BOUNDS_WIDTH = 2.0
+# MIN_POSITION = -1.0
+# MAX_POSITION = 1.0
+
+# NEXT_PRED_ID = 1
+# NEXT_PREY_ID = 1
+
 # Reproduction
-REPRODUCE_PREY_PROB = 0.05
-REPRODUCE_PRED_PROB = 0.03
+REPRODUCE_PREY_PROB = 0.012     # ↑ more offspring to prevent early collapse
+REPRODUCE_PRED_PROB = 0.015    # ↓ slower predator growth
 
 # Cohesion/Avoidance
 SAME_SPECIES_AVOIDANCE_RADIUS = 0.035
-PREY_GROUP_COHESION_RADIUS = 0.2
+PREY_GROUP_COHESION_RADIUS    = 0.25
 
 # Predator/Prey/Grass interaction
-PRED_PREY_INTERACTION_RADIUS = 0.3
-PRED_SPEED_ADVANTAGE = 3.0
-PRED_KILL_DISTANCE = 0.03
-GRASS_EAT_DISTANCE = 0.05
-GAIN_FROM_FOOD_PREY = 80
-GAIN_FROM_FOOD_PREDATOR = 100
-GRASS_REGROW_CYCLES = 20
-PRED_HUNGER_THRESH = 100
-PREY_HUNGER_THRESH = 100
+PRED_PREY_INTERACTION_RADIUS = 0.10
+PRED_SPEED_ADVANTAGE         = 1.5       # ↓ predators slightly slower
+PRED_KILL_DISTANCE           = 0.06      # ↓ closer contact needed to kill
+GRASS_EAT_DISTANCE           = 0.05
+
+GAIN_FROM_FOOD_PREY      = 18           # ↑ prey gain a bit more per graze
+GAIN_FROM_FOOD_PREDATOR  = 70           # ↓ kills sustain predators for less time
+
+GRASS_REGROW_CYCLES = 24                # ↓ faster grass recovery to avoid prey starvation
+
+PRED_HUNGER_THRESH = 115                # predators pursue when reasonably hungry
+PREY_HUNGER_THRESH = 140                # ↑ prey start eating earlier (life < 140)
 
 # Simulation properties
-DELTA_TIME = 0.001
+DELTA_TIME   = 0.001
 BOUNDS_WIDTH = 2.0
 MIN_POSITION = -1.0
-MAX_POSITION = 1.0
+MAX_POSITION =  1.0
 
 NEXT_PRED_ID = 1
 NEXT_PREY_ID = 1
+
 
 class Prey:
     def __init__(self):
