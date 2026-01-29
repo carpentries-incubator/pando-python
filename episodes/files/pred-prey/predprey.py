@@ -6,29 +6,29 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # Reproduction
-REPRODUCE_PREY_PROB = 0.012     # ↑ more offspring to prevent early collapse
-REPRODUCE_PRED_PROB = 0.015    # ↓ slower predator growth
+REPRODUCE_PREY_PROB = 0.012
+REPRODUCE_PRED_PROB = 0.015
 
 # Cohesion/Avoidance
 SAME_SPECIES_AVOIDANCE_RADIUS = 0.035
-PREY_GROUP_COHESION_RADIUS    = 0.25
+PREY_GROUP_COHESION_RADIUS = 0.25
 
 # Predator/Prey/Grass interaction
 PRED_PREY_INTERACTION_RADIUS = 0.10
-PRED_SPEED_ADVANTAGE         = 1.5       # ↓ predators slightly slower
-PRED_KILL_DISTANCE           = 0.06      # ↓ closer contact needed to kill
-GRASS_EAT_DISTANCE           = 0.05
+PRED_SPEED_ADVANTAGE = 1.5
+PRED_KILL_DISTANCE = 0.06
+GRASS_EAT_DISTANCE = 0.05
 
-GAIN_FROM_FOOD_PREY      = 18           # ↑ prey gain a bit more per graze
-GAIN_FROM_FOOD_PREDATOR  = 70           # ↓ kills sustain predators for less time
+GAIN_FROM_FOOD_PREY = 18
+GAIN_FROM_FOOD_PREDATOR = 70
 
-GRASS_REGROW_CYCLES = 24                # ↓ faster grass recovery to avoid prey starvation
+GRASS_REGROW_CYCLES = 24
 
-PRED_HUNGER_THRESH = 115                # predators pursue when reasonably hungry
-PREY_HUNGER_THRESH = 140                # ↑ prey start eating earlier (life < 140)
+PRED_HUNGER_THRESH = 115
+PREY_HUNGER_THRESH = 140
 
 # Simulation properties
-DELTA_TIME   = 0.001
+DELTA_TIME = 0.001
 BOUNDS_WIDTH = 2.0
 MIN_POSITION = -1.0
 MAX_POSITION =  1.0
@@ -145,16 +145,16 @@ class Prey:
         if predator_index >= 0:
             predator_list[predator_index].life += GAIN_FROM_FOOD_PREDATOR
             return True
-            
-        # If the life has reduced to 0 then the prey should die or starvation 
+
+        # If the life has reduced to 0 then the prey should die or starvation
         if self.life < 1:
             return True
         return False
-        
+
     def reproduce(self):
         if np.random.uniform() < REPRODUCE_PREY_PROB:
             self.life /= 2
-        
+
             child = Prey()
             child.x = np.random.uniform() * BOUNDS_WIDTH - BOUNDS_WIDTH / 2.0
             child.y = np.random.uniform() * BOUNDS_WIDTH - BOUNDS_WIDTH / 2.0
@@ -162,8 +162,8 @@ class Prey:
             child.vy = np.random.uniform() * 2 - 1
             child.life = self.life
             return child
-        
-    
+
+
 class Predator:
     def __init__(self):
         global NEXT_PRED_ID
@@ -176,7 +176,7 @@ class Predator:
         self.steer_x = 0.0
         self.steer_y = 0.0
         self.life = 0
-    
+
     def follow_prey(self, prey_list):
         # Find the closest prey by iterating the prey_location messages
         closest_prey_x = 0.0
@@ -201,7 +201,7 @@ class Predator:
             self.steer_x = closest_prey_x - self.x
             self.steer_y = closest_prey_y - self.y
 
-        
+
     def avoid_predators(self, predator_list):
         # Fetch this predator's position
         avoid_velocity_x = 0.0
@@ -220,7 +220,7 @@ class Predator:
 
         self.steer_x += avoid_velocity_x
         self.steer_y += avoid_velocity_y
-        
+
     def move(self):
         # Integrate steering forces and cap velocity
         self.vx += self.steer_x
@@ -235,7 +235,7 @@ class Predator:
         self.x += self.vx * DELTA_TIME * PRED_SPEED_ADVANTAGE
         self.y += self.vy * DELTA_TIME * PRED_SPEED_ADVANTAGE
 
-        # Bound the position within the environment 
+        # Bound the position within the environment
         self.x = max(self.x, MIN_POSITION)
         self.x = min(self.x, MAX_POSITION)
         self.y = max(self.y, MIN_POSITION)
@@ -243,13 +243,13 @@ class Predator:
 
         # Reduce life by one unit of energy
         self.life -= 1
-        
+
     def starve(self):
         # Did the predator starve?
         if self.life < 1:
             return True
         return False
-        
+
     def reproduce(self):
         if np.random.uniform() < REPRODUCE_PRED_PROB:
             self.life /= 2
@@ -261,14 +261,14 @@ class Predator:
             child.vy = np.random.uniform() * 2 - 1
             child.life = self.life
             return child
-        
+
 class Grass:
     def __init__(self):
         self.x = 0.0
         self.y = 0.0
         self.dead_cycles = 0
         self.available = 1
-        
+
     def grow(self):
         new_dead_cycles = self.dead_cycles + 1
         if self.dead_cycles == GRASS_REGROW_CYCLES:
@@ -278,7 +278,7 @@ class Grass:
         if self.available == 0:
             self.dead_cycles = new_dead_cycles
 
-        
+
     def eaten(self, prey_list):
         if self.available:
             prey_index = -1
@@ -300,11 +300,11 @@ class Grass:
             if prey_index >= 0:
                 # Add grass eaten message
                 prey_list[prey_index].life += GAIN_FROM_FOOD_PREY
-               
+
                 # Update grass agent variables
                 self.dead_cycles = 0
                 self.available = 0
-        
+
 class Model:
 
     def __init__(self, steps = 50):
@@ -324,7 +324,7 @@ class Model:
             p.vy = np.random.uniform(-1.0, 1.0)
             p.life = np.random.randint(10, 50)
             self.prey.append(p)
-      
+
         # Initialise predator agents
         self.predators = []
         for i in range(self.num_predators):
@@ -335,7 +335,7 @@ class Model:
             p.vy = np.random.uniform(-1.0, 1.0)
             p.life = np.random.randint(10, 15)
             self.predators.append(p)
-        
+
         # Initialise grass agents
         self.grass = []
         for i in range(self.num_grass):
@@ -343,34 +343,34 @@ class Model:
             g.x = np.random.uniform(-1.0, 1.0)
             g.y = np.random.uniform(-1.0, 1.0)
             self.grass.append(g)
-    
+
     def _step(self):
         ## Shuffle agent list order to avoid bias
         np.random.shuffle(self.predators) # todo, this probably doesn't like Python lists
         np.random.shuffle(self.prey)
-        
+
         for p in self.predators:
             p.follow_prey(self.prey)
         for p in self.prey:
             p.avoid_predators(self.predators)
-                
+
         for p in self.prey:
             p.flock(self.prey)
         for p in self.predators:
             p.avoid_predators(self.predators)
-        
+
         for p in self.prey:
             p.move()
         for p in self.predators:
             p.move()
-            
-            
+
+
         for g in self.grass:
             g.eaten(self.prey)
-        
+
         self.prey = [p for p in self.prey if not p.eaten_or_starve(self.predators)]
         self.predators = [p for p in self.predators if not p.starve()]
-                
+
         children = []
         for p in self.prey:
             c = p.reproduce()
@@ -385,17 +385,17 @@ class Model:
         self.predators.extend(children)
         for g in self.grass:
             g.grow()
-    
+
     def _init_log(self):
         self.prey_log = [len(self.prey)]
         self.predator_log = [len(self.predators)]
         self.grass_log = [sum(g.available for g in self.grass)/20]
-        
+
     def _log(self):
         self.prey_log.append(len(self.prey))
         self.predator_log.append(len(self.predators))
         self.grass_log.append(sum(g.available for g in self.grass)/20)
-    
+
     def _plot(self):
         plt.figure(figsize=(16,10))
         plt.rcParams.update({'font.size': 18})
@@ -406,7 +406,7 @@ class Model:
         plt.plot(range(0, len(self.grass_log)), self.grass_log, 'g', label="Grass/20")
         plt.legend()
         plt.savefig('predprey_out.png')
-    
+
     def run(self, random_seed=12):
         np.random.seed(random_seed)
         # init
@@ -418,7 +418,7 @@ class Model:
             self._log()
         # plot graph of results
         self._plot()
-        
+
 # Argument parsing
 if len(sys.argv) != 2:
     print("Script expects 1 positive integer argument (number of steps), %u found."%(len(sys.argv) - 1))
