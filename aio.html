@@ -459,7 +459,7 @@
         
 <section id="aio-profiling-introduction"><p>Content from <a href="profiling-introduction.html">Introduction to Profiling</a></p>
 <hr>
-<p>Last updated on 2025-07-06 |
+<p>Last updated on 2026-01-30 |
 
         <a href="https://github.com/carpentries-incubator/pando-python/edit/main/episodes/profiling-introduction.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -548,8 +548,8 @@ code and hence productivity.</p>
 <p>Even professional programmers make oversights that can lead to poor
 performance, and can be identified through profiling.</p>
 <p>For example Grand Theft Auto Online, which has allegedly earned over
-$7bn since it’s 2013 release, was notorious for it’s slow loading times.
-8 years after it’s release <a href="https://nee.lv/2021/02/28/How-I-cut-GTA-Online-loading-times-by-70/" class="external-link">a
+$7bn since its 2013 release, was notorious for slow loading times. 8
+years after its release <a href="https://nee.lv/2021/02/28/How-I-cut-GTA-Online-loading-times-by-70/" class="external-link">a
 ‘hacker’</a> had enough, they reverse engineered and profiled the code
 to enable a 70% speedup!</p>
 <p><em>How much revenue did that unnecessary bottleneck cost, through
@@ -633,7 +633,7 @@ calls.</p>
 total runtime to be quickly identified and investigated.</p>
 <!-- We will be covering -->
 <p>In this course we will cover the usage of the function-level profiler
-<code>cProfile</code> and how it’s output can be visualised with
+<code>cProfile</code> and how its output can be visualised with
 <code>snakeviz</code>.</p>
 </div>
 <div class="section level3">
@@ -766,7 +766,7 @@ execution.</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
   <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
 </button>
-<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
+<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
 <div class="accordion-body">
 <ul>
 <li>What tools and techniques would be required?</li>
@@ -813,7 +813,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-profiling-functions"><p>Content from <a href="profiling-functions.html">Function Level Profiling</a></p>
 <hr>
-<p>Last updated on 2025-07-06 |
+<p>Last updated on 2026-01-30 |
 
         <a href="https://github.com/carpentries-incubator/pando-python/edit/main/episodes/profiling-functions.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -872,7 +872,7 @@ calls.</p>
 total runtime to be quickly identified and investigated.</p>
 <!-- We will be covering -->
 <p>In this episode we will cover the usage of the function-level
-profiler <code>cProfile</code>, how it’s output can be visualised with
+profiler <code>cProfile</code>, how its output can be visualised with
 <code>snakeviz</code> and how the output can be interpreted.</p>
 <div id="what-is-a-call-stack" class="callout">
 <div class="callout-square">
@@ -977,7 +977,7 @@ package, however it’s easier to use its script interface:</p>
 <p><em>No additional changes to your code are required, it’s really that
 simple!</em></p>
 <!-- TODO should the remainder of this section be in a call-out, it's unnecessary -->
-<p>If you instead, don’t specify output to file (e.g. remove
+<p>If you don’t specify output to file (e.g. remove
 <code>-o out.prof</code> from the command), <code>cProfile</code> will
 produce output to console similar to that shown below:</p>
 <div class="codewrapper">
@@ -1036,7 +1036,7 @@ calls.</td>
 </tr>
 <tr>
 <td><code>filename:lineno(function)</code></td>
-<td>The location of the given function’s definition and it’s name.</td>
+<td>The location of the given function’s definition and its name.</td>
 </tr>
 </tbody>
 </table>
@@ -1342,7 +1342,7 @@ poor scaling so larger numbers take significantly longer to run.</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
   <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
 </button>
-<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
+<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
 <div class="accordion-body">
 <ul>
 <li>If a hotspot isn’t visible with the argument <code>1</code>, try
@@ -1360,14 +1360,14 @@ within the profile.</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>The hotspot only becomes visible when an argument of <code>5</code>
 or greater is passed.</p>
 <p>You should see that <code>distance()</code> (from
 <code>travellingsales.py:11</code>) becomes the largest box (similarly
-it’s parent in the call-stack <code>total_distance()</code>) showing
-that it scales poorly with the number of cities. With 5 cities,
+its parent in the call-stack <code>total_distance()</code>) showing that
+it scales poorly with the number of cities. With 5 cities,
 <code>distance()</code> has a cumulative time of <code>~35%</code> the
 runtime, this increases to <code>~60%</code> with 9 cities.</p>
 <p>Other boxes within the diagram correspond to the initialisation of
@@ -1420,7 +1420,7 @@ necessary to find the bottlenecks.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>It should be clear from the profile that the method
 <code>Grass::eaten()</code> (from <code>predprey.py:278</code>) occupies
@@ -1487,7 +1487,7 @@ Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  --></p></section><section id="aio-profiling-lines"><p>Content from <a href="profiling-lines.html">Line Level Profiling</a></p>
 <hr>
-<p>Last updated on 2025-11-26 |
+<p>Last updated on 2026-01-30 |
 
         <a href="https://github.com/carpentries-incubator/pando-python/edit/main/episodes/profiling-lines.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -1833,7 +1833,7 @@ package <code>rich</code>, it will have been installed if
 you can, as with <code>snakeviz</code>, use <code>line_profiler</code>
 directly from inside notebooks. However, it is still necessary for the
 code you wish to profile to be placed within a function.</p>
-<p>First <code>line_profiler</code> must be installed and it’s extension
+<p>First <code>line_profiler</code> must be installed and its extension
 loaded.</p>
 <div class="codewrapper sourceCode" id="cb12">
 <h3 class="code-label">PY<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1893,7 +1893,7 @@ time is being spent.</p>
 efficient so in practice other sorting algorithms are typically
 used.</p>
 <p>The array to be sorted is iterated, with a pair-wise sort being
-applied to each element and it’s neighbour. This can cause elements to
+applied to each element and its neighbour. This can cause elements to
 rise (or sink) multiple positions in a single pass, hence the name
 bubblesort. This iteration continues until the array is fully iterated
 with no elements being swapped.</p>
@@ -2846,7 +2846,7 @@ in Python?</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
   <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
 </button>
-<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
+<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
 <div class="accordion-body">
 <p>Python strings have a lot of methods to perform common operations,
 like removing suffixes, replacing substrings, joining or splitting,
@@ -2861,7 +2861,7 @@ methods documentation</a> for a full list.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -2926,7 +2926,7 @@ lot of low-level step-by-step instructions?</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint2" aria-expanded="false" aria-controls="collapseHint2">
   <h4 class="accordion-header" id="headingHint2"> Give me a hint </h4>
 </button>
-<div id="collapseHint2" class="accordion-collapse collapse" aria-labelledby="headingHint2" data-bs-parent="#accordionHint2">
+<div id="collapseHint2" class="accordion-collapse collapse" data-bs-parent="#accordionHint2" aria-labelledby="headingHint2">
 <div class="accordion-body">
 <!-- Typical cases might include reading data from a file, …, … TODO: more examples? -->
 <p>(Before you try to rewrite those parts of your code, use a profiler
@@ -2942,7 +2942,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-optimisation-data-structures-algorithms"><p>Content from <a href="optimisation-data-structures-algorithms.html">Data Structures &amp; Algorithms</a></p>
 <hr>
-<p>Last updated on 2025-11-02 |
+<p>Last updated on 2026-01-30 |
 
         <a href="https://github.com/carpentries-incubator/pando-python/edit/main/episodes/optimisation-data-structures-algorithms.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -3214,8 +3214,8 @@ members contribute to neither).</p>
 <p>Sets are dictionaries without the values (both are declared using
 <code>{}</code>), a collection of unique keys equivalent to the
 mathematical set. <em>Modern CPython now uses a set implementation
-distinct from that of it’s dictionary, however they still behave much
-the same in terms of performance characteristics.</em></p>
+distinct from that of its dictionary, however they still behave much the
+same in terms of performance characteristics.</em></p>
 <p>Sets are used for eliminating duplicates and checking for membership,
 and will normally outperform lists especially when the list cannot be
 maintained sorted.</p>
@@ -4859,8 +4859,8 @@ objects can improve performance.</li>
   "url": "https://carpentries-incubator.github.io/pando-python/aio.html",
   "identifier": "https://carpentries-incubator.github.io/pando-python/aio.html",
   "dateCreated": "2024-02-01",
-  "dateModified": "2026-01-27",
-  "datePublished": "2026-01-27"
+  "dateModified": "2026-01-30",
+  "datePublished": "2026-01-30"
 }
 
   </script><script>

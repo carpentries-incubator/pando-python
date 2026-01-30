@@ -394,7 +394,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Function Level Profiling</h1>
-        <p>Last updated on 2025-07-06 |
+        <p>Last updated on 2026-01-30 |
 
         <a href="https://github.com/carpentries-incubator/pando-python/edit/main/episodes/profiling-functions.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -453,7 +453,7 @@ calls.</p>
 total runtime to be quickly identified and investigated.</p>
 <!-- We will be covering -->
 <p>In this episode we will cover the usage of the function-level
-profiler <code>cProfile</code>, how it’s output can be visualised with
+profiler <code>cProfile</code>, how its output can be visualised with
 <code>snakeviz</code> and how the output can be interpreted.</p>
 <div id="what-is-a-call-stack" class="callout">
 <div class="callout-square">
@@ -556,7 +556,7 @@ package, however it’s easier to use its script interface:</p>
 <p><em>No additional changes to your code are required, it’s really that
 simple!</em></p>
 <!-- TODO should the remainder of this section be in a call-out, it's unnecessary -->
-<p>If you instead, don’t specify output to file (e.g. remove
+<p>If you don’t specify output to file (e.g. remove
 <code>-o out.prof</code> from the command), <code>cProfile</code> will
 produce output to console similar to that shown below:</p>
 <div class="codewrapper">
@@ -596,7 +596,7 @@ calls.</td>
 <td>The average cumtime per function call
 (<code>cumtime</code>/<code>ncalls</code>).</td>
 </tr><tr><td><code>filename:lineno(function)</code></td>
-<td>The location of the given function’s definition and it’s name.</td>
+<td>The location of the given function’s definition and its name.</td>
 </tr></tbody></table><p>This output can often exceed the terminal’s buffer length for large
 programs and can be unwieldy to parse, so the package
 <code>snakeviz</code> is often utilised to provide an interactive
@@ -888,7 +888,7 @@ poor scaling so larger numbers take significantly longer to run.</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
   <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
 </button>
-<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
+<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
 <div class="accordion-body">
 <ul><li>If a hotspot isn’t visible with the argument <code>1</code>, try
 increasing the value.</li>
@@ -904,14 +904,14 @@ within the profile.</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>The hotspot only becomes visible when an argument of <code>5</code>
 or greater is passed.</p>
 <p>You should see that <code>distance()</code> (from
 <code>travellingsales.py:11</code>) becomes the largest box (similarly
-it’s parent in the call-stack <code>total_distance()</code>) showing
-that it scales poorly with the number of cities. With 5 cities,
+its parent in the call-stack <code>total_distance()</code>) showing that
+it scales poorly with the number of cities. With 5 cities,
 <code>distance()</code> has a cumulative time of <code>~35%</code> the
 runtime, this increases to <code>~60%</code> with 9 cities.</p>
 <p>Other boxes within the diagram correspond to the initialisation of
@@ -964,7 +964,7 @@ necessary to find the bottlenecks.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>It should be clear from the profile that the method
 <code>Grass::eaten()</code> (from <code>predprey.py:278</code>) occupies
@@ -1074,8 +1074,8 @@ any links that you are not going to use.
   "url": "https://carpentries-incubator.github.io/pando-python/profiling-functions.html",
   "identifier": "https://carpentries-incubator.github.io/pando-python/profiling-functions.html",
   "dateCreated": "2024-02-01",
-  "dateModified": "2025-07-06",
-  "datePublished": "2026-01-27"
+  "dateModified": "2026-01-30",
+  "datePublished": "2026-01-30"
 }
 
   </script><script>
