@@ -53,8 +53,8 @@ Profiling should be a relatively quick and inexpensive process. If there are no 
 <!-- Everyone benefits (why) -->
 Even professional programmers make oversights that can lead to poor performance, and can be identified through profiling.
 
-For example Grand Theft Auto Online, which has allegedly earned over $7bn since it's 2013 release, was notorious for it's slow loading times.
-8 years after it's release [a 'hacker'](https://nee.lv/2021/02/28/How-I-cut-GTA-Online-loading-times-by-70/) had enough, they reverse engineered and profiled the code to enable a 70% speedup!
+For example Grand Theft Auto Online, which has allegedly earned over $7bn since its 2013 release, was notorious for slow loading times.
+8 years after its release [a 'hacker'](https://nee.lv/2021/02/28/How-I-cut-GTA-Online-loading-times-by-70/) had enough, they reverse engineered and profiled the code to enable a 70% speedup!
 
 *How much revenue did that unnecessary bottleneck cost, through user churn?*
 
@@ -130,7 +130,7 @@ Function-level profiling analyses where time is being spent with respect to func
 This allows functions that occupy a disproportionate amount of the total runtime to be quickly identified and investigated.
 
 <!-- We will be covering -->
-In this course we will cover the usage of the function-level profiler `cProfile` and how it's output can be visualised with `snakeviz`.
+In this course we will cover the usage of the function-level profiler `cProfile` and how its output can be visualised with `snakeviz`.
 
 ### Line-Level Profiling
 <!-- Context -->

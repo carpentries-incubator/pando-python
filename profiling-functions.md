@@ -33,7 +33,7 @@ Function-level profiling analyses where time is being spent with respect to func
 This allows functions that occupy a disproportionate amount of the total runtime to be quickly identified and investigated.
 
 <!-- We will be covering -->
-In this episode we will cover the usage of the function-level profiler `cProfile`, how it's output can be visualised with `snakeviz` and how the output can be interpreted.
+In this episode we will cover the usage of the function-level profiler `cProfile`, how its output can be visualised with `snakeviz` and how the output can be interpreted.
 
 
 ::::::::::::::::::::::::::::::::::::: callout
@@ -124,7 +124,7 @@ python -m cProfile -o out.prof my_script.py input.csv
 *No additional changes to your code are required, it's really that simple!*
 
 <!-- TODO should the remainder of this section be in a call-out, it's unnecessary -->
-If you instead, don't specify output to file (e.g. remove `-o out.prof` from the command), `cProfile` will produce output to console similar to that shown below:
+If you don't specify output to file (e.g. remove `-o out.prof` from the command), `cProfile` will produce output to console similar to that shown below:
 
 ```output
          28 function calls in 4.754 seconds
@@ -153,7 +153,7 @@ The columns have the following definitions:
 | `percall` | The average tottime per function call (`tottime`/`ncalls`). |
 | `cumtime` | The total time spent in the given function, including child function calls. |
 | `percall` | The average cumtime per function call (`cumtime`/`ncalls`). |
-| `filename:lineno(function)` | The location of the given function's definition and it's name. |
+| `filename:lineno(function)` | The location of the given function's definition and its name. |
 
 This output can often exceed the terminal's buffer length for large programs and can be unwieldy to parse, so the package `snakeviz` is often utilised to provide an interactive visualisation of the data when exported to file.
 
@@ -402,7 +402,7 @@ The value of `cities` should be a positive integer, this algorithm has poor scal
 
 The hotspot only becomes visible when an argument of `5` or greater is passed.
 
-You should see that `distance()` (from `travellingsales.py:11`) becomes the largest box (similarly it's parent in the call-stack `total_distance()`) showing that it scales poorly with the number of cities. With 5 cities, `distance()` has a cumulative time of `~35%` the runtime, this increases to `~60%` with 9 cities.
+You should see that `distance()` (from `travellingsales.py:11`) becomes the largest box (similarly its parent in the call-stack `total_distance()`) showing that it scales poorly with the number of cities. With 5 cities, `distance()` has a cumulative time of `~35%` the runtime, this increases to `~60%` with 9 cities.
 
 Other boxes within the diagram correspond to the initialisation of imports, or initialisation of cities. These have constant or linear scaling, so their cost barely increases with the number of cities.
 

@@ -248,7 +248,7 @@ The `-r` argument passed to `kernprof` (or `line_profiler`) enables rich output,
 
 If you're more familiar with writing Python inside Jupyter notebooks you can, as with `snakeviz`, use `line_profiler` directly from inside notebooks. However, it is still necessary for the code you wish to profile to be placed within a function.
 
-First `line_profiler` must be installed and it's extension loaded.
+First `line_profiler` must be installed and its extension loaded.
 
 ```py
 !pip install line_profiler
@@ -290,7 +290,7 @@ Download and profile <a href="files/bubblesort/bubblesort.py" download>the Pytho
 
 > Bubblesort is a basic sorting algorithm, it is not considered to be efficient so in practice other sorting algorithms are typically used.
 >
-> The array to be sorted is iterated, with a pair-wise sort being applied to each element and it's neighbour.
+> The array to be sorted is iterated, with a pair-wise sort being applied to each element and its neighbour.
 > This can cause elements to rise (or sink) multiple positions in a single pass, hence the name bubblesort.
 > This iteration continues until the array is fully iterated with no elements being swapped.
 

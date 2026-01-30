@@ -8,7 +8,7 @@ Array
 : A data-structure that stores a collection of elements, typically of the same type, arranged in contiguous memory locations. Arrays enable elements to be iterated in order or directly accessed according to their index. Arrays do not support appending or removing items, Python's lists wrap an array to provide support for greater flexibility such as appending.
 
 Benchmarking
-: The process of running a program in order to assess it's overall performance. This can be useful to confirm the impact of optimisations.
+: The process of running a program in order to assess its overall performance. This can be useful to confirm the impact of optimisations.
 
 Bottleneck
 : The component with the lowest throughput, which limits performance of the overall program. Improving the throughput of this component should improve the overall performance.
