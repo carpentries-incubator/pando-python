@@ -20,6 +20,26 @@ This is an all-day course, however it normally finishes by early afternoon.
 <!-- TODO: course duration? -->
 <!-- TODO: confident code syllabus? -->
 
+## Motivation
+
+Why might you want to profile and optimise your code?
+
+The simplest answer is that optimisation let you get results faster. It may also allow you to scale up your code to perform larger analyses that would otherwise have taken too long to be practical.
+
+Making your code faster can have additional benefits: faster software uses less compute power. If you use paid-for compute resources, such as cloud computing or some HPC facilities, optimising your code can therefore reduce your costs.
+
+Using less computing power also helps make your software more environmentally sustainable. As funders and research institutions set Net Zero goals, and computationally-intensive research expands, sustainability is increasingly becoming a concern for researchers.
+
+::::::::::::::::::::::::::::::::::::: callout
+
+### Green computing
+
+To find out more about sustainable computing, visit the [Green DiSC](https://www.software.ac.uk/GreenDiSC) website or see this [online training](https://learn.greensoftware.foundation/) from the Green Software Foundation.
+
+:::::::::::::::::::::::::::::::::::::
+
+However, it's sensible to focus your optimisation efforts on the parts of the code that take the longest. This is where profiling comes in: by profiling your code, you can identify which parts contribute the most to its runtime, and target these for optimisation.
+Even if you don’t find any major performance gains, profiling can give you a better understanding of what your code is doing, or give you confidence that the performance of your code matches your expectations.
 
 ## Learning Objectives
 <!-- Aim for 3-4 objectives for every 6 hours of training -->
