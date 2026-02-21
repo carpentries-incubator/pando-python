@@ -18,12 +18,9 @@ PRED_PREY_INTERACTION_RADIUS = 0.10
 PRED_SPEED_ADVANTAGE = 1.5
 PRED_KILL_DISTANCE = 0.06
 GRASS_EAT_DISTANCE = 0.05
-
 GAIN_FROM_FOOD_PREY = 18
 GAIN_FROM_FOOD_PREDATOR = 70
-
 GRASS_REGROW_CYCLES = 24
-
 PRED_HUNGER_THRESH = 115
 PREY_HUNGER_THRESH = 140
 
@@ -200,7 +197,6 @@ class Predator:
         if is_a_prey_in_range:
             self.steer_x = closest_prey_x - self.x
             self.steer_y = closest_prey_y - self.y
-
 
     def avoid_predators(self, predator_list):
         # Fetch this predator's position
