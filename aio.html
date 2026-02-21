@@ -813,7 +813,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-profiling-functions"><p>Content from <a href="profiling-functions.html">Function Level Profiling</a></p>
 <hr>
-<p>Last updated on 2026-01-30 |
+<p>Last updated on 2026-02-21 |
 
         <a href="https://github.com/carpentries-incubator/pando-python/edit/main/episodes/profiling-functions.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -1342,7 +1342,7 @@ poor scaling so larger numbers take significantly longer to run.</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
   <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
 </button>
-<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
+<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
 <div class="accordion-body">
 <ul>
 <li>If a hotspot isn’t visible with the argument <code>1</code>, try
@@ -1360,7 +1360,7 @@ within the profile.</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>The hotspot only becomes visible when an argument of <code>5</code>
 or greater is passed.</p>
@@ -1392,7 +1392,7 @@ component.</em></p>
 <p>Download and profile
 <a href="files/pred-prey/predprey.py" download>the Python predator prey
 model</a>, try to locate the function call(s) where the majority of
-execution time is being spent</p>
+execution time is being spent.</p>
 <p><em>This exercise uses the packages <code>numpy</code> and
 <code>matplotlib</code>, they can be installed via
 <code>pip install numpy matplotlib</code>.</em></p>
@@ -1408,8 +1408,9 @@ of their food source.</p>
 </blockquote>
 <p>The program can be executed via
 <code>python predprey.py &lt;steps&gt;</code>. The value of
-<code>steps</code> for a full run is 250, however a full run may not be
-necessary to find the bottlenecks.</p>
+<code>steps</code> for a full run is 400, which may take a few minutes.
+However, using 100–200 steps should be sufficient to find the
+bottlenecks.</p>
 <p>When the model finishes it outputs a graph of the three populations
 <code>predprey_out.png</code>.</p>
 </div>
@@ -1420,7 +1421,7 @@ necessary to find the bottlenecks.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>It should be clear from the profile that the method
 <code>Grass::eaten()</code> (from <code>predprey.py:278</code>) occupies
@@ -1434,14 +1435,14 @@ as the joint 4th most called method and 2nd most called method from
 <p>If you checked <code>predprey_out.png</code> (shown below), you
 should notice that there are significantly more <code>Grass</code>
 agents than <code>Predators</code> or <code>Prey</code>.</p>
-<figure><img src="fig/predprey_out.png" alt="A line graph plotting population over time through 250 steps of the pred prey model. Grass/20, shown in green, has a brief dip in the first 30 steps, but recovers holding steady at approximately 240 (4800 agents). Prey, shown in blue, starts at 200, quickly drops to around 185, before levelling off for steps and then slowly declining to a final value of 50. The data for predators, shown in red, has significantly more noise. There are 50 predators to begin, this rises briefly before falling to around 10, from here it noisily grows to around 70 by step 250 with several larger declines during the growth." class="figure mx-auto d-block"><div class="figcaption">
+<figure><img src="fig/predprey_out.png" alt="A line graph plotting population over time through 400 time steps of the pred prey model. The amount of grass, shown in green, is scaled down by a factor of 20 to fit onto the graph. It has a brief dip in the first 25 steps, then slowly declines from approximately 220 to 150 over the next 200 steps, before steadily returning to 250. The number of prey, shown in blue, starts at 200, then grows to around 600 after 200 steps, before declining quickly and reaching zero at 350 to 400 steps. The number of predators, shown in red, falls from 50 to around 30 after 15 time steps, then grows to almost 700 by step 330 before declining quickly." class="figure mx-auto d-block"><div class="figcaption">
 <code>predprey_out.png</code> as produced by the
 default configuration of <code>predprey.py</code>.</div>
 </figure><p>Similarly, the <code>Grass::eaten()</code> has a <code>percall</code>
 time is inline with other agent functions such as
 <code>Prey::flock()</code> (from <code>predprey.py:67</code>).</p>
 <p>Maybe we could investigate this further with line profiling!</p>
-<p><em>You may have noticed many iciles on the right hand of the
+<p><em>You may have noticed many icicles on the right hand of the
 diagram, these primarily correspond to the <code>import</code> of
 <code>matplotlib</code> which is relatively expensive!</em></p>
 </div>
@@ -1487,7 +1488,7 @@ Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  --></p></section><section id="aio-profiling-lines"><p>Content from <a href="profiling-lines.html">Line Level Profiling</a></p>
 <hr>
-<p>Last updated on 2026-01-30 |
+<p>Last updated on 2026-02-21 |
 
         <a href="https://github.com/carpentries-incubator/pando-python/edit/main/episodes/profiling-lines.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -1910,7 +1911,7 @@ number of elements to be sorted.</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
   <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
 </button>
-<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
+<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
 <div class="accordion-body">
 <ul>
 <li>Remember that the code needs to be moved into a method decorated
@@ -1930,7 +1931,7 @@ with <code>@profile</code>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>If you chose to profile the whole code, it may look like this:</p>
 <div class="codewrapper sourceCode" id="cb15">
@@ -2051,7 +2052,7 @@ how it might be optimised.</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint2" aria-expanded="false" aria-controls="collapseHint2">
   <h4 class="accordion-header" id="headingHint2"> Give me a hint </h4>
 </button>
-<div id="collapseHint2" class="accordion-collapse collapse" aria-labelledby="headingHint2" data-bs-parent="#accordionHint2">
+<div id="collapseHint2" class="accordion-collapse collapse" data-bs-parent="#accordionHint2" aria-labelledby="headingHint2">
 <div class="accordion-body">
 <ul>
 <li>Remember that the function needs to be decorated with
@@ -2062,7 +2063,7 @@ how it might be optimised.</p>
 </li>
 <li>Line-level profiling <code>Grass::eaten()</code>, the most called
 function will slow it down significantly. You may wish to reduce the
-number of steps <code>predprey.py:305</code>.</li>
+number of steps passed as an argument.</li>
 </ul>
 </div>
 </div>
@@ -2073,7 +2074,7 @@ number of steps <code>predprey.py:305</code>.</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>First the function must be decorated</p>
 <div class="codewrapper sourceCode" id="cb19">
@@ -2093,10 +2094,10 @@ number of steps <code>predprey.py:305</code>.</li>
 <code>python -m kernprof -lvr predprey.py &lt;steps&gt;</code>.</p>
 <p>Since this will take much longer to run due to
 <code>line_profiler</code>, you may wish to profile fewer
-<code>steps</code> than you did in the function-level profiling exercise
-(250 was suggested for a full run). In this instance it may change the
-profiling output slightly, as the number of <code>Prey</code> and their
-member variables evaluated by this method both change as the model
+<code>steps</code> (e.g., use 30 steps instead of the 200 steps used in
+the function-level profiling exercise). In this instance it may change
+the profiling output slightly, as the number of <code>Prey</code> and
+their member variables evaluated by this method both change as the model
 progresses, but the overall pattern is likely to remain similar.</p>
 <p>Alternatively, you can kill the profiling process
 (e.g. <code>ctrl + c</code>) after a minute and the currently collected
@@ -2108,7 +2109,7 @@ partial profiling information will be output.</p>
 <pre class="output" tabindex="0"><code>Wrote profile results to predprey.py.lprof
 Timer unit: 1e-06 s
 
-Total time: 101.573 s
+Total time: 92.9366 s
 File: predprey.py
 Function: eaten at line 278
 
@@ -2116,33 +2117,33 @@ Line #      Hits         Time  Per Hit   % Time  Line Contents
 ==============================================================
    278                                               @profile
    279                                               def eaten(self, prey_list):
-   280   1250000     227663.1      0.2      0.2          if self.available:
-   281   1201630     165896.4      0.1      0.2              prey_index = -1
-   282   1201630     166219.0      0.1      0.2              closest_prey = GRASS_EAT_DISTANCE
+   280   1000000     122091.0      0.1      0.1          if self.available:
+   281    735158      50360.0      0.1      0.1              prey_index = -1
+   282    735158      66788.0      0.1      0.1              closest_prey = GRASS_EAT_DISTANCE
    283
    284                                                       # Iterate prey_location messages to find the closest prey
-   285 198235791   29227902.1      0.1     28.8              for i in range(len(prey_list)):
-   286 197034161   30158318.8      0.2     29.7                  prey = prey_list[i]
-   287 197034161   38781451.1      0.2     38.2                  if prey.life &lt; PREY_HUNGER_THRESH:
+   285 271999493   32227115.0      0.1     34.7              for i in range(len(prey_list)):
+   286 271264335   20278656.0      0.1     21.8                  prey = prey_list[i]
+   287 271264335   20704920.0      0.1     22.3                  if prey.life &lt; PREY_HUNGER_THRESH:
    288                                                               # Check if they are within interaction radius
-   289   2969470     579923.4      0.2      0.6                      dx = self.x - prey.x
-   290   2969470     552092.2      0.2      0.5                      dy = self.y - prey.y
-   291   2969470     938669.8      0.3      0.9                      distance = math.sqrt(dx*dx + dy*dy)
+   289  61656593    4448711.0      0.1      4.8                      dx = self.x - prey.x
+   290  61656593    4591001.0      0.1      4.9                      dy = self.y - prey.y
+   291  61656593    5975450.0      0.1      6.4                      distance = math.sqrt(dx*dx + dy*dy)
    292
-   293   2969470     552853.8      0.2      0.5                      if distance &lt; closest_prey:
-   294      2532        469.3      0.2      0.0                          prey_index = i
-   295      2532        430.1      0.2      0.0                          closest_prey = distance
+   293  61656593    4273085.0      0.1      4.6                      if distance &lt; closest_prey:
+   294     13067        921.0      0.1      0.0                          prey_index = i
+   295     13067        843.0      0.1      0.0                          closest_prey = distance
    296
-   297   1201630     217534.5      0.2      0.2              if prey_index &gt;= 0:
+   297    735158     189561.0      0.3      0.2              if prey_index &gt;= 0:
    298                                                           # Add grass eaten message
-   299      2497       2181.8      0.9      0.0                  prey_list[prey_index].life += GAIN_FROM_FOOD_PREY
+   299     12078       2743.0      0.2      0.0                  prey_list[prey_index].life += GAIN_FROM_FOOD_PREY
    300
    301                                                           # Update grass agent variables
-   302      2497        793.9      0.3      0.0                  self.dead_cycles = 0
-   303      2497        631.0      0.3      0.0                  self.available = 0</code></pre>
+   302     12078       1244.0      0.1      0.0                  self.dead_cycles = 0
+   303     12078       3132.0      0.3      0.0                  self.available = 0</code></pre>
 </div>
 <p>From the profiling output it can be seen that lines 285-287 occupy
-over 90% of the method’s runtime!</p>
+almost 80% of the method’s runtime!</p>
 <div class="codewrapper sourceCode" id="cb22">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -2150,16 +2151,16 @@ over 90% of the method’s runtime!</p>
 <span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a>                prey <span class="op">=</span> prey_list[i]</span>
 <span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a>                <span class="cf">if</span> prey.life <span class="op">&lt;</span> PREY_HUNGER_THRESH:</span></code></pre>
 </div>
-<p>Given that the following line 289 only has a relative 0.6% time, it
-can be understood that the vast majority of times the condition
-<code>prey.life &lt; PREY_HUNGER_THRESH</code> is evaluated it does not
-proceed.</p>
-<p>Remembering that this method is executed once per each of the 5000
-<code>Grass</code> agents each step of the model, it could make sense to
-pre-filter <code>prey_list</code> once each time-step before it is
-passed to <code>Grass::eaten()</code>. This would greatly reduce the
-number of <code>Prey</code> iterated, reducing the cost of the
-method.</p>
+<p>Given that these lines have 271.3 million hits, while the following
+lines only has 61.7 million, it appears that the vast majority of times,
+the condition <code>prey.life &lt; PREY_HUNGER_THRESH</code> is not
+fulfilled.</p>
+<p>Remembering that this method is executed once for each of the 5000
+<code>Grass</code> agents during each time step of the model, it could
+make sense to pre-filter <code>prey_list</code> once per time step
+before it is passed to <code>Grass::eaten()</code>. This would greatly
+reduce the number of <code>Prey</code> iterated, reducing the cost of
+the method.</p>
 </div>
 </div>
 </div>
@@ -2846,7 +2847,7 @@ in Python?</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
   <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
 </button>
-<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
+<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
 <div class="accordion-body">
 <p>Python strings have a lot of methods to perform common operations,
 like removing suffixes, replacing substrings, joining or splitting,
@@ -2861,7 +2862,7 @@ methods documentation</a> for a full list.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -2926,7 +2927,7 @@ lot of low-level step-by-step instructions?</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint2" aria-expanded="false" aria-controls="collapseHint2">
   <h4 class="accordion-header" id="headingHint2"> Give me a hint </h4>
 </button>
-<div id="collapseHint2" class="accordion-collapse collapse" aria-labelledby="headingHint2" data-bs-parent="#accordionHint2">
+<div id="collapseHint2" class="accordion-collapse collapse" data-bs-parent="#accordionHint2" aria-labelledby="headingHint2">
 <div class="accordion-body">
 <!-- Typical cases might include reading data from a file, …, … TODO: more examples? -->
 <p>(Before you try to rewrite those parts of your code, use a profiler
@@ -3840,7 +3841,7 @@ instead of writing your own code from scratch?</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
   <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
 </button>
-<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
+<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
 <div class="accordion-body">
 <p>These libraries could be specific to your area of research; but they
 could also include packages from other fields that provide tools you
@@ -4061,7 +4062,7 @@ version of this calculation?</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint2" aria-expanded="false" aria-controls="collapseHint2">
   <h4 class="accordion-header" id="headingHint2"> Give me a hint </h4>
 </button>
-<div id="collapseHint2" class="accordion-collapse collapse" aria-labelledby="headingHint2" data-bs-parent="#accordionHint2">
+<div id="collapseHint2" class="accordion-collapse collapse" data-bs-parent="#accordionHint2" aria-labelledby="headingHint2">
 <div class="accordion-body">
 <p>Remember that most common mathematical operations work element-wise
 when applied to NumPy arrays. For example:</p>
@@ -4082,7 +4083,7 @@ when applied to NumPy arrays. For example:</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb19">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
