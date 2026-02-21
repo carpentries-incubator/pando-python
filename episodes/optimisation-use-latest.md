@@ -41,7 +41,7 @@ Performance regressions within major packages should be considered rare, they of
 ## Support for older Python versions in the Scientific Python ecosystem
 
 In the last few years, many important packages in the Scientific Python ecosystem have agreed [a common policy](https://scientific-python.org/specs/spec-0000/) to support previous versions of Python for 3 years.
-For example, since October 2024, these packages stopped supporting Python 3.10; so if you are still using Python 3.10 (or even older versions), you’re now losing access to new features and performance improvements in NumPy, SciPy, Matplotlib and many other libraries. Time to update!
+For example, since October 2025, these packages stopped supporting Python 3.11; so if you are still using Python 3.11 (or even older versions), you’re now losing access to new features and performance improvements in NumPy, SciPy, Matplotlib and many other libraries. Time to update!
 
 :::::::::::::::::::::::::::::::::::::
 
