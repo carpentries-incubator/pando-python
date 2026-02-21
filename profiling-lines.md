@@ -425,7 +425,7 @@ Line-profile this method, using the output from the profile consider how it migh
 
 - Remember that the function needs to be decorated with `@profile`
 - This must be imported via `from line_profiler import profile`
-- Line-level profiling `Grass::eaten()`, the most called function will slow it down significantly. You may wish to reduce the number of steps `predprey.py:305`.
+- Line-level profiling `Grass::eaten()`, the most called function will slow it down significantly. You may wish to reduce the number of steps passed as an argument.
 
 :::::::::::::::::::::::::::::::::
 
@@ -446,7 +446,7 @@ from line_profiler import profile
 
 `line_profiler` can then be executed via `python -m kernprof -lvr predprey.py <steps>`.
 
-Since this will take much longer to run due to `line_profiler`, you may wish to profile fewer `steps` than you did in the function-level profiling exercise (250 was suggested for a full run).
+Since this will take much longer to run due to `line_profiler`, you may wish to profile fewer `steps` (e.g., use 30 steps instead of the 200 steps used in the function-level profiling exercise).
 In this instance it may change the profiling output slightly, as the number of `Prey` and their member variables evaluated by this method both change as the model progresses, but the overall pattern is likely to remain similar.
 
 Alternatively, you can kill the profiling process (e.g. `ctrl + c`) after a minute and the currently collected partial profiling information will be output.
@@ -457,7 +457,7 @@ This will produce output similar to that below.
 Wrote profile results to predprey.py.lprof
 Timer unit: 1e-06 s
 
-Total time: 101.573 s
+Total time: 92.9366 s
 File: predprey.py
 Function: eaten at line 278
 
@@ -465,33 +465,33 @@ Line #      Hits         Time  Per Hit   % Time  Line Contents
 ==============================================================
    278                                               @profile
    279                                               def eaten(self, prey_list):
-   280   1250000     227663.1      0.2      0.2          if self.available:
-   281   1201630     165896.4      0.1      0.2              prey_index = -1
-   282   1201630     166219.0      0.1      0.2              closest_prey = GRASS_EAT_DISTANCE
+   280   1000000     122091.0      0.1      0.1          if self.available:
+   281    735158      50360.0      0.1      0.1              prey_index = -1
+   282    735158      66788.0      0.1      0.1              closest_prey = GRASS_EAT_DISTANCE
    283
    284                                                       # Iterate prey_location messages to find the closest prey
-   285 198235791   29227902.1      0.1     28.8              for i in range(len(prey_list)):
-   286 197034161   30158318.8      0.2     29.7                  prey = prey_list[i]
-   287 197034161   38781451.1      0.2     38.2                  if prey.life < PREY_HUNGER_THRESH:
+   285 271999493   32227115.0      0.1     34.7              for i in range(len(prey_list)):
+   286 271264335   20278656.0      0.1     21.8                  prey = prey_list[i]
+   287 271264335   20704920.0      0.1     22.3                  if prey.life < PREY_HUNGER_THRESH:
    288                                                               # Check if they are within interaction radius
-   289   2969470     579923.4      0.2      0.6                      dx = self.x - prey.x
-   290   2969470     552092.2      0.2      0.5                      dy = self.y - prey.y
-   291   2969470     938669.8      0.3      0.9                      distance = math.sqrt(dx*dx + dy*dy)
+   289  61656593    4448711.0      0.1      4.8                      dx = self.x - prey.x
+   290  61656593    4591001.0      0.1      4.9                      dy = self.y - prey.y
+   291  61656593    5975450.0      0.1      6.4                      distance = math.sqrt(dx*dx + dy*dy)
    292
-   293   2969470     552853.8      0.2      0.5                      if distance < closest_prey:
-   294      2532        469.3      0.2      0.0                          prey_index = i
-   295      2532        430.1      0.2      0.0                          closest_prey = distance
+   293  61656593    4273085.0      0.1      4.6                      if distance < closest_prey:
+   294     13067        921.0      0.1      0.0                          prey_index = i
+   295     13067        843.0      0.1      0.0                          closest_prey = distance
    296
-   297   1201630     217534.5      0.2      0.2              if prey_index >= 0:
+   297    735158     189561.0      0.3      0.2              if prey_index >= 0:
    298                                                           # Add grass eaten message
-   299      2497       2181.8      0.9      0.0                  prey_list[prey_index].life += GAIN_FROM_FOOD_PREY
+   299     12078       2743.0      0.2      0.0                  prey_list[prey_index].life += GAIN_FROM_FOOD_PREY
    300
    301                                                           # Update grass agent variables
-   302      2497        793.9      0.3      0.0                  self.dead_cycles = 0
-   303      2497        631.0      0.3      0.0                  self.available = 0
+   302     12078       1244.0      0.1      0.0                  self.dead_cycles = 0
+   303     12078       3132.0      0.3      0.0                  self.available = 0
 ```
 
-From the profiling output it can be seen that lines 285-287 occupy over 90% of the method's runtime!
+From the profiling output it can be seen that lines 285-287 occupy almost 80% of the method's runtime!
 
 ```python
             for i in range(len(prey_list)):
@@ -499,9 +499,9 @@ From the profiling output it can be seen that lines 285-287 occupy over 90% of t
                 if prey.life < PREY_HUNGER_THRESH:
 ```
 
-Given that the following line 289 only has a relative 0.6% time, it can be understood that the vast majority of times the condition `prey.life < PREY_HUNGER_THRESH` is evaluated it does not proceed.
+Given that these lines have 271.3 million hits, while the following lines only has 61.7 million, it appears that the vast majority of times, the condition `prey.life < PREY_HUNGER_THRESH` is not fulfilled.
 
-Remembering that this method is executed once per each of the 5000 `Grass` agents each step of the model, it could make sense to pre-filter `prey_list` once each time-step before it is passed to `Grass::eaten()`. This would greatly reduce the number of `Prey` iterated, reducing the cost of the method.
+Remembering that this method is executed once for each of the 5000 `Grass` agents during each time step of the model, it could make sense to pre-filter `prey_list` once per time step before it is passed to `Grass::eaten()`. This would greatly reduce the number of `Prey` iterated, reducing the cost of the method.
 
 :::::::::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::

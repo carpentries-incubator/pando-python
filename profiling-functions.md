@@ -429,7 +429,7 @@ python -m snakeviz predprey_out.prof
 
 ## Exercise 2: Predator Prey
 
-Download and profile <a href="files/pred-prey/predprey.py" download>the Python predator prey model</a>, try to locate the function call(s) where the majority of execution time is being spent
+Download and profile <a href="files/pred-prey/predprey.py" download>the Python predator prey model</a>, try to locate the function call(s) where the majority of execution time is being spent.
 
 *This exercise uses the packages `numpy` and `matplotlib`, they can be installed via `pip install numpy matplotlib`.* 
 
@@ -438,7 +438,7 @@ Download and profile <a href="files/pred-prey/predprey.py" download>the Python p
 > The three agents; predators, prey and grass exist in a two dimensional grid. Predators eat prey, prey eat grass. The size of each population changes over time. Depending on the parameters of the model, the populations may oscillate, grow or collapse due to the availability of their food source.
 
 The program can be executed via `python predprey.py <steps>`.
-The value of `steps` for a full run is 250, however a full run may not be necessary to find the bottlenecks.
+The value of `steps` for a full run is 400, which may take a few minutes. However, using 100–200 steps should be sufficient to find the bottlenecks.
 
 When the model finishes it outputs a graph of the three populations `predprey_out.png`.
 
@@ -454,13 +454,13 @@ If the table is ordered by `ncalls`, it can be identified as the joint 4th most 
 
 If you checked `predprey_out.png` (shown below), you should notice that there are significantly more `Grass` agents than `Predators` or `Prey`.
 
-![`predprey_out.png` as produced by the default configuration of `predprey.py`.](episodes/fig/predprey_out.png){alt="A line graph plotting population over time through 250 steps of the pred prey model. Grass/20, shown in green, has a brief dip in the first 30 steps, but recovers holding steady at approximately 240 (4800 agents). Prey, shown in blue, starts at 200, quickly drops to around 185, before levelling off for steps and then slowly declining to a final value of 50. The data for predators, shown in red, has significantly more noise. There are 50 predators to begin, this rises briefly before falling to around 10, from here it noisily grows to around 70 by step 250 with several larger declines during the growth."}
+![`predprey_out.png` as produced by the default configuration of `predprey.py`.](episodes/fig/predprey_out.png){alt="A line graph plotting population over time through 400 time steps of the pred prey model. The amount of grass, shown in green, is scaled down by a factor of 20 to fit onto the graph. It has a brief dip in the first 25 steps, then slowly declines from approximately 220 to 150 over the next 200 steps, before steadily returning to 250. The number of prey, shown in blue, starts at 200, then grows to around 600 after 200 steps, before declining quickly and reaching zero at 350 to 400 steps. The number of predators, shown in red, falls from 50 to around 30 after 15 time steps, then grows to almost 700 by step 330 before declining quickly."}
 
 Similarly, the `Grass::eaten()` has a `percall` time is inline with other agent functions such as `Prey::flock()` (from `predprey.py:67`).
 
 Maybe we could investigate this further with line profiling!
 
-*You may have noticed many iciles on the right hand of the diagram, these primarily correspond to the `import` of `matplotlib` which is relatively expensive!*
+*You may have noticed many icicles on the right hand of the diagram, these primarily correspond to the `import` of `matplotlib` which is relatively expensive!*
 
 :::::::::::::::::::::::::::::::::
 :::::::::::::::::::::::::::::::::::::::::::::::
