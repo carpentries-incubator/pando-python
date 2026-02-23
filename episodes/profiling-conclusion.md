@@ -49,7 +49,7 @@ How to function-level profile:
 How to line-level profile:
 
 - Import `profile` from `line_profiling`
-- Decorate targeted methods with `@profile`
+- Decorate targeted functions with `@profile`
 - Execute `line_profiler` via `python -m kernprof -lvr <script name> <arguments>`
 
 ::::::::::::::::::::::::::::::::::::::::::::::::

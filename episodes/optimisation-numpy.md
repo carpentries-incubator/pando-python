@@ -26,7 +26,7 @@ Packages like NumPy and Pandas work similarly: They have been written in compile
 
 ## Using NumPy (Effectively)
 
-[NumPy](https://numpy.org/) is a commonly used package for scientific computing, which provides a wide variety of methods.
+[NumPy](https://numpy.org/) is a commonly used package for scientific computing, which provides a wide variety of functions.
 
 It adds restriction via its own [basic numeric types](https://numpy.org/doc/stable/user/basics.types.html) and static arrays to enable even greater performance than that of core Python. However if these restrictions are ignored, the performance can become significantly worse.
 
@@ -201,7 +201,7 @@ In contrast, numbers in a Python list [are spread across memory in a fairly comp
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-Earlier it was demonstrated that using core Python methods over a list will outperform a loop, performing the same calculation faster. The below example takes this a step further by demonstrating the calculation of a dot product.
+Earlier it was demonstrated that using core Python functions on a list will outperform a loop, performing the same calculation faster. The below example takes this a step further by demonstrating the calculation of a dot product.
 
 <!-- Inspired by High Performance Python Chapter 6 example 
 Added Python sum array, skipped a couple of others--> 
@@ -376,11 +376,11 @@ Similar to NumPy, Pandas enables greater performance than pure Python implementa
 
 ### Operating on Rows
 
-Pandas' methods by default operate on columns. Each column or series can be thought of as a NumPy array, highly suitable for vectorisation.
+Pandas' functions by default operate on columns. Each column or series can be thought of as a NumPy array, highly suitable for vectorisation.
 
 Following the theme of this episode, iterating over the rows of a data frame using a `for` loop is not advised. The pythonic iteration will be slower than other approaches.
 
-Pandas allows its own methods to be applied to rows in many cases by passing `axis=1`, where available these functions should be preferred over manual loops. Where you can't find a suitable method, `apply()` can be used, which is similar to `map()`, to apply your own function to rows.
+Pandas allows its own functions to be applied to rows in many cases by passing `axis=1`, where available these functions should be preferred over manual loops. Where you can't find a suitable function, `apply()` can be used, which is similar to `map()`, to apply your own function to rows.
 
 ```python
 from timeit import timeit

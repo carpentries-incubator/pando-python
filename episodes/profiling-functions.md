@@ -192,7 +192,7 @@ python -m snakeviz out.prof
 
 This should open your web browser displaying a page similar to that below.
 
-![An example of the default 'icicle' visualisation provided by `snakeviz`.](episodes/fig/snakeviz-home.png){alt='A web page, with a central diagram representing a call-stack, with the root at the top and the horizontal axis representing the duration of each call. Below this diagram is the top of a table detailing the statistics of individual methods.'}
+![An example of the default 'icicle' visualisation provided by `snakeviz`.](episodes/fig/snakeviz-home.png){alt='A web page, with a central diagram representing a call-stack, with the root at the top and the horizontal axis representing the duration of each call. Below this diagram is the top of a table detailing the statistics of individual functions.'}
 
 <!-- From SnakeViz docs
 In the icicle visualization style functions are represented by rectangles. A root function is the top-most rectangle, with functions it calls below it, then the functions those call below them, and so on. The amount of time spent inside a function is represented by the width of the rectangle. A rectangle that stretches across most of the visualization represents a function that is taking up most of the time of its calling function, while a skinny rectangle represents a function that is using hardly any time at all.
@@ -200,12 +200,12 @@ In the icicle visualization style functions are represented by rectangles. A roo
 
 The icicle diagram displayed by `snakeviz` represents an aggregate of the call stack during the execution of the profiled code.
 The box which fills the top row represents the root call, filling the row shows that it occupied 100% of the runtime.
-The second row holds the child methods called from the root, with their widths relative to the proportion of runtime they occupied.
-This continues with each subsequent row, however where a method only occupies 50% of the runtime, its children can only occupy a maximum of that runtime hence the appearance of "icicles" as each row gets narrower when the overhead of methods with no further children is accounted for.
+The second row holds the child functions called from the root, with their widths relative to the proportion of runtime they occupied.
+This continues with each subsequent row, however where a function only occupies 50% of the runtime, its children can only occupy a maximum of that runtime hence the appearance of "icicles" as each row gets narrower when the overhead of functions with no further children is accounted for.
 
-By clicking a box within the diagram, it will "zoom" making the selected box the root allowing more detail to be explored. The diagram is limited to 10 rows by default ("Depth") and methods with a relatively small proportion of the runtime are hidden ("Cutoff").
+By clicking a box within the diagram, it will "zoom" making the selected box the root allowing more detail to be explored. The diagram is limited to 10 rows by default ("Depth") and functions with a relatively small proportion of the runtime are hidden ("Cutoff").
 
-As you hover each box, information to the left of the diagram updates specifying the location of the method and for how long it ran.
+As you hover over each box, information to the left of the diagram updates specifying the location of the function and for how long it ran.
 
 ::::::::::::::::::::::::::::::::::::: callout
 
@@ -283,7 +283,7 @@ def d_1():
 a_1()
 ```
 
-All of the methods except for `b_1()` call `time.sleep()`, this is used to provide synthetic bottlenecks to create an interesting profile.
+All of the functions except for `b_1()` call `time.sleep()`, this is used to provide synthetic bottlenecks to create an interesting profile.
 
 * `a_1()` calls `b_1()` x3 and `b_2()` x1
 * `b_1()` calls `c_1()` x1 and `c_2()` x1
@@ -305,11 +305,11 @@ python -m snakeviz out.prof
 <!-- TODO: Alt text here is redundant? -->
 ![An icicle visualisation provided by `snakeviz` for the above Python code.](episodes/fig/snakeviz-worked-example-icicle.png){alt='The snakeviz icicle visualisation for the worked example Python code.'}
 
-The third row represents `a_1()`, the only method called from global scope, therefore the first two rows represent Python's internal code for launching our script and can be ignored (by clicking on the third row).
+The third row represents `a_1()`, the only function called from global scope, therefore the first two rows represent Python's internal code for launching our script and can be ignored (by clicking on the third row).
 
 The row following `a_1()` is split into three boxes representing `b_1()`, `time.sleep()` and `b_2()`. Note that `b_1()` is called three times, but only has one box within the icicle diagram. The boxes are ordered left-to-right according to cumulative time, which happens to be the order they were first called.
 
-If the box for `time.sleep()` is hovered it will change colour along with several other boxes that represent the other locations that `time.sleep()` was called from. Note that each of these boxes display the same duration, the timing statistics collected by `cProfile` (and visualised by `snakeviz`) are aggregate, so there is no information about individual method calls for methods which were called multiple times. This does however mean that if you check the properties to the left of the diagram whilst hovering `time.sleep()` you will see a cumulative time of 99% reported, the overhead of the method calls and for loop is insignificant in contrast to the time spent sleeping!
+If the box for `time.sleep()` is hovered it will change colour along with several other boxes that represent the other locations that `time.sleep()` was called from. Note that each of these boxes display the same duration, the timing statistics collected by `cProfile` (and visualised by `snakeviz`) are aggregate, so there is no information about individual function calls for functions which were called multiple times. This does however mean that if you check the properties to the left of the diagram whilst hovering `time.sleep()` you will see a cumulative time of 99% reported, the overhead of the function calls and for loop is insignificant in contrast to the time spent sleeping!
 
 *Below are the properties shown, the time may differ if you generated the profile yourself.*
 
@@ -319,17 +319,17 @@ If the box for `time.sleep()` is hovered it will change colour along with severa
 * **Line:** `0`
 * **Directory:**
 
-As `time.sleep()` is a core Python method it is displayed as "built-in method" and doesn't have a file, line or directory.
+As `time.sleep()` is a core Python function it is displayed as "built-in method" and doesn't have a file, line or directory.
 
-If you hover any boxes representing the methods from the above code, you will see file and line properties completed. The directory property remains empty as the profiled code was in the root of the working directory. A profile of a large project with many files across multiple directories will see this filled.
+If you hover any boxes representing the functions from the above code, you will see file and line properties completed. The directory property remains empty as the profiled code was in the root of the working directory. A profile of a large project with many files across multiple directories will see this filled.
 
 Find the box representing `c_2()` on the icicle diagram, its children are unlabelled because they are not wide enough (but they can still be hovered). Clicking `c_2()` zooms in the diagram, showing the children to be `time.sleep()` and `d_1()`.
 
 To zoom back out you can either click the top row, which will zoom out one layer, or click "Reset Zoom" on the left-hand side.
 
-In this simple example the execution is fairly evenly balanced between all of the user-defined methods, so there is not a clear hot-spot to investigate.
+In this simple example the execution is fairly evenly balanced between all of the user-defined functions, so there is not a clear hot-spot to investigate.
 
-Below the icicle diagram, there is a table similar to the default output from `cProfile`. However, in this case you can sort the columns by clicking their headers and filter the rows shown by entering a filename in the search box. This allows built-in methods to be hidden, which can make it easier to highlight optimisation priorities.
+Below the icicle diagram, there is a table similar to the default output from `cProfile`. However, in this case you can sort the columns by clicking their headers and filter the rows shown by entering a filename in the search box. This allows built-in functions to be hidden, which can make it easier to highlight optimisation priorities.
 
 **Notebooks**
 
@@ -345,7 +345,7 @@ Because notebooks operate by creating temporary Python files, the filename (show
 
 `snakeviz` provides an alternate "Sunburst" visualisation, accessed via the "Style" drop-down on the left-hand side.
 
-This provides the same information as "Icicle", however the rows are instead circular with the root method call found at the center.
+This provides the same information as "Icicle", however the rows are instead circular with the root function call found at the center.
 
 The sunburst visualisation displays less text on the boxes, so it can be harder to interpret. However, it increases the visibility of boxes further from the root call.
 
