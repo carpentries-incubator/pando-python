@@ -447,7 +447,7 @@ When the model finishes it outputs a graph of the three populations `predprey_ou
 
 :::::::::::::::::::::::: solution 
 
-It should be clear from the profile that the function `Grass::eaten()` (from `predprey.py:278`) occupies the majority of the runtime.
+It should be clear from the profile that the function `Grass.eaten()` (from `predprey.py:278`) occupies the majority of the runtime.
 
 From the table below the Icicle diagram, we can see that it was called 1,250,000 times.
 
@@ -459,7 +459,7 @@ If you checked `predprey_out.png` (shown below), you should notice that there ar
 
 ![`predprey_out.png` as produced by the default configuration of `predprey.py`.](episodes/fig/predprey_out.png){alt="A line graph plotting population over time through 400 time steps of the pred prey model. The amount of grass, shown in green, is scaled down by a factor of 20 to fit onto the graph. It has a brief dip in the first 25 steps, then slowly declines from approximately 220 to 150 over the next 200 steps, before steadily returning to 250. The number of prey, shown in blue, starts at 200, then grows to around 600 after 200 steps, before declining quickly and reaching zero at 350 to 400 steps. The number of predators, shown in red, falls from 50 to around 30 after 15 time steps, then grows to almost 700 by step 330 before declining quickly."}
 
-Similarly, the `Grass::eaten()` has a `percall` time is inline with other agent functions such as `Prey::flock()` (from `predprey.py:67`).
+Similarly, the `Grass.eaten()` has a `percall` time is inline with other agent functions such as `Prey.flock()` (from `predprey.py:67`).
 
 Maybe we could investigate this further with line profiling!
 
