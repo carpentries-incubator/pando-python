@@ -174,7 +174,7 @@ You may already have a different testing workflow in-place for validating the co
 
 ::: instructor
 
-* Fixtures: A test fixture is a common class which multiple tests can inherit from. This class will typically include methods that perform common initialisation and teardown actions around the behaviour to be tested. This reduces repeated code.
+* Fixtures: A test fixture is a common class which multiple tests can inherit from. This class will typically include functions that perform common initialisation and teardown actions around the behaviour to be tested. This reduces repeated code.
 * Mocking: If you wish to test a feature which would relies on a live or temperamental service, such as making API calls to a website. You can mock that API, so that when the test runs synthetic responses are produced rather than the real API being used.
 * Test skipping: You may have configurations of your software that cause certain tests to be unsupported. Skipping allows conditions to be added to tests, to decide whether they should be executed or skipped.
 

@@ -444,13 +444,13 @@ When the model finishes it outputs a graph of the three populations `predprey_ou
 
 :::::::::::::::::::::::: solution 
 
-It should be clear from the profile that the method `Grass::eaten()` (from `predprey.py:278`) occupies the majority of the runtime.
+It should be clear from the profile that the function `Grass::eaten()` (from `predprey.py:278`) occupies the majority of the runtime.
 
 From the table below the Icicle diagram, we can see that it was called 1,250,000 times.
 
 ![The top of the table shown by snakeviz.](episodes/fig/snakeviz-predprey-table.png){alt='The top 9 rows of the table shown by snakeviz when profiling predprey.py. The top row shows that predprey.py:278(eaten) was called 1,250,000 times, taking a total time of 8 seconds. The table is ordered in descending total time, with the next row taking a mere 0.74 seconds.'}
 
-If the table is ordered by `ncalls`, it can be identified as the joint 4th most called method and 2nd most called method from `predprey.py`.
+If the table is ordered by `ncalls`, it can be identified as the joint 4th most called function and 2nd most called function from `predprey.py`.
 
 If you checked `predprey_out.png` (shown below), you should notice that there are significantly more `Grass` agents than `Predators` or `Prey`.
 

@@ -419,7 +419,7 @@ python -m line_profiler -rm predprey.py.lprof
 During the function-level profiling episode, <a href="files/pred-prey/predprey.py" download>the Python predator prey model</a> was function-level profiled.
 This highlighted that `Grass::eaten()` (from `predprey.py:278`) occupies the majority of the runtime.
 
-Line-profile this method, using the output from the profile consider how it might be optimised.
+Line-profile this function, using the output from the profile consider how it might be optimised.
 
 :::::::::::::::::::::::: hint
 
@@ -491,7 +491,7 @@ Line #      Hits         Time  Per Hit   % Time  Line Contents
    303     12078       3132.0      0.3      0.0                  self.available = 0
 ```
 
-From the profiling output it can be seen that lines 285-287 occupy almost 80% of the method's runtime!
+From the profiling output it can be seen that lines 285-287 occupy almost 80% of the function's runtime!
 
 ```python
             for i in range(len(prey_list)):
@@ -501,7 +501,7 @@ From the profiling output it can be seen that lines 285-287 occupy almost 80% of
 
 Given that these lines have 271.3 million hits, while the following lines only has 61.7 million, it appears that the vast majority of times, the condition `prey.life < PREY_HUNGER_THRESH` is not fulfilled.
 
-Remembering that this method is executed once for each of the 5000 `Grass` agents during each time step of the model, it could make sense to pre-filter `prey_list` once per time step before it is passed to `Grass::eaten()`. This would greatly reduce the number of `Prey` iterated, reducing the cost of the method.
+Remembering that this function is executed once for each of the 5000 `Grass` agents during each time step of the model, it could make sense to pre-filter `prey_list` once per time step before it is passed to `Grass::eaten()`. This would greatly reduce the number of `Prey` iterated, reducing the cost of the function.
 
 :::::::::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::
