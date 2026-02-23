@@ -26,9 +26,8 @@ Packages like NumPy and Pandas work similarly: They have been written in compile
 
 ## Using NumPy (Effectively)
 
-[NumPy](https://numpy.org/) is a commonly used package for scientific computing, which provides a wide variety of functions.
-
-It adds restriction via its own [basic numeric types](https://numpy.org/doc/stable/user/basics.types.html) and static arrays to enable even greater performance than that of core Python. However if these restrictions are ignored, the performance can become significantly worse.
+[NumPy](https://numpy.org/) is a commonly used package for scientific computing. It provides a wide variety of functions, as well as its own [basic numeric types](https://numpy.org/doc/stable/user/basics.types.html) and static arrays to enable even greater performance than that of core Python.
+However, these more specialised types come with restrictions—and if these restrictions are ignored, the performance can become significantly worse.
 
 ![Illustration of a NumPy array and a Python list.](episodes/fig/numpy-array-vs-list.png){alt="A diagram illustrating the difference between a NumPy array and a Python list. The NumPy array is a raw block of memory containing numerical values. A Python list contains a header with metadata and multiple items, each of which is a reference to another Python object with its own header and value."}
 <!-- Figure inspired by https://jakevdp.github.io/blog/2014/05/09/why-python-is-slow/#3.-Python's-object-model-can-lead-to-inefficient-memory-access -->
@@ -55,7 +54,7 @@ def array_resize():
     for i in range(1, N):
         ar.resize(i+1)
         ar[i] = i
-        
+
 repeats = 1000
 print(f"list_append: {timeit(list_append, number=repeats):.2f}ms")
 print(f"array_resize: {timeit(array_resize, number=repeats):.2f}ms")
@@ -449,9 +448,9 @@ def vectorize():
     vertical = df["f_vertical"]
     horizontal = df["f_horizontal"]
 
-    # Your code goes here
+    result = ...  # Your code goes here
 
-    return pandas.Series(results)
+    return pandas.Series(result)
 ```
 
 Once you’ve done that, measure your performance by running

@@ -1,14 +1,14 @@
 ---
-title: "Function Level Profiling"
+title: "Function-Level Profiling"
 teaching: 20
 exercises: 20
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions
 
-- When is function level profiling appropriate?
+- When is function-level profiling appropriate?
 - How can `cProfile` and `snakeviz` be used to profile a Python program?
-- How are the outputs from function level profiling interpreted?
+- How are the outputs from function-level profiling interpreted?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -63,10 +63,13 @@ import traceback
 def a():
     b1()
     b2()
+
 def b1():
     pass
+
 def b2():
     c()
+
 def c():
     traceback.print_stack()
 
@@ -226,7 +229,7 @@ Following this, you can either call `%snakeviz` to profile a function defined ea
 %snakeviz my_function()
 ```
 
-Or, you can create a `%%snakeviz` cell, to profile the python executed within it.
+Or, you can create a `%%snakeviz` cell, to profile the Python code executed within it.
 
 ```py
 %%snakeviz
@@ -309,7 +312,7 @@ The third row represents `a_1()`, the only function called from global scope, th
 
 The row following `a_1()` is split into three boxes representing `b_1()`, `time.sleep()` and `b_2()`. Note that `b_1()` is called three times, but only has one box within the icicle diagram. The boxes are ordered left-to-right according to cumulative time, which happens to be the order they were first called.
 
-If the box for `time.sleep()` is hovered it will change colour along with several other boxes that represent the other locations that `time.sleep()` was called from. Note that each of these boxes display the same duration, the timing statistics collected by `cProfile` (and visualised by `snakeviz`) are aggregate, so there is no information about individual function calls for functions which were called multiple times. This does however mean that if you check the properties to the left of the diagram whilst hovering `time.sleep()` you will see a cumulative time of 99% reported, the overhead of the function calls and for loop is insignificant in contrast to the time spent sleeping!
+If you hover over the box for `time.sleep()`, it will change colour along with several other boxes that represent the other locations that `time.sleep()` was called from. Note that each of these boxes display the same duration, the timing statistics collected by `cProfile` (and visualised by `snakeviz`) are aggregate, so there is no information about individual function calls for functions which were called multiple times. This does however mean that if you check the properties to the left of the diagram whilst hovering over `time.sleep()` you will see a cumulative time of 99% reported, the overhead of the function calls and for loop is insignificant in contrast to the time spent sleeping!
 
 *Below are the properties shown, the time may differ if you generated the profile yourself.*
 
@@ -321,9 +324,9 @@ If the box for `time.sleep()` is hovered it will change colour along with severa
 
 As `time.sleep()` is a core Python function it is displayed as "built-in method" and doesn't have a file, line or directory.
 
-If you hover any boxes representing the functions from the above code, you will see file and line properties completed. The directory property remains empty as the profiled code was in the root of the working directory. A profile of a large project with many files across multiple directories will see this filled.
+If you hover over any boxes representing the functions from the above code, you will see file and line properties completed. The directory property remains empty as the profiled code was in the root of the working directory. A profile of a large project with many files across multiple directories will see this filled.
 
-Find the box representing `c_2()` on the icicle diagram, its children are unlabelled because they are not wide enough (but they can still be hovered). Clicking `c_2()` zooms in the diagram, showing the children to be `time.sleep()` and `d_1()`.
+Find the box representing `c_2()` on the icicle diagram, its children are unlabelled because they are not wide enough (but they can still be hovered over). Clicking `c_2()` zooms in the diagram, showing the children to be `time.sleep()` and `d_1()`.
 
 To zoom back out you can either click the top row, which will zoom out one layer, or click "Reset Zoom" on the left-hand side.
 
@@ -361,7 +364,7 @@ The following exercises allow you to review your understanding of what has been 
 
 :::::::::::::::::::::::::::::::::: instructor
 
-Arguments 1-9 passed to `travellingsales.py` should execute relatively fast (less than a minute)
+Arguments 1-9 passed to `travellingsales.py` should execute relatively fast (less than a minute).
 
 This will be slower via the profiler, and is likely to vary on different hardware.
 
@@ -402,7 +405,7 @@ The value of `cities` should be a positive integer, this algorithm has poor scal
 
 The hotspot only becomes visible when an argument of `5` or greater is passed.
 
-You should see that `distance()` (from `travellingsales.py:11`) becomes the largest box (similarly its parent in the call-stack `total_distance()`) showing that it scales poorly with the number of cities. With 5 cities, `distance()` has a cumulative time of `~35%` the runtime, this increases to `~60%` with 9 cities.
+You should see that `distance()` (from `travellingsales.py:11`) becomes the largest box (similarly its parent in the call-stack, `total_distance()`) showing that it scales poorly with the number of cities. With 5 cities, `distance()` has a cumulative time of `~35%` the runtime, this increases to `~60%` with 9 cities.
 
 Other boxes within the diagram correspond to the initialisation of imports, or initialisation of cities. These have constant or linear scaling, so their cost barely increases with the number of cities.
 
@@ -468,8 +471,8 @@ Maybe we could investigate this further with line profiling!
 
 ::::::::::::::::::::::::::::::::::::: keypoints
 
-- A python program can be function level profiled with `cProfile` via `python -m cProfile -o <output file> <script name> <arguments>`.
+- A Python program can be function-level profiled with `cProfile` via `python -m cProfile -o <output file> <script name> <arguments>`.
 - The output file from `cProfile` can be visualised with `snakeviz` via `python -m snakeviz <output file>`.
-- Function level profiling output displays the nested call hierarchy, listing both the cumulative and total minus sub functions time.
+- Function-level profiling output displays the nested call hierarchy, listing both the cumulative and total minus sub functions time.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::

@@ -33,11 +33,11 @@ Why programmers can benefit from profiling:
 
 - Narrows down the costly areas of code, allowing optimisation to be prioritised or decided to be unnecessary.
 
-When to Profile:
+When to profile:
 
 - Profiling should be performed on functional code, either when concerned about performance or prior to release/deployment.
 
-What to Profile:
+What to profile:
 
 - The collection of profiling metrics will often slow the execution of code, therefore the test-case should be narrow whilst remaining representative of a realistic run.
 
