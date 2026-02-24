@@ -24,10 +24,10 @@ exercises: 30
 ## Introduction
 
 <!-- Context -->
-Whilst profiling, you may find that function-level profiling highlights expensive methods where you can't easily determine the cause of the cost due to their complexity.
+Whilst profiling, you may find that function-level profiling highlights expensive functions where you can't easily determine the cause of the cost due to their complexity.
 
 <!-- What -->
-Line level profiling allows you to target specific methods to collect more granular metrics, which can help narrow the source of expensive computation further. Typically, line-level profiling will calculate the number of times each line is called and the total time spent executing each line. However, with the increased granularity come increased collection costs, which is why it's targeted to specific methods.
+Line level profiling allows you to target specific functions to collect more granular metrics, which can help narrow the source of expensive computation further. Typically, line-level profiling will calculate the number of times each line is called and the total time spent executing each line. However, with the increased granularity come increased collection costs, which is why it's targeted to specific functions.
 
 <!-- Why -->
 This allows lines that occupy a disproportionate amount of the total runtime to be quickly identified and investigated.
@@ -47,7 +47,7 @@ It is not part of the Python standard library, and therefore must be installed v
 pip install "line_profiler[all]"
 ```
 
-To use `line_profiler` decorate methods to be profiled with `@profile` which is imported from `line_profiler`.
+To use `line_profiler` decorate functions to be profiled with `@profile` which is imported from `line_profiler`.
 
 For example, the below code:
 
@@ -80,7 +80,7 @@ def is_prime(number):
 print(is_prime(1087))
 ```
 
-This tells `line_profiler` to collect metrics for the lines within the method `is_prime()`.
+This tells `line_profiler` to collect metrics for the lines within the function `is_prime()`.
 You can still execute your code as normal, and these changes will have no effect.
 
 Similar to the earlier tools, `line_profiler` can then be triggered via `kernprof`.
@@ -89,7 +89,7 @@ Similar to the earlier tools, `line_profiler` can then be triggered via `kernpro
 python -m kernprof -lvr my_script.py
 ```
 
-This will output a table per profiled method to console:
+This will output a table per profiled function to console:
 
 ```output
 Wrote profile results to my_script.py.lprof
@@ -122,8 +122,8 @@ The columns have the following definitions:
 | `% Time` | The time spent executing the line, including child function calls, relative to the other lines of the function. |
 | `Line Contents` | A copy of the line from the file. |
 
-As `line_profiler` must be attached to specific methods and cannot attach to a full Python file or project,
-if your Python file has significant code in the global scope it will be necessary to move it into a new method which can then instead be called from global scope.
+As `line_profiler` must be attached to specific functions and cannot attach to a full Python file or project,
+if your Python file has significant code in the global scope it will be necessary to move it into a new function which can then instead be called from global scope.
 
 The profile is also output to file, in this case `my_script.py.lprof`.
 This file is not human-readable, but can be printed to console by passing it to `line_profiler`, which will then display the same table as above.
@@ -131,7 +131,7 @@ This file is not human-readable, but can be printed to console by passing it to 
 ```sh
 python -m line_profiler -rm my_script.py.lprof
 ```
-<!-- TODO line_profiling significantly slows down the profiled methods. Is it possible to dynamically disable/enable profiling with `line_profiler`? kernprof -h implies so, but trial/error and docs is failing me -->
+<!-- TODO line_profiling significantly slows down the profiled functions. Is it possible to dynamically disable/enable profiling with `line_profiler`? kernprof -h implies so, but trial/error and docs is failing me -->
 
 ## Worked Example
 
@@ -158,7 +158,7 @@ for i in range(1, n + 1):
         print(i)
 ```
 
-As there are no methods, firstly it should be updated to move the code to be profiled into a method:
+As there are no functions, firstly it should be updated to move the code to be profiled into a function:
 
 ```python
 def fizzbuzz(n):
@@ -175,7 +175,7 @@ def fizzbuzz(n):
 fizzbuzz(100)
 ```
 
-Next the method can be decorated with `@profile` which must be imported via `line_profiler`:
+Next the function can be decorated with `@profile` which must be imported via `line_profiler`:
 
 ```python
 from line_profiler import profile
@@ -201,7 +201,7 @@ Now that the code has been decorated, it can be profiled!
 python -m kernprof -lvr fizzbuzz.py
 ```
 
-This will output a table per profiled method to console:
+This will output a table per profiled function to console:
 
 *If you run this locally it should be highlighted due to `-r` passed to `kernprof`.*
 
@@ -299,7 +299,7 @@ The value of `elements` should be a positive integer as it represents the number
 
 :::::::::::::::::::::::: hint
 
-- Remember that the code needs to be moved into a method decorated with `@profile`
+- Remember that the code needs to be moved into a function decorated with `@profile`
 - This must be imported via `from line_profiler import profile`
 - 100 elements should be suitable for a quick profile
 
@@ -417,15 +417,15 @@ python -m line_profiler -rm predprey.py.lprof
 ## Exercise 2: Predator Prey
 
 During the function-level profiling episode, <a href="files/pred-prey/predprey.py" download>the Python predator prey model</a> was function-level profiled.
-This highlighted that `Grass::eaten()` (from `predprey.py:278`) occupies the majority of the runtime.
+This highlighted that `Grass.eaten()` (from `predprey.py:278`) occupies the majority of the runtime.
 
-Line-profile this method, using the output from the profile consider how it might be optimised.
+Line-profile this function, using the output from the profile consider how it might be optimised.
 
 :::::::::::::::::::::::: hint
 
 - Remember that the function needs to be decorated with `@profile`
 - This must be imported via `from line_profiler import profile`
-- Line-level profiling `Grass::eaten()`, the most called function will slow it down significantly. You may wish to reduce the number of steps passed as an argument.
+- Line-level profiling `Grass.eaten()`, the most called function will slow it down significantly. You may wish to reduce the number of steps passed as an argument.
 
 :::::::::::::::::::::::::::::::::
 
@@ -491,7 +491,7 @@ Line #      Hits         Time  Per Hit   % Time  Line Contents
    303     12078       3132.0      0.3      0.0                  self.available = 0
 ```
 
-From the profiling output it can be seen that lines 285-287 occupy almost 80% of the method's runtime!
+From the profiling output it can be seen that lines 285-287 occupy almost 80% of the function's runtime!
 
 ```python
             for i in range(len(prey_list)):
@@ -501,7 +501,7 @@ From the profiling output it can be seen that lines 285-287 occupy almost 80% of
 
 Given that these lines have 271.3 million hits, while the following lines only has 61.7 million, it appears that the vast majority of times, the condition `prey.life < PREY_HUNGER_THRESH` is not fulfilled.
 
-Remembering that this method is executed once for each of the 5000 `Grass` agents during each time step of the model, it could make sense to pre-filter `prey_list` once per time step before it is passed to `Grass::eaten()`. This would greatly reduce the number of `Prey` iterated, reducing the cost of the method.
+Remembering that this function is executed once for each of the 5000 `Grass` agents during each time step of the model, it could make sense to pre-filter `prey_list` once per time step before it is passed to `Grass.eaten()`. This would greatly reduce the number of `Prey` iterated, reducing the cost of the function.
 
 :::::::::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::
@@ -509,9 +509,9 @@ Remembering that this method is executed once for each of the 5000 `Grass` agent
 
 ::::::::::::::::::::::::::::::::::::: keypoints
 
-- Specific methods can be line-level profiled if decorated with `@profile` that is imported from `line_profiler`.
+- Specific functions can be line-level profiled if decorated with `@profile` that is imported from `line_profiler`.
 - `kernprof` executes `line_profiler` via `python -m kernprof -lvr <script name> <arguments>`.
-- Code in global scope must be wrapped in a method if it is to be profiled with `line_profiler`.
+- Code in global scope must be wrapped in a function if it is to be profiled with `line_profiler`.
 - The output from `line_profiler` lists the absolute and relative time spent per line for each targeted function.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
