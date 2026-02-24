@@ -37,13 +37,13 @@ It adds restriction via its own [basic numeric types](https://numpy.org/doc/stab
 
 NumPy's arrays (not to be confused with the core Python `array` package) are static arrays. Unlike core Python's lists, they do not dynamically resize. Therefore, if you wish to append to a NumPy array, you must call `resize()` first. If you treat this like `append()` for a Python list, resizing for each individual append, you will be performing significantly more copies and memory allocations than a Python list.
 
-The below example sees lists and arrays constructed from `range(100000)`.
+The below example sees lists and arrays constructed from `range(100_000)`.
 
 ```python
 from timeit import timeit
 import numpy
 
-N = 100000  # Number of elements in list/array
+N = 100_000  # Number of elements in list/array
 
 def list_append():
     ls = []
@@ -57,15 +57,15 @@ def array_resize():
         ar[i] = i
         
 repeats = 1000
-print(f"list_append: {timeit(list_append, number=repeats):.2f}ms")
-print(f"array_resize: {timeit(array_resize, number=repeats):.2f}ms")
+print(f"list_append: {timeit(list_append, number=repeats):.2f} s")
+print(f"array_resize: {timeit(array_resize, number=repeats):.2f} s")
 ```
 
 For Python lists, we've seen earlier that list comprehensions are more efficient, so we prefer to avoid using a large number of `append` operations if possible. Similarly, we should try to avoid resizing NumPy arrays, where the overhead is even higher (5.2x slower than a list, probably 10x slower than list comprehension).
 
 ```output
-list_append: 3.50ms
-array_resize: 18.04ms
+list_append: 3.50 s
+array_resize: 18.04 s
 ```
 
 Another difference, is that NumPy arrays typically require all data to be the same type (and a NumPy type). This enables more efficient access to elements, as they all exist contiguously in memory. In contrast, elements within Python lists can be of any type so the list always stores a pointer to where the element actually exists in memory, rather than the actual element. This has the side effect that if you are converting back and forth between Python lists and NumPy arrays, there is an additional overhead as it's not as simple as copying a single block of memory.
@@ -97,11 +97,11 @@ The below example demonstrates the overhead of mixing Python lists and NumPy fun
 
 ```sh
 # Python list, numpy.random.choice()
->python -m timeit -s "import numpy; ls = list(range(10000))" "numpy.random.choice(ls)"
+>python -m timeit -s "import numpy; ls = list(range(10_000))" "numpy.random.choice(ls)"
 1000 loops, best of 5: 267 usec per loop
 
 # NumPy array, numpy.random.choice()
->python -m timeit -s "import numpy; ar = numpy.arange(10000)" "numpy.random.choice(ar)"
+>python -m timeit -s "import numpy; ar = numpy.arange(10_000)" "numpy.random.choice(ar)"
 50000 loops, best of 5: 4.06 usec per loop
 ```
 
@@ -111,11 +111,11 @@ Passing a Python list to `numpy.random.choice()` is 65.6x slower than passing a 
 
 ```sh
 # Python list, Manually select 1 item
->python -m timeit -s "import numpy; ls = list(range(10000))" "ls[numpy.random.randint(len(ls))]"
+>python -m timeit -s "import numpy; ls = list(range(10_000))" "ls[numpy.random.randint(len(ls))]"
 200000 loops, best of 5: 1.19 usec per loop
 
 # NumPy array, Manually select 1 item
->python -m timeit -s "import numpy; ar = numpy.arange(10000)" "ar[numpy.random.randint(len(ar))]"
+>python -m timeit -s "import numpy; ar = numpy.arange(10_000)" "ar[numpy.random.randint(len(ar))]"
 200000 loops, best of 5: 1.22 usec per loop
 ```
 
@@ -208,7 +208,7 @@ Added Python sum array, skipped a couple of others-->
 ```python
 from timeit import timeit
 
-N = 1000000  # Number of elements in list
+N = 1_000_000  # Number of elements in list
 
 gen_list = f"ls = list(range({N}))"
 gen_array = f"import numpy; ar = numpy.arange({N}, dtype=numpy.int64)"
@@ -218,24 +218,24 @@ py_sum_ar = "sum(ar*ar)"
 np_sum_ar = "numpy.sum(ar*ar)"
 np_dot_ar = "numpy.dot(ar, ar)"
 
-repeats = 1000
-print(f"python_sum_list: {timeit(py_sum_ls, setup=gen_list, number=repeats):.2f}ms")
-print(f"python_sum_array: {timeit(py_sum_ar, setup=gen_array, number=repeats):.2f}ms")
-print(f"numpy_sum_array: {timeit(np_sum_ar, setup=gen_array, number=repeats):.2f}ms")
-print(f"numpy_dot_array: {timeit(np_dot_ar, setup=gen_array, number=repeats):.2f}ms")
+repeats = 100
+print(f"python_sum_list: {timeit(py_sum_ls, setup=gen_list, number=repeats):.3f} s")
+print(f"python_sum_array: {timeit(py_sum_ar, setup=gen_array, number=repeats):.3f} s")
+print(f"numpy_sum_array: {timeit(np_sum_ar, setup=gen_array, number=repeats):.3f} s")
+print(f"numpy_dot_array: {timeit(np_dot_ar, setup=gen_array, number=repeats):.3f} s")
 ```
 
 ```output
-python_sum_list: 46.93ms
-python_sum_array: 33.26ms
-numpy_sum_array: 1.44ms
-numpy_dot_array: 0.29ms
+python_sum_list: 4.693 s
+python_sum_array: 3.326 s
+numpy_sum_array: 0.144 s
+numpy_dot_array: 0.029 s
 ```
 
-* `python_sum_list` uses list comprehension to perform the multiplication, followed by the Python core `sum()`. This comes out at 46.93ms
-* `python_sum_array` instead directly multiplies the two arrays (taking advantage of NumPy's vectorisation) but uses the core Python `sum()`, this comes in slightly faster at 33.26ms.
-* `numpy_sum_array` again takes advantage of NumPy's vectorisation for the multiplication, and additionally uses NumPy's `sum()` implementation. These two rounds of vectorisation provide a much faster 1.44ms completion.
-* `numpy_dot_array` instead uses NumPy's `dot()` to calculate the dot product in a single operation. This comes out the fastest at 0.29ms, 162x faster than `python_sum_list`. 
+* `python_sum_list` uses list comprehension to perform the multiplication, followed by the Python core `sum()`. This comes out at 4.693 s
+* `python_sum_array` instead directly multiplies the two arrays (taking advantage of NumPy's vectorisation) but uses the core Python `sum()`, this comes in slightly faster.
+* `numpy_sum_array` again takes advantage of NumPy's vectorisation for the multiplication, and additionally uses NumPy's `sum()` implementation. These two rounds of vectorisation provide a roughly 30x faster completion.
+* `numpy_dot_array` instead uses NumPy's `dot()` to calculate the dot product in a single operation. This comes out the fastest, 162x faster than `python_sum_list`.
 
 
 ::::::::::::::::::::::::::::::::::::: callout
@@ -301,7 +301,7 @@ for polygon_idx in range(n_polygons):
     points_per_polygon[polygon_idx] = out_points
 ```
 
-For about 500k points and 1000 polygons, the initial version of the code took about 20 hours to run.
+For about 500,000 points and 1000 polygons, the initial version of the code took about 20 hours to run.
 
 Luckily, Shapely is built on top of NumPy, so she was able to apply functions to an array of points instead and wrote an improved version, which took just 20 minutes:
 
@@ -387,7 +387,7 @@ from timeit import timeit
 import pandas
 import numpy
 
-N = 100000  # Number of rows in DataFrame
+N = 100_000  # Number of rows in DataFrame
 
 def genDataFrame():
     numpy.random.seed(12)  # Ensure each dataframe is identical
@@ -400,7 +400,7 @@ def genDataFrame():
 
 def pythagoras(row):
     return (row["f_vertical"]**2 + row["f_horizontal"]**2)**0.5
-    
+
 def for_range():
     rtn = []
     df = genDataFrame()
@@ -415,25 +415,25 @@ def for_iterrows():
     for row_idx, row in df.iterrows():
         rtn.append(pythagoras(row))
     return pandas.Series(rtn)
-    
+
 def pandas_apply():
     df = genDataFrame()
     return df.apply(pythagoras, axis=1)
 
-repeats = 1000
+repeats = 10
 gentime = timeit(genDataFrame, number=repeats)
-print(f"for_range: {timeit(for_range, number=int(repeats/20))*20-gentime:.2f}ms")  # scale with factor 20, otherwise it takes too long
-print(f"for_iterrows: {timeit(for_iterrows, number=int(repeats/20))*20-gentime:.2f}ms")
-print(f"pandas_apply: {timeit(pandas_apply, number=int(repeats/20))*20-gentime:.2f}ms")
+print(f"for_range: {timeit(for_range, number=repeats)-gentime:.2f} s")
+print(f"for_iterrows: {timeit(for_iterrows, number=repeats)-gentime:.2f} s")
+print(f"pandas_apply: {timeit(pandas_apply, number=repeats)-gentime:.2f} s")
 ```
 
 `apply()` is 4x faster than the two `for` approaches, as it avoids the Python `for` loop.
 
 
 ```output
-for_range: 1582.47ms
-for_iterrows: 1677.14ms
-pandas_apply: 390.49ms
+for_range: 15.82 s
+for_iterrows: 16.77 s
+pandas_apply: 3.90 s
 ```
 
 However, rows don't exist in memory as arrays (columns do!), so `apply()` does not take advantage of NumPy's vectorisation. You may be able to go a step further and avoid explicitly operating on rows entirely by passing only the required columns to NumPy.
@@ -456,9 +456,7 @@ def vectorize():
 
 Once you’ve done that, measure your performance by running
 ```python
-repeats = 1000
-gentime = timeit(genDataFrame, number=repeats)
-print(f"vectorize: {timeit(vectorize, number=repeats)-gentime:.2f}ms")
+print(f"vectorize: {timeit(vectorize, number=repeats)-gentime:.3f} s")
 ```
 What result do you find? Does this match your expectations?
 
@@ -488,13 +486,13 @@ def vectorize():
 
     return pandas.Series(result)
 
-print(f"vectorize: {timeit(vectorize, number=repeats)-gentime:.2f}ms")
+print(f"vectorize: {timeit(vectorize, number=repeats)-gentime:.3f} s")
 ```
 
 264x faster than `apply()`, 1000x faster than the two `for` approaches!
 
-```
-vectorize: 1.48ms
+```output
+vectorize: 0.015 s
 ```
 
 :::::::::::::::::::::::::::::::::
@@ -512,22 +510,22 @@ def to_dict():
     df_as_dict = df.to_dict(orient='index')
     return pandas.Series([(r['f_vertical']**2 + r['f_horizontal']**2)**0.5 for r in df_as_dict.values()])
 
-print(f"to_dict: {timeit(to_dict, number=repeats)*10-gentime:.2f}ms")
+print(f"to_dict: {timeit(to_dict, number=repeats)-gentime:.2f} s")
 ```
 
-Whilst still nearly 100x slower than pure vectorisation, it's twice as fast as `apply()`.
+Whilst still nearly 100x slower than pure vectorisation, it's three times as fast as `apply()`.
 
-```sh
-to_dict: 131.15ms
+```output
+to_dict: 1.31 s
 ```
 
-This is because indexing into Pandas' `Series` (rows) is significantly slower than a Python dictionary. There is a slight overhead to creating the dictionary (40ms in this example), however the stark difference in access speed is more than enough to overcome that cost for any large DataFrame.
+This is because indexing into Pandas' `Series` (rows) is significantly slower than a Python dictionary. There is a slight overhead to creating the dictionary, however the stark difference in access speed is more than enough to overcome that cost for any large DataFrame.
 
 ```python
 from timeit import timeit
 import pandas as pandas
 
-N = 100000  # Number of rows in DataFrame
+N = 100_000  # Number of rows in DataFrame
 
 def genInput():
     s = pandas.Series({'a' : 1, 'b' : 2})
@@ -544,16 +542,16 @@ def dictionary():
     for i in range(N):
         y = d['a'] * d['b']
 
-repeats = 1000
-print(f"series: {timeit(series, number=repeats):.2f}ms")
-print(f"dictionary: {timeit(dictionary, number=repeats):.2f}ms")
+repeats = 100
+print(f"series: {timeit(series, number=repeats):.3f} s")
+print(f"dictionary: {timeit(dictionary, number=repeats):.3f} s")
 ```
 
 65x slower!
 
 ```output
-series: 237.25ms
-dictionary: 3.63ms
+series: 23.725 s
+dictionary: 0.363 s
 ```
 
 ### Filter Early

@@ -39,7 +39,7 @@ For example, you might think to sum a list of numbers by using a for loop, as wo
 import random
 from timeit import timeit
 
-N = 100000  # Number of elements in the list
+N = 100_000  # Number of elements in the list
 
 # Ensure every list is the same
 random.seed(12)
@@ -63,18 +63,18 @@ def builtinSum():
 
 
 repeats = 1000
-print(f"manualSumC: {timeit(manualSumC, globals=globals(), number=repeats):.3f}ms")
-print(f"manualSumPy: {timeit(manualSumPy, globals=globals(), number=repeats):.3f}ms")
-print(f"builtinSum: {timeit(builtinSum, globals=globals(), number=repeats):.3f}ms")
+print(f"manualSumC: {timeit(manualSumC, globals=globals(), number=repeats):.3f} s")
+print(f"manualSumPy: {timeit(manualSumPy, globals=globals(), number=repeats):.3f} s")
+print(f"builtinSum: {timeit(builtinSum, globals=globals(), number=repeats):.3f} s")
 ```
 
 Even just replacing the iteration over indices (which may be a habit you’ve picked up if you first learned to program in C) with a more pythonic iteration over the elements themselves speeds up the code by about 2x.
 But even better, by switching to the built-in `sum()` function our code becomes about 8x faster and much easier to read while doing the exact same operation!
 
 ```output
-manualSumC: 1.624ms
-manualSumPy: 0.740ms
-builtinSum: 0.218ms
+manualSumC: 1.624 s
+manualSumPy: 0.740 s
+builtinSum: 0.218 s
 ```
 
 This is because [built-in functions](https://docs.python.org/3/library/functions.html) (i.e. those that are available without importing packages) are typically implemented in the CPython back-end, so their performance benefits from bypassing the Python interpreter.
@@ -115,11 +115,11 @@ from timeit import timeit
 
 N = 2500  # Number of elements in list
 M = 2  # N*M == Range over which the elements span
-ls = [random.randint(0, int(N*M)) for i in range(N)]
+ls = [random.randint(0, N*M) for i in range(N)]
     
 def manualSearch():
     count = 0
-    for even_number in range(0, int(N*M), M):
+    for even_number in range(0, N*M, M):
         for i in range(0, len(ls)):
             if ls[i] == even_number:
                 count += 1
@@ -127,20 +127,20 @@ def manualSearch():
 
 def operatorSearch():
     count = 0
-    for even_number in range(0, int(N*M), M):
+    for even_number in range(0, N*M, M):
         if even_number in ls:
             count += 1
 
-repeats = 1000
-print(f"manualSearch: {timeit(manualSearch, number=repeats):.2f}ms")
-print(f"operatorSearch: {timeit(operatorSearch, number=repeats):.2f}ms")
+repeats = 100
+print(f"manualSearch: {timeit(manualSearch, number=repeats):.2f} s")
+print(f"operatorSearch: {timeit(operatorSearch, number=repeats):.2f} s")
 ```
 
 This results in the manual Python implementation being 5x slower, doing the exact same operation!
 
 ```output
-manualSearch: 152.15ms
-operatorSearch: 28.43ms
+manualSearch: 15.22 s
+operatorSearch: 2.84 s
 ```
 
 An easy approach to follow is that if two blocks of code do the same operation, the one that contains less Python is probably faster. This won't apply if you're using 3rd party packages written purely in Python though.
@@ -221,13 +221,13 @@ random.seed(12)
 f = [f" {i:0>6d} {random.random():8.4f} " for i in range(N)]
 
 repeats = 1000
-print(f"manualSplit: {timeit(manualSplit, globals=globals(), number=repeats):.3f}ms")
-print(f"builtinSplit: {timeit(builtinSplit, globals=globals(), number=repeats):.3f}ms")
+print(f"manualSplit: {timeit(manualSplit, globals=globals(), number=repeats):.3f} s")
+print(f"builtinSplit: {timeit(builtinSplit, globals=globals(), number=repeats):.3f} s")
 ```
 
 ```output
-manualSplit: 1.797ms
-builtinSplit: 0.796ms
+manualSplit: 1.797 s
+builtinSplit: 0.796 s
 ```
 
 :::::::::::::::::::::::::::::::::
