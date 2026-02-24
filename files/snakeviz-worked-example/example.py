@@ -2,7 +2,7 @@ import time
 
 """
 This is a synthetic program intended to produce a clear profile with cProfile/snakeviz
-Method names, constructed from a hex digit and a number clearly denote their position in the hierarchy.
+Function names, constructed from a hex digit and a number clearly denote their position in the hierarchy.
 """
 def a_1():
     for i in range(3):

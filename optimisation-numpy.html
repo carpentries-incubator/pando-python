@@ -216,7 +216,7 @@
 <div class="accordion accordion-flush" id="accordionFlush3">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading3">
-        <a href="profiling-functions.html">2. Function Level Profiling</a>
+        <a href="profiling-functions.html">2. Function-Level Profiling</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -392,7 +392,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Using Scientific Python Packages (NumPy, Pandas and more)</h1>
-        <p>Last updated on 2025-11-19 |
+        <p>Last updated on 2026-02-24 |
 
         <a href="https://github.com/carpentries-incubator/pando-python/edit/main/episodes/optimisation-numpy.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -437,11 +437,12 @@ in compiled languages to expose this performance across a wide range of
 scientific workloads.</p>
 <section><h2 class="section-heading" id="using-numpy-effectively">Using NumPy (Effectively)<a class="anchor" aria-label="anchor" href="#using-numpy-effectively"></a></h2>
 <hr class="half-width"><p><a href="https://numpy.org/" class="external-link">NumPy</a> is a commonly used package for
-scientific computing, which provides a wide variety of methods.</p>
-<p>It adds restriction via its own <a href="https://numpy.org/doc/stable/user/basics.types.html" class="external-link">basic numeric
+scientific computing. It provides a wide variety of functions, as well
+as its own <a href="https://numpy.org/doc/stable/user/basics.types.html" class="external-link">basic numeric
 types</a> and static arrays to enable even greater performance than that
-of core Python. However if these restrictions are ignored, the
-performance can become significantly worse.</p>
+of core Python. However, these more specialised types come with
+restrictions—and if these restrictions are ignored, the performance can
+become significantly worse.</p>
 <figure><img src="fig/numpy-array-vs-list.png" alt="A diagram illustrating the difference between a NumPy array and a Python list. The NumPy array is a raw block of memory containing numerical values. A Python list contains a header with metadata and multiple items, each of which is a reference to another Python object with its own header and value." class="figure mx-auto d-block"><!-- Figure inspired by https://jakevdp.github.io/blog/2014/05/09/why-python-is-slow/#3.-Python's-object-model-can-lead-to-inefficient-memory-access --></figure><div class="section level3">
 <h3 id="numpy-arrays-and-python-lists-live-in-two-separate-worlds">NumPy Arrays and Python Lists Live in Two Separate Worlds<a class="anchor" aria-label="anchor" href="#numpy-arrays-and-python-lists-live-in-two-separate-worlds"></a></h3>
 <p>NumPy’s arrays (not to be confused with the core Python
@@ -471,7 +472,7 @@ and memory allocations than a Python list.</p>
 <span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, N):</span>
 <span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>        ar.resize(i<span class="op">+</span><span class="dv">1</span>)</span>
 <span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>        ar[i] <span class="op">=</span> i</span>
-<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>        </span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a></span>
 <span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a>repeats <span class="op">=</span> <span class="dv">1000</span></span>
 <span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"list_append: </span><span class="sc">{</span>timeit(list_append, number<span class="op">=</span>repeats)<span class="sc">:.2f}</span><span class="ss">ms"</span>)</span>
 <span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"array_resize: </span><span class="sc">{</span>timeit(array_resize, number<span class="op">=</span>repeats)<span class="sc">:.2f}</span><span class="ss">ms"</span>)</span></code></pre>
@@ -658,7 +659,7 @@ perform this operation would increase with the length of the array.
 However, using NumPy broadcasting we can apply the addition to 1, 10 or
 100 elements, all in the same amount of time!</p>
 
-<p>Earlier it was demonstrated that using core Python methods over a
+<p>Earlier it was demonstrated that using core Python functions on a
 list will outperform a loop, performing the same calculation faster. The
 below example takes this a step further by demonstrating the calculation
 of a dot product.</p>
@@ -766,7 +767,7 @@ instead of writing your own code from scratch?</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
   <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
 </button>
-<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
+<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
 <div class="accordion-body">
 <p>These libraries could be specific to your area of research; but they
 could also include packages from other fields that provide tools you
@@ -868,16 +869,16 @@ implementations when used correctly, however incorrect usage can
 actively harm performance.</p>
 <div class="section level3">
 <h3 id="operating-on-rows">Operating on Rows<a class="anchor" aria-label="anchor" href="#operating-on-rows"></a></h3>
-<p>Pandas’ methods by default operate on columns. Each column or series
-can be thought of as a NumPy array, highly suitable for
+<p>Pandas’ functions by default operate on columns. Each column or
+series can be thought of as a NumPy array, highly suitable for
 vectorisation.</p>
 <p>Following the theme of this episode, iterating over the rows of a
 data frame using a <code>for</code> loop is not advised. The pythonic
 iteration will be slower than other approaches.</p>
-<p>Pandas allows its own methods to be applied to rows in many cases by
-passing <code>axis=1</code>, where available these functions should be
-preferred over manual loops. Where you can’t find a suitable method,
-<code>apply()</code> can be used, which is similar to
+<p>Pandas allows its own functions to be applied to rows in many cases
+by passing <code>axis=1</code>, where available these functions should
+be preferred over manual loops. Where you can’t find a suitable
+function, <code>apply()</code> can be used, which is similar to
 <code>map()</code>, to apply your own function to rows.</p>
 <div class="codewrapper sourceCode" id="cb14">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -959,9 +960,9 @@ version of this calculation?</p>
 <span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a>    vertical <span class="op">=</span> df[<span class="st">"f_vertical"</span>]</span>
 <span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a>    horizontal <span class="op">=</span> df[<span class="st">"f_horizontal"</span>]</span>
 <span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a></span>
-<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a>    <span class="co"># Your code goes here</span></span>
+<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a>    result <span class="op">=</span> ...  <span class="co"># Your code goes here</span></span>
 <span id="cb16-7"><a href="#cb16-7" tabindex="-1"></a></span>
-<span id="cb16-8"><a href="#cb16-8" tabindex="-1"></a>    <span class="cf">return</span> pandas.Series(results)</span></code></pre>
+<span id="cb16-8"><a href="#cb16-8" tabindex="-1"></a>    <span class="cf">return</span> pandas.Series(result)</span></code></pre>
 </div>
 <p>Once you’ve done that, measure your performance by running</p>
 <div class="codewrapper sourceCode" id="cb17">
@@ -980,7 +981,7 @@ version of this calculation?</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint2" aria-expanded="false" aria-controls="collapseHint2">
   <h4 class="accordion-header" id="headingHint2"> Give me a hint </h4>
 </button>
-<div id="collapseHint2" class="accordion-collapse collapse" aria-labelledby="headingHint2" data-bs-parent="#accordionHint2">
+<div id="collapseHint2" class="accordion-collapse collapse" data-bs-parent="#accordionHint2" aria-labelledby="headingHint2">
 <div class="accordion-body">
 <p>Remember that most common mathematical operations work element-wise
 when applied to NumPy arrays. For example:</p>
@@ -1001,7 +1002,7 @@ when applied to NumPy arrays. For example:</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb19">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1175,7 +1176,7 @@ any links that you are not going to use.
   "url": "https://carpentries-incubator.github.io/pando-python/optimisation-numpy.html",
   "identifier": "https://carpentries-incubator.github.io/pando-python/optimisation-numpy.html",
   "dateCreated": "2024-02-01",
-  "dateModified": "2025-11-19",
+  "dateModified": "2026-02-24",
   "datePublished": "2026-02-24"
 }
 

@@ -260,7 +260,7 @@
 <div class="accordion accordion-flush" id="accordionFlush3">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading3">
-        <a href="profiling-functions.html">2. Function Level Profiling</a>
+        <a href="profiling-functions.html">2. Function-Level Profiling</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -480,28 +480,28 @@ purposes.
 </li>
 <li>A representative test-case should be profiled, that is large enough
 to amplify any bottlenecks whilst executing to completion quickly.</li>
-</ul></section><section id="profiling-functions"><h2 class="section-heading"><a href="profiling-functions.html">Function Level Profiling</a></h2>
+</ul></section><section id="profiling-functions"><h2 class="section-heading"><a href="profiling-functions.html">Function-Level Profiling</a></h2>
 <hr class="half-width">
 <ul>
-<li>A python program can be function level profiled with
+<li>A Python program can be function-level profiled with
 <code>cProfile</code> via
 <code>python -m cProfile -o &lt;output file&gt; &lt;script name&gt; &lt;arguments&gt;</code>.</li>
 <li>The output file from <code>cProfile</code> can be visualised with
 <code>snakeviz</code> via
 <code>python -m snakeviz &lt;output file&gt;</code>.</li>
-<li>Function level profiling output displays the nested call hierarchy,
+<li>Function-level profiling output displays the nested call hierarchy,
 listing both the cumulative and total minus sub functions time.</li>
 </ul></section><section id="short-break1"><h2 class="section-heading"><a href="short-break1.html">Break</a></h2>
 <hr class="half-width"></section><section id="profiling-lines"><h2 class="section-heading"><a href="profiling-lines.html">Line Level Profiling</a></h2>
 <hr class="half-width">
 <ul>
-<li>Specific methods can be line-level profiled if decorated with
+<li>Specific functions can be line-level profiled if decorated with
 <code>@profile</code> that is imported from
 <code>line_profiler</code>.</li>
 <li>
 <code>kernprof</code> executes <code>line_profiler</code> via
 <code>python -m kernprof -lvr &lt;script name&gt; &lt;arguments&gt;</code>.</li>
-<li>Code in global scope must be wrapped in a method if it is to be
+<li>Code in global scope must be wrapped in a function if it is to be
 profiled with <code>line_profiler</code>.</li>
 <li>The output from <code>line_profiler</code> lists the absolute and
 relative time spent per line for each targeted function.</li>
@@ -517,12 +517,12 @@ of a program during execution .</li>
 <li>Narrows down the costly areas of code, allowing optimisation to be
 prioritised or decided to be unnecessary.</li>
 </ul>
-<p>When to Profile:</p>
+<p>When to profile:</p>
 <ul>
 <li>Profiling should be performed on functional code, either when
 concerned about performance or prior to release/deployment.</li>
 </ul>
-<p>What to Profile:</p>
+<p>What to profile:</p>
 <ul>
 <li>The collection of profiling metrics will often slow the execution of
 code, therefore the test-case should be narrow whilst remaining
@@ -541,7 +541,7 @@ representative of a realistic run.</li>
 <ul>
 <li>Import <code>profile</code> from <code>line_profiling</code>
 </li>
-<li>Decorate targeted methods with <code>@profile</code>
+<li>Decorate targeted functions with <code>@profile</code>
 </li>
 <li>Execute <code>line_profiler</code> via
 <code>python -m kernprof -lvr &lt;script name&gt; &lt;arguments&gt;</code>

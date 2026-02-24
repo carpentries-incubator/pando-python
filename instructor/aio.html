@@ -260,7 +260,7 @@
 <div class="accordion accordion-flush" id="accordionFlush3">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading3">
-        <a href="profiling-functions.html">2. Function Level Profiling</a>
+        <a href="profiling-functions.html">2. Function-Level Profiling</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -461,7 +461,7 @@
         
 <section id="aio-profiling-introduction"><p>Content from <a href="profiling-introduction.html">Introduction to Profiling</a></p>
 <hr>
-<p>Last updated on 2026-01-30 |
+<p>Last updated on 2026-02-24 |
 
         <a href="https://github.com/carpentries-incubator/pando-python/edit/main/episodes/profiling-introduction.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 25 minutes</p>
@@ -697,7 +697,7 @@ execute hundreds of thousands of lines of code per second. Therefore,
 collecting information about each line of code can be costly.</p>
 <p><code>line_profiler</code> is deterministic, meaning that it tracks
 every line of code executed. To avoid it being too costly, the profiling
-is restricted to methods targeted with the decorator
+is restricted to functions targeted with the decorator
 <code>@profile</code>.</p>
 <p>In contrast, <a href="https://github.com/plasma-umass/scalene" class="external-link"><code>scalene</code></a>
 is a more advanced Python profiler capable of line-level profiling. It
@@ -841,9 +841,9 @@ to amplify any bottlenecks whilst executing to completion quickly.</li>
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
-</section></section><section id="aio-profiling-functions"><p>Content from <a href="profiling-functions.html">Function Level Profiling</a></p>
+</section></section><section id="aio-profiling-functions"><p>Content from <a href="profiling-functions.html">Function-Level Profiling</a></p>
 <hr>
-<p>Last updated on 2026-02-21 |
+<p>Last updated on 2026-02-24 |
 
         <a href="https://github.com/carpentries-incubator/pando-python/edit/main/episodes/profiling-functions.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 40 minutes</p>
@@ -858,10 +858,10 @@ any links that you are not going to use.
 <div class="inner">
 <h3 class="card-title">Questions</h3>
 <ul>
-<li>When is function level profiling appropriate?</li>
+<li>When is function-level profiling appropriate?</li>
 <li>How can <code>cProfile</code> and <code>snakeviz</code> be used to
 profile a Python program?</li>
-<li>How are the outputs from function level profiling interpreted?</li>
+<li>How are the outputs from function-level profiling interpreted?</li>
 </ul>
 </div>
 </div>
@@ -937,14 +937,17 @@ will print the current call stack.</p>
 <span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="kw">def</span> a():</span>
 <span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>    b1()</span>
 <span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>    b2()</span>
-<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="kw">def</span> b1():</span>
-<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>    <span class="cf">pass</span></span>
-<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="kw">def</span> b2():</span>
-<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>    c()</span>
-<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="kw">def</span> c():</span>
-<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>    traceback.print_stack()</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="kw">def</span> b1():</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>    <span class="cf">pass</span></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="kw">def</span> b2():</span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>    c()</span>
 <span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>a()</span></code></pre>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a><span class="kw">def</span> c():</span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>    traceback.print_stack()</span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>a()</span></code></pre>
 </div>
 <p>Here we can see that the printing of the stack trace is called in
 <code>c()</code>, which is called by <code>b2()</code>, which is called
@@ -1083,7 +1086,7 @@ visualisation of the data when exported to file.</p>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
   <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
 <div class="accordion-body">
 <p>It can help to run these examples by running <code>snakeviz</code>
 live. For the worked example you may wish to also show the code (e.g. in
@@ -1123,7 +1126,7 @@ such as <code>out.prof</code> via:</p>
 </div>
 <p>This should open your web browser displaying a page similar to that
 below.</p>
-<figure><img src="../fig/snakeviz-home.png" alt="A web page, with a central diagram representing a call-stack, with the root at the top and the horizontal axis representing the duration of each call. Below this diagram is the top of a table detailing the statistics of individual methods." class="figure mx-auto d-block"><div class="figcaption">An example of the default ‘icicle’ visualisation
+<figure><img src="../fig/snakeviz-home.png" alt="A web page, with a central diagram representing a call-stack, with the root at the top and the horizontal axis representing the duration of each call. Below this diagram is the top of a table detailing the statistics of individual functions." class="figure mx-auto d-block"><div class="figcaption">An example of the default ‘icicle’ visualisation
 provided by <code>snakeviz</code>.</div>
 </figure><!-- From SnakeViz docs
 In the icicle visualization style functions are represented by rectangles. A root function is the top-most rectangle, with functions it calls below it, then the functions those call below them, and so on. The amount of time spent inside a function is represented by the width of the rectangle. A rectangle that stretches across most of the visualization represents a function that is taking up most of the time of its calling function, while a skinny rectangle represents a function that is using hardly any time at all.
@@ -1131,18 +1134,19 @@ In the icicle visualization style functions are represented by rectangles. A roo
 aggregate of the call stack during the execution of the profiled code.
 The box which fills the top row represents the root call, filling the
 row shows that it occupied 100% of the runtime. The second row holds the
-child methods called from the root, with their widths relative to the
+child functions called from the root, with their widths relative to the
 proportion of runtime they occupied. This continues with each subsequent
-row, however where a method only occupies 50% of the runtime, its
+row, however where a function only occupies 50% of the runtime, its
 children can only occupy a maximum of that runtime hence the appearance
-of “icicles” as each row gets narrower when the overhead of methods with
-no further children is accounted for.</p>
+of “icicles” as each row gets narrower when the overhead of functions
+with no further children is accounted for.</p>
 <p>By clicking a box within the diagram, it will “zoom” making the
 selected box the root allowing more detail to be explored. The diagram
-is limited to 10 rows by default (“Depth”) and methods with a relatively
-small proportion of the runtime are hidden (“Cutoff”).</p>
-<p>As you hover each box, information to the left of the diagram updates
-specifying the location of the method and for how long it ran.</p>
+is limited to 10 rows by default (“Depth”) and functions with a
+relatively small proportion of the runtime are hidden (“Cutoff”).</p>
+<p>As you hover over each box, information to the left of the diagram
+updates specifying the location of the function and for how long it
+ran.</p>
 <div id="snakeviz-inside-notebooks" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
@@ -1171,7 +1175,7 @@ a function defined earlier in the notebook.</p>
 <pre class="sourceCode py" tabindex="0"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="op">%</span>snakeviz my_function()</span></code></pre>
 </div>
 <p>Or, you can create a <code>%%snakeviz</code> cell, to profile the
-python executed within it.</p>
+Python code executed within it.</p>
 <div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">PY<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -1198,7 +1202,7 @@ small.</em></p>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor2" aria-expanded="false" aria-controls="collapseInstructor2">
   <h3 class="accordion-header" id="headingInstructor2">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
 </button>
-<div id="collapseInstructor2" class="accordion-collapse collapse" aria-labelledby="headingInstructor2" data-bs-parent="#accordionInstructor2">
+<div id="collapseInstructor2" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor2" aria-labelledby="headingInstructor2">
 <div class="accordion-body">
 <p>Demonstrate this!</p>
 </div>
@@ -1239,7 +1243,7 @@ implemented.</p>
 <span id="cb12-26"><a href="#cb12-26" tabindex="-1"></a><span class="co"># Entry Point</span></span>
 <span id="cb12-27"><a href="#cb12-27" tabindex="-1"></a>a_1()</span></code></pre>
 </div>
-<p>All of the methods except for <code>b_1()</code> call
+<p>All of the functions except for <code>b_1()</code> call
 <code>time.sleep()</code>, this is used to provide synthetic bottlenecks
 to create an interesting profile.</p>
 <ul>
@@ -1279,7 +1283,7 @@ machine.</p>
 <!-- TODO: Alt text here is redundant? -->
 <figure><img src="../fig/snakeviz-worked-example-icicle.png" alt="The snakeviz icicle visualisation for the worked example Python code." class="figure mx-auto d-block"><div class="figcaption">An icicle visualisation provided by
 <code>snakeviz</code> for the above Python code.</div>
-</figure><p>The third row represents <code>a_1()</code>, the only method called
+</figure><p>The third row represents <code>a_1()</code>, the only function called
 from global scope, therefore the first two rows represent Python’s
 internal code for launching our script and can be ignored (by clicking
 on the third row).</p>
@@ -1289,17 +1293,18 @@ representing <code>b_1()</code>, <code>time.sleep()</code> and
 but only has one box within the icicle diagram. The boxes are ordered
 left-to-right according to cumulative time, which happens to be the
 order they were first called.</p>
-<p>If the box for <code>time.sleep()</code> is hovered it will change
-colour along with several other boxes that represent the other locations
-that <code>time.sleep()</code> was called from. Note that each of these
-boxes display the same duration, the timing statistics collected by
-<code>cProfile</code> (and visualised by <code>snakeviz</code>) are
-aggregate, so there is no information about individual method calls for
-methods which were called multiple times. This does however mean that if
-you check the properties to the left of the diagram whilst hovering
-<code>time.sleep()</code> you will see a cumulative time of 99%
-reported, the overhead of the method calls and for loop is insignificant
-in contrast to the time spent sleeping!</p>
+<p>If you hover over the box for <code>time.sleep()</code>, it will
+change colour along with several other boxes that represent the other
+locations that <code>time.sleep()</code> was called from. Note that each
+of these boxes display the same duration, the timing statistics
+collected by <code>cProfile</code> (and visualised by
+<code>snakeviz</code>) are aggregate, so there is no information about
+individual function calls for functions which were called multiple
+times. This does however mean that if you check the properties to the
+left of the diagram whilst hovering over <code>time.sleep()</code> you
+will see a cumulative time of 99% reported, the overhead of the function
+calls and for loop is insignificant in contrast to the time spent
+sleeping!</p>
 <p><em>Below are the properties shown, the time may differ if you
 generated the profile yourself.</em></p>
 <ul>
@@ -1318,27 +1323,28 @@ generated the profile yourself.</em></p>
 </li>
 <li><strong>Directory:</strong></li>
 </ul>
-<p>As <code>time.sleep()</code> is a core Python method it is displayed
-as “built-in method” and doesn’t have a file, line or directory.</p>
-<p>If you hover any boxes representing the methods from the above code,
-you will see file and line properties completed. The directory property
-remains empty as the profiled code was in the root of the working
-directory. A profile of a large project with many files across multiple
-directories will see this filled.</p>
+<p>As <code>time.sleep()</code> is a core Python function it is
+displayed as “built-in method” and doesn’t have a file, line or
+directory.</p>
+<p>If you hover over any boxes representing the functions from the above
+code, you will see file and line properties completed. The directory
+property remains empty as the profiled code was in the root of the
+working directory. A profile of a large project with many files across
+multiple directories will see this filled.</p>
 <p>Find the box representing <code>c_2()</code> on the icicle diagram,
 its children are unlabelled because they are not wide enough (but they
-can still be hovered). Clicking <code>c_2()</code> zooms in the diagram,
-showing the children to be <code>time.sleep()</code> and
+can still be hovered over). Clicking <code>c_2()</code> zooms in the
+diagram, showing the children to be <code>time.sleep()</code> and
 <code>d_1()</code>.</p>
 <p>To zoom back out you can either click the top row, which will zoom
 out one layer, or click “Reset Zoom” on the left-hand side.</p>
 <p>In this simple example the execution is fairly evenly balanced
-between all of the user-defined methods, so there is not a clear
+between all of the user-defined functions, so there is not a clear
 hot-spot to investigate.</p>
 <p>Below the icicle diagram, there is a table similar to the default
 output from <code>cProfile</code>. However, in this case you can sort
 the columns by clicking their headers and filter the rows shown by
-entering a filename in the search box. This allows built-in methods to
+entering a filename in the search box. This allows built-in functions to
 be hidden, which can make it easier to highlight optimisation
 priorities.</p>
 <p><strong>Notebooks</strong></p>
@@ -1362,7 +1368,7 @@ e.g. <code>1378276351.py:3(a_1)</code>,
 <p><code>snakeviz</code> provides an alternate “Sunburst” visualisation,
 accessed via the “Style” drop-down on the left-hand side.</p>
 <p>This provides the same information as “Icicle”, however the rows are
-instead circular with the root method call found at the center.</p>
+instead circular with the root function call found at the center.</p>
 <p>The sunburst visualisation displays less text on the boxes, so it can
 be harder to interpret. However, it increases the visibility of boxes
 further from the root call.</p>
@@ -1383,10 +1389,10 @@ what has been covered in this episode.</p>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor3" aria-expanded="false" aria-controls="collapseInstructor3">
   <h3 class="accordion-header" id="headingInstructor3">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
 </button>
-<div id="collapseInstructor3" class="accordion-collapse collapse" aria-labelledby="headingInstructor3" data-bs-parent="#accordionInstructor3">
+<div id="collapseInstructor3" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor3" aria-labelledby="headingInstructor3">
 <div class="accordion-body">
 <p>Arguments 1-9 passed to <code>travellingsales.py</code> should
-execute relatively fast (less than a minute)</p>
+execute relatively fast (less than a minute).</p>
 <p>This will be slower via the profiler, and is likely to vary on
 different hardware.</p>
 <p>Larger values should be avoided.</p>
@@ -1435,7 +1441,7 @@ poor scaling so larger numbers take significantly longer to run.</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
   <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
 </button>
-<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
+<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
 <div class="accordion-body">
 <ul>
 <li>If a hotspot isn’t visible with the argument <code>1</code>, try
@@ -1453,14 +1459,14 @@ within the profile.</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>The hotspot only becomes visible when an argument of <code>5</code>
 or greater is passed.</p>
 <p>You should see that <code>distance()</code> (from
 <code>travellingsales.py:11</code>) becomes the largest box (similarly
-its parent in the call-stack <code>total_distance()</code>) showing that
-it scales poorly with the number of cities. With 5 cities,
+its parent in the call-stack, <code>total_distance()</code>) showing
+that it scales poorly with the number of cities. With 5 cities,
 <code>distance()</code> has a cumulative time of <code>~35%</code> the
 runtime, this increases to <code>~60%</code> with 9 cities.</p>
 <p>Other boxes within the diagram correspond to the initialisation of
@@ -1478,7 +1484,7 @@ component.</em></p>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor4" aria-expanded="false" aria-controls="collapseInstructor4">
   <h3 class="accordion-header" id="headingInstructor4">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
 </button>
-<div id="collapseInstructor4" class="accordion-collapse collapse" aria-labelledby="headingInstructor4" data-bs-parent="#accordionInstructor4">
+<div id="collapseInstructor4" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor4" aria-labelledby="headingInstructor4">
 <div class="accordion-body">
 <p>The default configuration of the Predator Prey model takes around 10
 seconds to run, it may be slower on other hardware.</p>
@@ -1536,16 +1542,16 @@ bottlenecks.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
-<p>It should be clear from the profile that the method
-<code>Grass::eaten()</code> (from <code>predprey.py:278</code>) occupies
+<p>It should be clear from the profile that the function
+<code>Grass.eaten()</code> (from <code>predprey.py:278</code>) occupies
 the majority of the runtime.</p>
 <p>From the table below the Icicle diagram, we can see that it was
 called 1,250,000 times.</p>
 <figure><img src="../fig/snakeviz-predprey-table.png" alt="The top 9 rows of the table shown by snakeviz when profiling predprey.py. The top row shows that predprey.py:278(eaten) was called 1,250,000 times, taking a total time of 8 seconds. The table is ordered in descending total time, with the next row taking a mere 0.74 seconds." class="figure mx-auto d-block"><div class="figcaption">The top of the table shown by snakeviz.</div>
 </figure><p>If the table is ordered by <code>ncalls</code>, it can be identified
-as the joint 4th most called method and 2nd most called method from
+as the joint 4th most called function and 2nd most called function from
 <code>predprey.py</code>.</p>
 <p>If you checked <code>predprey_out.png</code> (shown below), you
 should notice that there are significantly more <code>Grass</code>
@@ -1553,9 +1559,9 @@ agents than <code>Predators</code> or <code>Prey</code>.</p>
 <figure><img src="../fig/predprey_out.png" alt="A line graph plotting population over time through 400 time steps of the pred prey model. The amount of grass, shown in green, is scaled down by a factor of 20 to fit onto the graph. It has a brief dip in the first 25 steps, then slowly declines from approximately 220 to 150 over the next 200 steps, before steadily returning to 250. The number of prey, shown in blue, starts at 200, then grows to around 600 after 200 steps, before declining quickly and reaching zero at 350 to 400 steps. The number of predators, shown in red, falls from 50 to around 30 after 15 time steps, then grows to almost 700 by step 330 before declining quickly." class="figure mx-auto d-block"><div class="figcaption">
 <code>predprey_out.png</code> as produced by the
 default configuration of <code>predprey.py</code>.</div>
-</figure><p>Similarly, the <code>Grass::eaten()</code> has a <code>percall</code>
+</figure><p>Similarly, the <code>Grass.eaten()</code> has a <code>percall</code>
 time is inline with other agent functions such as
-<code>Prey::flock()</code> (from <code>predprey.py:67</code>).</p>
+<code>Prey.flock()</code> (from <code>predprey.py:67</code>).</p>
 <p>Maybe we could investigate this further with line profiling!</p>
 <p><em>You may have noticed many icicles on the right hand of the
 diagram, these primarily correspond to the <code>import</code> of
@@ -1572,13 +1578,13 @@ diagram, these primarily correspond to the <code>import</code> of
 <div class="callout-inner">
 <div class="callout-content">
 <ul>
-<li>A python program can be function level profiled with
+<li>A Python program can be function-level profiled with
 <code>cProfile</code> via
 <code>python -m cProfile -o &lt;output file&gt; &lt;script name&gt; &lt;arguments&gt;</code>.</li>
 <li>The output file from <code>cProfile</code> can be visualised with
 <code>snakeviz</code> via
 <code>python -m snakeviz &lt;output file&gt;</code>.</li>
-<li>Function level profiling output displays the nested call hierarchy,
+<li>Function-level profiling output displays the nested call hierarchy,
 listing both the cumulative and total minus sub functions time.</li>
 </ul>
 </div>
@@ -1604,7 +1610,7 @@ Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  --></p></section><section id="aio-profiling-lines"><p>Content from <a href="profiling-lines.html">Line Level Profiling</a></p>
 <hr>
-<p>Last updated on 2026-02-21 |
+<p>Last updated on 2026-02-24 |
 
         <a href="https://github.com/carpentries-incubator/pando-python/edit/main/episodes/profiling-lines.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 50 minutes</p>
@@ -1651,15 +1657,16 @@ lines where time is being spent during a program’s execution</li>
 </h2>
 <hr class="half-width">
 <!-- Context --><p>Whilst profiling, you may find that function-level profiling
-highlights expensive methods where you can’t easily determine the cause
-of the cost due to their complexity.</p>
+highlights expensive functions where you can’t easily determine the
+cause of the cost due to their complexity.</p>
 <!-- What -->
-<p>Line level profiling allows you to target specific methods to collect
-more granular metrics, which can help narrow the source of expensive
-computation further. Typically, line-level profiling will calculate the
-number of times each line is called and the total time spent executing
-each line. However, with the increased granularity come increased
-collection costs, which is why it’s targeted to specific methods.</p>
+<p>Line level profiling allows you to target specific functions to
+collect more granular metrics, which can help narrow the source of
+expensive computation further. Typically, line-level profiling will
+calculate the number of times each line is called and the total time
+spent executing each line. However, with the increased granularity come
+increased collection costs, which is why it’s targeted to specific
+functions.</p>
 <!-- Why -->
 <p>This allows lines that occupy a disproportionate amount of the total
 runtime to be quickly identified and investigated.</p>
@@ -1681,7 +1688,7 @@ installed via pip.</p>
 </h3>
 <pre class="sourceCode sh" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="ex">pip</span> install <span class="st">"line_profiler[all]"</span></span></code></pre>
 </div>
-<p>To use <code>line_profiler</code> decorate methods to be profiled
+<p>To use <code>line_profiler</code> decorate functions to be profiled
 with <code>@profile</code> which is imported from
 <code>line_profiler</code>.</p>
 <p>For example, the below code:</p>
@@ -1716,7 +1723,7 @@ with <code>@profile</code> which is imported from
 <span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a><span class="bu">print</span>(is_prime(<span class="dv">1087</span>))</span></code></pre>
 </div>
 <p>This tells <code>line_profiler</code> to collect metrics for the
-lines within the method <code>is_prime()</code>. You can still execute
+lines within the function <code>is_prime()</code>. You can still execute
 your code as normal, and these changes will have no effect.</p>
 <p>Similar to the earlier tools, <code>line_profiler</code> can then be
 triggered via <code>kernprof</code>.</p>
@@ -1725,7 +1732,7 @@ triggered via <code>kernprof</code>.</p>
 </h3>
 <pre class="sourceCode sh" tabindex="0"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> kernprof <span class="at">-lvr</span> my_script.py</span></code></pre>
 </div>
-<p>This will output a table per profiled method to console:</p>
+<p>This will output a table per profiled function to console:</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -1788,10 +1795,10 @@ relative to the other lines of the function.</td>
 </tr>
 </tbody>
 </table>
-<p>As <code>line_profiler</code> must be attached to specific methods
+<p>As <code>line_profiler</code> must be attached to specific functions
 and cannot attach to a full Python file or project, if your Python file
 has significant code in the global scope it will be necessary to move it
-into a new method which can then instead be called from global
+into a new function which can then instead be called from global
 scope.</p>
 <p>The profile is also output to file, in this case
 <code>my_script.py.lprof</code>. This file is not human-readable, but
@@ -1802,7 +1809,7 @@ which will then display the same table as above.</p>
 </h3>
 <pre class="sourceCode sh" tabindex="0"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> line_profiler <span class="at">-rm</span> my_script.py.lprof</span></code></pre>
 </div>
-<!-- TODO line_profiling significantly slows down the profiled methods. Is it possible to dynamically disable/enable profiling with `line_profiler`? kernprof -h implies so, but trial/error and docs is failing me -->
+<!-- TODO line_profiling significantly slows down the profiled functions. Is it possible to dynamically disable/enable profiling with `line_profiler`? kernprof -h implies so, but trial/error and docs is failing me -->
 </section><section><h2 class="section-heading" id="worked-example">Worked Example<a class="anchor" aria-label="anchor" href="#worked-example"></a>
 </h2>
 <hr class="half-width">
@@ -1837,8 +1844,8 @@ the below implementation of “FizzBuzz” will be line profiled.</p>
 <span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a>    <span class="cf">else</span>:</span>
 <span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a>        <span class="bu">print</span>(i)</span></code></pre>
 </div>
-<p>As there are no methods, firstly it should be updated to move the
-code to be profiled into a method:</p>
+<p>As there are no functions, firstly it should be updated to move the
+code to be profiled into a function:</p>
 <div class="codewrapper sourceCode" id="cb8">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -1855,7 +1862,7 @@ code to be profiled into a method:</p>
 <span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a></span>
 <span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a>fizzbuzz(<span class="dv">100</span>)</span></code></pre>
 </div>
-<p>Next the method can be decorated with <code>@profile</code> which
+<p>Next the function can be decorated with <code>@profile</code> which
 must be imported via <code>line_profiler</code>:</p>
 <div class="codewrapper sourceCode" id="cb9">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1882,7 +1889,7 @@ must be imported via <code>line_profiler</code>:</p>
 </h3>
 <pre class="sourceCode sh" tabindex="0"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> kernprof <span class="at">-lvr</span> fizzbuzz.py</span></code></pre>
 </div>
-<p>This will output a table per profiled method to console:</p>
+<p>This will output a table per profiled function to console:</p>
 <p><em>If you run this locally it should be highlighted due to
 <code>-r</code> passed to <code>kernprof</code>.</em></p>
 <div class="codewrapper">
@@ -2028,10 +2035,10 @@ number of elements to be sorted.</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
   <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
 </button>
-<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
+<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
 <div class="accordion-body">
 <ul>
-<li>Remember that the code needs to be moved into a method decorated
+<li>Remember that the code needs to be moved into a function decorated
 with <code>@profile</code>
 </li>
 <li>This must be imported via
@@ -2048,7 +2055,7 @@ with <code>@profile</code>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>If you chose to profile the whole code, it may look like this:</p>
 <div class="codewrapper sourceCode" id="cb15">
@@ -2150,7 +2157,7 @@ we are unlikely to be able to improve it further.</p>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
   <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
 <div class="accordion-body">
 <p>Download the pre-generated <code>line_profiler</code> output, this
 can be opened be to save waiting for the profiler.</p>
@@ -2177,10 +2184,10 @@ can be opened be to save waiting for the profiler.</p>
 <p>During the function-level profiling episode,
 <a href="../files/pred-prey/predprey.py" download>the Python predator prey
 model</a> was function-level profiled. This highlighted that
-<code>Grass::eaten()</code> (from <code>predprey.py:278</code>) occupies
+<code>Grass.eaten()</code> (from <code>predprey.py:278</code>) occupies
 the majority of the runtime.</p>
-<p>Line-profile this method, using the output from the profile consider
-how it might be optimised.</p>
+<p>Line-profile this function, using the output from the profile
+consider how it might be optimised.</p>
 </div>
 </div>
 </div>
@@ -2189,7 +2196,7 @@ how it might be optimised.</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint2" aria-expanded="false" aria-controls="collapseHint2">
   <h4 class="accordion-header" id="headingHint2"> Give me a hint </h4>
 </button>
-<div id="collapseHint2" class="accordion-collapse collapse" aria-labelledby="headingHint2" data-bs-parent="#accordionHint2">
+<div id="collapseHint2" class="accordion-collapse collapse" data-bs-parent="#accordionHint2" aria-labelledby="headingHint2">
 <div class="accordion-body">
 <ul>
 <li>Remember that the function needs to be decorated with
@@ -2198,7 +2205,7 @@ how it might be optimised.</p>
 <li>This must be imported via
 <code>from line_profiler import profile</code>
 </li>
-<li>Line-level profiling <code>Grass::eaten()</code>, the most called
+<li>Line-level profiling <code>Grass.eaten()</code>, the most called
 function will slow it down significantly. You may wish to reduce the
 number of steps passed as an argument.</li>
 </ul>
@@ -2211,7 +2218,7 @@ number of steps passed as an argument.</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>First the function must be decorated</p>
 <div class="codewrapper sourceCode" id="cb19">
@@ -2280,7 +2287,7 @@ Line #      Hits         Time  Per Hit   % Time  Line Contents
    303     12078       3132.0      0.3      0.0                  self.available = 0</code></pre>
 </div>
 <p>From the profiling output it can be seen that lines 285-287 occupy
-almost 80% of the method’s runtime!</p>
+almost 80% of the function’s runtime!</p>
 <div class="codewrapper sourceCode" id="cb22">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -2292,12 +2299,12 @@ almost 80% of the method’s runtime!</p>
 lines only has 61.7 million, it appears that the vast majority of times,
 the condition <code>prey.life &lt; PREY_HUNGER_THRESH</code> is not
 fulfilled.</p>
-<p>Remembering that this method is executed once for each of the 5000
+<p>Remembering that this function is executed once for each of the 5000
 <code>Grass</code> agents during each time step of the model, it could
 make sense to pre-filter <code>prey_list</code> once per time step
-before it is passed to <code>Grass::eaten()</code>. This would greatly
+before it is passed to <code>Grass.eaten()</code>. This would greatly
 reduce the number of <code>Prey</code> iterated, reducing the cost of
-the method.</p>
+the function.</p>
 </div>
 </div>
 </div>
@@ -2310,13 +2317,13 @@ the method.</p>
 <div class="callout-inner">
 <div class="callout-content">
 <ul>
-<li>Specific methods can be line-level profiled if decorated with
+<li>Specific functions can be line-level profiled if decorated with
 <code>@profile</code> that is imported from
 <code>line_profiler</code>.</li>
 <li>
 <code>kernprof</code> executes <code>line_profiler</code> via
 <code>python -m kernprof -lvr &lt;script name&gt; &lt;arguments&gt;</code>.</li>
-<li>Code in global scope must be wrapped in a method if it is to be
+<li>Code in global scope must be wrapped in a function if it is to be
 profiled with <code>line_profiler</code>.</li>
 <li>The output from <code>line_profiler</code> lists the absolute and
 relative time spent per line for each targeted function.</li>
@@ -2330,7 +2337,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-profiling-conclusion"><p>Content from <a href="profiling-conclusion.html">Profiling Conclusion</a></p>
 <hr>
-<p>Last updated on 2024-03-28 |
+<p>Last updated on 2026-02-24 |
 
         <a href="https://github.com/carpentries-incubator/pando-python/edit/main/episodes/profiling-conclusion.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 5 minutes</p>
@@ -2386,12 +2393,12 @@ of a program during execution .</li>
 <li>Narrows down the costly areas of code, allowing optimisation to be
 prioritised or decided to be unnecessary.</li>
 </ul>
-<p>When to Profile:</p>
+<p>When to profile:</p>
 <ul>
 <li>Profiling should be performed on functional code, either when
 concerned about performance or prior to release/deployment.</li>
 </ul>
-<p>What to Profile:</p>
+<p>What to profile:</p>
 <ul>
 <li>The collection of profiling metrics will often slow the execution of
 code, therefore the test-case should be narrow whilst remaining
@@ -2410,7 +2417,7 @@ representative of a realistic run.</li>
 <ul>
 <li>Import <code>profile</code> from <code>line_profiling</code>
 </li>
-<li>Decorate targeted methods with <code>@profile</code>
+<li>Decorate targeted functions with <code>@profile</code>
 </li>
 <li>Execute <code>line_profiler</code> via
 <code>python -m kernprof -lvr &lt;script name&gt; &lt;arguments&gt;</code>
@@ -2420,7 +2427,7 @@ representative of a realistic run.</li>
 </div>
 </div></section><section id="aio-optimisation-introduction"><p>Content from <a href="optimisation-introduction.html">Introduction to Optimisation</a></p>
 <hr>
-<p>Last updated on 2025-07-06 |
+<p>Last updated on 2026-02-24 |
 
         <a href="https://github.com/carpentries-incubator/pando-python/edit/main/episodes/optimisation-introduction.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 10 minutes</p>
@@ -2694,7 +2701,7 @@ the outputs from your code.</p>
 <div class="accordion-body">
 <ul>
 <li>Fixtures: A test fixture is a common class which multiple tests can
-inherit from. This class will typically include methods that perform
+inherit from. This class will typically include functions that perform
 common initialisation and teardown actions around the behaviour to be
 tested. This reduces repeated code.</li>
 <li>Mocking: If you wish to test a feature which would relies on a live
@@ -3688,7 +3695,7 @@ Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  --></p></section><section id="aio-optimisation-numpy"><p>Content from <a href="optimisation-numpy.html">Using Scientific Python Packages (NumPy, Pandas and more)</a></p>
 <hr>
-<p>Last updated on 2025-11-19 |
+<p>Last updated on 2026-02-24 |
 
         <a href="https://github.com/carpentries-incubator/pando-python/edit/main/episodes/optimisation-numpy.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 30 minutes</p>
@@ -3734,11 +3741,12 @@ scientific workloads.</p>
 </h2>
 <hr class="half-width">
 <p><a href="https://numpy.org/" class="external-link">NumPy</a> is a commonly used package for
-scientific computing, which provides a wide variety of methods.</p>
-<p>It adds restriction via its own <a href="https://numpy.org/doc/stable/user/basics.types.html" class="external-link">basic numeric
+scientific computing. It provides a wide variety of functions, as well
+as its own <a href="https://numpy.org/doc/stable/user/basics.types.html" class="external-link">basic numeric
 types</a> and static arrays to enable even greater performance than that
-of core Python. However if these restrictions are ignored, the
-performance can become significantly worse.</p>
+of core Python. However, these more specialised types come with
+restrictions—and if these restrictions are ignored, the performance can
+become significantly worse.</p>
 <figure><img src="../fig/numpy-array-vs-list.png" alt="A diagram illustrating the difference between a NumPy array and a Python list. The NumPy array is a raw block of memory containing numerical values. A Python list contains a header with metadata and multiple items, each of which is a reference to another Python object with its own header and value." class="figure mx-auto d-block"><!-- Figure inspired by https://jakevdp.github.io/blog/2014/05/09/why-python-is-slow/#3.-Python's-object-model-can-lead-to-inefficient-memory-access --></figure><div class="section level3">
 <h3 id="numpy-arrays-and-python-lists-live-in-two-separate-worlds">NumPy Arrays and Python Lists Live in Two Separate Worlds<a class="anchor" aria-label="anchor" href="#numpy-arrays-and-python-lists-live-in-two-separate-worlds"></a>
 </h3>
@@ -3769,7 +3777,7 @@ and memory allocations than a Python list.</p>
 <span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, N):</span>
 <span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>        ar.resize(i<span class="op">+</span><span class="dv">1</span>)</span>
 <span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>        ar[i] <span class="op">=</span> i</span>
-<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>        </span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a></span>
 <span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a>repeats <span class="op">=</span> <span class="dv">1000</span></span>
 <span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"list_append: </span><span class="sc">{</span>timeit(list_append, number<span class="op">=</span>repeats)<span class="sc">:.2f}</span><span class="ss">ms"</span>)</span>
 <span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"array_resize: </span><span class="sc">{</span>timeit(array_resize, number<span class="op">=</span>repeats)<span class="sc">:.2f}</span><span class="ss">ms"</span>)</span></code></pre>
@@ -3961,7 +3969,7 @@ However, using NumPy broadcasting we can apply the addition to 1, 10 or
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
   <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
 <div class="accordion-body">
 <p>A simple analogy:</p>
 <p>If you’re baking cookies, the oven (CPU register) is big enough to
@@ -3977,7 +3985,7 @@ benefit from this unless you convert them to a NumPy array first.</p>
 </div>
 </div>
 </div>
-<p>Earlier it was demonstrated that using core Python methods over a
+<p>Earlier it was demonstrated that using core Python functions on a
 list will outperform a loop, performing the same calculation faster. The
 below example takes this a step further by demonstrating the calculation
 of a dot product.</p>
@@ -4089,7 +4097,7 @@ instead of writing your own code from scratch?</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
   <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
 </button>
-<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
+<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
 <div class="accordion-body">
 <p>These libraries could be specific to your area of research; but they
 could also include packages from other fields that provide tools you
@@ -4176,7 +4184,7 @@ researcher decided not to spend more time to rewrite them.)</li>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor2" aria-expanded="false" aria-controls="collapseInstructor2">
   <h3 class="accordion-header" id="headingInstructor2">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
 </button>
-<div id="collapseInstructor2" class="accordion-collapse collapse" aria-labelledby="headingInstructor2" data-bs-parent="#accordionInstructor2">
+<div id="collapseInstructor2" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor2" aria-labelledby="headingInstructor2">
 <div class="accordion-body">
 <p>The following code snippet demonstrates how this works for a
 simplified example.</p>
@@ -4229,16 +4237,16 @@ actively harm performance.</p>
 <div class="section level3">
 <h3 id="operating-on-rows">Operating on Rows<a class="anchor" aria-label="anchor" href="#operating-on-rows"></a>
 </h3>
-<p>Pandas’ methods by default operate on columns. Each column or series
-can be thought of as a NumPy array, highly suitable for
+<p>Pandas’ functions by default operate on columns. Each column or
+series can be thought of as a NumPy array, highly suitable for
 vectorisation.</p>
 <p>Following the theme of this episode, iterating over the rows of a
 data frame using a <code>for</code> loop is not advised. The pythonic
 iteration will be slower than other approaches.</p>
-<p>Pandas allows its own methods to be applied to rows in many cases by
-passing <code>axis=1</code>, where available these functions should be
-preferred over manual loops. Where you can’t find a suitable method,
-<code>apply()</code> can be used, which is similar to
+<p>Pandas allows its own functions to be applied to rows in many cases
+by passing <code>axis=1</code>, where available these functions should
+be preferred over manual loops. Where you can’t find a suitable
+function, <code>apply()</code> can be used, which is similar to
 <code>map()</code>, to apply your own function to rows.</p>
 <div class="codewrapper sourceCode" id="cb14">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -4320,9 +4328,9 @@ version of this calculation?</p>
 <span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a>    vertical <span class="op">=</span> df[<span class="st">"f_vertical"</span>]</span>
 <span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a>    horizontal <span class="op">=</span> df[<span class="st">"f_horizontal"</span>]</span>
 <span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a></span>
-<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a>    <span class="co"># Your code goes here</span></span>
+<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a>    result <span class="op">=</span> ...  <span class="co"># Your code goes here</span></span>
 <span id="cb16-7"><a href="#cb16-7" tabindex="-1"></a></span>
-<span id="cb16-8"><a href="#cb16-8" tabindex="-1"></a>    <span class="cf">return</span> pandas.Series(results)</span></code></pre>
+<span id="cb16-8"><a href="#cb16-8" tabindex="-1"></a>    <span class="cf">return</span> pandas.Series(result)</span></code></pre>
 </div>
 <p>Once you’ve done that, measure your performance by running</p>
 <div class="codewrapper sourceCode" id="cb17">
@@ -4341,7 +4349,7 @@ version of this calculation?</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint2" aria-expanded="false" aria-controls="collapseHint2">
   <h4 class="accordion-header" id="headingHint2"> Give me a hint </h4>
 </button>
-<div id="collapseHint2" class="accordion-collapse collapse" aria-labelledby="headingHint2" data-bs-parent="#accordionHint2">
+<div id="collapseHint2" class="accordion-collapse collapse" data-bs-parent="#accordionHint2" aria-labelledby="headingHint2">
 <div class="accordion-body">
 <p>Remember that most common mathematical operations work element-wise
 when applied to NumPy arrays. For example:</p>
@@ -4362,7 +4370,7 @@ when applied to NumPy arrays. For example:</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb19">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>

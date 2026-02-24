@@ -216,7 +216,7 @@
 <div class="accordion accordion-flush" id="accordionFlush3">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading3">
-        <a href="profiling-functions.html">2. Function Level Profiling</a>
+        <a href="profiling-functions.html">2. Function-Level Profiling</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -393,7 +393,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Line Level Profiling</h1>
-        <p>Last updated on 2026-02-21 |
+        <p>Last updated on 2026-02-24 |
 
         <a href="https://github.com/carpentries-incubator/pando-python/edit/main/episodes/profiling-lines.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -439,15 +439,16 @@ lines where time is being spent during a program’s execution</li>
 </div>
 <section><h2 class="section-heading" id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a></h2>
 <hr class="half-width"><!-- Context --><p>Whilst profiling, you may find that function-level profiling
-highlights expensive methods where you can’t easily determine the cause
-of the cost due to their complexity.</p>
+highlights expensive functions where you can’t easily determine the
+cause of the cost due to their complexity.</p>
 <!-- What -->
-<p>Line level profiling allows you to target specific methods to collect
-more granular metrics, which can help narrow the source of expensive
-computation further. Typically, line-level profiling will calculate the
-number of times each line is called and the total time spent executing
-each line. However, with the increased granularity come increased
-collection costs, which is why it’s targeted to specific methods.</p>
+<p>Line level profiling allows you to target specific functions to
+collect more granular metrics, which can help narrow the source of
+expensive computation further. Typically, line-level profiling will
+calculate the number of times each line is called and the total time
+spent executing each line. However, with the increased granularity come
+increased collection costs, which is why it’s targeted to specific
+functions.</p>
 <!-- Why -->
 <p>This allows lines that occupy a disproportionate amount of the total
 runtime to be quickly identified and investigated.</p>
@@ -467,7 +468,7 @@ installed via pip.</p>
 </h3>
 <pre class="sourceCode sh" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="ex">pip</span> install <span class="st">"line_profiler[all]"</span></span></code></pre>
 </div>
-<p>To use <code>line_profiler</code> decorate methods to be profiled
+<p>To use <code>line_profiler</code> decorate functions to be profiled
 with <code>@profile</code> which is imported from
 <code>line_profiler</code>.</p>
 <p>For example, the below code:</p>
@@ -502,7 +503,7 @@ with <code>@profile</code> which is imported from
 <span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a><span class="bu">print</span>(is_prime(<span class="dv">1087</span>))</span></code></pre>
 </div>
 <p>This tells <code>line_profiler</code> to collect metrics for the
-lines within the method <code>is_prime()</code>. You can still execute
+lines within the function <code>is_prime()</code>. You can still execute
 your code as normal, and these changes will have no effect.</p>
 <p>Similar to the earlier tools, <code>line_profiler</code> can then be
 triggered via <code>kernprof</code>.</p>
@@ -511,7 +512,7 @@ triggered via <code>kernprof</code>.</p>
 </h3>
 <pre class="sourceCode sh" tabindex="0"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> kernprof <span class="at">-lvr</span> my_script.py</span></code></pre>
 </div>
-<p>This will output a table per profiled method to console:</p>
+<p>This will output a table per profiled function to console:</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -552,10 +553,10 @@ calls.</td>
 relative to the other lines of the function.</td>
 </tr><tr><td><code>Line Contents</code></td>
 <td>A copy of the line from the file.</td>
-</tr></tbody></table><p>As <code>line_profiler</code> must be attached to specific methods
+</tr></tbody></table><p>As <code>line_profiler</code> must be attached to specific functions
 and cannot attach to a full Python file or project, if your Python file
 has significant code in the global scope it will be necessary to move it
-into a new method which can then instead be called from global
+into a new function which can then instead be called from global
 scope.</p>
 <p>The profile is also output to file, in this case
 <code>my_script.py.lprof</code>. This file is not human-readable, but
@@ -566,7 +567,7 @@ which will then display the same table as above.</p>
 </h3>
 <pre class="sourceCode sh" tabindex="0"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> line_profiler <span class="at">-rm</span> my_script.py.lprof</span></code></pre>
 </div>
-<!-- TODO line_profiling significantly slows down the profiled methods. Is it possible to dynamically disable/enable profiling with `line_profiler`? kernprof -h implies so, but trial/error and docs is failing me -->
+<!-- TODO line_profiling significantly slows down the profiled functions. Is it possible to dynamically disable/enable profiling with `line_profiler`? kernprof -h implies so, but trial/error and docs is failing me -->
 </section><section><h2 class="section-heading" id="worked-example">Worked Example<a class="anchor" aria-label="anchor" href="#worked-example"></a></h2>
 <hr class="half-width"><div id="follow-along" class="callout">
 <div class="callout-square">
@@ -599,8 +600,8 @@ the below implementation of “FizzBuzz” will be line profiled.</p>
 <span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a>    <span class="cf">else</span>:</span>
 <span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a>        <span class="bu">print</span>(i)</span></code></pre>
 </div>
-<p>As there are no methods, firstly it should be updated to move the
-code to be profiled into a method:</p>
+<p>As there are no functions, firstly it should be updated to move the
+code to be profiled into a function:</p>
 <div class="codewrapper sourceCode" id="cb8">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -617,7 +618,7 @@ code to be profiled into a method:</p>
 <span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a></span>
 <span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a>fizzbuzz(<span class="dv">100</span>)</span></code></pre>
 </div>
-<p>Next the method can be decorated with <code>@profile</code> which
+<p>Next the function can be decorated with <code>@profile</code> which
 must be imported via <code>line_profiler</code>:</p>
 <div class="codewrapper sourceCode" id="cb9">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -644,7 +645,7 @@ must be imported via <code>line_profiler</code>:</p>
 </h3>
 <pre class="sourceCode sh" tabindex="0"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> kernprof <span class="at">-lvr</span> fizzbuzz.py</span></code></pre>
 </div>
-<p>This will output a table per profiled method to console:</p>
+<p>This will output a table per profiled function to console:</p>
 <p><em>If you run this locally it should be highlighted due to
 <code>-r</code> passed to <code>kernprof</code>.</em></p>
 <div class="codewrapper">
@@ -786,9 +787,9 @@ number of elements to be sorted.</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
   <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
 </button>
-<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
+<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
 <div class="accordion-body">
-<ul><li>Remember that the code needs to be moved into a method decorated
+<ul><li>Remember that the code needs to be moved into a function decorated
 with <code>@profile</code>
 </li>
 <li>This must be imported via
@@ -804,7 +805,7 @@ with <code>@profile</code>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>If you chose to profile the whole code, it may look like this:</p>
 <div class="codewrapper sourceCode" id="cb15">
@@ -913,10 +914,10 @@ we are unlikely to be able to improve it further.</p>
 <p>During the function-level profiling episode,
 <a href="files/pred-prey/predprey.py" download>the Python predator prey
 model</a> was function-level profiled. This highlighted that
-<code>Grass::eaten()</code> (from <code>predprey.py:278</code>) occupies
+<code>Grass.eaten()</code> (from <code>predprey.py:278</code>) occupies
 the majority of the runtime.</p>
-<p>Line-profile this method, using the output from the profile consider
-how it might be optimised.</p>
+<p>Line-profile this function, using the output from the profile
+consider how it might be optimised.</p>
 </div>
 </div>
 </div>
@@ -925,7 +926,7 @@ how it might be optimised.</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint2" aria-expanded="false" aria-controls="collapseHint2">
   <h4 class="accordion-header" id="headingHint2"> Give me a hint </h4>
 </button>
-<div id="collapseHint2" class="accordion-collapse collapse" aria-labelledby="headingHint2" data-bs-parent="#accordionHint2">
+<div id="collapseHint2" class="accordion-collapse collapse" data-bs-parent="#accordionHint2" aria-labelledby="headingHint2">
 <div class="accordion-body">
 <ul><li>Remember that the function needs to be decorated with
 <code>@profile</code>
@@ -933,7 +934,7 @@ how it might be optimised.</p>
 <li>This must be imported via
 <code>from line_profiler import profile</code>
 </li>
-<li>Line-level profiling <code>Grass::eaten()</code>, the most called
+<li>Line-level profiling <code>Grass.eaten()</code>, the most called
 function will slow it down significantly. You may wish to reduce the
 number of steps passed as an argument.</li>
 </ul></div>
@@ -945,7 +946,7 @@ number of steps passed as an argument.</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>First the function must be decorated</p>
 <div class="codewrapper sourceCode" id="cb19">
@@ -1014,7 +1015,7 @@ Line #      Hits         Time  Per Hit   % Time  Line Contents
    303     12078       3132.0      0.3      0.0                  self.available = 0</code></pre>
 </div>
 <p>From the profiling output it can be seen that lines 285-287 occupy
-almost 80% of the method’s runtime!</p>
+almost 80% of the function’s runtime!</p>
 <div class="codewrapper sourceCode" id="cb22">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -1026,12 +1027,12 @@ almost 80% of the method’s runtime!</p>
 lines only has 61.7 million, it appears that the vast majority of times,
 the condition <code>prey.life &lt; PREY_HUNGER_THRESH</code> is not
 fulfilled.</p>
-<p>Remembering that this method is executed once for each of the 5000
+<p>Remembering that this function is executed once for each of the 5000
 <code>Grass</code> agents during each time step of the model, it could
 make sense to pre-filter <code>prey_list</code> once per time step
-before it is passed to <code>Grass::eaten()</code>. This would greatly
+before it is passed to <code>Grass.eaten()</code>. This would greatly
 reduce the number of <code>Prey</code> iterated, reducing the cost of
-the method.</p>
+the function.</p>
 </div>
 </div>
 </div>
@@ -1043,13 +1044,13 @@ the method.</p>
 <span class="callout-header">Key Points</span>
 <div class="callout-inner">
 <div class="callout-content">
-<ul><li>Specific methods can be line-level profiled if decorated with
+<ul><li>Specific functions can be line-level profiled if decorated with
 <code>@profile</code> that is imported from
 <code>line_profiler</code>.</li>
 <li>
 <code>kernprof</code> executes <code>line_profiler</code> via
 <code>python -m kernprof -lvr &lt;script name&gt; &lt;arguments&gt;</code>.</li>
-<li>Code in global scope must be wrapped in a method if it is to be
+<li>Code in global scope must be wrapped in a function if it is to be
 profiled with <code>line_profiler</code>.</li>
 <li>The output from <code>line_profiler</code> lists the absolute and
 relative time spent per line for each targeted function.</li>
@@ -1120,7 +1121,7 @@ any links that you are not going to use.
   "url": "https://carpentries-incubator.github.io/pando-python/profiling-lines.html",
   "identifier": "https://carpentries-incubator.github.io/pando-python/profiling-lines.html",
   "dateCreated": "2024-02-01",
-  "dateModified": "2026-02-21",
+  "dateModified": "2026-02-24",
   "datePublished": "2026-02-24"
 }
 
