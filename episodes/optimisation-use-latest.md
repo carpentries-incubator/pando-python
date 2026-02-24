@@ -43,7 +43,7 @@ For example, since October 2024, these packages stopped supporting Python 3.10; 
 
 <!-- Not always possible due to incompatibilities -->
 These improvements are often free, requiring minimal changes to any code (unlike the jump from Python 2 to Python 3).
-However, the more packages and language features your code touches, and the older the Python version it currently uses, the greater the risk of incompatibilities that require some work to upgrade.
+However, the more packages and language features your code touches, and the older the Python (or package) version it currently uses, the greater the risk of incompatibilities that require some work to upgrade.
 
 <!-- Updates may include breaking changes, important to have validation inplace to ensure results aren't affected -->
 As with other optimisations, when updating it's important to have tests in place to validate the correctness of your code before and after changes.
