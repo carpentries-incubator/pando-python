@@ -1,14 +1,14 @@
 ---
-title: "Function Level Profiling"
+title: "Function-Level Profiling"
 teaching: 20
 exercises: 20
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions
 
-- When is function level profiling appropriate?
+- When is function-level profiling appropriate?
 - How can `cProfile` and `snakeviz` be used to profile a Python program?
-- How are the outputs from function level profiling interpreted?
+- How are the outputs from function-level profiling interpreted?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -63,10 +63,13 @@ import traceback
 def a():
     b1()
     b2()
+
 def b1():
     pass
+
 def b2():
     c()
+
 def c():
     traceback.print_stack()
 
@@ -192,7 +195,7 @@ python -m snakeviz out.prof
 
 This should open your web browser displaying a page similar to that below.
 
-![An example of the default 'icicle' visualisation provided by `snakeviz`.](episodes/fig/snakeviz-home.png){alt='A web page, with a central diagram representing a call-stack, with the root at the top and the horizontal axis representing the duration of each call. Below this diagram is the top of a table detailing the statistics of individual methods.'}
+![An example of the default 'icicle' visualisation provided by `snakeviz`.](episodes/fig/snakeviz-home.png){alt='A web page, with a central diagram representing a call-stack, with the root at the top and the horizontal axis representing the duration of each call. Below this diagram is the top of a table detailing the statistics of individual functions.'}
 
 <!-- From SnakeViz docs
 In the icicle visualization style functions are represented by rectangles. A root function is the top-most rectangle, with functions it calls below it, then the functions those call below them, and so on. The amount of time spent inside a function is represented by the width of the rectangle. A rectangle that stretches across most of the visualization represents a function that is taking up most of the time of its calling function, while a skinny rectangle represents a function that is using hardly any time at all.
@@ -200,12 +203,12 @@ In the icicle visualization style functions are represented by rectangles. A roo
 
 The icicle diagram displayed by `snakeviz` represents an aggregate of the call stack during the execution of the profiled code.
 The box which fills the top row represents the root call, filling the row shows that it occupied 100% of the runtime.
-The second row holds the child methods called from the root, with their widths relative to the proportion of runtime they occupied.
-This continues with each subsequent row, however where a method only occupies 50% of the runtime, its children can only occupy a maximum of that runtime hence the appearance of "icicles" as each row gets narrower when the overhead of methods with no further children is accounted for.
+The second row holds the child functions called from the root, with their widths relative to the proportion of runtime they occupied.
+This continues with each subsequent row, however where a function only occupies 50% of the runtime, its children can only occupy a maximum of that runtime hence the appearance of "icicles" as each row gets narrower when the overhead of functions with no further children is accounted for.
 
-By clicking a box within the diagram, it will "zoom" making the selected box the root allowing more detail to be explored. The diagram is limited to 10 rows by default ("Depth") and methods with a relatively small proportion of the runtime are hidden ("Cutoff").
+By clicking a box within the diagram, it will "zoom" making the selected box the root allowing more detail to be explored. The diagram is limited to 10 rows by default ("Depth") and functions with a relatively small proportion of the runtime are hidden ("Cutoff").
 
-As you hover each box, information to the left of the diagram updates specifying the location of the method and for how long it ran.
+As you hover over each box, information to the left of the diagram updates specifying the location of the function and for how long it ran.
 
 ::::::::::::::::::::::::::::::::::::: callout
 
@@ -226,7 +229,7 @@ Following this, you can either call `%snakeviz` to profile a function defined ea
 %snakeviz my_function()
 ```
 
-Or, you can create a `%%snakeviz` cell, to profile the python executed within it.
+Or, you can create a `%%snakeviz` cell, to profile the Python code executed within it.
 
 ```py
 %%snakeviz
@@ -283,7 +286,7 @@ def d_1():
 a_1()
 ```
 
-All of the methods except for `b_1()` call `time.sleep()`, this is used to provide synthetic bottlenecks to create an interesting profile.
+All of the functions except for `b_1()` call `time.sleep()`, this is used to provide synthetic bottlenecks to create an interesting profile.
 
 * `a_1()` calls `b_1()` x3 and `b_2()` x1
 * `b_1()` calls `c_1()` x1 and `c_2()` x1
@@ -305,11 +308,11 @@ python -m snakeviz out.prof
 <!-- TODO: Alt text here is redundant? -->
 ![An icicle visualisation provided by `snakeviz` for the above Python code.](episodes/fig/snakeviz-worked-example-icicle.png){alt='The snakeviz icicle visualisation for the worked example Python code.'}
 
-The third row represents `a_1()`, the only method called from global scope, therefore the first two rows represent Python's internal code for launching our script and can be ignored (by clicking on the third row).
+The third row represents `a_1()`, the only function called from global scope, therefore the first two rows represent Python's internal code for launching our script and can be ignored (by clicking on the third row).
 
 The row following `a_1()` is split into three boxes representing `b_1()`, `time.sleep()` and `b_2()`. Note that `b_1()` is called three times, but only has one box within the icicle diagram. The boxes are ordered left-to-right according to cumulative time, which happens to be the order they were first called.
 
-If the box for `time.sleep()` is hovered it will change colour along with several other boxes that represent the other locations that `time.sleep()` was called from. Note that each of these boxes display the same duration, the timing statistics collected by `cProfile` (and visualised by `snakeviz`) are aggregate, so there is no information about individual method calls for methods which were called multiple times. This does however mean that if you check the properties to the left of the diagram whilst hovering `time.sleep()` you will see a cumulative time of 99% reported, the overhead of the method calls and for loop is insignificant in contrast to the time spent sleeping!
+If you hover over the box for `time.sleep()`, it will change colour along with several other boxes that represent the other locations that `time.sleep()` was called from. Note that each of these boxes display the same duration, the timing statistics collected by `cProfile` (and visualised by `snakeviz`) are aggregate, so there is no information about individual function calls for functions which were called multiple times. This does however mean that if you check the properties to the left of the diagram whilst hovering over `time.sleep()` you will see a cumulative time of 99% reported, the overhead of the function calls and for loop is insignificant in contrast to the time spent sleeping!
 
 *Below are the properties shown, the time may differ if you generated the profile yourself.*
 
@@ -319,17 +322,17 @@ If the box for `time.sleep()` is hovered it will change colour along with severa
 * **Line:** `0`
 * **Directory:**
 
-As `time.sleep()` is a core Python method it is displayed as "built-in method" and doesn't have a file, line or directory.
+As `time.sleep()` is a core Python function it is displayed as "built-in method" and doesn't have a file, line or directory.
 
-If you hover any boxes representing the methods from the above code, you will see file and line properties completed. The directory property remains empty as the profiled code was in the root of the working directory. A profile of a large project with many files across multiple directories will see this filled.
+If you hover over any boxes representing the functions from the above code, you will see file and line properties completed. The directory property remains empty as the profiled code was in the root of the working directory. A profile of a large project with many files across multiple directories will see this filled.
 
-Find the box representing `c_2()` on the icicle diagram, its children are unlabelled because they are not wide enough (but they can still be hovered). Clicking `c_2()` zooms in the diagram, showing the children to be `time.sleep()` and `d_1()`.
+Find the box representing `c_2()` on the icicle diagram, its children are unlabelled because they are not wide enough (but they can still be hovered over). Clicking `c_2()` zooms in the diagram, showing the children to be `time.sleep()` and `d_1()`.
 
 To zoom back out you can either click the top row, which will zoom out one layer, or click "Reset Zoom" on the left-hand side.
 
-In this simple example the execution is fairly evenly balanced between all of the user-defined methods, so there is not a clear hot-spot to investigate.
+In this simple example the execution is fairly evenly balanced between all of the user-defined functions, so there is not a clear hot-spot to investigate.
 
-Below the icicle diagram, there is a table similar to the default output from `cProfile`. However, in this case you can sort the columns by clicking their headers and filter the rows shown by entering a filename in the search box. This allows built-in methods to be hidden, which can make it easier to highlight optimisation priorities.
+Below the icicle diagram, there is a table similar to the default output from `cProfile`. However, in this case you can sort the columns by clicking their headers and filter the rows shown by entering a filename in the search box. This allows built-in functions to be hidden, which can make it easier to highlight optimisation priorities.
 
 **Notebooks**
 
@@ -345,7 +348,7 @@ Because notebooks operate by creating temporary Python files, the filename (show
 
 `snakeviz` provides an alternate "Sunburst" visualisation, accessed via the "Style" drop-down on the left-hand side.
 
-This provides the same information as "Icicle", however the rows are instead circular with the root method call found at the center.
+This provides the same information as "Icicle", however the rows are instead circular with the root function call found at the center.
 
 The sunburst visualisation displays less text on the boxes, so it can be harder to interpret. However, it increases the visibility of boxes further from the root call.
 
@@ -361,7 +364,7 @@ The following exercises allow you to review your understanding of what has been 
 
 :::::::::::::::::::::::::::::::::: instructor
 
-Arguments 1-9 passed to `travellingsales.py` should execute relatively fast (less than a minute)
+Arguments 1-9 passed to `travellingsales.py` should execute relatively fast (less than a minute).
 
 This will be slower via the profiler, and is likely to vary on different hardware.
 
@@ -402,7 +405,7 @@ The value of `cities` should be a positive integer, this algorithm has poor scal
 
 The hotspot only becomes visible when an argument of `5` or greater is passed.
 
-You should see that `distance()` (from `travellingsales.py:11`) becomes the largest box (similarly its parent in the call-stack `total_distance()`) showing that it scales poorly with the number of cities. With 5 cities, `distance()` has a cumulative time of `~35%` the runtime, this increases to `~60%` with 9 cities.
+You should see that `distance()` (from `travellingsales.py:11`) becomes the largest box (similarly its parent in the call-stack, `total_distance()`) showing that it scales poorly with the number of cities. With 5 cities, `distance()` has a cumulative time of `~35%` the runtime, this increases to `~60%` with 9 cities.
 
 Other boxes within the diagram correspond to the initialisation of imports, or initialisation of cities. These have constant or linear scaling, so their cost barely increases with the number of cities.
 
@@ -444,19 +447,19 @@ When the model finishes it outputs a graph of the three populations `predprey_ou
 
 :::::::::::::::::::::::: solution 
 
-It should be clear from the profile that the method `Grass::eaten()` (from `predprey.py:278`) occupies the majority of the runtime.
+It should be clear from the profile that the function `Grass.eaten()` (from `predprey.py:278`) occupies the majority of the runtime.
 
 From the table below the Icicle diagram, we can see that it was called 1,250,000 times.
 
 ![The top of the table shown by snakeviz.](episodes/fig/snakeviz-predprey-table.png){alt='The top 9 rows of the table shown by snakeviz when profiling predprey.py. The top row shows that predprey.py:278(eaten) was called 1,250,000 times, taking a total time of 8 seconds. The table is ordered in descending total time, with the next row taking a mere 0.74 seconds.'}
 
-If the table is ordered by `ncalls`, it can be identified as the joint 4th most called method and 2nd most called method from `predprey.py`.
+If the table is ordered by `ncalls`, it can be identified as the joint 4th most called function and 2nd most called function from `predprey.py`.
 
 If you checked `predprey_out.png` (shown below), you should notice that there are significantly more `Grass` agents than `Predators` or `Prey`.
 
 ![`predprey_out.png` as produced by the default configuration of `predprey.py`.](episodes/fig/predprey_out.png){alt="A line graph plotting population over time through 400 time steps of the pred prey model. The amount of grass, shown in green, is scaled down by a factor of 20 to fit onto the graph. It has a brief dip in the first 25 steps, then slowly declines from approximately 220 to 150 over the next 200 steps, before steadily returning to 250. The number of prey, shown in blue, starts at 200, then grows to around 600 after 200 steps, before declining quickly and reaching zero at 350 to 400 steps. The number of predators, shown in red, falls from 50 to around 30 after 15 time steps, then grows to almost 700 by step 330 before declining quickly."}
 
-Similarly, the `Grass::eaten()` has a `percall` time is inline with other agent functions such as `Prey::flock()` (from `predprey.py:67`).
+Similarly, the `Grass.eaten()` has a `percall` time is inline with other agent functions such as `Prey.flock()` (from `predprey.py:67`).
 
 Maybe we could investigate this further with line profiling!
 
@@ -468,8 +471,8 @@ Maybe we could investigate this further with line profiling!
 
 ::::::::::::::::::::::::::::::::::::: keypoints
 
-- A python program can be function level profiled with `cProfile` via `python -m cProfile -o <output file> <script name> <arguments>`.
+- A Python program can be function-level profiled with `cProfile` via `python -m cProfile -o <output file> <script name> <arguments>`.
 - The output file from `cProfile` can be visualised with `snakeviz` via `python -m snakeviz <output file>`.
-- Function level profiling output displays the nested call hierarchy, listing both the cumulative and total minus sub functions time.
+- Function-level profiling output displays the nested call hierarchy, listing both the cumulative and total minus sub functions time.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::

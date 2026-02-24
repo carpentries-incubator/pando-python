@@ -154,7 +154,7 @@ In this course we will cover the usage of the line-level profiler `line_profiler
 
 Line-level profiling can be particularly expensive, a program can execute hundreds of thousands of lines of code per second. Therefore, collecting information about each line of code can be costly.
 
-`line_profiler` is deterministic, meaning that it tracks every line of code executed. To avoid it being too costly, the profiling is restricted to methods targeted with the decorator `@profile`.
+`line_profiler` is deterministic, meaning that it tracks every line of code executed. To avoid it being too costly, the profiling is restricted to functions targeted with the decorator `@profile`.
 
 In contrast, [`scalene`](https://github.com/plasma-umass/scalene) is a more advanced Python profiler capable of line-level profiling. It uses a sampling based approach, whereby the profiler halts and samples the line of code currently executing thousands of times per second. This reduces the cost of profiling, whilst still maintaining representative metrics for the most expensive components.
 
