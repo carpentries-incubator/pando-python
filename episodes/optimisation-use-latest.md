@@ -23,18 +23,13 @@ exercises: 0
 ## Introduction
 
 <!-- Why it's important to use the most recent Python and packages viable -->
-It's important to use the latest Python wherever feasible. In addition to new features and fixes, much work has been completed over the lifetime of Python 3 to improve the performance of the language.
-
-> [Python 3.11](https://docs.python.org/3/whatsnew/3.11.html) is between 10-60% faster than Python 3.10. On average, we measured a 1.25x speedup on the standard benchmark suite.
+It's important to use the latest Python version wherever feasible. In addition to new features and fixes, much work has been completed over the lifetime of Python 3 to improve the performance of the language. On average, [Python 3.11](https://docs.python.org/3/whatsnew/3.11.html) was about 25% faster than Python 3.10; since then, Python 3.12 to 3.14 have each introduced additional speedups. Overall, average performance has improved [by about 50%](https://www.youtube.com/watch?v=NE-Oq8I3X_w&t=2m22s) in those four years.
 
 Future proposals, such as changes to the [JIT](https://tonybaloney.github.io/posts/python-gets-a-jit.html) and [GIL](https://peps.python.org/pep-0703/) will provide further improvements to performance.
 
-Similarly, major packages with a performance focus such as NumPy and Pandas, should be kept up to date for the same reasons.
+Similarly, major packages with a performance focus, such as NumPy and Pandas, should be kept up to date for the same reasons.
 
-<!-- performance regressions for major packages are rare -->
-These improvements are often free, requiring minimal changes to any code (unlike the jump from Python 2 to Python 3).
-
-Performance regressions within major packages should be considered rare, they often track performance alongside their test suites.
+Performance regressions in Python itself or in those packages are fairly rare, since they often track performance alongside their test suites.
 
 ::::::::::::::::::::::::::::::::::::: callout
 
@@ -47,10 +42,11 @@ For example, since October 2024, these packages stopped supporting Python 3.10; 
 
 
 <!-- Not always possible due to incompatibilities -->
-However, the more packages and language features your code touches, and the older the Python it currently uses, the greater chance of incompatibilities making it difficult to upgrade.
+These improvements are often free, requiring minimal changes to any code (unlike the jump from Python 2 to Python 3).
+However, the more packages and language features your code touches, and the older the Python version it currently uses, the greater the risk of incompatibilities that require some work to upgrade.
 
 <!-- Updates may include breaking changes, important to have validation inplace to ensure results aren't affected -->
-Similar to optimising, when updating it's important to have tests in place to validate the correctness of your code before and after changes.
+As with other optimisations, when updating it's important to have tests in place to validate the correctness of your code before and after changes.
 An update to a single small dependent package could introduce a breaking change.
 This could cause your code to crash, or worse subtly change your results.
 
