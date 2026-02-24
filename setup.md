@@ -18,14 +18,14 @@ Download the [data zip file](https://example.com/FIXME) and unzip it to your Des
 
 ### Details
 
-This course was originally developed using Python 3.11 and last tested with Python 3.13. We recommend that you have a Python 3.13 environment.
+This course was originally developed using Python 3.11 and last tested with Python 3.14. We recommend that you have a Python 3.14 environment.
 
 You may want to create a new Python virtual environment for the course, this can be done with your preferred Python environment manager (e.g. `conda`, `pipenv`), the required packages can all be installed via `pip`.
 
 If you have `conda` available, you can create and activate a new environment using the following command:
 
 ```sh
-conda create --name prof_opt python=3.13
+conda create --name prof_opt python=3.14
 conda activate prof_opt
 ```
 
