@@ -392,7 +392,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Using Scientific Python Packages (NumPy, Pandas and more)</h1>
-        <p>Last updated on 2026-02-24 |
+        <p>Last updated on 2026-02-25 |
 
         <a href="https://github.com/carpentries-incubator/pando-python/edit/main/episodes/optimisation-numpy.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -453,14 +453,14 @@ treat this like <code>append()</code> for a Python list, resizing for
 each individual append, you will be performing significantly more copies
 and memory allocations than a Python list.</p>
 <p>The below example sees lists and arrays constructed from
-<code>range(100000)</code>.</p>
+<code>range(100_000)</code>.</p>
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="im">from</span> timeit <span class="im">import</span> timeit</span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="im">import</span> numpy</span>
 <span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">100000</span>  <span class="co"># Number of elements in list/array</span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">100_000</span>  <span class="co"># Number of elements in list/array</span></span>
 <span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a></span>
 <span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="kw">def</span> list_append():</span>
 <span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>    ls <span class="op">=</span> []</span>
@@ -474,8 +474,8 @@ and memory allocations than a Python list.</p>
 <span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>        ar[i] <span class="op">=</span> i</span>
 <span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a></span>
 <span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a>repeats <span class="op">=</span> <span class="dv">1000</span></span>
-<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"list_append: </span><span class="sc">{</span>timeit(list_append, number<span class="op">=</span>repeats)<span class="sc">:.2f}</span><span class="ss">ms"</span>)</span>
-<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"array_resize: </span><span class="sc">{</span>timeit(array_resize, number<span class="op">=</span>repeats)<span class="sc">:.2f}</span><span class="ss">ms"</span>)</span></code></pre>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"list_append: </span><span class="sc">{</span>timeit(list_append, number<span class="op">=</span>repeats)<span class="sc">:.2f}</span><span class="ss"> s"</span>)</span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"array_resize: </span><span class="sc">{</span>timeit(array_resize, number<span class="op">=</span>repeats)<span class="sc">:.2f}</span><span class="ss"> s"</span>)</span></code></pre>
 </div>
 <p>For Python lists, we’ve seen earlier that list comprehensions are
 more efficient, so we prefer to avoid using a large number of
@@ -485,8 +485,8 @@ slower than a list, probably 10x slower than list comprehension).</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>list_append: 3.50ms
-array_resize: 18.04ms</code></pre>
+<pre class="output" tabindex="0"><code>list_append: 3.50 s
+array_resize: 18.04 s</code></pre>
 </div>
 <p>Another difference, is that NumPy arrays typically require all data
 to be the same type (and a NumPy type). This enables more efficient
@@ -534,11 +534,11 @@ and NumPy functions.</p>
 <h3 class="code-label">SH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode sh" tabindex="0"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># Python list, numpy.random.choice()</span></span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="op">&gt;</span>python <span class="ex">-m</span> timeit <span class="at">-s</span> <span class="st">"import numpy; ls = list(range(10000))"</span> <span class="st">"numpy.random.choice(ls)"</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="op">&gt;</span>python <span class="ex">-m</span> timeit <span class="at">-s</span> <span class="st">"import numpy; ls = list(range(10_000))"</span> <span class="st">"numpy.random.choice(ls)"</span></span>
 <span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="ex">1000</span> loops, best of 5: 267 usec per loop</span>
 <span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a></span>
 <span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="co"># NumPy array, numpy.random.choice()</span></span>
-<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="op">&gt;</span>python <span class="ex">-m</span> timeit <span class="at">-s</span> <span class="st">"import numpy; ar = numpy.arange(10000)"</span> <span class="st">"numpy.random.choice(ar)"</span></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="op">&gt;</span>python <span class="ex">-m</span> timeit <span class="at">-s</span> <span class="st">"import numpy; ar = numpy.arange(10_000)"</span> <span class="st">"numpy.random.choice(ar)"</span></span>
 <span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="ex">50000</span> loops, best of 5: 4.06 usec per loop</span></code></pre>
 </div>
 <p>Passing a Python list to <code>numpy.random.choice()</code> is 65.6x
@@ -557,11 +557,11 @@ calling the function so that overhead is only paid once.</p>
 <h3 class="code-label">SH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode sh" tabindex="0"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># Python list, Manually select 1 item</span></span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="op">&gt;</span>python <span class="ex">-m</span> timeit <span class="at">-s</span> <span class="st">"import numpy; ls = list(range(10000))"</span> <span class="st">"ls[numpy.random.randint(len(ls))]"</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="op">&gt;</span>python <span class="ex">-m</span> timeit <span class="at">-s</span> <span class="st">"import numpy; ls = list(range(10_000))"</span> <span class="st">"ls[numpy.random.randint(len(ls))]"</span></span>
 <span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="ex">200000</span> loops, best of 5: 1.19 usec per loop</span>
 <span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a></span>
 <span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="co"># NumPy array, Manually select 1 item</span></span>
-<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="op">&gt;</span>python <span class="ex">-m</span> timeit <span class="at">-s</span> <span class="st">"import numpy; ar = numpy.arange(10000)"</span> <span class="st">"ar[numpy.random.randint(len(ar))]"</span></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="op">&gt;</span>python <span class="ex">-m</span> timeit <span class="at">-s</span> <span class="st">"import numpy; ar = numpy.arange(10_000)"</span> <span class="st">"ar[numpy.random.randint(len(ar))]"</span></span>
 <span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="ex">200000</span> loops, best of 5: 1.22 usec per loop</span></code></pre>
 </div>
 <p>Regardless, for this simple application of
@@ -670,7 +670,7 @@ Added Python sum array, skipped a couple of others-->
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="im">from</span> timeit <span class="im">import</span> timeit</span>
 <span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">1000000</span>  <span class="co"># Number of elements in list</span></span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">1_000_000</span>  <span class="co"># Number of elements in list</span></span>
 <span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a></span>
 <span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>gen_list <span class="op">=</span> <span class="ss">f"ls = list(range(</span><span class="sc">{</span>N<span class="sc">}</span><span class="ss">))"</span></span>
 <span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a>gen_array <span class="op">=</span> <span class="ss">f"import numpy; ar = numpy.arange(</span><span class="sc">{</span>N<span class="sc">}</span><span class="ss">, dtype=numpy.int64)"</span></span>
@@ -680,38 +680,37 @@ Added Python sum array, skipped a couple of others-->
 <span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a>np_sum_ar <span class="op">=</span> <span class="st">"numpy.sum(ar*ar)"</span></span>
 <span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a>np_dot_ar <span class="op">=</span> <span class="st">"numpy.dot(ar, ar)"</span></span>
 <span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a></span>
-<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a>repeats <span class="op">=</span> <span class="dv">1000</span></span>
-<span id="cb9-14"><a href="#cb9-14" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"python_sum_list: </span><span class="sc">{</span>timeit(py_sum_ls, setup<span class="op">=</span>gen_list, number<span class="op">=</span>repeats)<span class="sc">:.2f}</span><span class="ss">ms"</span>)</span>
-<span id="cb9-15"><a href="#cb9-15" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"python_sum_array: </span><span class="sc">{</span>timeit(py_sum_ar, setup<span class="op">=</span>gen_array, number<span class="op">=</span>repeats)<span class="sc">:.2f}</span><span class="ss">ms"</span>)</span>
-<span id="cb9-16"><a href="#cb9-16" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"numpy_sum_array: </span><span class="sc">{</span>timeit(np_sum_ar, setup<span class="op">=</span>gen_array, number<span class="op">=</span>repeats)<span class="sc">:.2f}</span><span class="ss">ms"</span>)</span>
-<span id="cb9-17"><a href="#cb9-17" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"numpy_dot_array: </span><span class="sc">{</span>timeit(np_dot_ar, setup<span class="op">=</span>gen_array, number<span class="op">=</span>repeats)<span class="sc">:.2f}</span><span class="ss">ms"</span>)</span></code></pre>
+<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a>repeats <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb9-14"><a href="#cb9-14" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"python_sum_list: </span><span class="sc">{</span>timeit(py_sum_ls, setup<span class="op">=</span>gen_list, number<span class="op">=</span>repeats)<span class="sc">:.3f}</span><span class="ss"> s"</span>)</span>
+<span id="cb9-15"><a href="#cb9-15" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"python_sum_array: </span><span class="sc">{</span>timeit(py_sum_ar, setup<span class="op">=</span>gen_array, number<span class="op">=</span>repeats)<span class="sc">:.3f}</span><span class="ss"> s"</span>)</span>
+<span id="cb9-16"><a href="#cb9-16" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"numpy_sum_array: </span><span class="sc">{</span>timeit(np_sum_ar, setup<span class="op">=</span>gen_array, number<span class="op">=</span>repeats)<span class="sc">:.3f}</span><span class="ss"> s"</span>)</span>
+<span id="cb9-17"><a href="#cb9-17" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"numpy_dot_array: </span><span class="sc">{</span>timeit(np_dot_ar, setup<span class="op">=</span>gen_array, number<span class="op">=</span>repeats)<span class="sc">:.3f}</span><span class="ss"> s"</span>)</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>python_sum_list: 46.93ms
-python_sum_array: 33.26ms
-numpy_sum_array: 1.44ms
-numpy_dot_array: 0.29ms</code></pre>
+<pre class="output" tabindex="0"><code>python_sum_list: 4.693 s
+python_sum_array: 3.326 s
+numpy_sum_array: 0.144 s
+numpy_dot_array: 0.029 s</code></pre>
 </div>
 <ul><li>
 <code>python_sum_list</code> uses list comprehension to perform the
 multiplication, followed by the Python core <code>sum()</code>. This
-comes out at 46.93ms</li>
+comes out at 4.693 s</li>
 <li>
 <code>python_sum_array</code> instead directly multiplies the two
 arrays (taking advantage of NumPy’s vectorisation) but uses the core
-Python <code>sum()</code>, this comes in slightly faster at
-33.26ms.</li>
+Python <code>sum()</code>, this comes in slightly faster.</li>
 <li>
 <code>numpy_sum_array</code> again takes advantage of NumPy’s
 vectorisation for the multiplication, and additionally uses NumPy’s
 <code>sum()</code> implementation. These two rounds of vectorisation
-provide a much faster 1.44ms completion.</li>
+provide a roughly 30x faster completion.</li>
 <li>
 <code>numpy_dot_array</code> instead uses NumPy’s <code>dot()</code>
 to calculate the dot product in a single operation. This comes out the
-fastest at 0.29ms, 162x faster than <code>python_sum_list</code>.</li>
+fastest, 162x faster than <code>python_sum_list</code>.</li>
 </ul><div id="parallel-numpy" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
@@ -767,7 +766,7 @@ instead of writing your own code from scratch?</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
   <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
 </button>
-<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
+<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
 <div class="accordion-body">
 <p>These libraries could be specific to your area of research; but they
 could also include packages from other fields that provide tools you
@@ -801,8 +800,8 @@ library.</p>
 <span id="cb11-11"><a href="#cb11-11" tabindex="-1"></a></span>
 <span id="cb11-12"><a href="#cb11-12" tabindex="-1"></a>    points_per_polygon[polygon_idx] <span class="op">=</span> out_points</span></code></pre>
 </div>
-<p>For about 500k points and 1000 polygons, the initial version of the
-code took about 20 hours to run.</p>
+<p>For about 500,000 points and 1000 polygons, the initial version of
+the code took about 20 hours to run.</p>
 <p>Luckily, Shapely is built on top of NumPy, so she was able to apply
 functions to an array of points instead and wrote an improved version,
 which took just 20 minutes:</p>
@@ -887,7 +886,7 @@ function, <code>apply()</code> can be used, which is similar to
 <span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a><span class="im">import</span> pandas</span>
 <span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a><span class="im">import</span> numpy</span>
 <span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a></span>
-<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">100000</span>  <span class="co"># Number of rows in DataFrame</span></span>
+<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">100_000</span>  <span class="co"># Number of rows in DataFrame</span></span>
 <span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a></span>
 <span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a><span class="kw">def</span> genDataFrame():</span>
 <span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a>    numpy.random.seed(<span class="dv">12</span>)  <span class="co"># Ensure each dataframe is identical</span></span>
@@ -900,7 +899,7 @@ function, <code>apply()</code> can be used, which is similar to
 <span id="cb14-15"><a href="#cb14-15" tabindex="-1"></a></span>
 <span id="cb14-16"><a href="#cb14-16" tabindex="-1"></a><span class="kw">def</span> pythagoras(row):</span>
 <span id="cb14-17"><a href="#cb14-17" tabindex="-1"></a>    <span class="cf">return</span> (row[<span class="st">"f_vertical"</span>]<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> row[<span class="st">"f_horizontal"</span>]<span class="op">**</span><span class="dv">2</span>)<span class="op">**</span><span class="fl">0.5</span></span>
-<span id="cb14-18"><a href="#cb14-18" tabindex="-1"></a>    </span>
+<span id="cb14-18"><a href="#cb14-18" tabindex="-1"></a></span>
 <span id="cb14-19"><a href="#cb14-19" tabindex="-1"></a><span class="kw">def</span> for_range():</span>
 <span id="cb14-20"><a href="#cb14-20" tabindex="-1"></a>    rtn <span class="op">=</span> []</span>
 <span id="cb14-21"><a href="#cb14-21" tabindex="-1"></a>    df <span class="op">=</span> genDataFrame()</span>
@@ -915,25 +914,25 @@ function, <code>apply()</code> can be used, which is similar to
 <span id="cb14-30"><a href="#cb14-30" tabindex="-1"></a>    <span class="cf">for</span> row_idx, row <span class="kw">in</span> df.iterrows():</span>
 <span id="cb14-31"><a href="#cb14-31" tabindex="-1"></a>        rtn.append(pythagoras(row))</span>
 <span id="cb14-32"><a href="#cb14-32" tabindex="-1"></a>    <span class="cf">return</span> pandas.Series(rtn)</span>
-<span id="cb14-33"><a href="#cb14-33" tabindex="-1"></a>    </span>
+<span id="cb14-33"><a href="#cb14-33" tabindex="-1"></a></span>
 <span id="cb14-34"><a href="#cb14-34" tabindex="-1"></a><span class="kw">def</span> pandas_apply():</span>
 <span id="cb14-35"><a href="#cb14-35" tabindex="-1"></a>    df <span class="op">=</span> genDataFrame()</span>
 <span id="cb14-36"><a href="#cb14-36" tabindex="-1"></a>    <span class="cf">return</span> df.<span class="bu">apply</span>(pythagoras, axis<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb14-37"><a href="#cb14-37" tabindex="-1"></a></span>
-<span id="cb14-38"><a href="#cb14-38" tabindex="-1"></a>repeats <span class="op">=</span> <span class="dv">1000</span></span>
+<span id="cb14-38"><a href="#cb14-38" tabindex="-1"></a>repeats <span class="op">=</span> <span class="dv">10</span></span>
 <span id="cb14-39"><a href="#cb14-39" tabindex="-1"></a>gentime <span class="op">=</span> timeit(genDataFrame, number<span class="op">=</span>repeats)</span>
-<span id="cb14-40"><a href="#cb14-40" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"for_range: </span><span class="sc">{</span>timeit(for_range, number<span class="op">=</span><span class="bu">int</span>(repeats<span class="op">/</span><span class="dv">20</span>))<span class="op">*</span><span class="dv">20</span><span class="op">-</span>gentime<span class="sc">:.2f}</span><span class="ss">ms"</span>)  <span class="co"># scale with factor 20, otherwise it takes too long</span></span>
-<span id="cb14-41"><a href="#cb14-41" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"for_iterrows: </span><span class="sc">{</span>timeit(for_iterrows, number<span class="op">=</span><span class="bu">int</span>(repeats<span class="op">/</span><span class="dv">20</span>))<span class="op">*</span><span class="dv">20</span><span class="op">-</span>gentime<span class="sc">:.2f}</span><span class="ss">ms"</span>)</span>
-<span id="cb14-42"><a href="#cb14-42" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"pandas_apply: </span><span class="sc">{</span>timeit(pandas_apply, number<span class="op">=</span><span class="bu">int</span>(repeats<span class="op">/</span><span class="dv">20</span>))<span class="op">*</span><span class="dv">20</span><span class="op">-</span>gentime<span class="sc">:.2f}</span><span class="ss">ms"</span>)</span></code></pre>
+<span id="cb14-40"><a href="#cb14-40" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"for_range: </span><span class="sc">{</span>timeit(for_range, number<span class="op">=</span>repeats)<span class="op">-</span>gentime<span class="sc">:.2f}</span><span class="ss"> s"</span>)</span>
+<span id="cb14-41"><a href="#cb14-41" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"for_iterrows: </span><span class="sc">{</span>timeit(for_iterrows, number<span class="op">=</span>repeats)<span class="op">-</span>gentime<span class="sc">:.2f}</span><span class="ss"> s"</span>)</span>
+<span id="cb14-42"><a href="#cb14-42" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"pandas_apply: </span><span class="sc">{</span>timeit(pandas_apply, number<span class="op">=</span>repeats)<span class="op">-</span>gentime<span class="sc">:.2f}</span><span class="ss"> s"</span>)</span></code></pre>
 </div>
 <p><code>apply()</code> is 4x faster than the two <code>for</code>
 approaches, as it avoids the Python <code>for</code> loop.</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>for_range: 1582.47ms
-for_iterrows: 1677.14ms
-pandas_apply: 390.49ms</code></pre>
+<pre class="output" tabindex="0"><code>for_range: 15.82 s
+for_iterrows: 16.77 s
+pandas_apply: 3.90 s</code></pre>
 </div>
 <p>However, rows don’t exist in memory as arrays (columns do!), so
 <code>apply()</code> does not take advantage of NumPy’s vectorisation.
@@ -968,9 +967,7 @@ version of this calculation?</p>
 <div class="codewrapper sourceCode" id="cb17">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a>repeats <span class="op">=</span> <span class="dv">1000</span></span>
-<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a>gentime <span class="op">=</span> timeit(genDataFrame, number<span class="op">=</span>repeats)</span>
-<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"vectorize: </span><span class="sc">{</span>timeit(vectorize, number<span class="op">=</span>repeats)<span class="op">-</span>gentime<span class="sc">:.2f}</span><span class="ss">ms"</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"vectorize: </span><span class="sc">{</span>timeit(vectorize, number<span class="op">=</span>repeats)<span class="op">-</span>gentime<span class="sc">:.3f}</span><span class="ss"> s"</span>)</span></code></pre>
 </div>
 <p>What result do you find? Does this match your expectations?</p>
 </div>
@@ -981,7 +978,7 @@ version of this calculation?</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint2" aria-expanded="false" aria-controls="collapseHint2">
   <h4 class="accordion-header" id="headingHint2"> Give me a hint </h4>
 </button>
-<div id="collapseHint2" class="accordion-collapse collapse" data-bs-parent="#accordionHint2" aria-labelledby="headingHint2">
+<div id="collapseHint2" class="accordion-collapse collapse" aria-labelledby="headingHint2" data-bs-parent="#accordionHint2">
 <div class="accordion-body">
 <p>Remember that most common mathematical operations work element-wise
 when applied to NumPy arrays. For example:</p>
@@ -1002,7 +999,7 @@ when applied to NumPy arrays. For example:</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb19">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1016,11 +1013,15 @@ when applied to NumPy arrays. For example:</p>
 <span id="cb19-7"><a href="#cb19-7" tabindex="-1"></a></span>
 <span id="cb19-8"><a href="#cb19-8" tabindex="-1"></a>    <span class="cf">return</span> pandas.Series(result)</span>
 <span id="cb19-9"><a href="#cb19-9" tabindex="-1"></a></span>
-<span id="cb19-10"><a href="#cb19-10" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"vectorize: </span><span class="sc">{</span>timeit(vectorize, number<span class="op">=</span>repeats)<span class="op">-</span>gentime<span class="sc">:.2f}</span><span class="ss">ms"</span>)</span></code></pre>
+<span id="cb19-10"><a href="#cb19-10" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"vectorize: </span><span class="sc">{</span>timeit(vectorize, number<span class="op">=</span>repeats)<span class="op">-</span>gentime<span class="sc">:.3f}</span><span class="ss"> s"</span>)</span></code></pre>
 </div>
 <p>264x faster than <code>apply()</code>, 1000x faster than the two
 <code>for</code> approaches!</p>
-<pre><code>vectorize: 1.48ms</code></pre>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>vectorize: 0.015 s</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -1039,27 +1040,27 @@ dictionary. This can then be processed via list-comprehension:</p>
 <span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a>    df_as_dict <span class="op">=</span> df.to_dict(orient<span class="op">=</span><span class="st">'index'</span>)</span>
 <span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a>    <span class="cf">return</span> pandas.Series([(r[<span class="st">'f_vertical'</span>]<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> r[<span class="st">'f_horizontal'</span>]<span class="op">**</span><span class="dv">2</span>)<span class="op">**</span><span class="fl">0.5</span> <span class="cf">for</span> r <span class="kw">in</span> df_as_dict.values()])</span>
 <span id="cb21-5"><a href="#cb21-5" tabindex="-1"></a></span>
-<span id="cb21-6"><a href="#cb21-6" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"to_dict: </span><span class="sc">{</span>timeit(to_dict, number<span class="op">=</span>repeats)<span class="op">*</span><span class="dv">10</span><span class="op">-</span>gentime<span class="sc">:.2f}</span><span class="ss">ms"</span>)</span></code></pre>
+<span id="cb21-6"><a href="#cb21-6" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"to_dict: </span><span class="sc">{</span>timeit(to_dict, number<span class="op">=</span>repeats)<span class="op">-</span>gentime<span class="sc">:.2f}</span><span class="ss"> s"</span>)</span></code></pre>
 </div>
-<p>Whilst still nearly 100x slower than pure vectorisation, it’s twice
-as fast as <code>apply()</code>.</p>
-<div class="codewrapper sourceCode" id="cb22">
-<h3 class="code-label">SH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+<p>Whilst still nearly 100x slower than pure vectorisation, it’s three
+times as fast as <code>apply()</code>.</p>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode sh" tabindex="0"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="ex">to_dict:</span> 131.15ms</span></code></pre>
+<pre class="output" tabindex="0"><code>to_dict: 1.31 s</code></pre>
 </div>
 <p>This is because indexing into Pandas’ <code>Series</code> (rows) is
 significantly slower than a Python dictionary. There is a slight
-overhead to creating the dictionary (40ms in this example), however the
-stark difference in access speed is more than enough to overcome that
-cost for any large DataFrame.</p>
+overhead to creating the dictionary, however the stark difference in
+access speed is more than enough to overcome that cost for any large
+DataFrame.</p>
 <div class="codewrapper sourceCode" id="cb23">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="im">from</span> timeit <span class="im">import</span> timeit</span>
 <span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pandas</span>
 <span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a></span>
-<span id="cb23-4"><a href="#cb23-4" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">100000</span>  <span class="co"># Number of rows in DataFrame</span></span>
+<span id="cb23-4"><a href="#cb23-4" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">100_000</span>  <span class="co"># Number of rows in DataFrame</span></span>
 <span id="cb23-5"><a href="#cb23-5" tabindex="-1"></a></span>
 <span id="cb23-6"><a href="#cb23-6" tabindex="-1"></a><span class="kw">def</span> genInput():</span>
 <span id="cb23-7"><a href="#cb23-7" tabindex="-1"></a>    s <span class="op">=</span> pandas.Series({<span class="st">'a'</span> : <span class="dv">1</span>, <span class="st">'b'</span> : <span class="dv">2</span>})</span>
@@ -1076,16 +1077,16 @@ cost for any large DataFrame.</p>
 <span id="cb23-18"><a href="#cb23-18" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(N):</span>
 <span id="cb23-19"><a href="#cb23-19" tabindex="-1"></a>        y <span class="op">=</span> d[<span class="st">'a'</span>] <span class="op">*</span> d[<span class="st">'b'</span>]</span>
 <span id="cb23-20"><a href="#cb23-20" tabindex="-1"></a></span>
-<span id="cb23-21"><a href="#cb23-21" tabindex="-1"></a>repeats <span class="op">=</span> <span class="dv">1000</span></span>
-<span id="cb23-22"><a href="#cb23-22" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"series: </span><span class="sc">{</span>timeit(series, number<span class="op">=</span>repeats)<span class="sc">:.2f}</span><span class="ss">ms"</span>)</span>
-<span id="cb23-23"><a href="#cb23-23" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"dictionary: </span><span class="sc">{</span>timeit(dictionary, number<span class="op">=</span>repeats)<span class="sc">:.2f}</span><span class="ss">ms"</span>)</span></code></pre>
+<span id="cb23-21"><a href="#cb23-21" tabindex="-1"></a>repeats <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb23-22"><a href="#cb23-22" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"series: </span><span class="sc">{</span>timeit(series, number<span class="op">=</span>repeats)<span class="sc">:.3f}</span><span class="ss"> s"</span>)</span>
+<span id="cb23-23"><a href="#cb23-23" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"dictionary: </span><span class="sc">{</span>timeit(dictionary, number<span class="op">=</span>repeats)<span class="sc">:.3f}</span><span class="ss"> s"</span>)</span></code></pre>
 </div>
 <p>65x slower!</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>series: 237.25ms
-dictionary: 3.63ms</code></pre>
+<pre class="output" tabindex="0"><code>series: 23.725 s
+dictionary: 0.363 s</code></pre>
 </div>
 </div>
 <div class="section level3">
@@ -1176,8 +1177,8 @@ any links that you are not going to use.
   "url": "https://carpentries-incubator.github.io/pando-python/optimisation-numpy.html",
   "identifier": "https://carpentries-incubator.github.io/pando-python/optimisation-numpy.html",
   "dateCreated": "2024-02-01",
-  "dateModified": "2026-02-24",
-  "datePublished": "2026-02-24"
+  "dateModified": "2026-02-25",
+  "datePublished": "2026-02-25"
 }
 
   </script><script>

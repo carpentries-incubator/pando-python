@@ -394,7 +394,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Data Structures &amp; Algorithms</h1>
-        <p>Last updated on 2026-01-30 |
+        <p>Last updated on 2026-02-25 |
 
         <a href="https://github.com/carpentries-incubator/pando-python/edit/main/episodes/optimisation-data-structures-algorithms.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -441,7 +441,7 @@ a list or array</li>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
   <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
 <div class="accordion-body">
 <p>The important information for students to learn within this episode
 are the patterns demonstrated via the benchmarks.</p>
@@ -520,30 +520,30 @@ overheads.</p>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="kw">def</span> list_append():</span>
 <span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>    li <span class="op">=</span> []</span>
-<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100000</span>):</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100_000</span>):</span>
 <span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>        li.append(i)</span>
 <span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a></span>
 <span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="kw">def</span> list_preallocate():</span>
-<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>    li <span class="op">=</span> [<span class="dv">0</span>]<span class="op">*</span><span class="dv">100000</span></span>
-<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100000</span>):</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>    li <span class="op">=</span> [<span class="dv">0</span>]<span class="op">*</span><span class="dv">100_000</span></span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100_000</span>):</span>
 <span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>        li[i] <span class="op">=</span> i</span>
 <span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a></span>
 <span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a><span class="kw">def</span> list_comprehension():</span>
-<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>    li <span class="op">=</span> [i <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100000</span>)]</span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>    li <span class="op">=</span> [i <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100_000</span>)]</span>
 <span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a></span>
 <span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>repeats <span class="op">=</span> <span class="dv">1000</span></span>
-<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Append: </span><span class="sc">{</span>timeit(list_append, number<span class="op">=</span>repeats)<span class="sc">:.2f}</span><span class="ss">ms"</span>)</span>
-<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Preallocate: </span><span class="sc">{</span>timeit(list_preallocate, number<span class="op">=</span>repeats)<span class="sc">:.2f}</span><span class="ss">ms"</span>)</span>
-<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Comprehension: </span><span class="sc">{</span>timeit(list_comprehension, number<span class="op">=</span>repeats)<span class="sc">:.2f}</span><span class="ss">ms"</span>)</span></code></pre>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Append: </span><span class="sc">{</span>timeit(list_append, number<span class="op">=</span>repeats)<span class="sc">:.2f}</span><span class="ss"> s"</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Preallocate: </span><span class="sc">{</span>timeit(list_preallocate, number<span class="op">=</span>repeats)<span class="sc">:.2f}</span><span class="ss"> s"</span>)</span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Comprehension: </span><span class="sc">{</span>timeit(list_comprehension, number<span class="op">=</span>repeats)<span class="sc">:.2f}</span><span class="ss"> s"</span>)</span></code></pre>
 </div>
 <p><code>timeit</code> is used to run each function 1000 times,
 providing the below averages:</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>Append: 3.50ms
-Preallocate: 2.48ms
-Comprehension: 1.69ms</code></pre>
+<pre class="output" tabindex="0"><code>Append: 3.50 s
+Preallocate: 2.48 s
+Comprehension: 1.69 s</code></pre>
 </div>
 <p>Results will vary between Python versions, hardware and list lengths.
 But in this example list comprehension was 2x faster, with pre-allocate
@@ -627,7 +627,7 @@ shelf "Sci-Fi, G—J", so I’d be able to find it much more quickly!</p>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor2" aria-expanded="false" aria-controls="collapseInstructor2">
   <h3 class="accordion-header" id="headingInstructor2">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
 </button>
-<div id="collapseInstructor2" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor2" aria-labelledby="headingInstructor2">
+<div id="collapseInstructor2" class="accordion-collapse collapse" aria-labelledby="headingInstructor2" data-bs-parent="#accordionInstructor2">
 <div class="accordion-body">
 <p>The large bookcases in the second illustration, with many shelves
 almost empty, take up a lot more space than the single shelf in the
@@ -727,7 +727,7 @@ duplicates <code>int(N/2)</code> affect performance?</p>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="im">import</span> random</span>
 <span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="im">from</span> timeit <span class="im">import</span> timeit</span>
 <span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">25000</span>  <span class="co"># Number of elements in the list</span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">25_000</span>  <span class="co"># Number of elements in the list</span></span>
 <span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>data <span class="op">=</span> [random.randint(<span class="dv">0</span>, <span class="bu">int</span>(N<span class="op">/</span><span class="dv">2</span>)) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(N)]</span>
 <span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a></span>
 <span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="kw">def</span> uniqueSet():</span>
@@ -751,11 +751,11 @@ duplicates <code>int(N/2)</code> affect performance?</p>
 <span id="cb5-25"><a href="#cb5-25" tabindex="-1"></a>        <span class="cf">if</span> ls_out[<span class="op">-</span><span class="dv">1</span>] <span class="op">!=</span> i:</span>
 <span id="cb5-26"><a href="#cb5-26" tabindex="-1"></a>            ls_out.append(i)</span>
 <span id="cb5-27"><a href="#cb5-27" tabindex="-1"></a></span>
-<span id="cb5-28"><a href="#cb5-28" tabindex="-1"></a>repeats <span class="op">=</span> <span class="dv">1000</span></span>
-<span id="cb5-29"><a href="#cb5-29" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"uniqueSet: </span><span class="sc">{</span>timeit(uniqueSet, number<span class="op">=</span>repeats)<span class="sc">:.2f}</span><span class="ss">ms"</span>)</span>
-<span id="cb5-30"><a href="#cb5-30" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"uniqueSetAdd: </span><span class="sc">{</span>timeit(uniqueSetAdd, number<span class="op">=</span>repeats)<span class="sc">:.2f}</span><span class="ss">ms"</span>)</span>
-<span id="cb5-31"><a href="#cb5-31" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"uniqueList: </span><span class="sc">{</span>timeit(uniqueList, number<span class="op">=</span>repeats)<span class="sc">:.2f}</span><span class="ss">ms"</span>)</span>
-<span id="cb5-32"><a href="#cb5-32" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"uniqueListSort: </span><span class="sc">{</span>timeit(uniqueListSort, number<span class="op">=</span>repeats)<span class="sc">:.2f}</span><span class="ss">ms"</span>)</span></code></pre>
+<span id="cb5-28"><a href="#cb5-28" tabindex="-1"></a>repeats <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb5-29"><a href="#cb5-29" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"uniqueSet: </span><span class="sc">{</span>timeit(uniqueSet, number<span class="op">=</span>repeats)<span class="sc">:.3f}</span><span class="ss"> s"</span>)</span>
+<span id="cb5-30"><a href="#cb5-30" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"uniqueSetAdd: </span><span class="sc">{</span>timeit(uniqueSetAdd, number<span class="op">=</span>repeats)<span class="sc">:.3f}</span><span class="ss"> s"</span>)</span>
+<span id="cb5-31"><a href="#cb5-31" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"uniqueList: </span><span class="sc">{</span>timeit(uniqueList, number<span class="op">=</span>repeats)<span class="sc">:.3f}</span><span class="ss"> s"</span>)</span>
+<span id="cb5-32"><a href="#cb5-32" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"uniqueListSort: </span><span class="sc">{</span>timeit(uniqueListSort, number<span class="op">=</span>repeats)<span class="sc">:.3f}</span><span class="ss"> s"</span>)</span></code></pre>
 </div>
 </div>
 </div>
@@ -765,7 +765,7 @@ duplicates <code>int(N/2)</code> affect performance?</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
   <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
 </button>
-<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
+<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
 <div class="accordion-body">
 <ul><li>
 <code>uniqueSet()</code> passes the input list to the constructor
@@ -791,7 +791,7 @@ comprehension.</em></p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>Constructing a set by passing in a single list is the clear
 winner.</p>
@@ -809,10 +809,10 @@ list.</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>uniqueSet: 0.30ms
-uniqueSetAdd: 0.81ms
-uniqueList: 660.71ms
-uniqueListSort: 2.67ms</code></pre>
+<pre class="output" tabindex="0"><code>uniqueSet: 0.030 s
+uniqueSetAdd: 0.081 s
+uniqueList: 66.071 s
+uniqueListSort: 0.267 s</code></pre>
 </div>
 </div>
 </div>
@@ -855,49 +855,49 @@ performance.</p>
 <span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="im">from</span> timeit <span class="im">import</span> timeit</span>
 <span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="im">from</span> bisect <span class="im">import</span> bisect_left</span>
 <span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a></span>
-<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">25000</span>  <span class="co"># Number of elements in list</span></span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">25_000</span>  <span class="co"># Number of elements in list</span></span>
 <span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>M <span class="op">=</span> <span class="dv">2</span>  <span class="co"># N*M == Range over which the elements span</span></span>
 <span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a></span>
-<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a>st <span class="op">=</span> <span class="bu">set</span>([random.randint(<span class="dv">0</span>, <span class="bu">int</span>(N<span class="op">*</span>M)) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(N)])</span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a>st <span class="op">=</span> <span class="bu">set</span>([random.randint(<span class="dv">0</span>, N<span class="op">*</span>M) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(N)])</span>
 <span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a>ls <span class="op">=</span> <span class="bu">list</span>(st)</span>
 <span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a>ls.sort()  <span class="co"># Sort required for binary search</span></span>
 <span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a>    </span>
 <span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a><span class="kw">def</span> search_set():</span>
 <span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a>    j <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, <span class="bu">int</span>(N<span class="op">*</span>M), M):</span>
+<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, N<span class="op">*</span>M, M):</span>
 <span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a>        <span class="cf">if</span> i <span class="kw">in</span> st:</span>
 <span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a>            j <span class="op">+=</span> <span class="dv">1</span></span>
 <span id="cb7-17"><a href="#cb7-17" tabindex="-1"></a>    </span>
 <span id="cb7-18"><a href="#cb7-18" tabindex="-1"></a><span class="kw">def</span> linear_search_list():</span>
 <span id="cb7-19"><a href="#cb7-19" tabindex="-1"></a>    j <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb7-20"><a href="#cb7-20" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, <span class="bu">int</span>(N<span class="op">*</span>M), M):</span>
+<span id="cb7-20"><a href="#cb7-20" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, N<span class="op">*</span>M, M):</span>
 <span id="cb7-21"><a href="#cb7-21" tabindex="-1"></a>        <span class="cf">if</span> i <span class="kw">in</span> ls:</span>
 <span id="cb7-22"><a href="#cb7-22" tabindex="-1"></a>            j <span class="op">+=</span> <span class="dv">1</span></span>
 <span id="cb7-23"><a href="#cb7-23" tabindex="-1"></a>    </span>
 <span id="cb7-24"><a href="#cb7-24" tabindex="-1"></a><span class="kw">def</span> binary_search_list():</span>
 <span id="cb7-25"><a href="#cb7-25" tabindex="-1"></a>    j <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb7-26"><a href="#cb7-26" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, <span class="bu">int</span>(N<span class="op">*</span>M), M):</span>
+<span id="cb7-26"><a href="#cb7-26" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, N<span class="op">*</span>M, M):</span>
 <span id="cb7-27"><a href="#cb7-27" tabindex="-1"></a>        k <span class="op">=</span> bisect_left(ls, i)</span>
 <span id="cb7-28"><a href="#cb7-28" tabindex="-1"></a>        <span class="cf">if</span> k <span class="op">!=</span> <span class="bu">len</span>(ls) <span class="kw">and</span> ls[k] <span class="op">==</span> i:</span>
 <span id="cb7-29"><a href="#cb7-29" tabindex="-1"></a>            j <span class="op">+=</span> <span class="dv">1</span></span>
 <span id="cb7-30"><a href="#cb7-30" tabindex="-1"></a></span>
-<span id="cb7-31"><a href="#cb7-31" tabindex="-1"></a>repeats <span class="op">=</span> <span class="dv">1000</span></span>
-<span id="cb7-32"><a href="#cb7-32" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"search_set: </span><span class="sc">{</span>timeit(search_set, number<span class="op">=</span>repeats)<span class="sc">:.2f}</span><span class="ss">ms"</span>)</span>
-<span id="cb7-33"><a href="#cb7-33" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"linear_search_list: </span><span class="sc">{</span>timeit(linear_search_list, number<span class="op">=</span>repeats)<span class="sc">:.2f}</span><span class="ss">ms"</span>)</span>
-<span id="cb7-34"><a href="#cb7-34" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"binary_search_list: </span><span class="sc">{</span>timeit(binary_search_list, number<span class="op">=</span>repeats)<span class="sc">:.2f}</span><span class="ss">ms"</span>)</span></code></pre>
+<span id="cb7-31"><a href="#cb7-31" tabindex="-1"></a>repeats <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb7-32"><a href="#cb7-32" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"search_set: </span><span class="sc">{</span>timeit(search_set, number<span class="op">=</span>repeats)<span class="sc">:.4f}</span><span class="ss"> s"</span>)</span>
+<span id="cb7-33"><a href="#cb7-33" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"linear_search_list: </span><span class="sc">{</span>timeit(linear_search_list, number<span class="op">=</span>repeats)<span class="sc">:.2f}</span><span class="ss"> s"</span>)</span>
+<span id="cb7-34"><a href="#cb7-34" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"binary_search_list: </span><span class="sc">{</span>timeit(binary_search_list, number<span class="op">=</span>repeats)<span class="sc">:.4f}</span><span class="ss"> s"</span>)</span></code></pre>
 </div>
-<p>Searching the set is fastest performing 25,000 searches in 0.57ms.
-This is followed by the binary search of the (sorted) list which is 6x
-slower, although the list has been filtered for duplicates. A list still
+<p>Searching the set is fastest, performing the task in 5.7 ms. This is
+followed by the binary search of the (sorted) list which is 6x slower,
+although the list has been filtered for duplicates. A list still
 containing duplicates would be longer, leading to a more expensive
 search. The linear search of the list is about 2700x slower than the
 fastest, it really shouldn’t be used!</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>search_set: 0.57ms
-linear_search_list: 1531.61ms
-binary_search_list: 3.43ms</code></pre>
+<pre class="output" tabindex="0"><code>search_set: 0.0057 s
+linear_search_list: 15.32 s
+binary_search_list: 0.0343 s</code></pre>
 </div>
 <p>These results are subject to change based on the number of items and
 the proportion of searched items that exist within the list. However,
@@ -986,8 +986,8 @@ any links that you are not going to use.
   "url": "https://carpentries-incubator.github.io/pando-python/instructor/optimisation-data-structures-algorithms.html",
   "identifier": "https://carpentries-incubator.github.io/pando-python/instructor/optimisation-data-structures-algorithms.html",
   "dateCreated": "2024-02-01",
-  "dateModified": "2026-01-30",
-  "datePublished": "2026-02-24"
+  "dateModified": "2026-02-25",
+  "datePublished": "2026-02-25"
 }
 
   </script><script>
