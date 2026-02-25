@@ -89,29 +89,29 @@ from timeit import timeit
 
 def list_append():
     li = []
-    for i in range(100000):
+    for i in range(100_000):
         li.append(i)
 
 def list_preallocate():
-    li = [0]*100000
-    for i in range(100000):
+    li = [0]*100_000
+    for i in range(100_000):
         li[i] = i
 
 def list_comprehension():
-    li = [i for i in range(100000)]
+    li = [i for i in range(100_000)]
 
 repeats = 1000
-print(f"Append: {timeit(list_append, number=repeats):.2f}ms")
-print(f"Preallocate: {timeit(list_preallocate, number=repeats):.2f}ms")
-print(f"Comprehension: {timeit(list_comprehension, number=repeats):.2f}ms")
+print(f"Append: {timeit(list_append, number=repeats):.2f} s")
+print(f"Preallocate: {timeit(list_preallocate, number=repeats):.2f} s")
+print(f"Comprehension: {timeit(list_comprehension, number=repeats):.2f} s")
 ```
 
 `timeit` is used to run each function 1000 times, providing the below averages:
 
 ```output
-Append: 3.50ms
-Preallocate: 2.48ms
-Comprehension: 1.69ms
+Append: 3.50 s
+Preallocate: 2.48 s
+Comprehension: 1.69 s
 ```
 
 Results will vary between Python versions, hardware and list lengths. But in this example list comprehension was 2x faster, with pre-allocate fairing in the middle. Although this is milliseconds, this can soon add up if you are regularly creating lists.
@@ -238,7 +238,7 @@ If you reduce the value of `repeats` it will run faster, how does changing the n
 import random
 from timeit import timeit
 
-N = 25000  # Number of elements in the list
+N = 25_000  # Number of elements in the list
 data = [random.randint(0, int(N/2)) for i in range(N)]
 
 def uniqueSet():
@@ -262,11 +262,11 @@ def uniqueListSort():
         if ls_out[-1] != i:
             ls_out.append(i)
 
-repeats = 1000
-print(f"uniqueSet: {timeit(uniqueSet, number=repeats):.2f}ms")
-print(f"uniqueSetAdd: {timeit(uniqueSetAdd, number=repeats):.2f}ms")
-print(f"uniqueList: {timeit(uniqueList, number=repeats):.2f}ms")
-print(f"uniqueListSort: {timeit(uniqueListSort, number=repeats):.2f}ms")
+repeats = 100
+print(f"uniqueSet: {timeit(uniqueSet, number=repeats):.3f} s")
+print(f"uniqueSetAdd: {timeit(uniqueSetAdd, number=repeats):.3f} s")
+print(f"uniqueList: {timeit(uniqueList, number=repeats):.3f} s")
+print(f"uniqueListSort: {timeit(uniqueListSort, number=repeats):.3f} s")
 ```
 
 :::::::::::::::::::::::: hint
@@ -291,10 +291,10 @@ The naive list approach is 2200x times slower than the fastest approach, because
 Sorting the input list reduces the cost of searching the output list significantly, however it is still 8x slower than the fastest approach. In part because around half of its runtime is now spent sorting the list.
 
 ```output
-uniqueSet: 0.30ms
-uniqueSetAdd: 0.81ms
-uniqueList: 660.71ms
-uniqueListSort: 2.67ms
+uniqueSet: 0.030 s
+uniqueSetAdd: 0.081 s
+uniqueList: 66.071 s
+uniqueListSort: 0.267 s
 ```
 :::::::::::::::::::::::::::::::::
 :::::::::::::::::::::::::::::::::::::::::::::::
@@ -316,46 +316,46 @@ import random
 from timeit import timeit
 from bisect import bisect_left
 
-N = 25000  # Number of elements in list
+N = 25_000  # Number of elements in list
 M = 2  # N*M == Range over which the elements span
 
-st = set([random.randint(0, int(N*M)) for i in range(N)])
+st = set([random.randint(0, N*M) for i in range(N)])
 ls = list(st)
 ls.sort()  # Sort required for binary search
     
 def search_set():
     j = 0
-    for i in range(0, int(N*M), M):
+    for i in range(0, N*M, M):
         if i in st:
             j += 1
     
 def linear_search_list():
     j = 0
-    for i in range(0, int(N*M), M):
+    for i in range(0, N*M, M):
         if i in ls:
             j += 1
     
 def binary_search_list():
     j = 0
-    for i in range(0, int(N*M), M):
+    for i in range(0, N*M, M):
         k = bisect_left(ls, i)
         if k != len(ls) and ls[k] == i:
             j += 1
 
-repeats = 1000
-print(f"search_set: {timeit(search_set, number=repeats):.2f}ms")
-print(f"linear_search_list: {timeit(linear_search_list, number=repeats):.2f}ms")
-print(f"binary_search_list: {timeit(binary_search_list, number=repeats):.2f}ms")
+repeats = 10
+print(f"search_set: {timeit(search_set, number=repeats):.4f} s")
+print(f"linear_search_list: {timeit(linear_search_list, number=repeats):.2f} s")
+print(f"binary_search_list: {timeit(binary_search_list, number=repeats):.4f} s")
 ```
 
-Searching the set is fastest performing 25,000 searches in 0.57ms.
+Searching the set is fastest, performing the task in 5.7 ms.
 This is followed by the binary search of the (sorted) list which is 6x slower, although the list has been filtered for duplicates. A list still containing duplicates would be longer, leading to a more expensive search.
 The linear search of the list is about 2700x slower than the fastest, it really shouldn't be used!
 
 ```output
-search_set: 0.57ms
-linear_search_list: 1531.61ms
-binary_search_list: 3.43ms
+search_set: 0.0057 s
+linear_search_list: 15.32 s
+binary_search_list: 0.0343 s
 ```
 
 These results are subject to change based on the number of items and the proportion of searched items that exist within the list. However, the pattern is likely to remain the same. Linear searches should be avoided!

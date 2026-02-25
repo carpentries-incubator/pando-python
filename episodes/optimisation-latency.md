@@ -47,7 +47,7 @@ The below example code runs a small benchmark, whereby 10MB is written to disk a
 import os, time
 
 # Generate 10MB
-data_len = 10000000
+data_len = 10_000_000
 data = os.urandom(data_len)
 file_ct = 1000
 file_len = int(data_len/file_ct)
@@ -78,12 +78,12 @@ for i in range(file_ct):
     small_file.close()
 small_read_s = time.perf_counter() - start
 # Print Summary
-print(f"{1:5d}x{data_len/1000000}MB Write: {large_write_s:.5f} seconds")
+print(f"{1:5d}x{data_len/1_000_000}MB Write: {large_write_s:.5f} seconds")
 print(f"{file_ct:5d}x{file_len/1000}KB Write: {small_write_s:.5f} seconds")
-print(f"{1:5d}x{data_len/1000000}MB Read: {large_read_s:.5f} seconds")
+print(f"{1:5d}x{data_len/1_000_000}MB Read: {large_read_s:.5f} seconds")
 print(f"{file_ct:5d}x{file_len/1000}KB Read: {small_read_s:.5f} seconds")
-print(f"{file_ct:5d}x{file_len/1000}KB Write was {small_write_s/large_write_s:.1f} slower than 1x{data_len/1000000}MB Write")
-print(f"{file_ct:5d}x{file_len/1000}KB Read was {small_read_s/large_read_s:.1f} slower than 1x{data_len/1000000}MB Read")
+print(f"{file_ct:5d}x{file_len/1000}KB Write was {small_write_s/large_write_s:.1f} slower than 1x{data_len/1_000_000}MB Write")
+print(f"{file_ct:5d}x{file_len/1000}KB Read was {small_read_s/large_read_s:.1f} slower than 1x{data_len/1_000_000}MB Read")
 # Cleanup
 os.remove("large.bin")
 for i in range(file_ct):
