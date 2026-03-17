@@ -436,9 +436,10 @@ Download and profile <a href="files/pred-prey/predprey.py" download>the Python p
 
 *This exercise uses the packages `numpy` and `matplotlib`, they can be installed via `pip install numpy matplotlib`.* 
 
-> The predator prey model is a simple agent-based model of population dynamics. Predators and prey co-exist in a common environment and compete over finite resources. 
+> The predator prey model is a simple model of population dynamics, where a number of predators, prey and grass exist in a two dimensional grid.
+> Predators eat prey, prey eat grass; predators and prey can each reproduce, while grass can regrow. Accordingly, the size of each population changes over time. Depending on the parameters of the model, the populations may oscillate, grow or collapse due to the availability of their food source.
 >
-> The three agents; predators, prey and grass exist in a two dimensional grid. Predators eat prey, prey eat grass. The size of each population changes over time. Depending on the parameters of the model, the populations may oscillate, grow or collapse due to the availability of their food source.
+> Since the behaviour of each individual predator/prey/grass is modeled, this is called an agent-based model. Computational models like this are used in many areas of research, ranging from population dynamics to epidemiology (e.g., to simulate the effect of public health interventions during the COVID-19 pandemic), urban planning (e.g., simulating pedestrian flows) or economics (e.g., simulating financial markets).
 
 The program can be executed via `python predprey.py <steps>`.
 The value of `steps` for a full run is 400, which may take a few minutes. However, using 100–200 steps should be sufficient to find the bottlenecks.
