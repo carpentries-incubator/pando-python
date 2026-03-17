@@ -383,22 +383,22 @@ Pandas allows its own functions to be applied to rows in many cases by passing `
 
 ```python
 from timeit import timeit
-import pandas
-import numpy
+import pandas as pd
+import numpy as np
 
 N = 100_000  # Number of rows in DataFrame
 
 def genDataFrame():
-    numpy.random.seed(12)  # Ensure each dataframe is identical
-    return pandas.DataFrame(
+    np.random.seed(12)  # Ensure each dataframe is identical
+    return pd.DataFrame(
     {
-        "f_vertical": numpy.random.random(size=N),
-        "f_horizontal": numpy.random.random(size=N),
+        "length": np.random.random(size=N),
+        "width": np.random.random(size=N),
         # todo some spurious columns
     })
 
 def pythagoras(row):
-    return (row["f_vertical"]**2 + row["f_horizontal"]**2)**0.5
+    return (row["length"]**2 + row["width"]**2)**0.5
 
 def for_range():
     rtn = []
@@ -406,14 +406,14 @@ def for_range():
     for row_idx in range(df.shape[0]):
         row = df.iloc[row_idx]
         rtn.append(pythagoras(row))
-    return pandas.Series(rtn)
+    return pd.Series(rtn)
 
 def for_iterrows():
     rtn = []
     df = genDataFrame()
     for row_idx, row in df.iterrows():
         rtn.append(pythagoras(row))
-    return pandas.Series(rtn)
+    return pd.Series(rtn)
 
 def pandas_apply():
     df = genDataFrame()
@@ -439,18 +439,18 @@ However, rows don't exist in memory as arrays (columns do!), so `apply()` does n
 
 ::::::::::::::::::::::::::::::::::::: challenge
 
-We can extract the individual columns of the data frame. These are of the type `pandas.Series`, which supports array broadcasting, just like a NumPy array.
+We can extract the individual columns of the data frame. These are of the type `pd.Series`, which supports array broadcasting, just like a NumPy array.
 Instead of using the `pythagoras(row)` function, can you write a vectorised version of this calculation?
 
 ```python
 def vectorize():
     df = genDataFrame()
-    vertical = df["f_vertical"]
-    horizontal = df["f_horizontal"]
+    length = df["length"]
+    width = df["width"]
 
     result = ...  # Your code goes here
 
-    return pandas.Series(result)
+    return pd.Series(result)
 ```
 
 Once you’ve done that, measure your performance by running
@@ -475,15 +475,22 @@ print(ar + ar)  # array([2, 4, 6])
 
 :::::::::::::::::::::::: solution
 
+We start with the original implementation of the `pythagoras()` function:
+```python
+(row["length"]**2 + row["width"]**2)**0.5
+```
+Instead of `row["length"]` and `row["width"]`, which are individual entries in the dataframe, we use the `length` and `width` columns.
+Additionally, we can use NumPy’s `np.sqrt()` function instead of Python’s builtin `**` operator. (This is not strictly necessary, but avoids a bit of performance overhead from mixing the two worlds, as discussed at the beginning of this episode.)
+
 ```python
 def vectorize():
     df = genDataFrame()
-    vertical = df["f_vertical"]
-    horizontal = df["f_horizontal"]
+    length = df["length"]
+    width = df["width"]
 
-    result = numpy.sqrt(vertical**2 + horizontal**2)
+    result = np.sqrt(length**2 + width**2)
 
-    return pandas.Series(result)
+    return pd.Series(result)
 
 print(f"vectorize: {timeit(vectorize, number=repeats)-gentime:.3f} s")
 ```
@@ -507,7 +514,7 @@ An alternate approach is converting your DataFrame to a Python dictionary using 
 def to_dict():
     df = genDataFrame()
     df_as_dict = df.to_dict(orient='index')
-    return pandas.Series([(r['f_vertical']**2 + r['f_horizontal']**2)**0.5 for r in df_as_dict.values()])
+    return pd.Series([(r['length']**2 + r['width']**2)**0.5 for r in df_as_dict.values()])
 
 print(f"to_dict: {timeit(to_dict, number=repeats)-gentime:.2f} s")
 ```
@@ -522,12 +529,12 @@ This is because indexing into Pandas' `Series` (rows) is significantly slower th
 
 ```python
 from timeit import timeit
-import pandas as pandas
+import pandas as pd
 
 N = 100_000  # Number of rows in DataFrame
 
 def genInput():
-    s = pandas.Series({'a' : 1, 'b' : 2})
+    s = pd.Series({'a' : 1, 'b' : 2})
     d = {'a' : 1, 'b' : 2}
     return s, d
 

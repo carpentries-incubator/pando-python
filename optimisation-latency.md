@@ -129,30 +129,32 @@ downloaded_files = []
 def sequentialDownload():
     for mass in range(10, 20):
         url = f"https://github.com/SNEWS2/snewpy-models-ccsn/raw/refs/heads/main/models/Warren_2020/stir_a1.23/stir_multimessenger_a1.23_m{mass}.0.h5"
-        f = download_file(url, f"seq_{mass}.h5")
-        downloaded_files.append(f)
+        local_filename = f"seq_{mass}.h5"
+        try:
+            f = download_file(url, local_filename)
+            downloaded_files.append(f)
+        except Exception:
+            print(f"Downloading {local_filename} failed.")
 
 def parallelDownload():
     # Initialise a pool of 6 threads to share the workload
-    pool = ThreadPoolExecutor(max_workers=6)
-    jobs = []
-    # Submit each download to be executed by the thread pool
-    for mass in range(10, 20):
-        url = f"https://github.com/SNEWS2/snewpy-models-ccsn/raw/refs/heads/main/models/Warren_2020/stir_a1.23/stir_multimessenger_a1.23_m{mass}.0.h5"
-        local_filename = f"par_{mass}.h5"
-        jobs.append(pool.submit(download_file, url, local_filename))
+    with ThreadPoolExecutor(max_workers=6) as pool:
+        jobs = {}
+        for mass in range(10, 20):
+            url = f"https://github.com/SNEWS2/snewpy-models-ccsn/raw/refs/heads/main/models/Warren_2020/stir_a1.23/stir_multimessenger_a1.23_m{mass}.0.h5"
+            local_filename = f"par_{mass}.h5"
+            # Submit each download to be executed by the thread pool
+            job = pool.submit(download_file, url, local_filename)
+            jobs[job] = local_filename
 
-    # Collect the results (and errors) as the jobs are completed
-    for result in as_completed(jobs):        
-        if result.exception() is None:
-            # handle return values of the parallelised function
-            f = result.result()
-            downloaded_files.append(f)
-        else:
-            # handle errors
-            print(result.exception())
-
-    pool.shutdown(wait=False)
+        # Collect the results (and errors) as the jobs are completed
+        for job in as_completed(jobs):        
+            if job.exception() is None:
+                # return value of the executed function is available as job.result()
+                downloaded_files.append(job.result())
+            else:
+                # handle errors
+                print(f"Downloading {jobs[job]} failed.")
 
 
 print(f"sequentialDownload: {timeit(sequentialDownload, globals=globals(), number=1):.3f} s")
