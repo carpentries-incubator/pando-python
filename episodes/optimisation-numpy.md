@@ -383,14 +383,14 @@ Pandas allows its own functions to be applied to rows in many cases by passing `
 
 ```python
 from timeit import timeit
-import pandas
+import pandas as pd
 import numpy as np
 
 N = 100_000  # Number of rows in DataFrame
 
 def genDataFrame():
     np.random.seed(12)  # Ensure each dataframe is identical
-    return pandas.DataFrame(
+    return pd.DataFrame(
     {
         "length": np.random.random(size=N),
         "width": np.random.random(size=N),
@@ -406,14 +406,14 @@ def for_range():
     for row_idx in range(df.shape[0]):
         row = df.iloc[row_idx]
         rtn.append(pythagoras(row))
-    return pandas.Series(rtn)
+    return pd.Series(rtn)
 
 def for_iterrows():
     rtn = []
     df = genDataFrame()
     for row_idx, row in df.iterrows():
         rtn.append(pythagoras(row))
-    return pandas.Series(rtn)
+    return pd.Series(rtn)
 
 def pandas_apply():
     df = genDataFrame()
@@ -439,7 +439,7 @@ However, rows don't exist in memory as arrays (columns do!), so `apply()` does n
 
 ::::::::::::::::::::::::::::::::::::: challenge
 
-We can extract the individual columns of the data frame. These are of the type `pandas.Series`, which supports array broadcasting, just like a NumPy array.
+We can extract the individual columns of the data frame. These are of the type `pd.Series`, which supports array broadcasting, just like a NumPy array.
 Instead of using the `pythagoras(row)` function, can you write a vectorised version of this calculation?
 
 ```python
@@ -450,7 +450,7 @@ def vectorize():
 
     result = ...  # Your code goes here
 
-    return pandas.Series(result)
+    return pd.Series(result)
 ```
 
 Once you’ve done that, measure your performance by running
@@ -490,7 +490,7 @@ def vectorize():
 
     result = np.sqrt(length**2 + width**2)
 
-    return pandas.Series(result)
+    return pd.Series(result)
 
 print(f"vectorize: {timeit(vectorize, number=repeats)-gentime:.3f} s")
 ```
@@ -514,7 +514,7 @@ An alternate approach is converting your DataFrame to a Python dictionary using 
 def to_dict():
     df = genDataFrame()
     df_as_dict = df.to_dict(orient='index')
-    return pandas.Series([(r['length']**2 + r['width']**2)**0.5 for r in df_as_dict.values()])
+    return pd.Series([(r['length']**2 + r['width']**2)**0.5 for r in df_as_dict.values()])
 
 print(f"to_dict: {timeit(to_dict, number=repeats)-gentime:.2f} s")
 ```
@@ -529,12 +529,12 @@ This is because indexing into Pandas' `Series` (rows) is significantly slower th
 
 ```python
 from timeit import timeit
-import pandas
+import pandas as pd
 
 N = 100_000  # Number of rows in DataFrame
 
 def genInput():
-    s = pandas.Series({'a' : 1, 'b' : 2})
+    s = pd.Series({'a' : 1, 'b' : 2})
     d = {'a' : 1, 'b' : 2}
     return s, d
 
