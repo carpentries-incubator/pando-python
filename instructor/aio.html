@@ -843,7 +843,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-profiling-functions"><p>Content from <a href="profiling-functions.html">Function-Level Profiling</a></p>
 <hr>
-<p>Last updated on 2026-02-24 |
+<p>Last updated on 2026-03-17 |
 
         <a href="https://github.com/carpentries-incubator/pando-python/edit/main/episodes/profiling-functions.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 40 minutes</p>
@@ -1086,7 +1086,7 @@ visualisation of the data when exported to file.</p>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
   <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
 <div class="accordion-body">
 <p>It can help to run these examples by running <code>snakeviz</code>
 live. For the worked example you may wish to also show the code (e.g. in
@@ -1202,7 +1202,7 @@ small.</em></p>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor2" aria-expanded="false" aria-controls="collapseInstructor2">
   <h3 class="accordion-header" id="headingInstructor2">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
 </button>
-<div id="collapseInstructor2" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor2" aria-labelledby="headingInstructor2">
+<div id="collapseInstructor2" class="accordion-collapse collapse" aria-labelledby="headingInstructor2" data-bs-parent="#accordionInstructor2">
 <div class="accordion-body">
 <p>Demonstrate this!</p>
 </div>
@@ -1389,7 +1389,7 @@ what has been covered in this episode.</p>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor3" aria-expanded="false" aria-controls="collapseInstructor3">
   <h3 class="accordion-header" id="headingInstructor3">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
 </button>
-<div id="collapseInstructor3" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor3" aria-labelledby="headingInstructor3">
+<div id="collapseInstructor3" class="accordion-collapse collapse" aria-labelledby="headingInstructor3" data-bs-parent="#accordionInstructor3">
 <div class="accordion-body">
 <p>Arguments 1-9 passed to <code>travellingsales.py</code> should
 execute relatively fast (less than a minute).</p>
@@ -1441,7 +1441,7 @@ poor scaling so larger numbers take significantly longer to run.</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
   <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
 </button>
-<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
+<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
 <div class="accordion-body">
 <ul>
 <li>If a hotspot isn’t visible with the argument <code>1</code>, try
@@ -1459,7 +1459,7 @@ within the profile.</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>The hotspot only becomes visible when an argument of <code>5</code>
 or greater is passed.</p>
@@ -1484,7 +1484,7 @@ component.</em></p>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor4" aria-expanded="false" aria-controls="collapseInstructor4">
   <h3 class="accordion-header" id="headingInstructor4">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
 </button>
-<div id="collapseInstructor4" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor4" aria-labelledby="headingInstructor4">
+<div id="collapseInstructor4" class="accordion-collapse collapse" aria-labelledby="headingInstructor4" data-bs-parent="#accordionInstructor4">
 <div class="accordion-body">
 <p>The default configuration of the Predator Prey model takes around 10
 seconds to run, it may be slower on other hardware.</p>
@@ -1518,14 +1518,20 @@ execution time is being spent.</p>
 <code>matplotlib</code>, they can be installed via
 <code>pip install numpy matplotlib</code>.</em></p>
 <blockquote>
-<p>The predator prey model is a simple agent-based model of population
-dynamics. Predators and prey co-exist in a common environment and
-compete over finite resources.</p>
-<p>The three agents; predators, prey and grass exist in a two
-dimensional grid. Predators eat prey, prey eat grass. The size of each
+<p>The predator prey model is a simple model of population dynamics,
+where a number of predators, prey and grass exist in a two dimensional
+grid. Predators eat prey, prey eat grass; predators and prey can each
+reproduce, while grass can regrow. Accordingly, the size of each
 population changes over time. Depending on the parameters of the model,
 the populations may oscillate, grow or collapse due to the availability
 of their food source.</p>
+<p>Since the behaviour of each individual predator/prey/grass is
+modeled, this is called an agent-based model. Computational models like
+this are used in many areas of research, ranging from population
+dynamics to epidemiology (e.g., to simulate the effect of public health
+interventions during the COVID-19 pandemic), urban planning (e.g.,
+simulating pedestrian flows) or economics (e.g., simulating financial
+markets).</p>
 </blockquote>
 <p>The program can be executed via
 <code>python predprey.py &lt;steps&gt;</code>. The value of
@@ -1542,7 +1548,7 @@ bottlenecks.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>It should be clear from the profile that the function
 <code>Grass.eaten()</code> (from <code>predprey.py:278</code>) occupies
@@ -2035,7 +2041,7 @@ number of elements to be sorted.</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
   <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
 </button>
-<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
+<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
 <div class="accordion-body">
 <ul>
 <li>Remember that the code needs to be moved into a function decorated
@@ -2055,7 +2061,7 @@ with <code>@profile</code>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>If you chose to profile the whole code, it may look like this:</p>
 <div class="codewrapper sourceCode" id="cb15">
@@ -2157,7 +2163,7 @@ we are unlikely to be able to improve it further.</p>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
   <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
 <div class="accordion-body">
 <p>Download the pre-generated <code>line_profiler</code> output, this
 can be opened be to save waiting for the profiler.</p>
@@ -2196,7 +2202,7 @@ consider how it might be optimised.</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint2" aria-expanded="false" aria-controls="collapseHint2">
   <h4 class="accordion-header" id="headingHint2"> Give me a hint </h4>
 </button>
-<div id="collapseHint2" class="accordion-collapse collapse" data-bs-parent="#accordionHint2" aria-labelledby="headingHint2">
+<div id="collapseHint2" class="accordion-collapse collapse" aria-labelledby="headingHint2" data-bs-parent="#accordionHint2">
 <div class="accordion-body">
 <ul>
 <li>Remember that the function needs to be decorated with
@@ -2218,7 +2224,7 @@ number of steps passed as an argument.</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>First the function must be decorated</p>
 <div class="codewrapper sourceCode" id="cb19">
@@ -2697,7 +2703,7 @@ the outputs from your code.</p>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
   <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
 <div class="accordion-body">
 <ul>
 <li>Fixtures: A test fixture is a common class which multiple tests can
@@ -3695,7 +3701,7 @@ Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  --></p></section><section id="aio-optimisation-numpy"><p>Content from <a href="optimisation-numpy.html">Using Scientific Python Packages (NumPy, Pandas and more)</a></p>
 <hr>
-<p>Last updated on 2026-02-25 |
+<p>Last updated on 2026-03-17 |
 
         <a href="https://github.com/carpentries-incubator/pando-python/edit/main/episodes/optimisation-numpy.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 30 minutes</p>
@@ -3969,7 +3975,7 @@ However, using NumPy broadcasting we can apply the addition to 1, 10 or
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
   <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
 <div class="accordion-body">
 <p>A simple analogy:</p>
 <p>If you’re baking cookies, the oven (CPU register) is big enough to
@@ -4096,7 +4102,7 @@ instead of writing your own code from scratch?</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
   <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
 </button>
-<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
+<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
 <div class="accordion-body">
 <p>These libraries could be specific to your area of research; but they
 could also include packages from other fields that provide tools you
@@ -4183,7 +4189,7 @@ researcher decided not to spend more time to rewrite them.)</li>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor2" aria-expanded="false" aria-controls="collapseInstructor2">
   <h3 class="accordion-header" id="headingInstructor2">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
 </button>
-<div id="collapseInstructor2" class="accordion-collapse collapse" aria-labelledby="headingInstructor2" data-bs-parent="#accordionInstructor2">
+<div id="collapseInstructor2" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor2" aria-labelledby="headingInstructor2">
 <div class="accordion-body">
 <p>The following code snippet demonstrates how this works for a
 simplified example.</p>
@@ -4251,22 +4257,22 @@ function, <code>apply()</code> can be used, which is similar to
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="im">from</span> timeit <span class="im">import</span> timeit</span>
-<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a><span class="im">import</span> pandas</span>
-<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a><span class="im">import</span> numpy</span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a></span>
 <span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">100_000</span>  <span class="co"># Number of rows in DataFrame</span></span>
 <span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a></span>
 <span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a><span class="kw">def</span> genDataFrame():</span>
-<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a>    numpy.random.seed(<span class="dv">12</span>)  <span class="co"># Ensure each dataframe is identical</span></span>
-<span id="cb14-9"><a href="#cb14-9" tabindex="-1"></a>    <span class="cf">return</span> pandas.DataFrame(</span>
+<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a>    np.random.seed(<span class="dv">12</span>)  <span class="co"># Ensure each dataframe is identical</span></span>
+<span id="cb14-9"><a href="#cb14-9" tabindex="-1"></a>    <span class="cf">return</span> pd.DataFrame(</span>
 <span id="cb14-10"><a href="#cb14-10" tabindex="-1"></a>    {</span>
-<span id="cb14-11"><a href="#cb14-11" tabindex="-1"></a>        <span class="st">"f_vertical"</span>: numpy.random.random(size<span class="op">=</span>N),</span>
-<span id="cb14-12"><a href="#cb14-12" tabindex="-1"></a>        <span class="st">"f_horizontal"</span>: numpy.random.random(size<span class="op">=</span>N),</span>
+<span id="cb14-11"><a href="#cb14-11" tabindex="-1"></a>        <span class="st">"length"</span>: np.random.random(size<span class="op">=</span>N),</span>
+<span id="cb14-12"><a href="#cb14-12" tabindex="-1"></a>        <span class="st">"width"</span>: np.random.random(size<span class="op">=</span>N),</span>
 <span id="cb14-13"><a href="#cb14-13" tabindex="-1"></a>        <span class="co"># todo some spurious columns</span></span>
 <span id="cb14-14"><a href="#cb14-14" tabindex="-1"></a>    })</span>
 <span id="cb14-15"><a href="#cb14-15" tabindex="-1"></a></span>
 <span id="cb14-16"><a href="#cb14-16" tabindex="-1"></a><span class="kw">def</span> pythagoras(row):</span>
-<span id="cb14-17"><a href="#cb14-17" tabindex="-1"></a>    <span class="cf">return</span> (row[<span class="st">"f_vertical"</span>]<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> row[<span class="st">"f_horizontal"</span>]<span class="op">**</span><span class="dv">2</span>)<span class="op">**</span><span class="fl">0.5</span></span>
+<span id="cb14-17"><a href="#cb14-17" tabindex="-1"></a>    <span class="cf">return</span> (row[<span class="st">"length"</span>]<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> row[<span class="st">"width"</span>]<span class="op">**</span><span class="dv">2</span>)<span class="op">**</span><span class="fl">0.5</span></span>
 <span id="cb14-18"><a href="#cb14-18" tabindex="-1"></a></span>
 <span id="cb14-19"><a href="#cb14-19" tabindex="-1"></a><span class="kw">def</span> for_range():</span>
 <span id="cb14-20"><a href="#cb14-20" tabindex="-1"></a>    rtn <span class="op">=</span> []</span>
@@ -4274,14 +4280,14 @@ function, <code>apply()</code> can be used, which is similar to
 <span id="cb14-22"><a href="#cb14-22" tabindex="-1"></a>    <span class="cf">for</span> row_idx <span class="kw">in</span> <span class="bu">range</span>(df.shape[<span class="dv">0</span>]):</span>
 <span id="cb14-23"><a href="#cb14-23" tabindex="-1"></a>        row <span class="op">=</span> df.iloc[row_idx]</span>
 <span id="cb14-24"><a href="#cb14-24" tabindex="-1"></a>        rtn.append(pythagoras(row))</span>
-<span id="cb14-25"><a href="#cb14-25" tabindex="-1"></a>    <span class="cf">return</span> pandas.Series(rtn)</span>
+<span id="cb14-25"><a href="#cb14-25" tabindex="-1"></a>    <span class="cf">return</span> pd.Series(rtn)</span>
 <span id="cb14-26"><a href="#cb14-26" tabindex="-1"></a></span>
 <span id="cb14-27"><a href="#cb14-27" tabindex="-1"></a><span class="kw">def</span> for_iterrows():</span>
 <span id="cb14-28"><a href="#cb14-28" tabindex="-1"></a>    rtn <span class="op">=</span> []</span>
 <span id="cb14-29"><a href="#cb14-29" tabindex="-1"></a>    df <span class="op">=</span> genDataFrame()</span>
 <span id="cb14-30"><a href="#cb14-30" tabindex="-1"></a>    <span class="cf">for</span> row_idx, row <span class="kw">in</span> df.iterrows():</span>
 <span id="cb14-31"><a href="#cb14-31" tabindex="-1"></a>        rtn.append(pythagoras(row))</span>
-<span id="cb14-32"><a href="#cb14-32" tabindex="-1"></a>    <span class="cf">return</span> pandas.Series(rtn)</span>
+<span id="cb14-32"><a href="#cb14-32" tabindex="-1"></a>    <span class="cf">return</span> pd.Series(rtn)</span>
 <span id="cb14-33"><a href="#cb14-33" tabindex="-1"></a></span>
 <span id="cb14-34"><a href="#cb14-34" tabindex="-1"></a><span class="kw">def</span> pandas_apply():</span>
 <span id="cb14-35"><a href="#cb14-35" tabindex="-1"></a>    df <span class="op">=</span> genDataFrame()</span>
@@ -4315,21 +4321,20 @@ rows entirely by passing only the required columns to NumPy.</p>
 <h3 class="callout-title">Challenge</h3>
 <div class="callout-content">
 <p>We can extract the individual columns of the data frame. These are of
-the type <code>pandas.Series</code>, which supports array broadcasting,
-just like a NumPy array. Instead of using the
-<code>pythagoras(row)</code> function, can you write a vectorised
-version of this calculation?</p>
+the type <code>pd.Series</code>, which supports array broadcasting, just
+like a NumPy array. Instead of using the <code>pythagoras(row)</code>
+function, can you write a vectorised version of this calculation?</p>
 <div class="codewrapper sourceCode" id="cb16">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="kw">def</span> vectorize():</span>
 <span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a>    df <span class="op">=</span> genDataFrame()</span>
-<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a>    vertical <span class="op">=</span> df[<span class="st">"f_vertical"</span>]</span>
-<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a>    horizontal <span class="op">=</span> df[<span class="st">"f_horizontal"</span>]</span>
+<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a>    length <span class="op">=</span> df[<span class="st">"length"</span>]</span>
+<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a>    width <span class="op">=</span> df[<span class="st">"width"</span>]</span>
 <span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a></span>
 <span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a>    result <span class="op">=</span> ...  <span class="co"># Your code goes here</span></span>
 <span id="cb16-7"><a href="#cb16-7" tabindex="-1"></a></span>
-<span id="cb16-8"><a href="#cb16-8" tabindex="-1"></a>    <span class="cf">return</span> pandas.Series(result)</span></code></pre>
+<span id="cb16-8"><a href="#cb16-8" tabindex="-1"></a>    <span class="cf">return</span> pd.Series(result)</span></code></pre>
 </div>
 <p>Once you’ve done that, measure your performance by running</p>
 <div class="codewrapper sourceCode" id="cb17">
@@ -4346,7 +4351,7 @@ version of this calculation?</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint2" aria-expanded="false" aria-controls="collapseHint2">
   <h4 class="accordion-header" id="headingHint2"> Give me a hint </h4>
 </button>
-<div id="collapseHint2" class="accordion-collapse collapse" aria-labelledby="headingHint2" data-bs-parent="#accordionHint2">
+<div id="collapseHint2" class="accordion-collapse collapse" data-bs-parent="#accordionHint2" aria-labelledby="headingHint2">
 <div class="accordion-body">
 <p>Remember that most common mathematical operations work element-wise
 when applied to NumPy arrays. For example:</p>
@@ -4367,21 +4372,35 @@ when applied to NumPy arrays. For example:</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
+<p>We start with the original implementation of the
+<code>pythagoras()</code> function:</p>
 <div class="codewrapper sourceCode" id="cb19">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="kw">def</span> vectorize():</span>
-<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a>    df <span class="op">=</span> genDataFrame()</span>
-<span id="cb19-3"><a href="#cb19-3" tabindex="-1"></a>    vertical <span class="op">=</span> df[<span class="st">"f_vertical"</span>]</span>
-<span id="cb19-4"><a href="#cb19-4" tabindex="-1"></a>    horizontal <span class="op">=</span> df[<span class="st">"f_horizontal"</span>]</span>
-<span id="cb19-5"><a href="#cb19-5" tabindex="-1"></a></span>
-<span id="cb19-6"><a href="#cb19-6" tabindex="-1"></a>    result <span class="op">=</span> numpy.sqrt(vertical<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> horizontal<span class="op">**</span><span class="dv">2</span>)</span>
-<span id="cb19-7"><a href="#cb19-7" tabindex="-1"></a></span>
-<span id="cb19-8"><a href="#cb19-8" tabindex="-1"></a>    <span class="cf">return</span> pandas.Series(result)</span>
-<span id="cb19-9"><a href="#cb19-9" tabindex="-1"></a></span>
-<span id="cb19-10"><a href="#cb19-10" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"vectorize: </span><span class="sc">{</span>timeit(vectorize, number<span class="op">=</span>repeats)<span class="op">-</span>gentime<span class="sc">:.3f}</span><span class="ss"> s"</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a>(row[<span class="st">"length"</span>]<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> row[<span class="st">"width"</span>]<span class="op">**</span><span class="dv">2</span>)<span class="op">**</span><span class="fl">0.5</span></span></code></pre>
+</div>
+<p>Instead of <code>row["length"]</code> and <code>row["width"]</code>,
+which are individual entries in the dataframe, we use the
+<code>length</code> and <code>width</code> columns. Additionally, we can
+use NumPy’s <code>np.sqrt()</code> function instead of Python’s builtin
+<code>**</code> operator. (This is not strictly necessary, but avoids a
+bit of performance overhead from mixing the two worlds, as discussed at
+the beginning of this episode.)</p>
+<div class="codewrapper sourceCode" id="cb20">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="kw">def</span> vectorize():</span>
+<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a>    df <span class="op">=</span> genDataFrame()</span>
+<span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a>    length <span class="op">=</span> df[<span class="st">"length"</span>]</span>
+<span id="cb20-4"><a href="#cb20-4" tabindex="-1"></a>    width <span class="op">=</span> df[<span class="st">"width"</span>]</span>
+<span id="cb20-5"><a href="#cb20-5" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" tabindex="-1"></a>    result <span class="op">=</span> np.sqrt(length<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> width<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb20-7"><a href="#cb20-7" tabindex="-1"></a></span>
+<span id="cb20-8"><a href="#cb20-8" tabindex="-1"></a>    <span class="cf">return</span> pd.Series(result)</span>
+<span id="cb20-9"><a href="#cb20-9" tabindex="-1"></a></span>
+<span id="cb20-10"><a href="#cb20-10" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"vectorize: </span><span class="sc">{</span>timeit(vectorize, number<span class="op">=</span>repeats)<span class="op">-</span>gentime<span class="sc">:.3f}</span><span class="ss"> s"</span>)</span></code></pre>
 </div>
 <p>264x faster than <code>apply()</code>, 1000x faster than the two
 <code>for</code> approaches!</p>
@@ -4400,15 +4419,15 @@ for example you may have conditional logic.</p>
 dictionary using <code>to_dict(orient='index')</code>. This creates a
 nested dictionary, where each row of the outer dictionary is an internal
 dictionary. This can then be processed via list-comprehension:</p>
-<div class="codewrapper sourceCode" id="cb21">
+<div class="codewrapper sourceCode" id="cb22">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="kw">def</span> to_dict():</span>
-<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a>    df <span class="op">=</span> genDataFrame()</span>
-<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a>    df_as_dict <span class="op">=</span> df.to_dict(orient<span class="op">=</span><span class="st">'index'</span>)</span>
-<span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a>    <span class="cf">return</span> pandas.Series([(r[<span class="st">'f_vertical'</span>]<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> r[<span class="st">'f_horizontal'</span>]<span class="op">**</span><span class="dv">2</span>)<span class="op">**</span><span class="fl">0.5</span> <span class="cf">for</span> r <span class="kw">in</span> df_as_dict.values()])</span>
-<span id="cb21-5"><a href="#cb21-5" tabindex="-1"></a></span>
-<span id="cb21-6"><a href="#cb21-6" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"to_dict: </span><span class="sc">{</span>timeit(to_dict, number<span class="op">=</span>repeats)<span class="op">-</span>gentime<span class="sc">:.2f}</span><span class="ss"> s"</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="kw">def</span> to_dict():</span>
+<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a>    df <span class="op">=</span> genDataFrame()</span>
+<span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a>    df_as_dict <span class="op">=</span> df.to_dict(orient<span class="op">=</span><span class="st">'index'</span>)</span>
+<span id="cb22-4"><a href="#cb22-4" tabindex="-1"></a>    <span class="cf">return</span> pd.Series([(r[<span class="st">'length'</span>]<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> r[<span class="st">'width'</span>]<span class="op">**</span><span class="dv">2</span>)<span class="op">**</span><span class="fl">0.5</span> <span class="cf">for</span> r <span class="kw">in</span> df_as_dict.values()])</span>
+<span id="cb22-5"><a href="#cb22-5" tabindex="-1"></a></span>
+<span id="cb22-6"><a href="#cb22-6" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"to_dict: </span><span class="sc">{</span>timeit(to_dict, number<span class="op">=</span>repeats)<span class="op">-</span>gentime<span class="sc">:.2f}</span><span class="ss"> s"</span>)</span></code></pre>
 </div>
 <p>Whilst still nearly 100x slower than pure vectorisation, it’s three
 times as fast as <code>apply()</code>.</p>
@@ -4422,32 +4441,32 @@ significantly slower than a Python dictionary. There is a slight
 overhead to creating the dictionary, however the stark difference in
 access speed is more than enough to overcome that cost for any large
 DataFrame.</p>
-<div class="codewrapper sourceCode" id="cb23">
+<div class="codewrapper sourceCode" id="cb24">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="im">from</span> timeit <span class="im">import</span> timeit</span>
-<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pandas</span>
-<span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a></span>
-<span id="cb23-4"><a href="#cb23-4" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">100_000</span>  <span class="co"># Number of rows in DataFrame</span></span>
-<span id="cb23-5"><a href="#cb23-5" tabindex="-1"></a></span>
-<span id="cb23-6"><a href="#cb23-6" tabindex="-1"></a><span class="kw">def</span> genInput():</span>
-<span id="cb23-7"><a href="#cb23-7" tabindex="-1"></a>    s <span class="op">=</span> pandas.Series({<span class="st">'a'</span> : <span class="dv">1</span>, <span class="st">'b'</span> : <span class="dv">2</span>})</span>
-<span id="cb23-8"><a href="#cb23-8" tabindex="-1"></a>    d <span class="op">=</span> {<span class="st">'a'</span> : <span class="dv">1</span>, <span class="st">'b'</span> : <span class="dv">2</span>}</span>
-<span id="cb23-9"><a href="#cb23-9" tabindex="-1"></a>    <span class="cf">return</span> s, d</span>
-<span id="cb23-10"><a href="#cb23-10" tabindex="-1"></a></span>
-<span id="cb23-11"><a href="#cb23-11" tabindex="-1"></a><span class="kw">def</span> series():</span>
-<span id="cb23-12"><a href="#cb23-12" tabindex="-1"></a>    s, _ <span class="op">=</span> genInput()</span>
-<span id="cb23-13"><a href="#cb23-13" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(N):</span>
-<span id="cb23-14"><a href="#cb23-14" tabindex="-1"></a>        y <span class="op">=</span> s[<span class="st">'a'</span>] <span class="op">*</span> s[<span class="st">'b'</span>]</span>
-<span id="cb23-15"><a href="#cb23-15" tabindex="-1"></a></span>
-<span id="cb23-16"><a href="#cb23-16" tabindex="-1"></a><span class="kw">def</span> dictionary():</span>
-<span id="cb23-17"><a href="#cb23-17" tabindex="-1"></a>    _, d <span class="op">=</span> genInput()</span>
-<span id="cb23-18"><a href="#cb23-18" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(N):</span>
-<span id="cb23-19"><a href="#cb23-19" tabindex="-1"></a>        y <span class="op">=</span> d[<span class="st">'a'</span>] <span class="op">*</span> d[<span class="st">'b'</span>]</span>
-<span id="cb23-20"><a href="#cb23-20" tabindex="-1"></a></span>
-<span id="cb23-21"><a href="#cb23-21" tabindex="-1"></a>repeats <span class="op">=</span> <span class="dv">100</span></span>
-<span id="cb23-22"><a href="#cb23-22" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"series: </span><span class="sc">{</span>timeit(series, number<span class="op">=</span>repeats)<span class="sc">:.3f}</span><span class="ss"> s"</span>)</span>
-<span id="cb23-23"><a href="#cb23-23" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"dictionary: </span><span class="sc">{</span>timeit(dictionary, number<span class="op">=</span>repeats)<span class="sc">:.3f}</span><span class="ss"> s"</span>)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a><span class="im">from</span> timeit <span class="im">import</span> timeit</span>
+<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb24-3"><a href="#cb24-3" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">100_000</span>  <span class="co"># Number of rows in DataFrame</span></span>
+<span id="cb24-5"><a href="#cb24-5" tabindex="-1"></a></span>
+<span id="cb24-6"><a href="#cb24-6" tabindex="-1"></a><span class="kw">def</span> genInput():</span>
+<span id="cb24-7"><a href="#cb24-7" tabindex="-1"></a>    s <span class="op">=</span> pd.Series({<span class="st">'a'</span> : <span class="dv">1</span>, <span class="st">'b'</span> : <span class="dv">2</span>})</span>
+<span id="cb24-8"><a href="#cb24-8" tabindex="-1"></a>    d <span class="op">=</span> {<span class="st">'a'</span> : <span class="dv">1</span>, <span class="st">'b'</span> : <span class="dv">2</span>}</span>
+<span id="cb24-9"><a href="#cb24-9" tabindex="-1"></a>    <span class="cf">return</span> s, d</span>
+<span id="cb24-10"><a href="#cb24-10" tabindex="-1"></a></span>
+<span id="cb24-11"><a href="#cb24-11" tabindex="-1"></a><span class="kw">def</span> series():</span>
+<span id="cb24-12"><a href="#cb24-12" tabindex="-1"></a>    s, _ <span class="op">=</span> genInput()</span>
+<span id="cb24-13"><a href="#cb24-13" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(N):</span>
+<span id="cb24-14"><a href="#cb24-14" tabindex="-1"></a>        y <span class="op">=</span> s[<span class="st">'a'</span>] <span class="op">*</span> s[<span class="st">'b'</span>]</span>
+<span id="cb24-15"><a href="#cb24-15" tabindex="-1"></a></span>
+<span id="cb24-16"><a href="#cb24-16" tabindex="-1"></a><span class="kw">def</span> dictionary():</span>
+<span id="cb24-17"><a href="#cb24-17" tabindex="-1"></a>    _, d <span class="op">=</span> genInput()</span>
+<span id="cb24-18"><a href="#cb24-18" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(N):</span>
+<span id="cb24-19"><a href="#cb24-19" tabindex="-1"></a>        y <span class="op">=</span> d[<span class="st">'a'</span>] <span class="op">*</span> d[<span class="st">'b'</span>]</span>
+<span id="cb24-20"><a href="#cb24-20" tabindex="-1"></a></span>
+<span id="cb24-21"><a href="#cb24-21" tabindex="-1"></a>repeats <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb24-22"><a href="#cb24-22" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"series: </span><span class="sc">{</span>timeit(series, number<span class="op">=</span>repeats)<span class="sc">:.3f}</span><span class="ss"> s"</span>)</span>
+<span id="cb24-23"><a href="#cb24-23" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"dictionary: </span><span class="sc">{</span>timeit(dictionary, number<span class="op">=</span>repeats)<span class="sc">:.3f}</span><span class="ss"> s"</span>)</span></code></pre>
 </div>
 <p>65x slower!</p>
 <div class="codewrapper">
@@ -4625,7 +4644,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-optimisation-latency"><p>Content from <a href="optimisation-latency.html">Understanding Latency</a></p>
 <hr>
-<p>Last updated on 2026-02-25 |
+<p>Last updated on 2026-03-17 |
 
         <a href="https://github.com/carpentries-incubator/pando-python/edit/main/episodes/optimisation-latency.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 30 minutes</p>
@@ -4789,37 +4808,39 @@ by parallelising downloads.</p>
 <span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a><span class="kw">def</span> sequentialDownload():</span>
 <span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a>    <span class="cf">for</span> mass <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>, <span class="dv">20</span>):</span>
 <span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a>        url <span class="op">=</span> <span class="ss">f"https://github.com/SNEWS2/snewpy-models-ccsn/raw/refs/heads/main/models/Warren_2020/stir_a1.23/stir_multimessenger_a1.23_m</span><span class="sc">{</span>mass<span class="sc">}</span><span class="ss">.0.h5"</span></span>
-<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a>        f <span class="op">=</span> download_file(url, <span class="ss">f"seq_</span><span class="sc">{</span>mass<span class="sc">}</span><span class="ss">.h5"</span>)</span>
-<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a>        downloaded_files.append(f)</span>
-<span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a></span>
-<span id="cb3-20"><a href="#cb3-20" tabindex="-1"></a><span class="kw">def</span> parallelDownload():</span>
-<span id="cb3-21"><a href="#cb3-21" tabindex="-1"></a>    <span class="co"># Initialise a pool of 6 threads to share the workload</span></span>
-<span id="cb3-22"><a href="#cb3-22" tabindex="-1"></a>    pool <span class="op">=</span> ThreadPoolExecutor(max_workers<span class="op">=</span><span class="dv">6</span>)</span>
-<span id="cb3-23"><a href="#cb3-23" tabindex="-1"></a>    jobs <span class="op">=</span> []</span>
-<span id="cb3-24"><a href="#cb3-24" tabindex="-1"></a>    <span class="co"># Submit each download to be executed by the thread pool</span></span>
-<span id="cb3-25"><a href="#cb3-25" tabindex="-1"></a>    <span class="cf">for</span> mass <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>, <span class="dv">20</span>):</span>
-<span id="cb3-26"><a href="#cb3-26" tabindex="-1"></a>        url <span class="op">=</span> <span class="ss">f"https://github.com/SNEWS2/snewpy-models-ccsn/raw/refs/heads/main/models/Warren_2020/stir_a1.23/stir_multimessenger_a1.23_m</span><span class="sc">{</span>mass<span class="sc">}</span><span class="ss">.0.h5"</span></span>
-<span id="cb3-27"><a href="#cb3-27" tabindex="-1"></a>        local_filename <span class="op">=</span> <span class="ss">f"par_</span><span class="sc">{</span>mass<span class="sc">}</span><span class="ss">.h5"</span></span>
-<span id="cb3-28"><a href="#cb3-28" tabindex="-1"></a>        jobs.append(pool.submit(download_file, url, local_filename))</span>
-<span id="cb3-29"><a href="#cb3-29" tabindex="-1"></a></span>
-<span id="cb3-30"><a href="#cb3-30" tabindex="-1"></a>    <span class="co"># Collect the results (and errors) as the jobs are completed</span></span>
-<span id="cb3-31"><a href="#cb3-31" tabindex="-1"></a>    <span class="cf">for</span> result <span class="kw">in</span> as_completed(jobs):        </span>
-<span id="cb3-32"><a href="#cb3-32" tabindex="-1"></a>        <span class="cf">if</span> result.exception() <span class="kw">is</span> <span class="va">None</span>:</span>
-<span id="cb3-33"><a href="#cb3-33" tabindex="-1"></a>            <span class="co"># handle return values of the parallelised function</span></span>
-<span id="cb3-34"><a href="#cb3-34" tabindex="-1"></a>            f <span class="op">=</span> result.result()</span>
-<span id="cb3-35"><a href="#cb3-35" tabindex="-1"></a>            downloaded_files.append(f)</span>
-<span id="cb3-36"><a href="#cb3-36" tabindex="-1"></a>        <span class="cf">else</span>:</span>
-<span id="cb3-37"><a href="#cb3-37" tabindex="-1"></a>            <span class="co"># handle errors</span></span>
-<span id="cb3-38"><a href="#cb3-38" tabindex="-1"></a>            <span class="bu">print</span>(result.exception())</span>
-<span id="cb3-39"><a href="#cb3-39" tabindex="-1"></a></span>
-<span id="cb3-40"><a href="#cb3-40" tabindex="-1"></a>    pool.shutdown(wait<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb3-41"><a href="#cb3-41" tabindex="-1"></a></span>
-<span id="cb3-42"><a href="#cb3-42" tabindex="-1"></a></span>
-<span id="cb3-43"><a href="#cb3-43" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"sequentialDownload: </span><span class="sc">{</span>timeit(sequentialDownload, <span class="bu">globals</span><span class="op">=</span><span class="bu">globals</span>(), number<span class="op">=</span><span class="dv">1</span>)<span class="sc">:.3f}</span><span class="ss"> s"</span>)</span>
-<span id="cb3-44"><a href="#cb3-44" tabindex="-1"></a><span class="bu">print</span>(downloaded_files)</span>
-<span id="cb3-45"><a href="#cb3-45" tabindex="-1"></a>downloaded_files <span class="op">=</span> []</span>
-<span id="cb3-46"><a href="#cb3-46" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"parallelDownload: </span><span class="sc">{</span>timeit(parallelDownload, <span class="bu">globals</span><span class="op">=</span><span class="bu">globals</span>(), number<span class="op">=</span><span class="dv">1</span>)<span class="sc">:.3f}</span><span class="ss"> s"</span>)</span>
-<span id="cb3-47"><a href="#cb3-47" tabindex="-1"></a><span class="bu">print</span>(downloaded_files)</span></code></pre>
+<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a>        local_filename <span class="op">=</span> <span class="ss">f"seq_</span><span class="sc">{</span>mass<span class="sc">}</span><span class="ss">.h5"</span></span>
+<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a>        <span class="cf">try</span>:</span>
+<span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a>            f <span class="op">=</span> download_file(url, local_filename)</span>
+<span id="cb3-20"><a href="#cb3-20" tabindex="-1"></a>            downloaded_files.append(f)</span>
+<span id="cb3-21"><a href="#cb3-21" tabindex="-1"></a>        <span class="cf">except</span> <span class="pp">Exception</span>:</span>
+<span id="cb3-22"><a href="#cb3-22" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"Downloading </span><span class="sc">{</span>local_filename<span class="sc">}</span><span class="ss"> failed."</span>)</span>
+<span id="cb3-23"><a href="#cb3-23" tabindex="-1"></a></span>
+<span id="cb3-24"><a href="#cb3-24" tabindex="-1"></a><span class="kw">def</span> parallelDownload():</span>
+<span id="cb3-25"><a href="#cb3-25" tabindex="-1"></a>    <span class="co"># Initialise a pool of 6 threads to share the workload</span></span>
+<span id="cb3-26"><a href="#cb3-26" tabindex="-1"></a>    <span class="cf">with</span> ThreadPoolExecutor(max_workers<span class="op">=</span><span class="dv">6</span>) <span class="im">as</span> pool:</span>
+<span id="cb3-27"><a href="#cb3-27" tabindex="-1"></a>        jobs <span class="op">=</span> {}</span>
+<span id="cb3-28"><a href="#cb3-28" tabindex="-1"></a>        <span class="cf">for</span> mass <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>, <span class="dv">20</span>):</span>
+<span id="cb3-29"><a href="#cb3-29" tabindex="-1"></a>            url <span class="op">=</span> <span class="ss">f"https://github.com/SNEWS2/snewpy-models-ccsn/raw/refs/heads/main/models/Warren_2020/stir_a1.23/stir_multimessenger_a1.23_m</span><span class="sc">{</span>mass<span class="sc">}</span><span class="ss">.0.h5"</span></span>
+<span id="cb3-30"><a href="#cb3-30" tabindex="-1"></a>            local_filename <span class="op">=</span> <span class="ss">f"par_</span><span class="sc">{</span>mass<span class="sc">}</span><span class="ss">.h5"</span></span>
+<span id="cb3-31"><a href="#cb3-31" tabindex="-1"></a>            <span class="co"># Submit each download to be executed by the thread pool</span></span>
+<span id="cb3-32"><a href="#cb3-32" tabindex="-1"></a>            job <span class="op">=</span> pool.submit(download_file, url, local_filename)</span>
+<span id="cb3-33"><a href="#cb3-33" tabindex="-1"></a>            jobs[job] <span class="op">=</span> local_filename</span>
+<span id="cb3-34"><a href="#cb3-34" tabindex="-1"></a></span>
+<span id="cb3-35"><a href="#cb3-35" tabindex="-1"></a>        <span class="co"># Collect the results (and errors) as the jobs are completed</span></span>
+<span id="cb3-36"><a href="#cb3-36" tabindex="-1"></a>        <span class="cf">for</span> job <span class="kw">in</span> as_completed(jobs):        </span>
+<span id="cb3-37"><a href="#cb3-37" tabindex="-1"></a>            <span class="cf">if</span> job.exception() <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb3-38"><a href="#cb3-38" tabindex="-1"></a>                <span class="co"># return value of the executed function is available as job.result()</span></span>
+<span id="cb3-39"><a href="#cb3-39" tabindex="-1"></a>                downloaded_files.append(job.result())</span>
+<span id="cb3-40"><a href="#cb3-40" tabindex="-1"></a>            <span class="cf">else</span>:</span>
+<span id="cb3-41"><a href="#cb3-41" tabindex="-1"></a>                <span class="co"># handle errors</span></span>
+<span id="cb3-42"><a href="#cb3-42" tabindex="-1"></a>                <span class="bu">print</span>(<span class="ss">f"Downloading </span><span class="sc">{</span>jobs[job]<span class="sc">}</span><span class="ss"> failed."</span>)</span>
+<span id="cb3-43"><a href="#cb3-43" tabindex="-1"></a></span>
+<span id="cb3-44"><a href="#cb3-44" tabindex="-1"></a></span>
+<span id="cb3-45"><a href="#cb3-45" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"sequentialDownload: </span><span class="sc">{</span>timeit(sequentialDownload, <span class="bu">globals</span><span class="op">=</span><span class="bu">globals</span>(), number<span class="op">=</span><span class="dv">1</span>)<span class="sc">:.3f}</span><span class="ss"> s"</span>)</span>
+<span id="cb3-46"><a href="#cb3-46" tabindex="-1"></a><span class="bu">print</span>(downloaded_files)</span>
+<span id="cb3-47"><a href="#cb3-47" tabindex="-1"></a>downloaded_files <span class="op">=</span> []</span>
+<span id="cb3-48"><a href="#cb3-48" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"parallelDownload: </span><span class="sc">{</span>timeit(parallelDownload, <span class="bu">globals</span><span class="op">=</span><span class="bu">globals</span>(), number<span class="op">=</span><span class="dv">1</span>)<span class="sc">:.3f}</span><span class="ss"> s"</span>)</span>
+<span id="cb3-49"><a href="#cb3-49" tabindex="-1"></a><span class="bu">print</span>(downloaded_files)</span></code></pre>
 </div>
 <p>Depending on your internet connection, results may vary
 significantly, but the parallel download will usually be quite a bit

@@ -393,7 +393,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Understanding Latency</h1>
-        <p>Last updated on 2026-02-25 |
+        <p>Last updated on 2026-03-17 |
 
         <a href="https://github.com/carpentries-incubator/pando-python/edit/main/episodes/optimisation-latency.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -554,37 +554,39 @@ by parallelising downloads.</p>
 <span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a><span class="kw">def</span> sequentialDownload():</span>
 <span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a>    <span class="cf">for</span> mass <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>, <span class="dv">20</span>):</span>
 <span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a>        url <span class="op">=</span> <span class="ss">f"https://github.com/SNEWS2/snewpy-models-ccsn/raw/refs/heads/main/models/Warren_2020/stir_a1.23/stir_multimessenger_a1.23_m</span><span class="sc">{</span>mass<span class="sc">}</span><span class="ss">.0.h5"</span></span>
-<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a>        f <span class="op">=</span> download_file(url, <span class="ss">f"seq_</span><span class="sc">{</span>mass<span class="sc">}</span><span class="ss">.h5"</span>)</span>
-<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a>        downloaded_files.append(f)</span>
-<span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a></span>
-<span id="cb3-20"><a href="#cb3-20" tabindex="-1"></a><span class="kw">def</span> parallelDownload():</span>
-<span id="cb3-21"><a href="#cb3-21" tabindex="-1"></a>    <span class="co"># Initialise a pool of 6 threads to share the workload</span></span>
-<span id="cb3-22"><a href="#cb3-22" tabindex="-1"></a>    pool <span class="op">=</span> ThreadPoolExecutor(max_workers<span class="op">=</span><span class="dv">6</span>)</span>
-<span id="cb3-23"><a href="#cb3-23" tabindex="-1"></a>    jobs <span class="op">=</span> []</span>
-<span id="cb3-24"><a href="#cb3-24" tabindex="-1"></a>    <span class="co"># Submit each download to be executed by the thread pool</span></span>
-<span id="cb3-25"><a href="#cb3-25" tabindex="-1"></a>    <span class="cf">for</span> mass <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>, <span class="dv">20</span>):</span>
-<span id="cb3-26"><a href="#cb3-26" tabindex="-1"></a>        url <span class="op">=</span> <span class="ss">f"https://github.com/SNEWS2/snewpy-models-ccsn/raw/refs/heads/main/models/Warren_2020/stir_a1.23/stir_multimessenger_a1.23_m</span><span class="sc">{</span>mass<span class="sc">}</span><span class="ss">.0.h5"</span></span>
-<span id="cb3-27"><a href="#cb3-27" tabindex="-1"></a>        local_filename <span class="op">=</span> <span class="ss">f"par_</span><span class="sc">{</span>mass<span class="sc">}</span><span class="ss">.h5"</span></span>
-<span id="cb3-28"><a href="#cb3-28" tabindex="-1"></a>        jobs.append(pool.submit(download_file, url, local_filename))</span>
-<span id="cb3-29"><a href="#cb3-29" tabindex="-1"></a></span>
-<span id="cb3-30"><a href="#cb3-30" tabindex="-1"></a>    <span class="co"># Collect the results (and errors) as the jobs are completed</span></span>
-<span id="cb3-31"><a href="#cb3-31" tabindex="-1"></a>    <span class="cf">for</span> result <span class="kw">in</span> as_completed(jobs):        </span>
-<span id="cb3-32"><a href="#cb3-32" tabindex="-1"></a>        <span class="cf">if</span> result.exception() <span class="kw">is</span> <span class="va">None</span>:</span>
-<span id="cb3-33"><a href="#cb3-33" tabindex="-1"></a>            <span class="co"># handle return values of the parallelised function</span></span>
-<span id="cb3-34"><a href="#cb3-34" tabindex="-1"></a>            f <span class="op">=</span> result.result()</span>
-<span id="cb3-35"><a href="#cb3-35" tabindex="-1"></a>            downloaded_files.append(f)</span>
-<span id="cb3-36"><a href="#cb3-36" tabindex="-1"></a>        <span class="cf">else</span>:</span>
-<span id="cb3-37"><a href="#cb3-37" tabindex="-1"></a>            <span class="co"># handle errors</span></span>
-<span id="cb3-38"><a href="#cb3-38" tabindex="-1"></a>            <span class="bu">print</span>(result.exception())</span>
-<span id="cb3-39"><a href="#cb3-39" tabindex="-1"></a></span>
-<span id="cb3-40"><a href="#cb3-40" tabindex="-1"></a>    pool.shutdown(wait<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb3-41"><a href="#cb3-41" tabindex="-1"></a></span>
-<span id="cb3-42"><a href="#cb3-42" tabindex="-1"></a></span>
-<span id="cb3-43"><a href="#cb3-43" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"sequentialDownload: </span><span class="sc">{</span>timeit(sequentialDownload, <span class="bu">globals</span><span class="op">=</span><span class="bu">globals</span>(), number<span class="op">=</span><span class="dv">1</span>)<span class="sc">:.3f}</span><span class="ss"> s"</span>)</span>
-<span id="cb3-44"><a href="#cb3-44" tabindex="-1"></a><span class="bu">print</span>(downloaded_files)</span>
-<span id="cb3-45"><a href="#cb3-45" tabindex="-1"></a>downloaded_files <span class="op">=</span> []</span>
-<span id="cb3-46"><a href="#cb3-46" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"parallelDownload: </span><span class="sc">{</span>timeit(parallelDownload, <span class="bu">globals</span><span class="op">=</span><span class="bu">globals</span>(), number<span class="op">=</span><span class="dv">1</span>)<span class="sc">:.3f}</span><span class="ss"> s"</span>)</span>
-<span id="cb3-47"><a href="#cb3-47" tabindex="-1"></a><span class="bu">print</span>(downloaded_files)</span></code></pre>
+<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a>        local_filename <span class="op">=</span> <span class="ss">f"seq_</span><span class="sc">{</span>mass<span class="sc">}</span><span class="ss">.h5"</span></span>
+<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a>        <span class="cf">try</span>:</span>
+<span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a>            f <span class="op">=</span> download_file(url, local_filename)</span>
+<span id="cb3-20"><a href="#cb3-20" tabindex="-1"></a>            downloaded_files.append(f)</span>
+<span id="cb3-21"><a href="#cb3-21" tabindex="-1"></a>        <span class="cf">except</span> <span class="pp">Exception</span>:</span>
+<span id="cb3-22"><a href="#cb3-22" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"Downloading </span><span class="sc">{</span>local_filename<span class="sc">}</span><span class="ss"> failed."</span>)</span>
+<span id="cb3-23"><a href="#cb3-23" tabindex="-1"></a></span>
+<span id="cb3-24"><a href="#cb3-24" tabindex="-1"></a><span class="kw">def</span> parallelDownload():</span>
+<span id="cb3-25"><a href="#cb3-25" tabindex="-1"></a>    <span class="co"># Initialise a pool of 6 threads to share the workload</span></span>
+<span id="cb3-26"><a href="#cb3-26" tabindex="-1"></a>    <span class="cf">with</span> ThreadPoolExecutor(max_workers<span class="op">=</span><span class="dv">6</span>) <span class="im">as</span> pool:</span>
+<span id="cb3-27"><a href="#cb3-27" tabindex="-1"></a>        jobs <span class="op">=</span> {}</span>
+<span id="cb3-28"><a href="#cb3-28" tabindex="-1"></a>        <span class="cf">for</span> mass <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>, <span class="dv">20</span>):</span>
+<span id="cb3-29"><a href="#cb3-29" tabindex="-1"></a>            url <span class="op">=</span> <span class="ss">f"https://github.com/SNEWS2/snewpy-models-ccsn/raw/refs/heads/main/models/Warren_2020/stir_a1.23/stir_multimessenger_a1.23_m</span><span class="sc">{</span>mass<span class="sc">}</span><span class="ss">.0.h5"</span></span>
+<span id="cb3-30"><a href="#cb3-30" tabindex="-1"></a>            local_filename <span class="op">=</span> <span class="ss">f"par_</span><span class="sc">{</span>mass<span class="sc">}</span><span class="ss">.h5"</span></span>
+<span id="cb3-31"><a href="#cb3-31" tabindex="-1"></a>            <span class="co"># Submit each download to be executed by the thread pool</span></span>
+<span id="cb3-32"><a href="#cb3-32" tabindex="-1"></a>            job <span class="op">=</span> pool.submit(download_file, url, local_filename)</span>
+<span id="cb3-33"><a href="#cb3-33" tabindex="-1"></a>            jobs[job] <span class="op">=</span> local_filename</span>
+<span id="cb3-34"><a href="#cb3-34" tabindex="-1"></a></span>
+<span id="cb3-35"><a href="#cb3-35" tabindex="-1"></a>        <span class="co"># Collect the results (and errors) as the jobs are completed</span></span>
+<span id="cb3-36"><a href="#cb3-36" tabindex="-1"></a>        <span class="cf">for</span> job <span class="kw">in</span> as_completed(jobs):        </span>
+<span id="cb3-37"><a href="#cb3-37" tabindex="-1"></a>            <span class="cf">if</span> job.exception() <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb3-38"><a href="#cb3-38" tabindex="-1"></a>                <span class="co"># return value of the executed function is available as job.result()</span></span>
+<span id="cb3-39"><a href="#cb3-39" tabindex="-1"></a>                downloaded_files.append(job.result())</span>
+<span id="cb3-40"><a href="#cb3-40" tabindex="-1"></a>            <span class="cf">else</span>:</span>
+<span id="cb3-41"><a href="#cb3-41" tabindex="-1"></a>                <span class="co"># handle errors</span></span>
+<span id="cb3-42"><a href="#cb3-42" tabindex="-1"></a>                <span class="bu">print</span>(<span class="ss">f"Downloading </span><span class="sc">{</span>jobs[job]<span class="sc">}</span><span class="ss"> failed."</span>)</span>
+<span id="cb3-43"><a href="#cb3-43" tabindex="-1"></a></span>
+<span id="cb3-44"><a href="#cb3-44" tabindex="-1"></a></span>
+<span id="cb3-45"><a href="#cb3-45" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"sequentialDownload: </span><span class="sc">{</span>timeit(sequentialDownload, <span class="bu">globals</span><span class="op">=</span><span class="bu">globals</span>(), number<span class="op">=</span><span class="dv">1</span>)<span class="sc">:.3f}</span><span class="ss"> s"</span>)</span>
+<span id="cb3-46"><a href="#cb3-46" tabindex="-1"></a><span class="bu">print</span>(downloaded_files)</span>
+<span id="cb3-47"><a href="#cb3-47" tabindex="-1"></a>downloaded_files <span class="op">=</span> []</span>
+<span id="cb3-48"><a href="#cb3-48" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"parallelDownload: </span><span class="sc">{</span>timeit(parallelDownload, <span class="bu">globals</span><span class="op">=</span><span class="bu">globals</span>(), number<span class="op">=</span><span class="dv">1</span>)<span class="sc">:.3f}</span><span class="ss"> s"</span>)</span>
+<span id="cb3-49"><a href="#cb3-49" tabindex="-1"></a><span class="bu">print</span>(downloaded_files)</span></code></pre>
 </div>
 <p>Depending on your internet connection, results may vary
 significantly, but the parallel download will usually be quite a bit
@@ -801,7 +803,7 @@ any links that you are not going to use.
   "url": "https://carpentries-incubator.github.io/pando-python/optimisation-latency.html",
   "identifier": "https://carpentries-incubator.github.io/pando-python/optimisation-latency.html",
   "dateCreated": "2024-02-01",
-  "dateModified": "2026-02-25",
+  "dateModified": "2026-03-17",
   "datePublished": "2026-03-17"
 }
 

@@ -394,7 +394,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Function-Level Profiling</h1>
-        <p>Last updated on 2026-02-24 |
+        <p>Last updated on 2026-03-17 |
 
         <a href="https://github.com/carpentries-incubator/pando-python/edit/main/episodes/profiling-functions.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -894,7 +894,7 @@ poor scaling so larger numbers take significantly longer to run.</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
   <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
 </button>
-<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
+<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
 <div class="accordion-body">
 <ul><li>If a hotspot isn’t visible with the argument <code>1</code>, try
 increasing the value.</li>
@@ -910,7 +910,7 @@ within the profile.</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>The hotspot only becomes visible when an argument of <code>5</code>
 or greater is passed.</p>
@@ -947,14 +947,20 @@ execution time is being spent.</p>
 <code>matplotlib</code>, they can be installed via
 <code>pip install numpy matplotlib</code>.</em></p>
 <blockquote>
-<p>The predator prey model is a simple agent-based model of population
-dynamics. Predators and prey co-exist in a common environment and
-compete over finite resources.</p>
-<p>The three agents; predators, prey and grass exist in a two
-dimensional grid. Predators eat prey, prey eat grass. The size of each
+<p>The predator prey model is a simple model of population dynamics,
+where a number of predators, prey and grass exist in a two dimensional
+grid. Predators eat prey, prey eat grass; predators and prey can each
+reproduce, while grass can regrow. Accordingly, the size of each
 population changes over time. Depending on the parameters of the model,
 the populations may oscillate, grow or collapse due to the availability
 of their food source.</p>
+<p>Since the behaviour of each individual predator/prey/grass is
+modeled, this is called an agent-based model. Computational models like
+this are used in many areas of research, ranging from population
+dynamics to epidemiology (e.g., to simulate the effect of public health
+interventions during the COVID-19 pandemic), urban planning (e.g.,
+simulating pedestrian flows) or economics (e.g., simulating financial
+markets).</p>
 </blockquote>
 <p>The program can be executed via
 <code>python predprey.py &lt;steps&gt;</code>. The value of
@@ -971,7 +977,7 @@ bottlenecks.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>It should be clear from the profile that the function
 <code>Grass.eaten()</code> (from <code>predprey.py:278</code>) occupies
@@ -1081,7 +1087,7 @@ any links that you are not going to use.
   "url": "https://carpentries-incubator.github.io/pando-python/profiling-functions.html",
   "identifier": "https://carpentries-incubator.github.io/pando-python/profiling-functions.html",
   "dateCreated": "2024-02-01",
-  "dateModified": "2026-02-24",
+  "dateModified": "2026-03-17",
   "datePublished": "2026-03-17"
 }
 
