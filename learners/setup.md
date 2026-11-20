@@ -100,3 +100,33 @@ CuPy also has experimental support for AMD graphics cards on Linux. You will nee
 ```sh
 pip install cupy-rocm-7-0
 ```
+
+#### NVIDIA GPU (cuDF, optional, Linux or WSL2 only)
+
+cuDF runs Pandas code on NVIDIA graphics cards. It needs Linux (or WSL2 on Windows 11) and a GPU with compute capability 7.0 or newer, which includes most NVIDIA cards from the last few years. cuDF does not yet support Python 3.14, and it should not be mixed with Modin, so install it into its **own** environment. Check which CUDA version your driver supports with `nvidia-smi`, then install the matching package:
+
+```sh
+conda create --name prof_opt_cudf python=3.12
+conda activate prof_opt_cudf
+pip install cudf-cu13      # or cudf-cu12 for CUDA 12 drivers
+```
+
+See [NVIDIA's installation guide](https://docs.nvidia.com/datascience/install/) for other options.
+
+#### AMD GPU (hipDF, optional, Linux only)
+
+hipDF is AMD's version of cuDF. **It currently only supports AMD Instinct datacenter GPUs** (MI210, MI250, MI300X, MI325X and MI355X), so in practice you will only find it on HPC systems; consumer Radeon cards are not supported. It needs Linux (Ubuntu 22.04 or 24.04) and [ROCm 10](https://rocm.docs.amd.com/projects/install-on-linux/en/latest/install/quick-start.html). Install it into its own environment, separate from cuDF:
+
+```sh
+conda create --name prof_opt_hipdf python=3.12
+conda activate prof_opt_hipdf
+pip install amd-hipdf==4.0.0 --extra-index-url=https://pypi.amd.com/rocm-10.0.0/simple
+```
+
+To use hipDF's Pandas accelerator mode (as in the episode) you must also enable XNACK before starting Python:
+
+```sh
+export HSA_XNACK=1
+```
+
+See [AMD's hipDF installation guide](https://rocm.docs.amd.com/projects/hipDF/en/latest/install/INSTALL.html) for the full list of requirements.
