@@ -31,7 +31,7 @@ exercises: 20
   - [Modin](https://modin.readthedocs.io/) runs Pandas code across all CPU cores (it does **not** use the GPU).
   - [cuDF](https://docs.nvidia.com/cudf/latest/) runs Pandas code on NVIDIA GPUs, and [hipDF](https://rocm.docs.amd.com/projects/hipDF/en/latest/), AMD's port of cuDF, does the same on AMD Instinct GPUs.
 
-- **The GPU examples are all "bi-lingual" between DPNP and CuPy.** This was a deliberate choice as provides the widest range of hardware support and allows most users to use there own laptops to run the examples (sorry MacOs people). The examples and principles used in this material are near identical and fully transferable between CuPY and DPNP, you only need to change a few lines. So if you want to teach it with dedicated graphics hardware you can. Every GPU example is given in two tabs, "DPNP (Intel)" and "CuPy (NVIDIA or AMD)", each with its own measured output. The tabs are linked, so choosing CuPy once switches every example on the page.
+- **The Numpy/Scipy examples are all "bi-lingual" between DPNP and CuPy.** This was a deliberate choice as provides the widest range of hardware support and allows most users to use there own laptops to run the examples. However, Unfortunately DPNP does not support apple silicon sorry MacOs people. with this in mind we have provided example outputs for each example so they can at least follow along. The examples and principles used in this material are near identical and fully transferable between CuPY and DPNP, you only need to change a few lines. So if you want to teach it with dedicated graphics hardware you can. Every GPU example is given in two tabs, "DPNP (Intel)" and "CuPy (NVIDIA or AMD)", each with its own measured output. The tabs are linked, so choosing CuPy once switches every example on the page.
 
 - **The Pandas examples have three tabs: "Modin (any CPU)", "cuDF (NVIDIA)" and "hipDF (AMD)".** cuDF needs an NVIDIA GPU on Linux or WSL2, and hipDF currently only supports AMD Instinct datacenter GPUs, so many learners (Intel integrated graphics, Macs, Windows without WSL2) will not be able to run either. Modin is there to give them a non-GPU option that still fits the same workflow as the rest of the episode: change the import, warm up, wait for the work to finish when timing, and measure. **Stress that Modin is CPU only.** Its speed-ups come from using all the CPU cores, not from a GPU, which is why it helps with different operations to cuDF.
 
@@ -61,9 +61,13 @@ Graphics processing units (GPUs) by comparison are specialised processors design
 
 A GPU contains hundreds or thousands of small, simple cores that can all work on the same calculation at once in parallel. Thus If you have the same operation that needs to be done thousands (or even millions) of times, a GPU can be a huge help.
 
-There is however, a catch: the GPU usually has its own separate memory, so data must be copied to it before it can work, and copied back afterwards. Starting work on the GPU also has a small  fixed "startup" cost. Therefore a GPU only wins when there is lots of data with *a lot* of work to do on each piece.
+There are however, two things to keep in mind. Firstly the GPU usually has its own separate memory, so data must be copied to it before it can work, and copied back afterwards. Starting work on the GPU also has a small  fixed "startup" cost. Therefore a GPU only wins when there is lots of data with *a lot* of work to do on each piece.
 
-GPUs also vary between (and sometimes even within) manufactures as to what hardware and software they support. Whilst, we have tried our best to support the most common hardware setups, we cannot guarantee that every GPU will be able to work with all the examples in this episode. Therefore a good rule to follow is to always test and measure on *your* hardware before deciding if a change was worth it.
+![An animation of a CPU handing a large task to a GPU.](episodes/fig/what-a-gpu-does.gif){alt="An animation of a program that edits a photo in four steps: open the photo, resize it, brighten it and save it. The CPU, drawn as a chip with a few strong workers, does the first two steps itself. Step 3, brightening the photo, is a huge job, so the CPU sends it to the GPU, a chip with thousands of tiny workers. The photo slowly travels to the GPU one piece at a time, the GPU's workers all brighten it at the same moment, and the result travels slowly back to the CPU. During all of this the CPU sits idle, and a timeline bar along the bottom fills with 'Idle: waiting and doing nothing'. Once the result is back, the CPU wakes up and saves the photo. The final caption reads: GPUs are fast at big jobs, but the trips there and back are slow, and the CPU waits in between."}
+
+The animation above shows this in action. The CPU works through the program, until it reaches a large task that the GPU is good at. The CPU then sends data over to the GPU for processing and waits for the result. Meanwhile, once the data arrives, the GPU does the work, then copies the result back to the CPU. The GPU itself is very fast, but if the trips there and back take too long, the CPU might have been better off doing the job itself.
+
+Second, GPUs also vary between (and sometimes even within) manufactures as to what hardware and software they support. Whilst, we have tried our best to support the most common hardware setups, we cannot guarantee that every GPU will be able to work with all the examples in this episode. Therefore a good rule to follow is to always test and measure on *your* hardware before deciding if a change was worth it.
 
 The example outputs shown were recorded on a laptop with:
 
@@ -95,7 +99,7 @@ DPNP's strength is that it runs on the integrated graphics found in most Intel l
 
 Instructions to install both can be found on the [setup page](../learners/setup.md).
 
-::::::::::::::::::::::::::::::::::::::::::::: 
+:::::::::::::::::::::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::: callout
 
 ## Will DPNP work on my laptop?
