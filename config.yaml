@@ -1,0 +1,101 @@
+#------------------------------------------------------------
+# Values for this lesson.
+#------------------------------------------------------------
+
+# Which carpentry is this (swc, dc, lc, or cp)?
+# swc: Software Carpentry
+# dc: Data Carpentry
+# lc: Library Carpentry
+# cp: Carpentries (to use for instructor training for instance)
+# incubator: The Carpentries Incubator
+carpentry: 'incubator'
+
+# Overall title for pages.
+title: 'Performance Profiling & Optimisation (Python)'
+
+# Date the lesson was created (YYYY-MM-DD, this is empty by default)
+created: 2024-02-01~ # FIXME
+
+# Comma-separated list of keywords for the lesson
+keywords: 'python, profiling, optimisation, data structures, algorithms'
+
+# Life cycle stage of the lesson
+# possible values: pre-alpha, alpha, beta, stable
+life_cycle: 'beta'
+
+# License of the lesson
+license: 'CC-BY 4.0'
+
+# Link to the source repository for this lesson
+source: 'https://github.com/carpentries-incubator/pando-python'
+
+# Default branch of your lesson
+branch: 'main'
+
+# Who to contact if there are any issues
+contact: 'robert.chisholm@sheffield.ac.uk'
+
+# Navigation ------------------------------------------------
+#
+# Use the following menu items to specify the order of
+# individual pages in each dropdown section. Leave blank to
+# include all pages in the folder.
+#
+# Example -------------
+#
+# episodes:
+# - introduction.md
+# - first-steps.md
+#
+# learners:
+# - setup.md
+#
+# instructors:
+# - instructor-notes.md
+#
+# profiles:
+# - one-learner.md
+# - another-learner.md
+
+# Order of episodes in your lesson
+episodes: 
+- profiling-introduction.md
+- profiling-functions.md
+- short-break1.md
+- profiling-lines.md
+- profiling-conclusion.md
+- optimisation-introduction.md
+- optimisation-using-python.md
+- optimisation-data-structures-algorithms.md
+- long-break1.md
+- optimisation-numpy.md
+- optimisation-use-latest.md
+- optimisation-latency.md
+- optimisation-conclusion.md
+
+# Information for Learners
+learners: 
+- setup.md
+# - registration.md # University of Sheffield specific registration procedure
+- technical-appendix.md
+- acknowledgements.md
+- ppp.md
+- reference.md
+
+# Information for Instructors
+instructors: 
+
+# Learner Profiles
+profiles: 
+
+# Customisation ---------------------------------------------
+#
+# This space below is where custom yaml items (e.g. pinning
+# sandpaper and varnish versions) should live
+
+# These config items are used to deploy the University of Sheffield varnish theme
+#varnish: RSE-Sheffield/uos-varnish@main
+#url: 'https://rse.shef.ac.uk/pando-python'
+
+analytics: |
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="2b561bd0-0d7a-436b-a18d-d19c94785362"></script>
