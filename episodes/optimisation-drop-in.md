@@ -613,7 +613,9 @@ There are also drop-in replacements for Pandas. Just like DPNP and CuPy, you swi
 
 Each Pandas example has three tabs, one for each library. If you don't have a suitable GPU, choose the Modin tab.
 
-### Modin
+::::::::::::::::::::::::::::::::::::: group-tab
+
+### Modin (any CPU)
 
 To use Modin, change the import:
 
@@ -623,11 +625,9 @@ import modin.pandas as pd
 
 Behind the scenes, Modin hands the work to an "engine" which manages the CPU cores. We will use [Ray](https://www.ray.io/), which is the default and usually the fastest.
 
-::::::::::::::::::::::::::::::::::::: callout
+**Note:**
 
-If you are using an Intel Mac or WSL on Windows, Ray may not work. Use the Dask engine instead: install `modin[dask]`, and use `modin.config.Engine.put("dask")` in the examples below.
-
-:::::::::::::::::::::::::::::::::::::::::::::
+If you are using WSL on Windows, Ray may not work. Use the Dask engine instead: install `modin[dask]`, and use `modin.config.Engine.put("dask")` in the examples below.
 
 ### cuDF and hipDF
 
@@ -649,9 +649,7 @@ python -m cudf.pandas my_script.py
 
 hipDF is imported with the same name, `cudf`, so the code is identical on NVIDIA and AMD; only the installation is different.
 
-::::::::::::::::::::::::::::::::::::: callout
-
-## Will hipDF work on my computer?
+**Will hipDF work on my computer?**
 
 Probably not, unless you are using an HPC system. hipDF currently only supports AMD **Instinct** datacenter GPUs (such as the MI210, MI250 and MI300X) on Linux. Consumer Radeon graphics cards are not supported. To use accelerator mode, hipDF also needs you to run `export HSA_XNACK=1` before starting Python. See the [setup page](../learners/setup.md) for details.
 
@@ -746,13 +744,15 @@ map: 0.70 s
 groupby: 0.24 s
 ```
 
-Modin installs an older version of Pandas, so to keep the comparison fair we timed plain Pandas in the same environment as Modin. There, `read_csv()` took 1.44 s, `apply()` 45.98 s, `map()` 2.75 s and `groupby()` 0.19 s.
+Note: Modin installs an older version of Pandas, so to keep the comparison fair we timed plain Pandas in the same environment as Modin. There, `read_csv()` took 1.44 s, `apply()` 45.98 s, `map()` 2.75 s and `groupby()` 0.19 s.
 
 Compared with that, `apply()` is now 2.4x faster and `map()` almost 4x faster. These run a Python function once for every row, which is exactly the kind of slow work that benefits from being split across many cores. `read_csv()` is a little faster, and `groupby()` is actually slightly slower, because Pandas already does this efficiently and Modin adds the cost of splitting the work up.
 
 Notice that just using Pandas 3 (28.70 s, above) runs `apply()` faster than Modin does with the older Pandas. As the episode on [keeping packages up to date](optimisation-use-latest.md) explains, upgrading can give a free speed-up, so check that first.
 
-### cuDF (NVIDIA)
+### cuDF (NVIDIA) or hipDF (AMD)
+
+Note for AMD users: the hipDf code is identical to the cuDF version. However you will need to remember to run `export HSA_XNACK=1` before starting Python. This is not needed for Nvidia users.
 
 ```python
 import time
@@ -789,41 +789,6 @@ groupby: 0.12 s
 Everything is faster, but by very different amounts. `apply()` went from almost 29 seconds to under half a second, about 60x faster, and `map()` is about 13x faster. This may be surprising, since a Python function is normally run one row at a time. However, cuDF can translate ("compile") simple numerical Python functions, like `feels_like()`, into GPU code, which then runs on many rows at once. Most of the 0.49 s is this compiling, which happens the first time a function is used: running the same `apply()` a second time took just 0.01 s.
 
 `read_csv()` is about 2.7x faster, but `groupby()` only gained a little, because Pandas already does it efficiently and 10 million rows is not much work for a GPU.
-
-### hipDF (AMD)
-
-```python
-import time
-import cudf.pandas
-cudf.pandas.install()
-import pandas as pd
-
-pd.DataFrame({"warm_up": [1]}).sum()   # start the GPU before we time anything
-
-def timed(label, func):
-    start = time.perf_counter()
-    result = func()
-    print(f"{label}: {time.perf_counter() - start:.2f} s")
-    return result
-
-def feels_like(row):
-    if row["rainfall"] > 5:
-        return row["temperature"] - 3
-    return row["temperature"]
-
-df = timed("read_csv", lambda: pd.read_csv("weather.csv"))
-timed("apply", lambda: df.apply(feels_like, axis=1))
-timed("map", lambda: df["temperature"].map(lambda t: t * 9 / 5 + 32))
-timed("groupby", lambda: df.groupby("station").mean())
-```
-
-The code is identical to the cuDF version. Remember to run `export HSA_XNACK=1` before starting Python.
-
-```output
-TODO(AMD): replace with measured output
-```
-
-TODO(AMD): describe the hipDF results, and how they compare with cuDF.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -872,7 +837,7 @@ modin:  0.04548 s
 
 Almost 1000x slower!
 
-### cuDF (NVIDIA)
+### cuDF (NVIDIA) or hipDF (AMD)
 
 ```python
 from timeit import timeit
@@ -891,26 +856,6 @@ cudf.pandas: 0.00205 s
 ```
 
 About 50x slower than plain Pandas, which took 0.00004 s in the same environment, because every operation has the fixed cost of starting work on the GPU.
-
-### hipDF (AMD)
-
-```python
-from timeit import timeit
-import cudf.pandas
-cudf.pandas.install()
-import pandas as pd
-
-small = pd.DataFrame({"a": range(1000), "b": range(1000)})
-small.sum()  # warm-up
-
-print(f"cudf.pandas: {timeit(lambda: small.sum(), number=100) / 100:.5f} s")
-```
-
-```output
-TODO(AMD): replace with measured output
-```
-
-TODO(AMD): compare with plain Pandas (0.00004 s).
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -988,7 +933,7 @@ modin total: 22.29 s
 
 For our machine this was almost twice as fast. Which is not bad for changing one line (Note: this time includes Ray starting up, and the Pandas time is for the older Pandas that Modin installs). The `map()` and `apply()` lines, which run a Python function for every row, benefit the most.
 
-### cuDF (NVIDIA)
+### cuDF (NVIDIA) or hipDF (AMD)
 
 ```python
 import time
@@ -1020,31 +965,8 @@ fallback:
 
 The `map()` function returns text ("cold", "mild" or "warm"), which cuDF can't compile into GPU code, so that line ran in normal Pandas on the CPU. At about 2.6 s it was most of the total. The `apply()`, which only uses numbers, did run on the GPU and benefits the most.
 
-### hipDF (AMD)
-
-```python
-import time
-import cudf.pandas
-cudf.pandas.install()
-import pandas as pd
-
-start = time.perf_counter()
-df = pd.read_csv("weather.csv")
-df["season_label"] = df["temperature"].map(lambda t: "cold" if t < 5 else "mild" if t < 15 else "warm")
-df["wet"] = df.apply(lambda row: row["rainfall"] > 2 and row["temperature"] < 10, axis=1)
-counts = df.groupby("season_label")["wet"].sum()
-print(counts)
-print(f"total: {time.perf_counter() - start:.2f} s")
-```
-
-```output
-TODO(AMD): replace with measured output
-```
-
-TODO(AMD): describe the hipDF result, including which lines fell back to the CPU (check with `python -m cudf.pandas --profile`).
 
 :::::::::::::::::::::::::::::::::
-
 :::::::::::::::::::::::::::::::::
 :::::::::::::::::::::::::::::::::::::::::::::::
 
